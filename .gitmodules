@@ -1,3 +1,0 @@
-[submodule "phpmyadmin"]
-	path = phpmyadmin
-	url = git@github.com:phpmyadmin/phpmyadmin.git
