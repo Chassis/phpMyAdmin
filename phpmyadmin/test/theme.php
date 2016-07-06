@@ -16,7 +16,7 @@ chdir('..');
 require_once './libraries/common.inc.php';
 $GLOBALS['pmaThemeImage'] = '../' . $GLOBALS['pmaThemeImage'];
 
-$lang_iso_code = $GLOBALS['available_languages'][$GLOBALS['lang']][1];
+$lang_iso_code = $GLOBALS['lang'];
 
 // start output
 header('Content-Type: text/html; charset=utf-8');
@@ -31,7 +31,7 @@ header('Content-Type: text/html; charset=utf-8');
         href="../phpmyadmin.css.php?<?php echo PMA_URL_getCommon(); ?>&amp;nocache=<?php echo $GLOBALS['PMA_Config']->getThemeUniqueValue(); ?>" />
     <link rel="stylesheet" type="text/css" media="print"
         href="../print.css" />
-    <script src="../js/jquery/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="../js/jquery/jquery-2.1.4.min.js" type="text/javascript"></script>
     <script src="../js/messages.php" type="text/javascript"></script>
     <script type="text/javascript">
         var PMA_TEST_THEME = true;
@@ -52,7 +52,9 @@ $item = '<a href="%1$s?%2$s" class="item">'
 echo '<div id="serverinfo">' . "\n";
 printf(
     $item,
-    $GLOBALS['cfg']['DefaultTabServer'],
+    PMA\libraries\Util::getScriptNameForOption(
+        $GLOBALS['cfg']['DefaultTabserver'], 'server'
+    ),
     PMA_URL_getCommon(),
     'Server',
     __('Server'),
@@ -62,7 +64,9 @@ printf(
 echo $separator;
 printf(
     $item,
-    $GLOBALS['cfg']['DefaultTabDatabase'],
+    PMA\libraries\Util::getScriptNameForOption(
+        $GLOBALS['cfg']['DefaultTabDatabase'], 'database'
+    ),
     '',
     'Database',
     __('Database'),
@@ -72,7 +76,9 @@ printf(
 echo $separator;
 printf(
     $item,
-    $GLOBALS['cfg']['DefaultTabTable'],
+    PMA\libraries\Util::getScriptNameForOption(
+        $GLOBALS['cfg']['DefaultTabTable'], 'table'
+    ),
     '',
     'Table',
     (isset($GLOBALS['tbl_is_view']) && $GLOBALS['tbl_is_view']
@@ -138,7 +144,7 @@ $tabs['import']['link'] = 'server_import.php';
 $tabs['import']['text'] = 'active';
 $tabs['import']['class'] = 'active';
 
-echo PMA_Util::getHtmlTabs($tabs, array(), 'topmenu');
+echo PMA\libraries\Util::getHtmlTabs($tabs, array(), 'topmenu');
 unset($tabs);
 
 if (@file_exists($pmaThemeImage . 'logo_right.png')) {
@@ -254,7 +260,7 @@ echo sprintf(
 </code>
 <div class="tools">
 [
-<a href="tbl_sql.php?db=test;table=test;sql_query=SELECT+%2A+FROM+%60test%60;show_query=1;token=266edabf70fa6368498d89b4054d01bf#querybox" onclick="PMA_querywindow.focus('SELECT * FROM `test`'); return false;">Bearbeiten</a>
+<a href="tbl_sql.php?db=test;table=test;sql_query=SELECT+%2A+FROM+%60test%60;show_query=1;token=266edabf70fa6368498d89b4054d01bf#querybox" >Bearbeiten</a>
 ] [
 <a href="import.php?db=test;table=test;sql_query=EXPLAIN+SELECT+%2A+FROM+%60test%60;token=266edabf70fa6368498d89b4054d01bf" >SQL erklären</a>
 ] [
@@ -289,9 +295,15 @@ echo sprintf(
                     value="1" /></td>
             <th><label for="checkbox_1">th label</label></th>
             <td class="value">td.value</td>
-            <td><img class="icon ic_bd_drop" src="../themes/dot.gif" alt="drop" /></td>
-            <td><img class="icon ic_bd_drop" src="../themes/dot.gif" alt="drop" /></td>
-            <td><img class="icon ic_bd_drop" src="../themes/dot.gif" alt="drop" /></td>
+            <td>
+                <img class="icon ic_bd_drop" src="../themes/dot.gif" alt="drop"/>
+            </td>
+            <td>
+                <img class="icon ic_bd_drop" src="../themes/dot.gif" alt="drop"/>
+            </td>
+            <td>
+                <img class="icon ic_bd_drop" src="../themes/dot.gif" alt="drop" />
+            </td>
             <td>table.data tbody tr.odd td</td>
         </tr>
         <tr class="even">
@@ -299,9 +311,15 @@ echo sprintf(
                     value="1" /></td>
             <th><label for="checkbox_2">th label</label></th>
             <td class="value">td.value</td>
-            <td><img class="icon ic_bd_drop" src="../themes/dot.gif" alt="drop" /></td>
-            <td><img class="icon ic_bd_drop" src="../themes/dot.gif" alt="drop" /></td>
-            <td><img class="icon ic_bd_drop" src="../themes/dot.gif" alt="drop" /></td>
+            <td>
+                <img class="icon ic_bd_drop" src="../themes/dot.gif" alt="drop"/>
+            </td>
+            <td>
+                <img class="icon ic_bd_drop" src="../themes/dot.gif" alt="drop"/>
+            </td>
+            <td>
+                <img class="icon ic_bd_drop" src="../themes/dot.gif" alt="drop" />
+            </td>
             <td>table.data tbody tr.even td</td>
         </tr>
         <tr class="odd">
@@ -309,9 +327,15 @@ echo sprintf(
                     value="1" /></td>
             <th><label for="checkbox_3">th label</label></th>
             <td class="value">td.value</td>
-            <td><img class="icon ic_bd_drop" src="../themes/dot.gif" alt="drop" /></td>
-            <td><img class="icon ic_bd_drop" src="../themes/dot.gif" alt="drop" /></td>
-            <td><img class="icon ic_bd_drop" src="../themes/dot.gif" alt="drop" /></td>
+            <td>
+                <img class="icon ic_bd_drop" src="../themes/dot.gif" alt="drop"/>
+            </td>
+            <td>
+                <img class="icon ic_bd_drop" src="../themes/dot.gif" alt="drop"/>
+            </td>
+            <td>
+                <img class="icon ic_bd_drop" src="../themes/dot.gif" alt="drop"/>
+            </td>
             <td>table.data tbody tr.odd td</td>
         </tr>
         <tr class="even">
@@ -319,9 +343,15 @@ echo sprintf(
                     value="1" /></td>
             <th><label for="checkbox_4">th label</label></th>
             <td class="value">td.value</td>
-            <td><img class="icon ic_bd_drop" src="../themes/dot.gif" alt="drop" /></td>
-            <td><img class="icon ic_bd_drop" src="../themes/dot.gif" alt="drop" /></td>
-            <td><img class="icon ic_bd_drop" src="../themes/dot.gif" alt="drop" /></td>
+            <td>
+                <img class="icon ic_bd_drop" src="../themes/dot.gif" alt="drop"/>
+            </td>
+            <td>
+                <img class="icon ic_bd_drop" src="../themes/dot.gif" alt="drop"/>
+            </td>
+            <td>
+                <img class="icon ic_bd_drop" src="../themes/dot.gif" alt="drop"/>
+            </td>
             <td>table.data tbody tr.even td</td>
         </tr>
     </tbody>

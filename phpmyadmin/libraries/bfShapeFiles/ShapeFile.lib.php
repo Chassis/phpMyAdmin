@@ -83,7 +83,7 @@
 
     var $records;
 
-    function ShapeFile($shapeType, $boundingBox = array("xmin" => 0.0, "ymin" => 0.0, "xmax" => 0.0, "ymax" => 0.0), $FileName = NULL) {
+    public function __construct($shapeType, $boundingBox = array("xmin" => 0.0, "ymin" => 0.0, "xmax" => 0.0, "ymax" => 0.0), $FileName = NULL) {
       $this->shapeType = $shapeType;
       $this->boundingBox = $boundingBox;
       $this->FileName = $FileName;
@@ -357,7 +357,7 @@
     var $SHPData = array();
     var $DBFData = array();
 
-    function ShapeRecord($shapeType) {
+    public function __construct($shapeType) {
       $this->shapeType = $shapeType;
     }
 
@@ -534,7 +534,6 @@
         fwrite($this->SHPFile, pack("V", count($this->SHPData["parts"][$i])));
       }
 
-      reset($this->SHPData["parts"]);
       foreach ($this->SHPData["parts"] as $partData){
         reset($partData["points"]);
         while (list($pointIndex, $pointData) = each($partData["points"])) {
@@ -679,4 +678,3 @@
     }
   }
 
-?>

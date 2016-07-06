@@ -9,20 +9,17 @@
 /*
  * Include to test.
  */
-require_once 'libraries/Util.class.php';
-require_once 'libraries/Table.class.php';
-require_once 'libraries/Advisor.class.php';
-require_once 'libraries/php-gettext/gettext.inc';
+use PMA\libraries\Theme;
+
+
 require_once 'libraries/url_generating.lib.php';
-require_once 'libraries/ServerStatusData.class.php';
+
 require_once 'libraries/display_export.lib.php';
-require_once 'libraries/Theme.class.php';
+
 require_once 'libraries/database_interface.inc.php';
 require_once 'libraries/charset_conversion.lib.php';
-require_once 'libraries/Message.class.php';
 require_once 'libraries/plugin_interface.lib.php';
 require_once 'libraries/sanitizing.lib.php';
-require_once 'libraries/sqlparser.lib.php';
 require_once 'libraries/js_escape.lib.php';
 require_once 'libraries/relation.lib.php';
 
@@ -68,11 +65,11 @@ class PMA_DisplayExport_Test extends PHPUnit_Framework_TestCase
         $GLOBALS['db'] = "PMA";
 
         //$_SESSION
-        $_SESSION['PMA_Theme'] = PMA_Theme::load('./themes/pmahomme');
-        $_SESSION['PMA_Theme'] = new PMA_Theme();
+        $_SESSION['PMA_Theme'] = Theme::load('./themes/pmahomme');
+        $_SESSION['PMA_Theme'] = new Theme();
         $_SESSION['relation'][$GLOBALS['server']] = "";
 
-        $pmaconfig = $this->getMockBuilder('PMA_Config')
+        $pmaconfig = $this->getMockBuilder('PMA\libraries\Config')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -125,7 +122,7 @@ class PMA_DisplayExport_Test extends PHPUnit_Framework_TestCase
     /**
      * Test for PMA_getHtmlForExportOptions
      *
-     * @return vgetUserValue
+     * @return void
      */
     public function testPMAGetHtmlForExportOptions()
     {
@@ -138,10 +135,26 @@ class PMA_DisplayExport_Test extends PHPUnit_Framework_TestCase
         $table = "PMA_test";
         $multi_values_str = "multi_values_str";
         $num_tables_str = "10";
-        $export_list = null;
         $unlim_num_rows_str = "unlim_num_rows_str";
         $single_table = "single_table";
-        PMA_Table::$cache[$db][$table]['ENGINE'] = "MERGE";
+        $GLOBALS['dbi']->cacheTableContent(array($db, $table, 'ENGINE'), 'MERGE');
+
+        $columns_info = array(
+            'test_column1' => array(
+                'COLUMN_NAME' => 'test_column1'
+            ),
+            'test_column2' => array(
+                'COLUMN_NAME' => 'test_column2'
+            )
+        );
+        $dbi = $this->getMockBuilder('PMA\libraries\DatabaseInterface')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $dbi->expects($this->any())->method('getColumnsFull')
+            ->will($this->returnValue($columns_info));
+
+        $GLOBALS['dbi'] = $dbi;
 
         /* Scan for plugins */
         $export_list = PMA_getPlugins(
@@ -164,16 +177,6 @@ class PMA_DisplayExport_Test extends PHPUnit_Framework_TestCase
             $unlim_num_rows_str
         );
 
-        //validate 1: PMA_getHtmlForExportOptionHeader
-        $this->assertContains(
-            '<div class="exportoptions" id="header">',
-            $html
-        );
-        $this->assertContains(
-            __('Exporting databases from the current server'),
-            $html
-        );
-
         //validate 2: PMA_getHtmlForExportOptionsMethod
         $this->assertContains(
             $cfg['Export']['method'],
@@ -184,7 +187,7 @@ class PMA_DisplayExport_Test extends PHPUnit_Framework_TestCase
             $html
         );
         $this->assertContains(
-            __('Export Method:'),
+            __('Export method:'),
             $html
         );
         $this->assertContains(
@@ -198,7 +201,7 @@ class PMA_DisplayExport_Test extends PHPUnit_Framework_TestCase
             $html
         );
         $this->assertContains(
-            '<h3>' . __('Database(s):') . '</h3>',
+            '<h3>' . __('Databases:') . '</h3>',
             $html
         );
         $this->assertContains(
@@ -211,13 +214,40 @@ class PMA_DisplayExport_Test extends PHPUnit_Framework_TestCase
             '<input type="checkbox" name="onserver" value="saveit" ',
             $html
         );
-        $dir = htmlspecialchars(PMA_Util::userDir($cfg['SaveDir']));
+        $dir = htmlspecialchars(PMA\libraries\Util::userDir($cfg['SaveDir']));
         $this->assertContains(
             'Save on server in the directory <b>' . $dir . '</b>',
             $html
         );
 
-        //validate 5: PMA_getHtmlForExportOptionsOutput
+        //validate 5: PMA_getHtmlForAliasModalDialog
+        $this->assertContains(
+            '<div id="alias_modal" class="hide" title="'
+            . 'Rename exported databases/tables/columns">',
+            $html
+        );
+        $this->assertContains(
+            'Select database',
+            $html
+        );
+        $this->assertContains(
+            'Select table',
+            $html
+        );
+        $this->assertContains(
+            'New database name',
+            $html
+        );
+        $this->assertContains(
+            'New table name',
+            $html
+        );
+        $this->assertContains(
+            'test_column',
+            $html
+        );
+
+        //validate 6: PMA_getHtmlForExportOptionsOutput
         $this->assertContains(
             '<div class="exportoptions" id="output">',
             $html
@@ -227,13 +257,81 @@ class PMA_DisplayExport_Test extends PHPUnit_Framework_TestCase
             $html
         );
 
-        //validate 6: PMA_getHtmlForExportOptionsFormat
+        //validate 7: PMA_getHtmlForExportOptionsFormat
         $this->assertContains(
             '<div class="exportoptions" id="format">',
             $html
         );
         $this->assertContains(
             '<h3>' . __('Format:') . '</h3>',
+            $html
+        );
+    }
+
+    /**
+     * Test for PMA_getHtmlForAliasModalDialog
+     *
+     * @return void
+     */
+    public function testPMAGetHtmlForAliasModalDialog()
+    {
+        $columns_info = array(
+            'test\'_db' => array(
+                'test_<b>table' => array(
+                    'co"l1' => array(
+                        'COLUMN_NAME' => 'co"l1'
+                    ),
+                    'col<2' => array(
+                        'COLUMN_NAME' => 'col<2'
+                    )
+                )
+            )
+        );
+
+        $dbi = $this->getMockBuilder('PMA\libraries\DatabaseInterface')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $dbi->expects($this->any())->method('getColumnsFull')
+            ->will($this->returnValue($columns_info));
+
+        $GLOBALS['dbi'] = $dbi;
+
+        $html = PMA_getHtmlForAliasModalDialog();
+
+        $this->assertContains(
+            '<div id="alias_modal" class="hide" title="'
+            . 'Rename exported databases/tables/columns">',
+            $html
+        );
+        $this->assertContains(
+            'test\'_db',
+            $html
+        );
+        $this->assertContains(
+            'test_&lt;b&gt;table',
+            $html
+        );
+        $this->assertContains(
+            'col&lt;2',
+            $html
+        );
+        $this->assertContains(
+            'co&quot;l1',
+            $html
+        );
+        $this->assertContains(
+            '<hr/>',
+            $html
+        );
+
+        $name_attr =  'aliases[test\'_db][tables][test_&lt;b&gt;table][alias]';
+        $id_attr = mb_substr(md5($name_attr), 0, 12);
+
+        $this->assertContains(
+            '<input type="text" value="" name="' . $name_attr . '" '
+            . 'id="' . $id_attr . '" placeholder="'
+            . 'test_&lt;b&gt;table alias" class="" disabled="disabled"/>',
             $html
         );
     }

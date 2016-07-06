@@ -10,15 +10,16 @@
  * Include to test.
  */
 
+use PMA\libraries\Theme;
+
 $GLOBALS['server'] = 1;
 require_once 'libraries/operations.lib.php';
 require_once 'libraries/url_generating.lib.php';
-require_once 'libraries/php-gettext/gettext.inc';
 require_once 'libraries/relation.lib.php';
-require_once 'libraries/Util.class.php';
-require_once 'libraries/Theme.class.php';
+
+
 require_once 'libraries/database_interface.inc.php';
-require_once 'libraries/Tracker.class.php';
+
 require_once 'libraries/mysql_charsets.inc.php';
 
 /**
@@ -37,12 +38,19 @@ class PMA_Operations_Test extends PHPUnit_Framework_TestCase
     {
         $GLOBALS['table'] = 'table';
         $GLOBALS['db'] = 'db';
-        $_SESSION['PMA_Theme'] = PMA_Theme::load('./themes/pmahomme');
+        $_SESSION['PMA_Theme'] = Theme::load('./themes/pmahomme');
         $GLOBALS['cfg'] = array(
             'ServerDefault' => 1,
             'ActionLinksMode' => 'icons',
         );
+        $GLOBALS['cfg']['DBG']['sql'] = false;
         $GLOBALS['server'] = 1;
+
+        $GLOBALS['db_priv'] = true;
+        $GLOBALS['table_priv'] = true;
+        $GLOBALS['col_priv'] = true;
+        $GLOBALS['proc_priv'] = true;
+        $GLOBALS['flush_priv'] = true;
     }
 
     /**
@@ -68,9 +76,11 @@ class PMA_Operations_Test extends PHPUnit_Framework_TestCase
     {
 
         $_REQUEST['db_collation'] = 'db1';
+        $html = PMA_getHtmlForRenameDatabase("pma");
+        $this->assertContains('db_operations.php', $html);
         $this->assertRegExp(
-            '/.*db_operations.php(.|[\n])*db_rename([\n]|.)*Rename database to.*/m',
-            PMA_getHtmlForRenameDatabase("pma")
+            '/.*db_rename.*Rename database to.*/',
+            $html
         );
     }
 
@@ -95,12 +105,11 @@ class PMA_Operations_Test extends PHPUnit_Framework_TestCase
      */
     public function testGetHtmlForCopyDatabase()
     {
-
         $_REQUEST['db_collation'] = 'db1';
-        $this->assertRegExp(
-            '/.*db_operations.php(.|[\n])*db_copy([\n]|.)*Copy database to.*/m',
-            PMA_getHtmlForCopyDatabase("pma")
-        );
+        $html = PMA_getHtmlForCopyDatabase("pma");
+        $this->assertRegExp('/.*db_operations.php.*/', $html);
+        $this->assertRegExp('/.*db_copy.*/', $html);
+        $this->assertRegExp('/.*Copy database to.*/', $html);
     }
 
     /**
@@ -115,20 +124,6 @@ class PMA_Operations_Test extends PHPUnit_Framework_TestCase
         $this->assertRegExp(
             '/.*db_operations.php(.|[\n])*select_db_collation([\n]|.)*Collation.*/m',
             PMA_getHtmlForChangeDatabaseCharset("pma", "bookmark")
-        );
-    }
-
-    /**
-     * Test for PMA_getHtmlForExportRelationalSchemaView
-     *
-     * @return void
-     */
-    public function testGetHtmlForExportRelationalSchemaView()
-    {
-
-        $this->assertRegExp(
-            '/.*schema_edit.php.*Edit or export relational schema<.*/',
-            PMA_getHtmlForExportRelationalSchemaView("id=001&name=pma")
         );
     }
 
@@ -157,7 +152,7 @@ class PMA_Operations_Test extends PHPUnit_Framework_TestCase
     {
 
         $this->assertEquals(
-            '<tr><td><label for="name">lable</label></td><td><input type="checkbox" name="name" id="name" value="1"/></td></tr>',
+            '<tr><td class="vmiddle"><label for="name">lable</label></td><td><input type="checkbox" name="name" id="name" value="1"/></td></tr>',
             PMA_getHtmlForTableRow("name", "lable", "value")
         );
     }
@@ -223,14 +218,13 @@ class PMA_Operations_Test extends PHPUnit_Framework_TestCase
      */
     public function testGetHtmlForPartitionMaintenance()
     {
-
-        $this->assertRegExp(
-            '/.*action="tbl_operations.php"(.|[\n])*ANALYZE([\n]|.)*REBUILD([\n]|.)*/m',
-            PMA_getHtmlForPartitionMaintenance(
-                array("partition1", "partion2"),
-                array("param1" => 'foo', "param2" => 'bar')
-            )
+        $html = PMA_getHtmlForPartitionMaintenance(
+            array("partition1", "partion2"),
+            array("param1" => 'foo', "param2" => 'bar')
         );
+        $this->assertRegExp('/.*action="tbl_operations.php".*/', $html);
+        $this->assertRegExp('/.*ANALYZE.*/', $html);
+        $this->assertRegExp('/.*REBUILD.*/', $html);
     }
 
     /**

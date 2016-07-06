@@ -7,47 +7,41 @@
  * @package PhpMyAdmin
  */
 
+use PMA\libraries\Message;
+use PMA\libraries\ServerStatusData;
+
 require_once 'libraries/common.inc.php';
 require_once 'libraries/server_common.inc.php';
-require_once 'libraries/ServerStatusData.class.php';
 require_once 'libraries/server_status_queries.lib.php';
+require_once 'libraries/replication.inc.php';
+require_once 'libraries/replication_gui.lib.php';
 
-if (PMA_DRIZZLE) {
-    $server_master_status = false;
-    $server_slave_status = false;
-} else {
-    include_once 'libraries/replication.inc.php';
-    include_once 'libraries/replication_gui.lib.php';
-}
+$serverStatusData = new ServerStatusData();
 
-$ServerStatusData = new PMA_ServerStatusData();
-
-$response = PMA_Response::getInstance();
+$response = PMA\libraries\Response::getInstance();
 $header   = $response->getHeader();
 $scripts  = $header->getScripts();
 $scripts->addFile('server_status_queries.js');
 
-/* < IE 9 doesn't support canvas natively */
-if (PMA_USR_BROWSER_AGENT == 'IE' && PMA_USR_BROWSER_VER < 9) {
-    $scripts->addFile('jqplot/excanvas.js');
-}
-
 // for charting
+$scripts->addFile('chart.js');
 $scripts->addFile('jqplot/jquery.jqplot.js');
 $scripts->addFile('jqplot/plugins/jqplot.pieRenderer.js');
-$scripts->addFile('jqplot/plugins/jqplot.canvasTextRenderer.js');
-$scripts->addFile('jqplot/plugins/jqplot.canvasAxisLabelRenderer.js');
-$scripts->addFile('jqplot/plugins/jqplot.dateAxisRenderer.js');
 $scripts->addFile('jqplot/plugins/jqplot.highlighter.js');
-$scripts->addFile('jqplot/plugins/jqplot.cursor.js');
 $scripts->addFile('jquery/jquery.tablesorter.js');
 $scripts->addFile('server_status_sorter.js');
 
 // Add the html content to the response
 $response->addHTML('<div>');
-$response->addHTML($ServerStatusData->getMenuHtml());
-$response->addHTML(PMA_getHtmlForQueryStatistics($ServerStatusData));
+$response->addHTML($serverStatusData->getMenuHtml());
+if ($serverStatusData->dataLoaded) {
+    $response->addHTML(PMA_getHtmlForQueryStatistics($serverStatusData));
+} else {
+    $response->addHTML(
+        Message::error(
+            __('Not enough privilege to view query statistics.')
+        )->getDisplay()
+    );
+}
 $response->addHTML('</div>');
 exit;
-
-?>

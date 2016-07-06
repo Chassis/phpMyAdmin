@@ -6,11 +6,10 @@
  * @package PhpMyAdmin-test
  */
 
-require_once 'libraries/php-gettext/gettext.inc';
 require_once 'libraries/url_generating.lib.php';
-require_once 'libraries/Util.class.php';
+
 require_once 'libraries/database_interface.inc.php';
-require_once 'libraries/Tracker.class.php';
+
 /*
  * Include to test.
  */
@@ -31,6 +30,7 @@ class PMA_TRI_GetEditorForm_Test extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $GLOBALS['cfg']['ServerDefault'] = '';
+        $GLOBALS['cfg']['DBG']['sql'] = false;
         $GLOBALS['db'] = 'pma_test';
     }
 
@@ -38,27 +38,31 @@ class PMA_TRI_GetEditorForm_Test extends PHPUnit_Framework_TestCase
     /**
      * Test for PMA_TRI_getEditorForm
      *
-     * @param string $data    Data for trigger
-     * @param array  $matcher Matcher
+     * @param array $data    Data for trigger
+     * @param array $matcher Matcher
      *
      * @return void
      *
-     * @dataProvider provider_add
+     * @dataProvider providerAdd
      * @group medium
      */
-    public function testgetEditorForm_add($data, $matcher)
+    public function testGetEditorFormAdd($data, $matcher)
     {
         $GLOBALS['is_ajax_request'] = false;
+        $GLOBALS['server'] = 1;
         PMA_TRI_setGlobals();
-        $this->assertTag($matcher, PMA_TRI_getEditorForm('add', $data), '', false);
+        $this->assertContains(
+            $matcher,
+            PMA_TRI_getEditorForm('add', $data)
+        );
     }
 
     /**
-     * Provider for testgetEditorForm_add
+     * Provider for testGetEditorFormAdd
      *
      * @return array
      */
-    public function provider_add()
+    public function providerAdd()
     {
         $data = array(
             'item_name'               => '',
@@ -73,75 +77,35 @@ class PMA_TRI_GetEditorForm_Test extends PHPUnit_Framework_TestCase
         return array(
             array(
                 $data,
-                array(
-                    'tag' => 'input',
-                    'attributes' => array(
-                        'name' => 'add_item'
-                    )
-                )
+                "name='add_item'"
             ),
             array(
                 $data,
-                array(
-                    'tag' => 'input',
-                    'attributes' => array(
-                        'name' => 'item_name'
-                    )
-                )
+                "name='item_name'"
             ),
             array(
                 $data,
-                 array(
-                    'tag' => 'select',
-                    'attributes' => array(
-                        'name' => 'item_table'
-                    )
-                )
+                "name='item_table'"
             ),
             array(
                 $data,
-                array(
-                    'tag' => 'select',
-                    'attributes' => array(
-                        'name' => 'item_timing'
-                    )
-                )
+                "name='item_timing'"
             ),
             array(
                 $data,
-                array(
-                    'tag' => 'select',
-                    'attributes' => array(
-                        'name' => 'item_event'
-                    )
-                )
+                "name='item_event'"
             ),
             array(
                 $data,
-                array(
-                    'tag' => 'textarea',
-                    'attributes' => array(
-                        'name' => 'item_definition'
-                    )
-                )
+                "name='item_definition'"
             ),
             array(
                 $data,
-                array(
-                    'tag' => 'input',
-                    'attributes' => array(
-                        'name' => 'item_definer'
-                    )
-                )
+                "name='item_definer'"
             ),
             array(
                 $data,
-                array(
-                    'tag' => 'input',
-                    'attributes' => array(
-                        'name' => 'editor_process_add'
-                    )
-                )
+                "name='editor_process_add'"
             )
         );
     }
@@ -149,27 +113,31 @@ class PMA_TRI_GetEditorForm_Test extends PHPUnit_Framework_TestCase
     /**
      * Test for PMA_TRI_getEditorForm
      *
-     * @param string $data    Data for trigger
-     * @param array  $matcher Matcher
+     * @param array $data    Data for trigger
+     * @param array $matcher Matcher
      *
      * @return void
      *
-     * @dataProvider provider_edit
+     * @dataProvider providerEdit
      * @group medium
      */
-    public function testgetEditorForm_edit($data, $matcher)
+    public function testGetEditorFormEdit($data, $matcher)
     {
         $GLOBALS['is_ajax_request'] = false;
+        $GLOBALS['server'] = 1;
         PMA_TRI_setGlobals();
-        $this->assertTag($matcher, PMA_TRI_getEditorForm('edit', $data), '', false);
+        $this->assertContains(
+            $matcher,
+            PMA_TRI_getEditorForm('edit', $data)
+        );
     }
 
     /**
-     * Provider for testgetEditorForm_edit
+     * Provider for testGetEditorFormEdit
      *
      * @return array
      */
-    public function provider_edit()
+    public function providerEdit()
     {
         $data = array(
             'item_name'               => 'foo',
@@ -184,75 +152,35 @@ class PMA_TRI_GetEditorForm_Test extends PHPUnit_Framework_TestCase
         return array(
             array(
                 $data,
-                array(
-                    'tag' => 'input',
-                    'attributes' => array(
-                        'name' => 'edit_item'
-                    )
-                )
+                "name='edit_item'"
             ),
             array(
                 $data,
-                array(
-                    'tag' => 'input',
-                    'attributes' => array(
-                        'name' => 'item_name'
-                    )
-                )
+                "name='item_name'"
             ),
             array(
                 $data,
-                 array(
-                    'tag' => 'select',
-                    'attributes' => array(
-                        'name' => 'item_table'
-                    )
-                )
+                "name='item_table'"
             ),
             array(
                 $data,
-                array(
-                    'tag' => 'select',
-                    'attributes' => array(
-                        'name' => 'item_timing'
-                    )
-                )
+                "name='item_timing'"
             ),
             array(
                 $data,
-                array(
-                    'tag' => 'select',
-                    'attributes' => array(
-                        'name' => 'item_event'
-                    )
-                )
+                "name='item_event'"
             ),
             array(
                 $data,
-                array(
-                    'tag' => 'textarea',
-                    'attributes' => array(
-                        'name' => 'item_definition'
-                    )
-                )
+                "name='item_definition'"
             ),
             array(
                 $data,
-                array(
-                    'tag' => 'input',
-                    'attributes' => array(
-                        'name' => 'item_definer'
-                    )
-                )
+                "name='item_definer'"
             ),
             array(
                 $data,
-                array(
-                    'tag' => 'input',
-                    'attributes' => array(
-                        'name' => 'editor_process_edit'
-                    )
-                )
+                "name='editor_process_edit'"
             )
         );
     }
@@ -260,26 +188,30 @@ class PMA_TRI_GetEditorForm_Test extends PHPUnit_Framework_TestCase
     /**
      * Test for PMA_TRI_getEditorForm
      *
-     * @param string $data    Data for trigger
-     * @param array  $matcher Matcher
+     * @param array $data    Data for trigger
+     * @param array $matcher Matcher
      *
      * @return void
      *
-     * @dataProvider provider_ajax
+     * @dataProvider providerAjax
      */
-    public function testgetEditorForm_ajax($data, $matcher)
+    public function testGetEditorFormAjax($data, $matcher)
     {
         $GLOBALS['is_ajax_request'] = true;
+        $GLOBALS['server'] = 1;
         PMA_TRI_setGlobals();
-        $this->assertTag($matcher, PMA_TRI_getEditorForm('edit', $data), '', false);
+        $this->assertContains(
+            $matcher,
+            PMA_TRI_getEditorForm('edit', $data)
+        );
     }
 
     /**
-     * Provider for testgetEditorForm_ajax
+     * Provider for testGetEditorFormAjax
      *
      * @return array
      */
-    public function provider_ajax()
+    public function providerAjax()
     {
         $data = array(
             'item_name'               => 'foo',
@@ -294,23 +226,12 @@ class PMA_TRI_GetEditorForm_Test extends PHPUnit_Framework_TestCase
         return array(
             array(
                 $data,
-                array(
-                    'tag' => 'input',
-                    'attributes' => array(
-                        'name' => 'editor_process_edit'
-                    )
-                )
+                "name='editor_process_edit'"
             ),
             array(
                 $data,
-                array(
-                    'tag' => 'input',
-                    'attributes' => array(
-                        'name' => 'ajax_request'
-                    )
-                )
+                "name='ajax_request'"
             )
         );
     }
 }
-?>

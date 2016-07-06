@@ -9,15 +9,15 @@
 /*
  * Include to test.
  */
-require_once 'libraries/Util.class.php';
-require_once 'libraries/php-gettext/gettext.inc';
+use PMA\libraries\Theme;
+
+
 require_once 'libraries/url_generating.lib.php';
 require_once 'libraries/select_server.lib.php';
-require_once 'libraries/Theme.class.php';
+
 require_once 'libraries/database_interface.inc.php';
-require_once 'libraries/Message.class.php';
+
 require_once 'libraries/sanitizing.lib.php';
-require_once 'libraries/sqlparser.lib.php';
 require_once 'libraries/js_escape.lib.php';
 
 /**
@@ -55,8 +55,8 @@ class PMA_SelectServer_Test extends PHPUnit_Framework_TestCase
         $GLOBALS['pmaThemeImage'] = 'image';
 
         //$_SESSION
-        $_SESSION['PMA_Theme'] = PMA_Theme::load('./themes/pmahomme');
-        $_SESSION['PMA_Theme'] = new PMA_Theme();
+        $_SESSION['PMA_Theme'] = Theme::load('./themes/pmahomme');
+        $_SESSION['PMA_Theme'] = new Theme();
     }
 
     /**
@@ -67,9 +67,9 @@ class PMA_SelectServer_Test extends PHPUnit_Framework_TestCase
     public function testPMASelectServer()
     {
         $not_only_options = false;
-        $ommit_fieldset = false;
+        $omit_fieldset = false;
 
-        $GLOBALS['cfg']['DefaultTabServer'] = "DefaultTabServer";
+        $GLOBALS['cfg']['DefaultTabServer'] = "welcome";
 
         $GLOBALS['cfg']['Servers'] = array(
             '0' => array(
@@ -88,8 +88,8 @@ class PMA_SelectServer_Test extends PHPUnit_Framework_TestCase
             ),
         );
 
-        //$not_only_options=false & $ommit_fieldset=false
-        $html = PMA_selectServer($not_only_options, $ommit_fieldset);
+        //$not_only_options=false & $omit_fieldset=false
+        $html = PMA_selectServer($not_only_options, $omit_fieldset);
         $server = $GLOBALS['cfg']['Servers']['0'];
 
         //server items
@@ -111,27 +111,23 @@ class PMA_SelectServer_Test extends PHPUnit_Framework_TestCase
         );
 
         $not_only_options = true;
-        $ommit_fieldset = true;
+        $omit_fieldset = true;
         $GLOBALS['cfg']['DisplayServersList'] = null;
 
-        //$not_only_options=true & $ommit_fieldset=true
-        $html = PMA_selectServer($not_only_options, $ommit_fieldset);
+        //$not_only_options=true & $omit_fieldset=true
+        $html = PMA_selectServer($not_only_options, $omit_fieldset);
 
         //$GLOBALS['cfg']['DefaultTabServer']
         $this->assertContains(
-            $GLOBALS['cfg']['DefaultTabServer'],
-            $html
-        );
-
-        //PMA_URL_getHiddenInputs
-        $this->assertContains(
-            PMA_URL_getHiddenInputs(),
+            PMA\libraries\Util::getScriptNameForOption(
+                $GLOBALS['cfg']['DefaultTabServer'], 'server'
+            ),
             $html
         );
 
         //labels
         $this->assertContains(
-            __('Current Server:'),
+            __('Current server:'),
             $html
         );
         $this->assertContains(

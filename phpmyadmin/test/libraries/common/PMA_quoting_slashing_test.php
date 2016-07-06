@@ -10,8 +10,7 @@
 /*
  * Include to test.
  */
-require_once 'libraries/Util.class.php';
-require_once 'libraries/sqlparser.data.php';
+
 
 /**
  * Test for quoting, slashing/backslashing
@@ -33,40 +32,44 @@ class PMA_QuotingSlashing_Test extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             "\\\\\\\\\'test\'\'\\\\\\\\\'\'\\\\\\\\\'\\r\\t\\n",
-            PMA_Util::sqlAddSlashes($string, true, true, true)
+            PMA\libraries\Util::sqlAddSlashes($string, true, true, true)
         );
         $this->assertEquals(
-            "\\\\\\\\''test''''\\\\\\\\''''\\\\\\\\''\\r\\t\\n",
-            PMA_Util::sqlAddSlashes($string, true, true, false)
+            "\\\\\\\\\\'test\\'\\'\\\\\\\\\\'\\'\\\\\\\\\\'\\r\\t\\n",
+            PMA\libraries\Util::sqlAddSlashes($string, true, true, false)
         );
         $this->assertEquals(
             "\\\\\\\\\'test\'\'\\\\\\\\\'\'\\\\\\\\\'\r\t\n",
-            PMA_Util::sqlAddSlashes($string, true, false, true)
+            PMA\libraries\Util::sqlAddSlashes($string, true, false, true)
         );
         $this->assertEquals(
-            "\\\\\\\\''test''''\\\\\\\\''''\\\\\\\\''\r\t\n",
-            PMA_Util::sqlAddSlashes($string, true, false, false)
+            "\\\\\\\\\\'test\\'\\'\\\\\\\\\\'\\'\\\\\\\\\\'\r\t\n",
+            PMA\libraries\Util::sqlAddSlashes($string, true, false, false)
         );
         $this->assertEquals(
             "\\\\\'test\'\'\\\\\'\'\\\\\'\\r\\t\\n",
-            PMA_Util::sqlAddSlashes($string, false, true, true)
+            PMA\libraries\Util::sqlAddSlashes($string, false, true, true)
         );
         $this->assertEquals(
-            "\\\\''test''''\\\\''''\\\\''\\r\\t\\n",
-            PMA_Util::sqlAddSlashes($string, false, true, false)
+            "\\\\\\'test\\'\\'\\\\\\'\\'\\\\\\'\\r\\t\\n",
+            PMA\libraries\Util::sqlAddSlashes($string, false, true, false)
         );
         $this->assertEquals(
             "\\\\\'test\'\'\\\\\'\'\\\\\'\r\t\n",
-            PMA_Util::sqlAddSlashes($string, false, false, true)
+            PMA\libraries\Util::sqlAddSlashes($string, false, false, true)
         );
         $this->assertEquals(
-            "\\\\''test''''\\\\''''\\\\''\r\t\n",
-            PMA_Util::sqlAddSlashes($string, false, false, false)
+            "\\\\\\'test\\'\\'\\\\\\'\\'\\\\\\'\r\t\n",
+            PMA\libraries\Util::sqlAddSlashes($string, false, false, false)
+        );
+        $this->assertEquals(
+            "\\\\\\'",
+            PMA\libraries\Util::sqlAddSlashes('\\\'')
         );
     }
 
     /**
-     * data provider for PMA_Util::unQuote test
+     * data provider for PMA\libraries\Util::unQuote test
      *
      * @return array
      */
@@ -81,7 +84,7 @@ class PMA_QuotingSlashing_Test extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * PMA_Util::unQuote test
+     * PMA\libraries\Util::unQuote test
      *
      * @param string $param    String
      * @param string $expected Expected output
@@ -93,12 +96,12 @@ class PMA_QuotingSlashing_Test extends PHPUnit_Framework_TestCase
     public function testUnQuote($param, $expected)
     {
         $this->assertEquals(
-            $expected, PMA_Util::unQuote($param)
+            $expected, PMA\libraries\Util::unQuote($param)
         );
     }
 
     /**
-     * data provider for PMA_Util::unQuote test with chosen quote
+     * data provider for PMA\libraries\Util::unQuote test with chosen quote
      *
      * @return array
      */
@@ -113,7 +116,7 @@ class PMA_QuotingSlashing_Test extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * PMA_Util::unQuote test with chosen quote
+     * PMA\libraries\Util::unQuote test with chosen quote
      *
      * @param string $param    String
      * @param string $expected Expected output
@@ -125,7 +128,7 @@ class PMA_QuotingSlashing_Test extends PHPUnit_Framework_TestCase
     public function testUnQuoteSelectedChar($param, $expected)
     {
         $this->assertEquals(
-            $expected, PMA_Util::unQuote($param, '"')
+            $expected, PMA\libraries\Util::unQuote($param, '"')
         );
     }
 
@@ -160,10 +163,10 @@ class PMA_QuotingSlashing_Test extends PHPUnit_Framework_TestCase
     public function testBackquote($a, $b)
     {
         // Test bypass quoting (used by dump functions)
-        $this->assertEquals($a, PMA_Util::backquote($a, false));
+        $this->assertEquals($a, PMA\libraries\Util::backquote($a, false));
 
         // Test backquote
-        $this->assertEquals($b, PMA_Util::backquote($a));
+        $this->assertEquals($b, PMA\libraries\Util::backquote($a));
     }
 
     /**
@@ -197,18 +200,14 @@ class PMA_QuotingSlashing_Test extends PHPUnit_Framework_TestCase
     public function testbackquoteCompat($a, $b)
     {
         // Test bypass quoting (used by dump functions)
-        $this->assertEquals($a, PMA_Util::backquoteCompat($a, 'NONE', false));
-
-        // Test backquote (backquoting will be enabled only
-        // if isset $GLOBALS['sql_backquotes']
-        $this->assertEquals($a, PMA_Util::backquoteCompat($a, 'NONE'));
+        $this->assertEquals($a, PMA\libraries\Util::backquoteCompat($a, 'NONE', false));
 
         // Run tests in MSSQL compatibility mode
         // Test bypass quoting (used by dump functions)
-        $this->assertEquals($a, PMA_Util::backquoteCompat($a, 'MSSQL', false));
+        $this->assertEquals($a, PMA\libraries\Util::backquoteCompat($a, 'MSSQL', false));
 
         // Test backquote
-        $this->assertEquals($b, PMA_Util::backquoteCompat($a, 'MSSQL'));
+        $this->assertEquals($b, PMA\libraries\Util::backquoteCompat($a, 'MSSQL'));
     }
 
     /**
@@ -218,14 +217,18 @@ class PMA_QuotingSlashing_Test extends PHPUnit_Framework_TestCase
      */
     public function testBackquoteForbidenWords()
     {
-        global $PMA_SQPdata_forbidden_word;
-
-        foreach ($PMA_SQPdata_forbidden_word as $forbidden) {
-            $this->assertEquals(
-                "`" . $forbidden . "`",
-                PMA_Util::backquote($forbidden, false)
-            );
+        foreach (SqlParser\Context::$KEYWORDS as $keyword => $type) {
+            if ($type & SqlParser\Token::FLAG_KEYWORD_RESERVED) {
+                $this->assertEquals(
+                    "`" . $keyword . "`",
+                    PMA\libraries\Util::backquote($keyword, false)
+                );
+            } else {
+                $this->assertEquals(
+                    $keyword,
+                    PMA\libraries\Util::backquote($keyword, false)
+                );
+            }
         }
     }
 }
-?>

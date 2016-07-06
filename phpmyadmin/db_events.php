@@ -10,7 +10,6 @@
  * Include required files
  */
 require_once 'libraries/common.inc.php';
-require_once 'libraries/Util.class.php';
 
 /**
  * Include all other files
@@ -22,5 +21,3 @@ require_once 'libraries/rte/rte_events.lib.php';
  */
 $_PMA_RTE = 'EVN';
 require_once 'libraries/rte/rte_main.inc.php';
-
-?>

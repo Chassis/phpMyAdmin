@@ -9,10 +9,9 @@
 /*
  * Include to test.
  */
-require_once 'libraries/Util.class.php';
-require_once 'libraries/php-gettext/gettext.inc';
+
 require_once 'libraries/database_interface.inc.php';
-require_once 'libraries/Tracker.class.php';
+
 require_once 'libraries/relation.lib.php';
 
 /**
@@ -44,7 +43,7 @@ class PMA_Bookmark_Test extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function testPMA_Bookmark_getParams()
+    public function testGetParams()
     {
         $this->assertEquals(
             false,
@@ -57,7 +56,7 @@ class PMA_Bookmark_Test extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function testPMA_Bookmark_getList()
+    public function testGetList()
     {
         $this->assertEquals(
             array(),
@@ -70,7 +69,7 @@ class PMA_Bookmark_Test extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function testPMA_Bookmark_get()
+    public function testGet()
     {
         $this->assertEquals(
             '',
@@ -83,7 +82,7 @@ class PMA_Bookmark_Test extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function testPMA_Bookmark_save()
+    public function testSave()
     {
         $bookmark = array(
             'dbase' => 'phpmyadmin',
@@ -100,7 +99,7 @@ class PMA_Bookmark_Test extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function testPMA_Bookmark_delete()
+    public function testDelete()
     {
         $this->assertFalse(
             PMA_Bookmark_delete('1')

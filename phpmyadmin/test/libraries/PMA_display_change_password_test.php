@@ -9,15 +9,16 @@
 /*
  * Include to test.
  */
-require_once 'libraries/Util.class.php';
-require_once 'libraries/php-gettext/gettext.inc';
+use PMA\libraries\Theme;
+
+
 require_once 'libraries/url_generating.lib.php';
 require_once 'libraries/display_change_password.lib.php';
-require_once 'libraries/Theme.class.php';
+
 require_once 'libraries/database_interface.inc.php';
 require_once 'libraries/sanitizing.lib.php';
 require_once 'libraries/js_escape.lib.php';
-require_once 'libraries/Config.class.php';
+
 require_once 'libraries/config.default.php';
 
 /**
@@ -37,7 +38,7 @@ class PMA_DisplayChangePassword_Test extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         //$GLOBALS
-        $GLOBALS['PMA_Config'] = new PMA_Config();
+        $GLOBALS['PMA_Config'] = new PMA\libraries\Config();
         $GLOBALS['PMA_Config']->enableBc();
         $GLOBALS['cfg']['MaxRows'] = 10;
         $GLOBALS['cfg']['ServerDefault'] = "PMA_server";
@@ -48,13 +49,14 @@ class PMA_DisplayChangePassword_Test extends PHPUnit_Framework_TestCase
         $GLOBALS['cfg']['Server']['user'] = "pma_user";
         $GLOBALS['cfg']['ShowHint'] = true;
         $GLOBALS['cfg']['ActionLinksMode'] = 'icons';
+        $GLOBALS['cfg']['Server']['DisableIS'] = false;
         $GLOBALS['PMA_PHP_SELF'] = "server_privileges.php";
         $GLOBALS['server'] = 0;
         $GLOBALS['pmaThemeImage'] = 'image';
 
         //$_SESSION
-        $_SESSION['PMA_Theme'] = PMA_Theme::load('./themes/pmahomme');
-        $_SESSION['PMA_Theme'] = new PMA_Theme();
+        $_SESSION['PMA_Theme'] = Theme::load('./themes/pmahomme');
+        $_SESSION['PMA_Theme'] = new Theme();
         $_SESSION['relation'][$GLOBALS['server']] = "relation";
     }
 
@@ -69,7 +71,7 @@ class PMA_DisplayChangePassword_Test extends PHPUnit_Framework_TestCase
         $hostname = "pma_hostname";
 
         //Call the test function
-        $html = PMA_getHtmlForChangePassword($username, $hostname);
+        $html = PMA_getHtmlForChangePassword('change_pw', $username, $hostname);
 
         //PMA_PHP_SELF
         $this->assertContains(
@@ -108,10 +110,6 @@ class PMA_DisplayChangePassword_Test extends PHPUnit_Framework_TestCase
         );
         $this->assertContains(
             __('Password:'),
-            $html
-        );
-        $this->assertContains(
-            __('Password Hashing:'),
             $html
         );
     }

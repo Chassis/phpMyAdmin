@@ -17,6 +17,14 @@ header('Expires: ' . gmdate('D, d M Y H:i:s', time() + 3600) . ' GMT');
 define('PMA_MINIMUM_COMMON', true);
 require_once './libraries/common.inc.php';
 
+$buffer = PMA\libraries\OutputBuffering::getInstance();
+$buffer->start();
+register_shutdown_function(
+    function () {
+        echo PMA\libraries\OutputBuffering::getInstance()->getContents();
+    }
+);
+
 // Get the data for the sprites, if it's available
 if (is_readable($_SESSION['PMA_Theme']->getPath() . '/sprites.lib.php')) {
     include $_SESSION['PMA_Theme']->getPath() . '/sprites.lib.php';
@@ -60,7 +68,7 @@ function PMA_getImage(image, alternate, attributes) {
         return false;
     };
     var sprites = [
-        <?php echo implode($keys, ",\n        ") . "\n"; ?>
+        <?php echo implode($keys, ",\n        ") , "\n"; ?>
     ];
     // custom image object, it will eventually be returned by this functions
     var retval = {
@@ -101,15 +109,15 @@ function PMA_getImage(image, alternate, attributes) {
     }
     // set alt
     if (attributes.alt != undefined) {
-        retval.attr('alt', attributes.alt);
+        retval.attr('alt', escapeHtml(attributes.alt));
     } else {
-        retval.attr('alt', alternate);
+        retval.attr('alt', escapeHtml(alternate));
     }
     // set title
     if (attributes.title != undefined) {
-        retval.attr('title', attributes.title);
+        retval.attr('title', escapeHtml(attributes.title));
     } else {
-        retval.attr('title', alternate);
+        retval.attr('title', escapeHtml(alternate));
     }
     // set src
     var klass = image.replace('.gif', '').replace('.png', '');
@@ -129,7 +137,9 @@ function PMA_getImage(image, alternate, attributes) {
         if (i == 'src') {
             // do not allow to override the 'src' attribute
             continue;
-        } else if (i == 'class') {
+        }
+
+        if (i == 'class') {
             retval.attr(i, retval.attr('class') + ' ' + attributes[i]);
         } else {
             retval.attr(i, attributes[i]);

@@ -4,9 +4,9 @@ class phpmyadmin (
 	$path = "/vagrant/extensions/phpmyadmin",
 ) {
 	file { "${path}/phpmyadmin/config.inc.php":
-		ensure => file,
+		ensure  => file,
 		content => template('phpmyadmin/config.inc.php.erb'),
-		mode => "0600"
+		mode    => "0755"
 	}
 
 	file { "/vagrant/phpmyadmin":

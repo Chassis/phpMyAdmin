@@ -5,9 +5,6 @@
  *
  * @package PhpMyAdmin
  */
-if (! defined('PHPMYADMIN')) {
-    exit;
-}
 
 /**
  * Returns array of filtered file names
@@ -19,7 +16,7 @@ if (! defined('PHPMYADMIN')) {
  */
 function PMA_getDirContent($dir, $expression = '')
 {
-    if (!file_exists($dir) || !($handle = @opendir($dir))) {
+    if (!@file_exists($dir) || !($handle = @opendir($dir))) {
         return false;
     }
 
@@ -28,13 +25,13 @@ function PMA_getDirContent($dir, $expression = '')
         $dir .= '/';
     }
     while ($file = @readdir($handle)) {
-        if (is_file($dir . $file)
+        if (@is_file($dir . $file)
             && ($expression == '' || preg_match($expression, $file))
         ) {
             $result[] = $file;
         }
     }
-    @closedir($handle);
+    closedir($handle);
     asort($result);
     return $result;
 }
@@ -43,7 +40,7 @@ function PMA_getDirContent($dir, $expression = '')
  * Returns options of filtered file names
  *
  * @param string $dir        directory to list
- * @param string $extensions regullar expression to match files
+ * @param string $extensions regular expression to match files
  * @param string $active     currently active choice
  *
  * @return array   sorted file list on success, false on failure

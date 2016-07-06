@@ -7,9 +7,6 @@
  *
  * @package PhpMyAdmin
  */
-if (! defined('PHPMYADMIN')) {
-    exit;
-}
 
 /**
  * Logs user information to webserver logs.
@@ -27,4 +24,3 @@ function PMA_logUser($user, $status = 'ok')
     }
 }
 
-?>

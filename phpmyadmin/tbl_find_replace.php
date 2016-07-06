@@ -12,52 +12,22 @@
  * Gets some core libraries
  */
 require_once 'libraries/common.inc.php';
-require_once 'libraries/TableSearch.class.php';
+require_once 'libraries/tbl_common.inc.php';
+require_once 'libraries/tbl_info.inc.php';
 
-$response = PMA_Response::getInstance();
-$table_search = new PMA_TableSearch($db, $table, "replace");
-
-$connectionCharSet = $GLOBALS['dbi']->fetchValue(
-    "SHOW VARIABLES LIKE 'character_set_connection'", 0, 1
+$container = \PMA\libraries\di\Container::getDefaultContainer();
+$container->factory('PMA\libraries\controllers\table\TableSearchController');
+$container->alias(
+    'TableSearchController', 'PMA\libraries\controllers\table\TableSearchController'
 );
-if (isset($_POST['find'])) {
-    $preview = $table_search->getReplacePreview(
-        $_POST['columnIndex'],
-        $_POST['find'],
-        $_POST['replaceWith'],
-        $connectionCharSet
-    );
-    $response->addJSON('preview', $preview);
-    exit;
-}
+$container->set('PMA\libraries\Response', PMA\libraries\Response::getInstance());
+$container->alias('response', 'PMA\libraries\Response');
 
-$header  = $response->getHeader();
-$scripts = $header->getScripts();
-$scripts->addFile('tbl_find_replace.js');
+$dependency_definitions = array(
+    'searchType' => 'replace',
+    'url_query' => &$url_query
+);
 
-// Show secondary level of tabs
-$htmlOutput  = $table_search->getSecondaryTabs();
-
-if (isset($_POST['replace'])) {
-    $htmlOutput .= $table_search->replace(
-        $_POST['columnIndex'],
-        $_POST['findString'],
-        $_POST['replaceWith'],
-        $connectionCharSet
-    );
-    $htmlOutput .= PMA_Util::getMessage(
-        __('Your SQL query has been executed successfully.'),
-        null, 'success'
-    );
-}
-
-if (! isset($goto)) {
-    $goto = $GLOBALS['cfg']['DefaultTabTable'];
-}
-// Defines the url to return to in case of error in the next sql statement
-$err_url   = $goto . '?' . PMA_URL_getCommon($db, $table);
-// Displays the find and replace form
-$htmlOutput .= $table_search->getSelectionForm($goto);
-$response->addHTML($htmlOutput);
-
-?>
+/** @var PMA\libraries\controllers\table\TableSearchController $controller */
+$controller = $container->get('TableSearchController', $dependency_definitions);
+$controller->indexAction();

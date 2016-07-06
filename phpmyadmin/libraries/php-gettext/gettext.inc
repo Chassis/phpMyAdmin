@@ -115,7 +115,7 @@ function get_list_of_locales($locale) {
  */
 function _get_reader($domain=null, $category=5, $enable_cache=true) {
     global $text_domains, $default_domain, $LC_CATEGORIES;
-    if (!isset($domain)) $domain = $default_domain;
+    if (is_null($domain)) $domain = $default_domain;
     if (!isset($text_domains[$domain]->l10n)) {
         // get the current locale
         $locale = _setlocale(LC_MESSAGES, 0);
@@ -175,6 +175,9 @@ function _get_codeset($domain=null) {
  */
 function _encode($text) {
     $source_encoding = mb_detect_encoding($text);
+    if ($source_encoding === false) {
+        $source_encoding = 'utf-8';
+    }
     $target_encoding = _get_codeset();
     if ($source_encoding != $target_encoding) {
         return mb_convert_encoding($text, $target_encoding, $source_encoding);
@@ -241,7 +244,7 @@ function _setlocale($category, $locale) {
 function _bindtextdomain($domain, $path) {
     global $text_domains;
     // ensure $path ends with a slash ('/' should work for both, but lets still play nice)
-    if (substr(php_uname(), 0, 7) == "Windows") {
+    if (DIRECTORY_SEPARATOR == '\\') {
       if ($path[strlen($path)-1] != '\\' and $path[strlen($path)-1] != '/')
         $path .= '\\';
     } else {

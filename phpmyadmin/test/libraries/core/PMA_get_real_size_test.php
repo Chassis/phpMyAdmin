@@ -1,7 +1,6 @@
 <?php
 /* vim: set expandtab sw=4 ts=4 sts=4: */
 /**
- * Test for PMA_getRealSize()  from libraries/core.lib.php
  *
  * @package PhpMyAdmin-test
  */
@@ -9,10 +8,8 @@
 /*
  * Include to test.
  */
-require_once 'libraries/core.lib.php';
 
 /**
- * Test for PMA_getRealSize()  from libraries/core.lib.php
  *
  * @package PhpMyAdmin-test
  */
@@ -51,4 +48,3 @@ class PMA_GetRealSize_Test extends PHPUnit_Framework_TestCase
     }
 
 }
-?>

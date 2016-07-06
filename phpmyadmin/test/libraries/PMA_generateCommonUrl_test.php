@@ -9,7 +9,6 @@
 /*
  * Include to test.
  */
-require_once 'libraries/core.lib.php';
 require_once 'libraries/url_generating.lib.php';
 
 /**
@@ -33,11 +32,11 @@ class PMA_GenerateCommonURL_Test extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test for PMA_URL_getCommon with old style
+     * Test for PMA_URL_getCommon for DB only
      *
      * @return void
      */
-    public function testOldStyle()
+    public function testDbOnly()
     {
         $GLOBALS['server'] = 'x';
         $GLOBALS['collation_connection'] = 'x';
@@ -50,35 +49,10 @@ class PMA_GenerateCommonURL_Test extends PHPUnit_Framework_TestCase
             . 'token=token'
             ;
 
-        $expected = 'db=db'
-            . htmlentities($separator) . 'table=table'
+        $expected = '?db=db'
             . htmlentities($separator) . $expected;
 
-        $this->assertEquals($expected, PMA_URL_getCommon('db', 'table'));
-    }
-
-    /**
-     * Test for PMA_URL_getCommon with old style for DB only
-     *
-     * @return void
-     */
-    public function testOldStyleDbOnly()
-    {
-        $GLOBALS['server'] = 'x';
-        $GLOBALS['collation_connection'] = 'x';
-        $GLOBALS['cfg']['ServerDefault'] = 'y';
-
-        $separator = PMA_URL_getArgSeparator();
-        $expected = 'server=x' . htmlentities($separator)
-            . 'lang=en' . htmlentities($separator)
-            . 'collation_connection=x' . htmlentities($separator)
-            . 'token=token'
-            ;
-
-        $expected = 'db=db'
-            . htmlentities($separator) . $expected;
-
-        $this->assertEquals($expected, PMA_URL_getCommon('db'));
+        $this->assertEquals($expected, PMA_URL_getCommon(array('db' => 'db')));
     }
 
     /**
@@ -107,11 +81,11 @@ class PMA_GenerateCommonURL_Test extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test for PMA_URL_getCommon with old style and alternate separator
+     * Test for PMA_URL_getCommon with alternate divider
      *
      * @return void
      */
-    public function testOldStyleWithAlternateSeparator()
+    public function testWithAlternateDivider()
     {
         $GLOBALS['server'] = 'x';
         $GLOBALS['collation_connection'] = 'x';
@@ -124,30 +98,14 @@ class PMA_GenerateCommonURL_Test extends PHPUnit_Framework_TestCase
             . 'token=token'
             ;
 
-        $expected = 'db=db' . $separator . 'table=table' . $separator . $expected;
-        $this->assertEquals($expected, PMA_URL_getCommon('db', 'table', '&'));
-    }
-
-    /**
-     * Test for PMA_URL_getCommon with old style and alternate separator for DB only
-     *
-     * @return void
-     */
-    public function testOldStyleWithAlternateSeparatorDbOnly()
-    {
-        $GLOBALS['server'] = 'x';
-        $GLOBALS['collation_connection'] = 'x';
-        $GLOBALS['cfg']['ServerDefault'] = 'y';
-
-        $separator = PMA_URL_getArgSeparator();
-        $expected = 'server=x' . $separator
-            . 'lang=en' . $separator
-            . 'collation_connection=x' . $separator
-            . 'token=token'
-            ;
-
-        $expected = 'db=db' . $separator . $expected;
-        $this->assertEquals($expected, PMA_URL_getCommon('db', '', '&'));
+        $expected = '#ABC#db=db' . $separator . 'table=table' . $separator
+            . $expected;
+        $this->assertEquals(
+            $expected,
+            PMA_URL_getCommon(
+                array('db' => 'db', 'table' => 'table'), 'text', '#ABC#'
+            )
+        );
     }
 
     /**
@@ -162,7 +120,7 @@ class PMA_GenerateCommonURL_Test extends PHPUnit_Framework_TestCase
         $GLOBALS['cfg']['ServerDefault'] = 'y';
 
         $separator = PMA_URL_getArgSeparator();
-        $expected = 'server=x' . htmlentities($separator)
+        $expected = '?server=x' . htmlentities($separator)
             . 'lang=en' . htmlentities($separator)
             . 'collation_connection=x' . htmlentities($separator)
             . 'token=token'
@@ -170,4 +128,3 @@ class PMA_GenerateCommonURL_Test extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, PMA_URL_getCommon());
     }
 }
-?>

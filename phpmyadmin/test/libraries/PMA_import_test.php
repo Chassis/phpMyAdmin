@@ -20,10 +20,11 @@ $GLOBALS['server'] = 0;
 /*
  * Include to test.
  */
-require_once 'libraries/Util.class.php';
-require_once 'libraries/Tracker.class.php';
+
+
 require_once 'libraries/database_interface.inc.php';
 require_once 'libraries/import.lib.php';
+require_once 'libraries/url_generating.lib.php';
 
 /**
  * Tests for import functions
@@ -32,6 +33,16 @@ require_once 'libraries/import.lib.php';
  */
 class PMA_Import_Test extends PHPUnit_Framework_TestCase
 {
+    /**
+     * Prepares environment for the test.
+     *
+     * @return void
+     */
+    public function setUp()
+    {
+        $GLOBALS['cfg']['ServerDefault'] = '';
+    }
+
     /**
      * Test for PMA_checkTimeout
      *
@@ -160,7 +171,7 @@ class PMA_Import_Test extends PHPUnit_Framework_TestCase
      *
      * @return void
      *
-     * @dataProvider provGetColumnNumberFromNamee
+     * @dataProvider provGetColumnNumberFromName
      */
     function testGetColumnNumberFromName($expected, $name)
     {
@@ -172,7 +183,7 @@ class PMA_Import_Test extends PHPUnit_Framework_TestCase
      *
      * @return array
      */
-    function provGetColumnNumberFromNamee()
+    function provGetColumnNumberFromName()
     {
         return array(
             array(1, 'A'),
@@ -314,5 +325,163 @@ class PMA_Import_Test extends PHPUnit_Framework_TestCase
             array(VARCHAR, VARCHAR, 'test'),
             array(VARCHAR, INT, 'test'),
         );
+    }
+
+    /**
+     * Test for PMA_getMatchedRows.
+     *
+     * @return void
+     */
+    function testPMAGetMatchedRows()
+    {
+        $GLOBALS['db'] = 'PMA';
+        //mock DBI
+        $dbi = $this->getMockBuilder('PMA\libraries\DatabaseInterface')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $update_query = 'UPDATE `table_1` '
+            . 'SET `id` = 20 '
+            . 'WHERE `id` > 10';
+        $simulated_update_query = 'SELECT `id` FROM `table_1` WHERE `id` > 10 AND (`id` <> 20)';
+
+        $delete_query = 'DELETE FROM `table_1` '
+            . 'WHERE `id` > 10';
+        $simulated_delete_query = 'SELECT * FROM `table_1` WHERE `id` > 10';
+
+        $dbi->expects($this->any())
+            ->method('numRows')
+            ->with(array())
+            ->will($this->returnValue(2));
+
+        $dbi->expects($this->any())
+            ->method('selectDb')
+            ->with('PMA')
+            ->will($this->returnValue(true));
+
+        $dbi->expects($this->at(1))
+            ->method('tryQuery')
+            ->with($simulated_update_query)
+            ->will($this->returnValue(array()));
+
+        $dbi->expects($this->at(4))
+            ->method('tryQuery')
+            ->with($simulated_delete_query)
+            ->will($this->returnValue(array()));
+
+        $GLOBALS['dbi'] = $dbi;
+
+        $this->simulatedQueryTest($update_query, $simulated_update_query);
+        $this->simulatedQueryTest($delete_query, $simulated_delete_query);
+    }
+
+    /**
+     * Tests simulated UPDATE/DELETE query.
+     *
+     * @param string $sql_query       SQL query
+     * @param string $simulated_query Simulated query
+     *
+     * @return void
+     */
+    function simulatedQueryTest($sql_query, $simulated_query)
+    {
+        $parser = new SqlParser\Parser($sql_query);
+        $analyzed_sql_results = array(
+            'query' => $sql_query,
+            'parser' => $parser,
+            'statement' => $parser->statements[0],
+        );
+
+        $simulated_data = PMA_getMatchedRows($analyzed_sql_results);
+
+        // URL to matched rows.
+        $_url_params = array(
+            'db'        => 'PMA',
+            'sql_query' => $simulated_query
+        );
+        $matched_rows_url  = 'sql.php' . PMA_URL_getCommon($_url_params);
+
+        $this->assertEquals(
+            array(
+                'sql_query' => PMA\libraries\Util::formatSql(
+                    $analyzed_sql_results['query']
+                ),
+                'matched_rows' => 2,
+                'matched_rows_url' => $matched_rows_url
+            ),
+            $simulated_data
+        );
+    }
+
+    /**
+     * Test for PMA_checkIfRollbackPossible
+     *
+     * @return void
+     */
+    function testPMACheckIfRollbackPossible()
+    {
+        $GLOBALS['db'] = 'PMA';
+        //mock DBI
+        $dbi = $this->getMockBuilder('PMA\libraries\DatabaseInterface')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        // List of Transactional Engines.
+        $transactional_engines = array(
+            'INNODB',
+            'FALCON',
+            'NDB',
+            'INFINIDB',
+            'TOKUDB',
+            'XTRADB',
+            'SEQUENCE',
+            'BDB'
+        );
+
+        $check_query = 'SELECT `ENGINE` FROM `information_schema`.`tables` '
+            . 'WHERE `table_name` = "%s" '
+            . 'AND `table_schema` = "%s" '
+            . 'AND UPPER(`engine`) IN ("'
+            . implode('", "', $transactional_engines)
+            . '")';
+
+        $check_table_query = 'SELECT * FROM `%s`.`%s` '
+            . 'LIMIT 1';
+
+        $dbi->expects($this->at(0))
+            ->method('tryQuery')
+            ->with(sprintf($check_table_query, 'PMA', 'table_1'))
+            ->will($this->returnValue(array('table')));
+
+        $dbi->expects($this->at(1))
+            ->method('tryQuery')
+            ->with(sprintf($check_query, 'table_1', 'PMA'))
+            ->will($this->returnValue(true));
+
+        $dbi->expects($this->at(2))
+            ->method('numRows')
+            ->will($this->returnValue(1));
+
+        $dbi->expects($this->at(3))
+            ->method('tryQuery')
+            ->with(sprintf($check_table_query, 'PMA', 'table_2'))
+            ->will($this->returnValue(array('table')));
+
+        $dbi->expects($this->at(4))
+            ->method('tryQuery')
+            ->with(sprintf($check_query, 'table_2', 'PMA'))
+            ->will($this->returnValue(true));
+
+        $dbi->expects($this->at(5))
+            ->method('numRows')
+            ->will($this->returnValue(1));
+
+        $GLOBALS['dbi'] = $dbi;
+
+        $sql_query = 'UPDATE `table_1` AS t1, `table_2` t2 '
+            . 'SET `table_1`.`id` = `table_2`.`id` '
+            . 'WHERE 1';
+
+        $this->assertEquals(true, PMA_checkIfRollbackPossible($sql_query));
     }
 }

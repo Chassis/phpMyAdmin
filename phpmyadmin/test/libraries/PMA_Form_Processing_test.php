@@ -10,17 +10,25 @@
  * Include to test
  */
 require_once 'setup/lib/form_processing.lib.php';
-require_once 'libraries/config/ConfigFile.class.php';
-require_once 'libraries/core.lib.php';
-require_once 'libraries/Util.class.php';
+
 
 /**
  * tests for methods under Formset processing library
  *
  * @package PhpMyAdmin-test
  */
-class PMA_From_Processing_Test extends PHPUnit_Framework_TestCase
+class PMA_Form_Processing_Test extends PHPUnit_Framework_TestCase
 {
+    /**
+     * Prepares environment for the test.
+     *
+     * @return void
+     */
+    public function setUp()
+    {
+        $GLOBALS['server'] = 1;
+        $GLOBALS['cfg']['ServerDefault'] = 1;
+    }
 
     /**
      * Test for process_formset()
@@ -36,9 +44,9 @@ class PMA_From_Processing_Test extends PHPUnit_Framework_TestCase
         }
 
         // case 1
-        $formDisplay = $this->getMockBuilder('FormDisplay')
+        $formDisplay = $this->getMockBuilder('PMA\libraries\config\FormDisplay')
             ->disableOriginalConstructor()
-            ->setMethods(array('process', 'display'))
+            ->setMethods(array('process', 'getDisplay'))
             ->getMock();
 
         $formDisplay->expects($this->once())
@@ -47,13 +55,13 @@ class PMA_From_Processing_Test extends PHPUnit_Framework_TestCase
             ->will($this->returnValue(false));
 
         $formDisplay->expects($this->once())
-            ->method('display')
+            ->method('getDisplay')
             ->with(true, true);
 
         PMA_Process_formset($formDisplay);
 
         // case 2
-        $formDisplay = $this->getMockBuilder('FormDisplay')
+        $formDisplay = $this->getMockBuilder('PMA\libraries\config\FormDisplay')
             ->disableOriginalConstructor()
             ->setMethods(array('process', 'hasErrors', 'displayErrors'))
             ->getMock();
@@ -78,22 +86,22 @@ class PMA_From_Processing_Test extends PHPUnit_Framework_TestCase
         );
 
         $this->assertContains(
-            '<a href="?page=&amp;mode=revert">',
+            '<a href="?lang=en&amp;token=token&amp;page=&amp;mode=revert">',
             $result
         );
 
         $this->assertContains(
-            '<a class="btn" href="index.php">',
+            '<a class="btn" href="index.php?lang=en&amp;token=token">',
             $result
         );
 
         $this->assertContains(
-            '<a class="btn" href="?page=&amp;mode=edit">',
+            '<a class="btn" href="?lang=en&amp;token=token&amp;page=&amp;mode=edit">',
             $result
         );
 
         // case 3
-        $formDisplay = $this->getMockBuilder('FormDisplay')
+        $formDisplay = $this->getMockBuilder('PMA\libraries\config\FormDisplay')
             ->disableOriginalConstructor()
             ->setMethods(array('process', 'hasErrors'))
             ->getMock();
@@ -111,7 +119,7 @@ class PMA_From_Processing_Test extends PHPUnit_Framework_TestCase
         PMA_Process_formset($formDisplay);
 
         $this->assertEquals(
-            array('HTTP/1.1 303 See Other', 'Location: index.php'),
+            array('HTTP/1.1 303 See Other', 'Location: index.php?lang=en&amp;token=token'),
             $GLOBALS['header']
         );
 
@@ -119,4 +127,3 @@ class PMA_From_Processing_Test extends PHPUnit_Framework_TestCase
 
 
 }
-?>

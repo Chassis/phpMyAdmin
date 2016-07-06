@@ -12,7 +12,7 @@ if (! defined('PHPMYADMIN')) {
 /**
  * Generates text with hidden inputs.
  *
- * @param string       $db     optional database name
+ * @param string|array $db     optional database name
  *                             (can also be an array of parameters)
  * @param string       $table  optional table name
  * @param int          $indent indenting level
@@ -22,13 +22,6 @@ if (! defined('PHPMYADMIN')) {
  * @see PMA_URL_getCommon()
  *
  * @return string   string with input fields
- *
- * @global  string   the current language
- * @global  string   the current conversion charset
- * @global  string   the current connection collation
- * @global  string   the current server
- * @global  array    the configuration array
- * @global  boolean  whether recoding is allowed or not
  *
  * @access  public
  */
@@ -43,10 +36,10 @@ function PMA_URL_getHiddenInputs($db = '', $table = '',
         $skip    =& $_skip;
     } else {
         $params = array();
-        if (strlen($db)) {
+        if (mb_strlen($db)) {
             $params['db'] = $db;
         }
-        if (strlen($table)) {
+        if (mb_strlen($table)) {
             $params['table'] = $table;
         }
     }
@@ -139,15 +132,6 @@ function PMA_getHiddenFields($values, $pre = '')
  * Generates text with URL parameters.
  *
  * <code>
- * // OLD (deprecated) style
- * // note the ?
- * echo 'script.php?' . PMA_URL_getCommon('mysql', 'rights');
- * // produces with cookies enabled:
- * // script.php?db=mysql&amp;table=rights
- * // with cookies disabled:
- * // script.php?server=1&amp;lang=en&amp;db=mysql&amp;table=rights
- *
- * // NEW style
  * $params['myparam'] = 'myvalue';
  * $params['db']      = 'mysql';
  * $params['table']   = 'rights';
@@ -167,70 +151,28 @@ function PMA_getHiddenFields($values, $pre = '')
  * // script.php?server=1&amp;lang=en
  * </code>
  *
- * @param mixed  assoc. array with url params or optional string with database name
- *               if first param is an array there is also an ? prefixed to the url
+ * @param mixed  $params  optional, Contains an associative array with url params
  *
- * @param string - if first param is array: 'html' to use htmlspecialchars()
- *               on the resulting URL (for a normal URL displayed in HTML)
- *               or something else to avoid using htmlspecialchars() (for
- *               a URL sent via a header); if not set,'html' is assumed
- *               - if first param is not array:  optional table name
+ * @param string $encode  'html' to use htmlspecialchars() on the resulting
+ *                        URL (for a normal URL displayed in HTML) or
+ *                        something else to avoid using htmlspecialchars()
+ *                        (for a URL sent via a header);
+ *                        if not set,'html' is assumed
  *
- * @param string - if first param is array: optional character to
- *               use instead of '?'
- *               - if first param is not array: optional character to use
- *               instead of '&amp;' for dividing URL parameters
+ * @param string $divider optional character to use instead of '?'
  *
  * @return string   string with URL parameters
  * @access  public
  */
-function PMA_URL_getCommon()
+function PMA_URL_getCommon($params = array(), $encode = 'html', $divider = '?')
 {
-    $args = func_get_args();
-
-    if (isset($args[0]) && is_array($args[0])) {
-        // new style
-        $params = $args[0];
-
-        if (isset($args[1])) {
-            $encode = $args[1];
-        } else {
-            $encode = 'html';
-        }
-
-        if (isset($args[2])) {
-            $questionmark = $args[2];
-        } else {
-            $questionmark = '?';
-        }
-    } else {
-        // old style
-
-        $params = array();
-
-        if (PMA_isValid($args[0])) {
-            $params['db'] = $args[0];
-        }
-
-        if (PMA_isValid($args[1])) {
-            $params['table'] = $args[1];
-        }
-
-        if (isset($args[2]) && $args[2] !== '&amp;') {
-            $encode = 'text';
-        } else {
-            $encode = 'html';
-        }
-
-        $questionmark = '';
-    }
-
     $separator = PMA_URL_getArgSeparator();
 
     // avoid overwriting when creating navi panel links to servers
     if (isset($GLOBALS['server'])
         && $GLOBALS['server'] != $GLOBALS['cfg']['ServerDefault']
         && ! isset($params['server'])
+        && ! defined('PMA_SETUP')
     ) {
         $params['server'] = $GLOBALS['server'];
     }
@@ -252,7 +194,7 @@ function PMA_URL_getCommon()
         return '';
     }
 
-    $query = $questionmark . http_build_query($params, null, $separator);
+    $query = $divider . http_build_query($params, null, $separator);
 
     if ($encode === 'html') {
         $query = htmlspecialchars($query);
@@ -284,9 +226,9 @@ function PMA_URL_getArgSeparator($encode = 'none')
         // (see http://www.w3.org/TR/1999/REC-html401-19991224/appendix
         // /notes.html#h-B.2.2)
         $arg_separator = ini_get('arg_separator.input');
-        if (strpos($arg_separator, ';') !== false) {
+        if (mb_strpos($arg_separator, ';') !== false) {
             $separator = ';';
-        } elseif (strlen($arg_separator) > 0) {
+        } elseif (mb_strlen($arg_separator) > 0) {
             $separator = $arg_separator{0};
         } else {
             $separator = '&';
@@ -297,7 +239,6 @@ function PMA_URL_getArgSeparator($encode = 'none')
     switch ($encode) {
     case 'html':
         return $html_separator;
-        break;
     case 'text' :
     case 'none' :
     default :
@@ -305,4 +246,3 @@ function PMA_URL_getArgSeparator($encode = 'none')
     }
 }
 
-?>

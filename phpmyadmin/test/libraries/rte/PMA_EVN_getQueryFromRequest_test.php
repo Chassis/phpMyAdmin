@@ -9,12 +9,11 @@
 /*
  * Needed for backquote()
  */
-require_once 'libraries/Util.class.php';
+
 
 /*
  * Needed by PMA_EVN_getQueryFromRequest()
  */
-require_once 'libraries/php-gettext/gettext.inc';
 
 /*
  * Include to test.
@@ -69,7 +68,8 @@ class PMA_EVN_GetQueryFromRequest_Test extends PHPUnit_Framework_TestCase
                     'item_execute_at' => '2050-01-01 00:00:00',
                     'item_definition' => 'SET @A=0;'
                 ),
-                'CREATE EVENT `s o m e e v e n t\` ON SCHEDULE AT \'2050-01-01 00:00:00\' ON COMPLETION NOT PRESERVE DO SET @A=0;',
+                'CREATE EVENT `s o m e e v e n t\` ON SCHEDULE AT \'2050-01-01 ' .
+                '00:00:00\' ON COMPLETION NOT PRESERVE DO SET @A=0;',
                 0
             ),
             array(
@@ -82,7 +82,8 @@ class PMA_EVN_GetQueryFromRequest_Test extends PHPUnit_Framework_TestCase
                     'item_status'     => 'ENABLED',
                     'item_definition' => 'SET @A=0;'
                 ),
-                'CREATE DEFINER=`me`@`home` EVENT `evn` ON SCHEDULE AT \'2050-01-01 00:00:00\' ON COMPLETION PRESERVE ENABLE DO SET @A=0;',
+                'CREATE DEFINER=`me`@`home` EVENT `evn` ON SCHEDULE AT ' .
+                '\'2050-01-01 00:00:00\' ON COMPLETION PRESERVE ENABLE DO SET @A=0;',
                 0
             ),
             array(
@@ -94,7 +95,8 @@ class PMA_EVN_GetQueryFromRequest_Test extends PHPUnit_Framework_TestCase
                     'item_status'         => 'DISABLED',
                     'item_definition'     => 'SET @A=0;'
                 ),
-                'CREATE EVENT `rec_````evn` ON SCHEDULE EVERY 365 DAY ON COMPLETION NOT PRESERVE DISABLE DO SET @A=0;',
+                'CREATE EVENT `rec_````evn` ON SCHEDULE EVERY 365 DAY ON ' .
+                'COMPLETION NOT PRESERVE DISABLE DO SET @A=0;',
                 0
             ),
             array(
@@ -110,7 +112,9 @@ class PMA_EVN_GetQueryFromRequest_Test extends PHPUnit_Framework_TestCase
                     'item_status'         => 'SLAVESIDE_DISABLED',
                     'item_definition'     => 'SET @A=0;'
                 ),
-                'CREATE DEFINER=`evil````user><\`@`work\` EVENT `rec_evn2` ON SCHEDULE EVERY 365 DAY STARTS \'1900-01-01\' ENDS \'2050-01-01\' ON COMPLETION PRESERVE DISABLE ON SLAVE DO SET @A=0;',
+                'CREATE DEFINER=`evil````user><\`@`work\` EVENT `rec_evn2` ON ' .
+                'SCHEDULE EVERY 365 DAY STARTS \'1900-01-01\' ENDS \'2050-01-01\' ' .
+                'ON COMPLETION PRESERVE DISABLE ON SLAVE DO SET @A=0;',
                 0
             ),
             // Testing failures
@@ -128,7 +132,8 @@ class PMA_EVN_GetQueryFromRequest_Test extends PHPUnit_Framework_TestCase
                     'item_execute_at' => '', // no execution time
                     'item_definition' => 'SET @A=0;'
                 ),
-                'CREATE EVENT `s o m e e v e n t\` ON SCHEDULE ON COMPLETION NOT PRESERVE DO SET @A=0;',
+                'CREATE EVENT `s o m e e v e n t\` ON SCHEDULE ON COMPLETION NOT ' .
+                'PRESERVE DO SET @A=0;',
                 2
             ),
             array(
@@ -140,7 +145,8 @@ class PMA_EVN_GetQueryFromRequest_Test extends PHPUnit_Framework_TestCase
                     'item_status'         => 'DISABLED',
                     'item_definition'     => 'SET @A=0;'
                 ),
-                'CREATE EVENT `rec_````evn` ON SCHEDULE ON COMPLETION NOT PRESERVE DISABLE DO SET @A=0;',
+                'CREATE EVENT `rec_````evn` ON SCHEDULE ON COMPLETION NOT ' .
+                'PRESERVE DISABLE DO SET @A=0;',
                 1
             ),
             array(
@@ -152,10 +158,10 @@ class PMA_EVN_GetQueryFromRequest_Test extends PHPUnit_Framework_TestCase
                     'item_status'         => 'DISABLED',
                     'item_definition'     => 'SET @A=0;'
                 ),
-                'CREATE EVENT `rec_````evn` ON SCHEDULE ON COMPLETION NOT PRESERVE DISABLE DO SET @A=0;',
+                'CREATE EVENT `rec_````evn` ON SCHEDULE ON COMPLETION NOT ' .
+                'PRESERVE DISABLE DO SET @A=0;',
                 1
             ),
         );
     }
 }
-?>
