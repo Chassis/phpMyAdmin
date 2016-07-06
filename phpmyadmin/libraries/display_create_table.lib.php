@@ -33,8 +33,6 @@ if (! defined('PHPMYADMIN')) {
  */
 require_once './libraries/check_user_privileges.lib.php';
 
-$is_create_table_priv = true;
-
 /**
  * Returns the html for create table.
  *
@@ -44,38 +42,7 @@ $is_create_table_priv = true;
  */
 function PMA_getHtmlForCreateTable($db)
 {
-    $html  = '<form id="create_table_form_minimal" method="post" '
-        . 'action="tbl_create.php">';
-    $html .= '<fieldset>';
-    $html .= '<legend>';
-
-    if (PMA_Util::showIcons('ActionLinksMode')) {
-        $html .= PMA_Util::getImage('b_newtbl.png');
-    }
-    $html .= __('Create table');
-
-    $html .= ' </legend>';
-    $html .= PMA_URL_getHiddenInputs($db);
-    $html .= '<div class="formelement">';
-    $html .= __('Name') . ":";
-    $html .= '  <input type="text" name="table" maxlength="64" '
-        . 'size="30" required="required" />';
-    $html .= ' </div>';
-    $html .= '  <div class="formelement">';
-    $html .= __('Number of columns') . ":";
-    $html .= '  <input type="number" min="1" name="num_fields" value="4" required="required" />';
-    $html .= ' </div>';
-    $html .= '  <div class="clearfloat"></div>';
-    $html .= '</fieldset>';
-    $html .= '<fieldset class="tblFooters">';
-    $html .= '   <input type="submit" value="' . __('Go') . '" />';
-    $html .= '</fieldset>';
-    $html .= '</form>';
-
-    return $html;
+    return PMA\libraries\Template::get('database/create_table')->render(
+        array('db' => $db)
+    );
 }
-
-if (!defined('TESTSUITE')) {
-    echo PMA_getHtmlForCreateTable($db);
-}
-?>

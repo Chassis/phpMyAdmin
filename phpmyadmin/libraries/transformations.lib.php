@@ -3,7 +3,7 @@
 /**
  * Set of functions used with the relation and pdf feature
  *
- * This file also provides basic functions to use in other plungins!
+ * This file also provides basic functions to use in other plugins!
  * These are declared in the 'GLOBAL Plugin functions' section
  *
  * Please use short and expressive names.
@@ -41,7 +41,7 @@ function PMA_Transformation_getOptions($option_string)
 {
     $result = array();
 
-    if (! strlen($option_string)
+    if (! mb_strlen($option_string)
         || ! $transform_options = preg_split('/,/', $option_string)
     ) {
         return $result;
@@ -49,12 +49,12 @@ function PMA_Transformation_getOptions($option_string)
 
     while (($option = array_shift($transform_options)) !== null) {
         $trimmed = trim($option);
-        if (strlen($trimmed) > 1
+        if (mb_strlen($trimmed) > 1
             && $trimmed[0] == "'"
-            && $trimmed[strlen($trimmed) - 1] == "'"
+            && $trimmed[mb_strlen($trimmed) - 1] == "'"
         ) {
             // '...'
-            $option = substr($trimmed, 1, -1);
+            $option = mb_substr($trimmed, 1, -1);
         } elseif (isset($trimmed[0]) && $trimmed[0] == "'") {
             // '...,
             $trimmed = ltrim($option);
@@ -62,12 +62,12 @@ function PMA_Transformation_getOptions($option_string)
                 // ...,
                 $trimmed .= ',' . $option;
                 $rtrimmed = rtrim($trimmed);
-                if ($rtrimmed[strlen($rtrimmed) - 1] == "'") {
+                if ($rtrimmed[mb_strlen($rtrimmed) - 1] == "'") {
                     // ,...'
                     break;
                 }
             }
-            $option = substr($rtrimmed, 1, -1);
+            $option = mb_substr($rtrimmed, 1, -1);
         }
         $result[] = stripslashes($option);
     }
@@ -91,77 +91,121 @@ function PMA_getAvailableMIMEtypes()
     }
 
     $stack = array();
-    $filestack = array();
+    $sub_dirs = array(
+        'input/' => 'input_',
+        'output/' => '',
+        '' => ''
+    );
 
-    $handle = opendir('./libraries/plugins/transformations');
+    foreach ($sub_dirs as $sd => $prefix) {
+        $handle = opendir('libraries/plugins/transformations/' . $sd);
 
-    if (! $handle) {
-        return $stack;
-    }
+        if (! $handle) {
+            $stack[$prefix . 'transformation'] = array();
+            $stack[$prefix . 'transformation_file'] = array();
+            continue;
+        }
 
-    while ($file = readdir($handle)) {
-        $filestack[] = $file;
-    }
+        $filestack = array();
+        while ($file = readdir($handle)) {
+            $filestack[] = $file;
+        }
 
-    closedir($handle);
-    sort($filestack);
+        closedir($handle);
+        sort($filestack);
 
-    foreach ($filestack as $file) {
-        if (preg_match('|^[^.].*_.*_.*\.class\.php$|', $file)) {
-            // File contains transformation functions.
-            $parts = explode('_', str_replace('.class.php', '', $file));
-            $mimetype = $parts[0] . "/" . $parts[1];
-            $stack['mimetype'][$mimetype] = $mimetype;
-            $stack['transformation'][] = $mimetype . ': ' . $parts[2];
-            $stack['transformation_file'][] = $file;
-
-        } elseif (preg_match('|^[^.].*\.class.php$|', $file)) {
-            // File is a plain mimetype, no functions.
-            $base = str_replace('.class.php', '', $file);
-
-            if ($base != 'global') {
-                $mimetype = str_replace('_', '/', $base);
+        foreach ($filestack as $file) {
+            if (preg_match('|^[^.].*_.*_.*\.php$|', $file)) {
+                // File contains transformation functions.
+                $parts = explode('_', str_replace('.php', '', $file));
+                $mimetype = $parts[0] . "/" . $parts[1];
                 $stack['mimetype'][$mimetype] = $mimetype;
-                $stack['empty_mimetype'][$mimetype] = $mimetype;
+
+                $stack[$prefix . 'transformation'][] = $mimetype . ': ' . $parts[2];
+                $stack[$prefix . 'transformation_file'][] = $sd . $file;
+                if ($sd === '') {
+                    $stack['input_transformation'][] = $mimetype . ': ' . $parts[2];
+                    $stack['input_transformation_file'][] = $sd . $file;
+                }
+
+            } elseif (preg_match('|^[^.].*\.php$|', $file)) {
+                // File is a plain mimetype, no functions.
+                $base = str_replace('.php', '', $file);
+
+                if ($base != 'global') {
+                    $mimetype = str_replace('_', '/', $base);
+                    $stack['mimetype'][$mimetype] = $mimetype;
+                    $stack['empty_mimetype'][$mimetype] = $mimetype;
+                }
             }
         }
     }
-
     return $stack;
+}
+
+/**
+ * Returns the class name of the transformation
+ *
+ * @param string $filename transformation file name
+ *
+ * @return string the class name of transformation
+ */
+function PMA_getTransformationClassName($filename)
+{
+    // get the transformation class name
+    $class_name = explode(".php", $filename);
+    $class_name = 'PMA\\' . str_replace('/', '\\', $class_name[0]);
+
+    return $class_name;
 }
 
 /**
  * Returns the description of the transformation
  *
- * @param string  $file           transformation file
- * @param boolean $html_formatted whether the description should be formatted
- *                                as HTML
+ * @param string $file transformation file
  *
  * @return String the description of the transformation
  */
-function PMA_getTransformationDescription($file, $html_formatted = true)
+function PMA_getTransformationDescription($file)
 {
-    // get the transformation class name
-    $class_name = explode(".class.php", $file);
-    $class_name = $class_name[0];
-
+    $include_file = 'libraries/plugins/transformations/' . $file;
+    /* @var $class_name PMA\libraries\plugins\TransformationsInterface */
+    $class_name = PMA_getTransformationClassName($include_file);
     // include and instantiate the class
-    include_once 'libraries/plugins/transformations/' . $file;
+    include_once $include_file;
     return $class_name::getInfo();
+}
+
+/**
+ * Returns the name of the transformation
+ *
+ * @param string $file transformation file
+ *
+ * @return String the name of the transformation
+ */
+function PMA_getTransformationName($file)
+{
+    $include_file = 'libraries/plugins/transformations/' . $file;
+    /* @var $class_name PMA\libraries\plugins\TransformationsInterface */
+    $class_name = PMA_getTransformationClassName($include_file);
+    // include and instantiate the class
+    include_once $include_file;
+    return $class_name::getName();
 }
 
 /**
  * Gets the mimetypes for all columns of a table
  *
- * @param string  $db     the name of the db to check for
- * @param string  $table  the name of the table to check for
- * @param boolean $strict whether to include only results having a mimetype set
+ * @param string  $db       the name of the db to check for
+ * @param string  $table    the name of the table to check for
+ * @param boolean $strict   whether to include only results having a mimetype set
+ * @param boolean $fullName whether to use full column names as the key
  *
  * @access public
  *
  * @return array [field_name][field_key] = field_value
  */
-function PMA_getMIME($db, $table, $strict = false)
+function PMA_getMIME($db, $table, $strict = false, $fullName = false)
 {
     $cfgRelation = PMA_getRelationsParam();
 
@@ -169,18 +213,28 @@ function PMA_getMIME($db, $table, $strict = false)
         return false;
     }
 
-    $com_qry  = '
-         SELECT `column_name`,
-                `mimetype`,
+    $com_qry = '';
+    if ($fullName) {
+        $com_qry .= "SELECT CONCAT("
+            . "`db_name`, '.', `table_name`, '.', `column_name`"
+            . ") AS column_name, ";
+    } else {
+        $com_qry  = "SELECT `column_name`, ";
+    }
+    $com_qry .= '`mimetype`,
                 `transformation`,
-                `transformation_options`
-         FROM ' . PMA_Util::backquote($cfgRelation['db']) . '.'
-        . PMA_Util::backquote($cfgRelation['column_info']) . '
-         WHERE `db_name`    = \'' . PMA_Util::sqlAddSlashes($db) . '\'
-           AND `table_name` = \'' . PMA_Util::sqlAddSlashes($table) . '\'
+                `transformation_options`,
+                `input_transformation`,
+                `input_transformation_options`
+         FROM ' . PMA\libraries\Util::backquote($cfgRelation['db']) . '.'
+        . PMA\libraries\Util::backquote($cfgRelation['column_info']) . '
+         WHERE `db_name`    = \'' . PMA\libraries\Util::sqlAddSlashes($db) . '\'
+           AND `table_name` = \'' . PMA\libraries\Util::sqlAddSlashes($table) . '\'
            AND ( `mimetype` != \'\'' . (!$strict ? '
               OR `transformation` != \'\'
-              OR `transformation_options` != \'\'' : '') . ')';
+              OR `transformation_options` != \'\'
+              OR `input_transformation` != \'\'
+              OR `input_transformation_options` != \'\'' : '') . ')';
     $result = $GLOBALS['dbi']->fetchResult(
         $com_qry, 'column_name', null, $GLOBALS['controllink']
     );
@@ -189,7 +243,6 @@ function PMA_getMIME($db, $table, $strict = false)
         // replacements in mimetype and transformation
         $values = str_replace("jpeg", "JPEG", $values);
         $values = str_replace("png", "PNG", $values);
-        $values = str_replace("octet-stream", "Octetstream", $values);
 
         // convert mimetype to new format (f.e. Text_Plain, etc)
         $delimiter_space = '- ';
@@ -206,10 +259,15 @@ function PMA_getMIME($db, $table, $strict = false)
             )
         );
 
-        // convert transformation to new format (class name)
-        // f.e. Text_Plain_Substring.class.php
-        $values = str_replace("__", "_", $values);
-        $values = str_replace(".inc.php", ".class.php", $values);
+        // For transformation of form
+        // output/image_jpeg__inline.inc.php
+        // extract dir part.
+        $dir = explode('/', $values['transformation']);
+        $subdir = '';
+        if (count($dir) === 2) {
+            $subdir = $dir[0] . '/';
+            $values['transformation'] = $dir[1];
+        }
 
         $values['transformation'] = str_replace(
             $delimiter_space,
@@ -222,7 +280,7 @@ function PMA_getMIME($db, $table, $strict = false)
                 )
             )
         );
-
+        $values['transformation'] = $subdir . $values['transformation'];
         $result[$column] = $values;
     }
 
@@ -238,6 +296,8 @@ function PMA_getMIME($db, $table, $strict = false)
  * @param string  $mimetype           the mimetype of the column
  * @param string  $transformation     the transformation of the column
  * @param string  $transformationOpts the transformation options of the column
+ * @param string  $inputTransform     the input transformation of the column
+ * @param string  $inputTransformOpts the input transformation options of the column
  * @param boolean $forcedelete        force delete, will erase any existing
  *                                    comments for this column
  *
@@ -246,7 +306,7 @@ function PMA_getMIME($db, $table, $strict = false)
  * @return boolean  true, if comment-query was made.
  */
 function PMA_setMIME($db, $table, $key, $mimetype, $transformation,
-    $transformationOpts, $forcedelete = false
+    $transformationOpts, $inputTransform, $inputTransformOpts, $forcedelete = false
 ) {
     $cfgRelation = PMA_getRelationsParam();
 
@@ -254,74 +314,78 @@ function PMA_setMIME($db, $table, $key, $mimetype, $transformation,
         return false;
     }
 
-    // convert mimetype to old format (f.e. text_plain)
-    $mimetype = strtolower($mimetype);
-    // old format has octet-stream instead of octetstream for mimetype
-    if (strstr($mimetype, "octetstream")) {
-        $mimetype = "application_octet-stream";
-    }
-
-    // convert transformation to old format (f.e. text_plain__substring.inc.php)
-    $transformation = strtolower($transformation);
-    $transformation = str_replace(".class.php", ".inc.php", $transformation);
-    $last_pos = strrpos($transformation, "_");
-    $transformation = substr($transformation, 0, $last_pos) . "_"
-        . substr($transformation, $last_pos);
+    // lowercase mimetype & transformation
+    $mimetype = mb_strtolower($mimetype);
+    $transformation = mb_strtolower($transformation);
 
     $test_qry = '
          SELECT `mimetype`,
                 `comment`
-           FROM ' . PMA_Util::backquote($cfgRelation['db']) . '.'
-        . PMA_Util::backquote($cfgRelation['column_info']) . '
-          WHERE `db_name`     = \'' . PMA_Util::sqlAddSlashes($db) . '\'
-            AND `table_name`  = \'' . PMA_Util::sqlAddSlashes($table) . '\'
-            AND `column_name` = \'' . PMA_Util::sqlAddSlashes($key) . '\'';
+           FROM ' . PMA\libraries\Util::backquote($cfgRelation['db']) . '.'
+        . PMA\libraries\Util::backquote($cfgRelation['column_info']) . '
+          WHERE `db_name`     = \'' . PMA\libraries\Util::sqlAddSlashes($db) . '\'
+            AND `table_name`  = \'' . PMA\libraries\Util::sqlAddSlashes($table) . '\'
+            AND `column_name` = \'' . PMA\libraries\Util::sqlAddSlashes($key) . '\'';
 
     $test_rs   = PMA_queryAsControlUser(
-        $test_qry, true, PMA_DatabaseInterface::QUERY_STORE
+        $test_qry, true, PMA\libraries\DatabaseInterface::QUERY_STORE
     );
 
     if ($test_rs && $GLOBALS['dbi']->numRows($test_rs) > 0) {
         $row = @$GLOBALS['dbi']->fetchAssoc($test_rs);
         $GLOBALS['dbi']->freeResult($test_rs);
 
+        $transformationLength = mb_strlen($transformation);
         if (! $forcedelete
-            && (strlen($mimetype) || strlen($transformation)
-            || strlen($transformationOpts) || strlen($row['comment']))
+            && (mb_strlen($mimetype) || $transformationLength
+            || mb_strlen($transformationOpts)
+            || mb_strlen($row['comment']))
         ) {
-            $upd_query = 'UPDATE ' . PMA_Util::backquote($cfgRelation['db']) . '.'
-                . PMA_Util::backquote($cfgRelation['column_info'])
+            $upd_query = 'UPDATE '
+                . PMA\libraries\Util::backquote($cfgRelation['db']) . '.'
+                . PMA\libraries\Util::backquote($cfgRelation['column_info'])
                 . ' SET '
                 . '`mimetype` = \''
-                . PMA_Util::sqlAddSlashes($mimetype) . '\', '
+                . PMA\libraries\Util::sqlAddSlashes($mimetype) . '\', '
                 . '`transformation` = \''
-                . PMA_Util::sqlAddSlashes($transformation) . '\', '
+                . PMA\libraries\Util::sqlAddSlashes($transformation) . '\', '
                 . '`transformation_options` = \''
-                . PMA_Util::sqlAddSlashes($transformationOpts) . '\'';
+                . PMA\libraries\Util::sqlAddSlashes($transformationOpts) . '\', '
+                . '`input_transformation` = \''
+                . PMA\libraries\Util::sqlAddSlashes($inputTransform) . '\', '
+                . '`input_transformation_options` = \''
+                . PMA\libraries\Util::sqlAddSlashes($inputTransformOpts) . '\'';
         } else {
-            $upd_query = 'DELETE FROM ' . PMA_Util::backquote($cfgRelation['db'])
-                . '.' . PMA_Util::backquote($cfgRelation['column_info']);
+            $upd_query = 'DELETE FROM '
+                . PMA\libraries\Util::backquote($cfgRelation['db'])
+                . '.' . PMA\libraries\Util::backquote($cfgRelation['column_info']);
         }
         $upd_query .= '
-            WHERE `db_name`     = \'' . PMA_Util::sqlAddSlashes($db) . '\'
-              AND `table_name`  = \'' . PMA_Util::sqlAddSlashes($table) . '\'
-              AND `column_name` = \'' . PMA_Util::sqlAddSlashes($key) . '\'';
-    } elseif (strlen($mimetype)
-        || strlen($transformation)
-        || strlen($transformationOpts)
+            WHERE `db_name`     = \'' . PMA\libraries\Util::sqlAddSlashes($db) . '\'
+              AND `table_name`  = \'' . PMA\libraries\Util::sqlAddSlashes($table)
+                . '\'
+              AND `column_name` = \'' . PMA\libraries\Util::sqlAddSlashes($key)
+                . '\'';
+    } elseif (mb_strlen($mimetype)
+        || mb_strlen($transformation)
+        || mb_strlen($transformationOpts)
     ) {
 
-        $upd_query = 'INSERT INTO ' . PMA_Util::backquote($cfgRelation['db'])
-            . '.' . PMA_Util::backquote($cfgRelation['column_info'])
+        $upd_query = 'INSERT INTO '
+            . PMA\libraries\Util::backquote($cfgRelation['db'])
+            . '.' . PMA\libraries\Util::backquote($cfgRelation['column_info'])
             . ' (db_name, table_name, column_name, mimetype, '
-            . 'transformation, transformation_options) '
+            . 'transformation, transformation_options, '
+            . 'input_transformation, input_transformation_options) '
             . ' VALUES('
-            . '\'' . PMA_Util::sqlAddSlashes($db) . '\','
-            . '\'' . PMA_Util::sqlAddSlashes($table) . '\','
-            . '\'' . PMA_Util::sqlAddSlashes($key) . '\','
-            . '\'' . PMA_Util::sqlAddSlashes($mimetype) . '\','
-            . '\'' . PMA_Util::sqlAddSlashes($transformation) . '\','
-            . '\'' . PMA_Util::sqlAddSlashes($transformationOpts) . '\')';
+            . '\'' . PMA\libraries\Util::sqlAddSlashes($db) . '\','
+            . '\'' . PMA\libraries\Util::sqlAddSlashes($table) . '\','
+            . '\'' . PMA\libraries\Util::sqlAddSlashes($key) . '\','
+            . '\'' . PMA\libraries\Util::sqlAddSlashes($mimetype) . '\','
+            . '\'' . PMA\libraries\Util::sqlAddSlashes($transformation) . '\','
+            . '\'' . PMA\libraries\Util::sqlAddSlashes($transformationOpts) . '\','
+            . '\'' . PMA\libraries\Util::sqlAddSlashes($inputTransform) . '\','
+            . '\'' . PMA\libraries\Util::sqlAddSlashes($inputTransformOpts) . '\')';
     }
 
     if (isset($upd_query)) {
@@ -335,44 +399,6 @@ function PMA_setMIME($db, $table, $key, $mimetype, $transformation,
 /**
  * GLOBAL Plugin functions
  */
-
-
-/**
- * Replaces "[__BUFFER__]" occurences found in $options['string'] with the text
- * in $buffer, after performing a regular expression search and replace on
- * $buffer using $options['regex'] and $options['regex_replace'].
- *
- * @param string $buffer  text that will be replaced in $options['string'],
- *                        after being formatted
- * @param array  $options the options required to format $buffer
- *     = array (
- *         'string'        => 'string', // text containing "[__BUFFER__]"
- *         'regex'         => 'mixed',  // the pattern to search for
- *         'regex_replace' => 'mixed',  // string or array of strings to replace
- *                                      // with
- *     );
- *
- * @return string containing the text with all the replacements
- */
-function PMA_Transformation_globalHtmlReplace($buffer, $options = array())
-{
-    if ( ! isset($options['string']) ) {
-        $options['string'] = '';
-    }
-
-    if (isset($options['regex']) && isset($options['regex_replace'])) {
-        $buffer = preg_replace(
-            '@' . str_replace('@', '\@', $options['regex']) . '@si',
-            $options['regex_replace'],
-            $buffer
-        );
-    }
-
-    // Replace occurences of [__BUFFER__] with actual text
-    $return = str_replace("[__BUFFER__]", $buffer, $options['string']);
-    return $return;
-}
-
 
 /**
  * Delete related transformation details
@@ -393,8 +419,8 @@ function PMA_clearTransformations($db, $table = '', $column = '')
     }
 
     $delete_sql = 'DELETE FROM '
-        . PMA_Util::backquote($cfgRelation['db']) . '.'
-        . PMA_Util::backquote($cfgRelation['column_info'])
+        . PMA\libraries\Util::backquote($cfgRelation['db']) . '.'
+        . PMA\libraries\Util::backquote($cfgRelation['column_info'])
         . ' WHERE ';
 
     if (($column != '') && ($table != '')) {
@@ -416,4 +442,3 @@ function PMA_clearTransformations($db, $table = '', $column = '')
 
 }
 
-?>

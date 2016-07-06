@@ -6,9 +6,7 @@
  * @package Swekey
  */
 
-if (! defined('PHPMYADMIN')) {
-    exit;
-}
+use PMA\libraries\Message;
 
 /**
  * Checks Swekey authentication.
@@ -24,7 +22,7 @@ function Swekey_Auth_check()
         $_SESSION['SWEKEY'] = array();
     }
 
-    $_SESSION['SWEKEY']['ENABLED'] = (! empty($confFile) && file_exists($confFile));
+    $_SESSION['SWEKEY']['ENABLED'] = (! empty($confFile) && @file_exists($confFile));
 
     // Load the swekey.conf file the first time
     if ($_SESSION['SWEKEY']['ENABLED']
@@ -100,9 +98,9 @@ function Swekey_Auth_error()
     function Swekey_GetValidKey()
     {
         var valids = "<?php
-    foreach ($_SESSION['SWEKEY']['VALID_SWEKEYS'] as $key => $value) {
-                echo $key . ',';
-    }
+        foreach ($_SESSION['SWEKEY']['VALID_SWEKEYS'] as $key => $value) {
+                echo $key , ',';
+        }
         ?>";
         var connected_keys = Swekey_ListKeyIds().split(",");
         for (i in connected_keys) {
@@ -136,18 +134,18 @@ function Swekey_Auth_error()
 
     setTimeout("timedCheck()",1000);
     </script>
-     <?php
+        <?php
 
-    if (! empty($_SESSION['SWEKEY']['AUTHENTICATED_SWEKEY'])) {
-        return null;
-    }
+        if (! empty($_SESSION['SWEKEY']['AUTHENTICATED_SWEKEY'])) {
+            return null;
+        }
 
-    if (count($_SESSION['SWEKEY']['VALID_SWEKEYS']) == 0) {
-        return sprintf(
-            __('File %s does not contain any key id'),
-            $GLOBALS['cfg']['Server']['auth_swekey_config']
-        );
-    }
+        if (count($_SESSION['SWEKEY']['VALID_SWEKEYS']) == 0) {
+            return sprintf(
+                __('File %s does not contain any key id'),
+                $GLOBALS['cfg']['Server']['auth_swekey_config']
+            );
+        }
 
     include_once "libraries/plugins/auth/swekey/swekey.php";
 
@@ -169,7 +167,7 @@ function Swekey_Auth_error()
         //            echo "<!-- exists -->\n";
     }
 
-    if (file_exists($caFile)) {
+    if (@file_exists($caFile)) {
         Swekey_SetCAFile($caFile);
     } elseif (! empty($caFile)
         && (substr($_SESSION['SWEKEY']['CONF_SERVER_CHECK'], 0, 8) == "https://")
@@ -228,7 +226,7 @@ function Swekey_Auth_error()
                 url = url.substr(0, url.indexOf("?"));
             }
             Swekey_SetUnplugUrl(key, "pma_login", url + "?session_to_unset=<?php echo session_id();?>&token=<?php echo $_SESSION[' PMA_token ']; ?>");
-            var otp = Swekey_GetOtp(key, <?php echo '"' . $_SESSION['SWEKEY']['RND_TOKEN'] . '"';?>);
+            var otp = Swekey_GetOtp(key, <?php echo '"' , $_SESSION['SWEKEY']['RND_TOKEN'] , '"';?>);
             window.location.search="?swekey_id=" + key + "&swekey_otp=" + otp + "&token=<?php echo $_SESSION[' PMA_token ']; ?>";
         }
         </script>
@@ -252,7 +250,7 @@ function Swekey_login($input_name, $input_go)
 {
     $swekeyErr = Swekey_Auth_error();
     if ($swekeyErr != null) {
-        PMA_Message::error($swekeyErr)->display();
+        Message::error($swekeyErr)->display();
         if ($GLOBALS['error_handler']->hasDisplayErrors()) {
             echo '<div>';
             $GLOBALS['error_handler']->dispErrors();
@@ -271,7 +269,7 @@ function Swekey_login($input_name, $input_go)
         ?>
             function open_swekey_site()
             {
-                window.open("<?php echo PMA_linkURL('http://phpmyadmin.net/auth_key'); ?>");
+                window.open("<?php echo PMA_linkURL('https://www.phpmyadmin.net/auth_key/'); ?>");
             }
 
             var input_username = document.getElementById("<?php echo $input_name; ?>");
@@ -315,4 +313,3 @@ if (isset($_GET['swekey_reset'])) {
     unset($_SESSION['SWEKEY']);
 }
 
-?>

@@ -5,9 +5,6 @@
  *
  * @package PhpMyAdmin
  */
-if (! defined('PHPMYADMIN')) {
-    exit;
-}
 
 /**
  * Checks whether given link is valid
@@ -30,7 +27,7 @@ function PMA_checkLink($url)
         $valid_starts[] = '?page=servers&';
     }
     foreach ($valid_starts as $val) {
-        if (substr($url, 0, strlen($val)) == $val) {
+        if (mb_substr($url, 0, mb_strlen($val)) == $val) {
             return true;
         }
     }
@@ -80,16 +77,21 @@ function PMA_replaceBBLink($found)
  */
 function PMA_replaceDocLink($found)
 {
-    $anchor = $found[1];
-    if (strncmp('faq', $anchor, 3) == 0) {
-        $page = 'faq';
-    } else if (strncmp('cfg', $anchor, 3) == 0) {
-        $page = 'cfg';
+    if (count($found) >= 4) {
+        $page = $found[1];
+        $anchor = $found[3];
     } else {
-        /* Guess */
-        $page = 'setup';
+        $anchor = $found[1];
+        if (strncmp('faq', $anchor, 3) == 0) {
+            $page = 'faq';
+        } else if (strncmp('cfg', $anchor, 3) == 0) {
+            $page = 'config';
+        } else {
+            /* Guess */
+            $page = 'setup';
+        }
     }
-    $link = PMA_Util::getDocuLink($page, $anchor);
+    $link = PMA\libraries\Util::getDocuLink($page, $anchor);
     return '<a href="' . $link . '" target="documentation">';
 }
 
@@ -134,6 +136,8 @@ function PMA_sanitize($message, $escape = false, $safe = false)
         '[/sup]'    => '</sup>',
          // used in common.inc.php:
         '[conferr]' => '<iframe src="show_config_errors.php" />',
+         // used in libraries/Util.php
+        '[dochelpicon]' => PMA\libraries\Util::getImage('b_help.png', __('Documentation')),
     );
 
     $message = strtr($message, $replace_pairs);
@@ -146,7 +150,7 @@ function PMA_sanitize($message, $escape = false, $safe = false)
 
     /* Replace documentation links */
     $message = preg_replace_callback(
-        '/\[doc@([a-zA-Z0-9_-]+)\]/',
+        '/\[doc@([a-zA-Z0-9_-]+)(@([a-zA-Z0-9_-]*))?\]/',
         'PMA_replaceDocLink',
         $message
     );
@@ -188,4 +192,3 @@ function PMA_sanitizeFilename($filename, $replaceDots = false)
     return $filename;
 }
 
-?>

@@ -18,7 +18,7 @@ require_once 'libraries/replication_gui.lib.php';
 /**
  * Does the common work
  */
-$response = PMA_Response::getInstance();
+$response = PMA\libraries\Response::getInstance();
 $header   = $response->getHeader();
 $scripts  = $header->getScripts();
 $scripts->addFile('server_privileges.js');
@@ -29,7 +29,7 @@ $scripts->addFile('replication.js');
  */
 if (! $is_superuser) {
     $html  = PMA_getHtmlForSubPageHeader('replication');
-    $html .= PMA_Message::error(__('No Privileges'))->getDisplay();
+    $html .= PMA\libraries\Message::error(__('No Privileges'))->getDisplay();
     $response->addHTML($html);
     exit;
 }
@@ -52,7 +52,7 @@ $response->addHTML(PMA_getHtmlForSubPageHeader('replication'));
 // Display error messages
 $response->addHTML(PMA_getHtmlForErrorMessage());
 
-if ($server_master_status) {
+if ($GLOBALS['replication_info']['master']['status']) {
     $response->addHTML(PMA_getHtmlForMasterReplication());
 } elseif (! isset($_REQUEST['mr_configure'])
     && ! isset($_REQUEST['repl_clear_scr'])
@@ -72,7 +72,7 @@ if (! isset($_REQUEST['repl_clear_scr'])) {
     // Render the 'Slave configuration' section
     $response->addHTML(
         PMA_getHtmlForSlaveConfiguration(
-            $server_slave_status,
+            $GLOBALS['replication_info']['slave']['status'],
             $server_slave_replication
         )
     );
@@ -80,4 +80,3 @@ if (! isset($_REQUEST['repl_clear_scr'])) {
 if (isset($_REQUEST['sl_configure'])) {
     $response->addHTML(PMA_getHtmlForReplicationChangeMaster("slave_changemaster"));
 }
-?>

@@ -9,9 +9,10 @@
 /*
  * Needed for backquote() and PMA_RTN_getQueryFromRequest()
  */
-require_once 'libraries/Util.class.php';
-require_once 'libraries/php-gettext/gettext.inc';
-require_once './libraries/Types.class.php';
+
+use PMA\libraries\TypesMySQL;
+
+
 
 /*
  * Include to test.
@@ -42,7 +43,7 @@ class PMA_RTN_GetQueryFromRequest_Test extends PHPUnit_Framework_TestCase
 
         $cfg['ShowFunctionFields'] = false;
 
-        $GLOBALS['PMA_Types'] = new PMA_Types_MySQL();
+        $GLOBALS['PMA_Types'] = new TypesMySQL();
 
         $errors = array();
         PMA_RTN_setGlobals();
@@ -84,7 +85,8 @@ class PMA_RTN_GetQueryFromRequest_Test extends PHPUnit_Framework_TestCase
                     'item_securitytype'         => 'INVOKER',
                     'item_sqldataaccess'        => 'NO SQL'
                 ),
-                'CREATE DEFINER=`me`@`home` PROCEDURE `p r o c`() COMMENT \'foo\' DETERMINISTIC NO SQL SQL SECURITY INVOKER SELECT 0;',
+                'CREATE DEFINER=`me`@`home` PROCEDURE `p r o c`() COMMENT \'foo\' '
+                . 'DETERMINISTIC NO SQL SQL SECURITY INVOKER SELECT 0;',
                 0
             ),
             array(
@@ -108,7 +110,10 @@ class PMA_RTN_GetQueryFromRequest_Test extends PHPUnit_Framework_TestCase
                     'item_securitytype'         => 'DEFINER',
                     'item_sqldataaccess'        => 'foobar'
                 ),
-                'CREATE DEFINER=`someuser`@`somehost` PROCEDURE `pr````oc`(IN `pa``ram` INT(10) ZEROFILL, INOUT `par 2` ENUM(\'a\', \'b\') CHARSET latin1) NOT DETERMINISTIC SQL SECURITY DEFINER SELECT \'foobar\';',
+                'CREATE DEFINER=`someuser`@`somehost` PROCEDURE `pr````oc`'
+                . '(IN `pa``ram` INT(10) ZEROFILL, INOUT `par 2` ENUM(\'a\', \'b\')'
+                . ' CHARSET latin1) NOT DETERMINISTIC SQL SECURITY DEFINER SELECT '
+                . '\'foobar\';',
                 0
             ),
             array(
@@ -133,7 +138,9 @@ class PMA_RTN_GetQueryFromRequest_Test extends PHPUnit_Framework_TestCase
                     'item_securitytype'         => 'DEFINER',
                     'item_sqldataaccess'        => 'READ SQL DATA'
                 ),
-                'CREATE FUNCTION `func\\`(`pa``ram` VARCHAR(45) CHARSET latin1) RETURNS DECIMAL(5,5) UNSIGNED ZEROFILL COMMENT \'foo\'\'s bar\' DETERMINISTIC SQL SECURITY DEFINER SELECT \'foobar\';',
+                'CREATE FUNCTION `func\\`(`pa``ram` VARCHAR(45) CHARSET latin1) '
+                . 'RETURNS DECIMAL(5,5) UNSIGNED ZEROFILL COMMENT \'foo\\\'s bar\' '
+                . 'DETERMINISTIC SQL SECURITY DEFINER SELECT \'foobar\';',
                 0
             ),
             array(
@@ -151,7 +158,8 @@ class PMA_RTN_GetQueryFromRequest_Test extends PHPUnit_Framework_TestCase
                     'item_securitytype'         => 'DEFINER',
                     'item_sqldataaccess'        => 'READ SQL DATA'
                 ),
-                'CREATE FUNCTION `func`() RETURNS VARCHAR(20) CHARSET utf8 NOT DETERMINISTIC SQL SECURITY DEFINER SELECT 0;',
+                'CREATE FUNCTION `func`() RETURNS VARCHAR(20) CHARSET utf8 NOT '
+                . 'DETERMINISTIC SQL SECURITY DEFINER SELECT 0;',
                 0
             ),
             // Testing failures
@@ -183,7 +191,8 @@ class PMA_RTN_GetQueryFromRequest_Test extends PHPUnit_Framework_TestCase
                     'item_securitytype'         => 'INVOKER',
                     'item_sqldataaccess'        => 'NO SQL'
                 ),
-                'CREATE PROCEDURE `proc`() COMMENT \'foo\' DETERMINISTIC NO SQL SQL SECURITY INVOKER SELECT 0;', // valid query
+                'CREATE PROCEDURE `proc`() COMMENT \'foo\' DETERMINISTIC '
+                . 'NO SQL SQL SECURITY INVOKER SELECT 0;', // valid query
                 1
             ),
             array(
@@ -205,9 +214,11 @@ class PMA_RTN_GetQueryFromRequest_Test extends PHPUnit_Framework_TestCase
                     'item_param_opts_text'      => array('utf8', 'latin1'),
                     'item_returntype'           => '',
                     'item_securitytype'         => 'DEFINER',
-                    'item_sqldataaccess'        => 'foobar' // invalid, will just be ignored withour throwing errors
+                    'item_sqldataaccess'        => 'foobar' // invalid, will just be ignored without throwing errors
                 ),
-                'CREATE PROCEDURE `proc`((10) ZEROFILL, INOUT `goo` ENUM CHARSET latin1) NOT DETERMINISTIC SQL SECURITY DEFINER SELECT 0;', // invalid query
+                'CREATE PROCEDURE `proc`((10) ZEROFILL, '
+                . 'INOUT `goo` ENUM CHARSET latin1) NOT DETERMINISTIC '
+                . 'SQL SECURITY DEFINER SELECT 0;', // invalid query
                 2
             ),
             array(
@@ -231,7 +242,8 @@ class PMA_RTN_GetQueryFromRequest_Test extends PHPUnit_Framework_TestCase
                     'item_securitytype'         => 'DEFINER',
                     'item_sqldataaccess'        => ''
                 ),
-                'CREATE FUNCTION `func`() RETURNS VARCHAR CHARSET utf8 NOT DETERMINISTIC SQL SECURITY DEFINER SELECT 0;', // invalid query
+                'CREATE FUNCTION `func`() RETURNS VARCHAR CHARSET utf8 NOT '
+                . 'DETERMINISTIC SQL SECURITY DEFINER SELECT 0;', // invalid query
                 2
             ),
             array(
@@ -249,10 +261,10 @@ class PMA_RTN_GetQueryFromRequest_Test extends PHPUnit_Framework_TestCase
                     'item_securitytype'         => 'DEFINER',
                     'item_sqldataaccess'        => ''
                 ),
-                'CREATE FUNCTION `func`()  NOT DETERMINISTIC SQL SECURITY DEFINER SELECT 0;', // invalid query
+                'CREATE FUNCTION `func`()  NOT DETERMINISTIC SQL '
+                . 'SECURITY DEFINER SELECT 0;', // invalid query
                 1
             ),
         );
     }
 }
-?>

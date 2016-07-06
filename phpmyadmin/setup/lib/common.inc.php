@@ -5,6 +5,7 @@
  *
  * @package PhpMyAdmin-Setup
  */
+use PMA\libraries\config\ConfigFile;
 
 /**
  * Do not include full common.
@@ -15,14 +16,12 @@ define('PMA_SETUP', true);
 chdir('..');
 
 if (!file_exists('./libraries/common.inc.php')) {
-    PMA_fatalError('Bad invocation!');
+    die('Bad invocation!');
 }
 
 require_once './libraries/common.inc.php';
-require_once './libraries/Util.class.php';
 require_once './libraries/config/config_functions.lib.php';
 require_once './libraries/config/messages.inc.php';
-require_once './libraries/config/ConfigFile.class.php';
 require_once './libraries/url_generating.lib.php';
 require_once './libraries/user_preferences.lib.php';
 
@@ -53,4 +52,3 @@ $GLOBALS['ConfigFile']->setPersistKeys(
 // allows for redirection even after sending some data
 ob_start();
 
-?>

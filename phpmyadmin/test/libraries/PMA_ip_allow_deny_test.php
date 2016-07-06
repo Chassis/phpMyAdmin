@@ -9,10 +9,9 @@
 /*
  * Include to test.
  */
-require_once 'libraries/Util.class.php';
-require_once 'libraries/php-gettext/gettext.inc';
+
 require_once 'libraries/database_interface.inc.php';
-require_once 'libraries/Tracker.class.php';
+
 require_once 'libraries/ip_allow_deny.lib.php';
 
 /**
@@ -32,13 +31,19 @@ class PMA_Ip_Allow_Deny_Test extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $GLOBALS['cfg']['Server']['user'] = "pma_username";
-        $GLOBALS['cfg']['Server']['AllowDeny']['rules'][] = "allow % 255.255.255.0/4";
-        $GLOBALS['cfg']['Server']['AllowDeny']['rules'][] = "allow % from 255.255.2.0/4";
-        $GLOBALS['cfg']['Server']['AllowDeny']['rules'][] = "allow % from 2001:4998:c:a0d:0000:0000:4998:1020";
-        $GLOBALS['cfg']['Server']['AllowDeny']['rules'][] = "allow % from 2001:4998:c:a0d:0000:0000:4998:[1001-2010]";
-        $GLOBALS['cfg']['Server']['AllowDeny']['rules'][] = "allow % from 2001:4998:c:a0d:0000:0000:4998:3020/24";
+        $GLOBALS['cfg']['Server']['AllowDeny']['rules'][]
+            = "allow % 255.255.255.0/4";
+        $GLOBALS['cfg']['Server']['AllowDeny']['rules'][]
+            = "allow % from 255.255.2.0/4";
+        $GLOBALS['cfg']['Server']['AllowDeny']['rules'][]
+            = "allow % from 2001:4998:c:a0d:0000:0000:4998:1020";
+        $GLOBALS['cfg']['Server']['AllowDeny']['rules'][]
+            = "allow % from 2001:4998:c:a0d:0000:0000:4998:[1001-2010]";
+        $GLOBALS['cfg']['Server']['AllowDeny']['rules'][]
+            = "allow % from 2001:4998:c:a0d:0000:0000:4998:3020/24";
         $GLOBALS['cfg']['Server']['AllowDeny']['rules'][] = "deny % 255.255.0.0/8";
-        $GLOBALS['cfg']['Server']['AllowDeny']['rules'][] = "deny % from 255.255.0.0/8";
+        $GLOBALS['cfg']['Server']['AllowDeny']['rules'][]
+            = "deny % from 255.255.0.0/8";
         include_once 'libraries/ip_allow_deny.lib.php';
     }
 
@@ -47,7 +52,7 @@ class PMA_Ip_Allow_Deny_Test extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function testPMA_getIp()
+    public function testGetIp()
     {
         //$_SERVER['REMOTE_ADDR'] is empty
         $this->assertEquals(
@@ -79,7 +84,7 @@ class PMA_Ip_Allow_Deny_Test extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function testPMA_ipMaskTest()
+    public function testIpMaskTest()
     {
         //IPV4 testing
         $testRange = "255.255.0.0/8";
@@ -157,7 +162,7 @@ class PMA_Ip_Allow_Deny_Test extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function testPMA_allowDeny()
+    public function testAllowDeny()
     {
         $_SERVER['REMOTE_ADDR'] = "";
         $this->assertEquals(
@@ -208,6 +213,5 @@ class PMA_Ip_Allow_Deny_Test extends PHPUnit_Framework_TestCase
             true,
             PMA_allowDeny("allow")
         );
-
     }
 }

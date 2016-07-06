@@ -51,8 +51,6 @@ function onKeyDownArrowsHandler(e)
 
     var x = pos[2], y = pos[1];
 
-    var nO = null;
-
     switch (e.keyCode) {
     case 38:
         // up
@@ -77,7 +75,8 @@ function onKeyDownArrowsHandler(e)
     var is_firefox = navigator.userAgent.toLowerCase().indexOf("firefox/") > -1;
 
     var id = "field_" + y + "_" + x;
-    nO = document.getElementById(id);
+
+    var nO = document.getElementById(id);
     if (! nO) {
         id = "field_" + y + "_" + x + "_0";
         nO = document.getElementById(id);
@@ -131,15 +130,15 @@ function onKeyDownArrowsHandler(e)
 }
 
 AJAX.registerTeardown('keyhandler.js', function () {
-    $('#table_columns').die('keydown keyup');
-    $('table.insertRowTable').die('keydown keyup');
+    $(document).off('keydown keyup', '#table_columns');
+    $(document).off('keydown keyup', 'table.insertRowTable');
 });
 
 AJAX.registerOnload('keyhandler.js', function () {
-    $('#table_columns').live('keydown keyup', function (event) {
+    $(document).on('keydown keyup', '#table_columns', function (event) {
         onKeyDownArrowsHandler(event.originalEvent);
     });
-    $('table.insertRowTable').live('keydown keyup', function (event) {
+    $(document).on('keydown keyup', 'table.insertRowTable', function (event) {
         onKeyDownArrowsHandler(event.originalEvent);
     });
 });

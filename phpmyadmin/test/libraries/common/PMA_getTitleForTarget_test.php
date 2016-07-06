@@ -1,7 +1,7 @@
 <?php
 /* vim: set expandtab sw=4 ts=4 sts=4: */
 /**
- ** Test for PMA_Util::getTitleForTarget from common.lib
+ ** Test for PMA\libraries\Util::getTitleForTarget from common.lib
  *
  * @package PhpMyAdmin-test
  * @group common.lib-tests
@@ -10,11 +10,10 @@
 /*
  * Include to test.
  */
-require_once 'libraries/Util.class.php';
-require_once 'libraries/php-gettext/gettext.inc';
+
 
 /**
- ** Test for PMA_Util::getTitleForTarget from common.lib
+ ** Test for PMA\libraries\Util::getTitleForTarget from common.lib
  *
  * @package PhpMyAdmin-test
  * @group common.lib-tests
@@ -50,12 +49,11 @@ class PMA_GetTitleForTarget_Test extends PHPUnit_Framework_TestCase
      * @return void
      *
      * @dataProvider dataProvider
-     * @return void
      */
     function testGetTitleForTarget($target, $result)
     {
         $this->assertEquals(
-            $result, PMA_Util::getTitleForTarget($target)
+            $result, PMA\libraries\Util::getTitleForTarget($target)
         );
     }
 

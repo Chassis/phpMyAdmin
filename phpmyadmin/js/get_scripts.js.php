@@ -17,8 +17,27 @@ header('Content-Type: text/javascript; charset=UTF-8');
 // Enable browser cache for 1 hour
 header('Expires: ' . gmdate('D, d M Y H:i:s', time() + 3600) . ' GMT');
 
+// When a token is not presented, even though whitelisted arrays are removed
+// in PMA_removeRequestVars(). This is a workaround for that.
+$_GET['scripts'] = json_encode($_GET['scripts']);
+
+// Avoid loading the full common.inc.php because this would add many
+// non-js-compatible stuff like DOCTYPE
+define('PMA_MINIMUM_COMMON', true);
+require_once './libraries/common.inc.php';
+
+$buffer = PMA\libraries\OutputBuffering::getInstance();
+$buffer->start();
+register_shutdown_function(
+    function () {
+        echo PMA\libraries\OutputBuffering::getInstance()->getContents();
+    }
+);
+
+$_GET['scripts'] = json_decode($_GET['scripts']);
 if (! empty($_GET['scripts']) && is_array($_GET['scripts'])) {
-    foreach ($_GET['scripts'] as $script) {
+    // Only up to 10 scripts as this is what we generate
+    foreach (array_slice($_GET['scripts'], 0, 10) as $script) {
         // Sanitise filename
         $script_name = 'js';
 
@@ -42,4 +61,3 @@ if (! empty($_GET['scripts']) && is_array($_GET['scripts'])) {
 if (isset($_GET['call_done'])) {
     echo "AJAX.scriptHandler.done();";
 }
-?>
