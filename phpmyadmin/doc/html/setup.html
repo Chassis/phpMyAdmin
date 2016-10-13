@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Installation &mdash; phpMyAdmin 4.6.3 documentation</title>
+    <title>Installation &mdash; phpMyAdmin 4.6.4 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.6.3',
+        VERSION:     '4.6.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="copyright" title="Copyright" href="copyright.html" />
-    <link rel="top" title="phpMyAdmin 4.6.3 documentation" href="index.html" />
+    <link rel="top" title="phpMyAdmin 4.6.4 documentation" href="index.html" />
     <link rel="next" title="Configuration" href="config.html" />
     <link rel="prev" title="Requirements" href="require.html" /> 
   </head>
@@ -41,7 +41,7 @@
         <li class="right" >
           <a href="require.html" title="Requirements"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">phpMyAdmin 4.6.3 documentation</a> &raquo;</li> 
+        <li><a href="index.html">phpMyAdmin 4.6.4 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -78,7 +78,7 @@ some ways from the official phpMyAdmin documentation.</p>
 <div class="section" id="opensuse">
 <h3>OpenSUSE<a class="headerlink" href="#opensuse" title="Permalink to this headline">¶</a></h3>
 <p>OpenSUSE already comes with phpMyAdmin package, just install packages from
-the <a class="reference external" href="http://software.opensuse.org/package/phpMyAdmin">openSUSE Build Service</a>.</p>
+the <a class="reference external" href="https://software.opensuse.org/package/phpMyAdmin">openSUSE Build Service</a>.</p>
 </div>
 <div class="section" id="ubuntu">
 <h3>Ubuntu<a class="headerlink" href="#ubuntu" title="Permalink to this headline">¶</a></h3>
@@ -107,9 +107,9 @@ official phpMyAdmin documentation.</p>
 <h3>Red Hat Enterprise Linux<a class="headerlink" href="#red-hat-enterprise-linux" title="Permalink to this headline">¶</a></h3>
 <p>Red Hat Enterprise Linux itself and thus derivatives like CentOS don&#8217;t
 ship phpMyAdmin, but the Fedora-driven repository
-<a class="reference external" href="http://fedoraproject.org/wiki/EPEL">Extra Packages for Enterprise Linux (EPEL)</a>
+<a class="reference external" href="https://fedoraproject.org/wiki/EPEL">Extra Packages for Enterprise Linux (EPEL)</a>
 is doing so, if it&#8217;s
-<a class="reference external" href="http://fedoraproject.org/wiki/EPEL/FAQ#howtouse">enabled</a>.
+<a class="reference external" href="https://fedoraproject.org/wiki/EPEL/FAQ#howtouse">enabled</a>.
 But be aware that the configuration file is maintained in
 <tt class="docutils literal"><span class="pre">/etc/phpMyAdmin/</span></tt> and may differ in some ways from the
 official phpMyAdmin documentation.</p>
@@ -119,7 +119,7 @@ official phpMyAdmin documentation.</p>
 <h2>Installing on Windows<a class="headerlink" href="#installing-on-windows" title="Permalink to this headline">¶</a></h2>
 <p>The easiest way to get phpMyAdmin on Windows is using third party products
 which include phpMyAdmin together with a database and web server such as
-<a class="reference external" href="http://www.apachefriends.org/en/xampp.html">XAMPP</a>.</p>
+<a class="reference external" href="https://www.apachefriends.org/">XAMPP</a>.</p>
 <p>You can find more of such options at <a class="reference external" href="https://en.wikipedia.org/wiki/List_of_AMP_packages">Wikipedia</a>.</p>
 </div>
 <div class="section" id="installing-using-composer">
@@ -190,6 +190,17 @@ proxy makes phpMyAdmin available.</p>
 
 <p>By default, <a class="reference internal" href="#cookie"><em>Cookie authentication mode</em></a> is used, but if <span class="target" id="index-1"></span><a class="reference internal" href="#envvar-PMA_USER"><tt class="xref std std-envvar docutils literal"><span class="pre">PMA_USER</span></tt></a> and
 <span class="target" id="index-2"></span><a class="reference internal" href="#envvar-PMA_PASSWORD"><tt class="xref std std-envvar docutils literal"><span class="pre">PMA_PASSWORD</span></tt></a> are set, it is switched to <a class="reference internal" href="#auth-config"><em>Config authentication mode</em></a>.</p>
+<p>Additionally configuration can be tweaked by <tt class="file docutils literal"><span class="pre">/config.user.inc.php</span></tt>. If
+this file exists, it will be loaded after configuration generated from above
+environment variables, so you can override any configuration variable. This
+configuraiton can be added as a volume when invoking docker using
+<cite>-v /some/local/directory/config.user.inc.php:/config.user.inc.php</cite> parameters.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">See <a class="reference internal" href="config.html#config"><em>Configuration</em></a> for detailed description of configuration options.</p>
+</div>
+<div class="section" id="docker-examples">
+<h3>Docker Examples<a class="headerlink" href="#docker-examples" title="Permalink to this headline">¶</a></h3>
 <p>To connect phpMyAdmin to given server use:</p>
 <div class="highlight-sh"><div class="highlight"><pre>docker run --name myadmin -d -e <span class="nv">PMA_HOST</span><span class="o">=</span>dbhost -p 8080:80 phpmyadmin/phpmyadmin
 </pre></div>
@@ -205,6 +216,11 @@ proxy makes phpMyAdmin available.</p>
 <p>You can also link the database container using Docker:</p>
 <div class="highlight-sh"><div class="highlight"><pre>docker run --name phpmyadmin -d --link mysql_db_server:db -p 8080:80 phpmyadmin/phpmyadmin
 </pre></div>
+</div>
+<p>Running with additional configration:</p>
+<div class="highlight-sh"><div class="highlight"><pre>docker run --name phpmyadmin -d --link mysql_db_server:db -p 8080:80 -v /some/local/directory/config.user.inc.php:/config.user.inc.php phpmyadmin/phpmyadmin
+</pre></div>
+</div>
 </div>
 <div class="section" id="using-docker-compose">
 <h3>Using docker-compose<a class="headerlink" href="#using-docker-compose" title="Permalink to this headline">¶</a></h3>
@@ -253,7 +269,8 @@ okay for a particular setting, there is no need to include it in
 <tt class="file docutils literal"><span class="pre">config.inc.php</span></tt>. You&#8217;ll probably need only a few directives to get going; a
 simple configuration may look like this:</p>
 <div class="highlight-xml+php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
-<span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;blowfish_secret&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;ba17c1ec07d65003&#39;</span><span class="p">;</span>  <span class="c1">// use here a value of your choice</span>
+<span class="c1">// use here a value of your choice at least 32 chars long</span>
+<span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;blowfish_secret&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;1{dd0`&lt;Q),5XP_:R9UK%%8\&quot;EEcyH#{o&#39;</span><span class="p">;</span>
 
 <span class="nv">$i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
 <span class="nv">$i</span><span class="o">++</span><span class="p">;</span>
@@ -355,17 +372,23 @@ webserver or limit access by web server configuration, see
 <span id="verify"></span><h2>Verifying phpMyAdmin releases<a class="headerlink" href="#verifying-phpmyadmin-releases" title="Permalink to this headline">¶</a></h2>
 <p>Since July 2015 all phpMyAdmin releases are cryptographically signed by the
 releasing developer, who through January 2016 was Marc Delisle. His key id is
-0x81AF644A, his PGP fingerprint is:</p>
+0xFEFC65D181AF644A, his PGP fingerprint is:</p>
 <div class="highlight-console"><div class="highlight"><pre><span class="go">436F F188 4B1A 0C3F DCBF 0D79 FEFC 65D1 81AF 644A</span>
 </pre></div>
 </div>
-<p>and you can get more identification information from <a class="reference external" href="https://keybase.io/lem9">https://keybase.io/lem9</a>.</p>
+<p>and you can get more identification information from &lt;<a class="reference external" href="https://keybase.io/lem9">https://keybase.io/lem9</a>&gt;.</p>
 <p>Beginning in January 2016, the release manager is Isaac Bennetch. His key id is
-0x8259BD92, and his PGP fingerprint is:</p>
+0xCE752F178259BD92, and his PGP fingerprint is:</p>
 <div class="highlight-console"><div class="highlight"><pre><span class="go">3D06 A59E CE73 0EB7 1B51 1C17 CE75 2F17 8259 BD92</span>
 </pre></div>
 </div>
-<p>and you can get more identification information from <a class="reference external" href="https://keybase.io/ibennetch">https://keybase.io/ibennetch</a>.</p>
+<p>and you can get more identification information from &lt;<a class="reference external" href="https://keybase.io/ibennetch">https://keybase.io/ibennetch</a>&gt;.</p>
+<p>Some additional downloads (for example themes) might be signed by Michal Čihař. His key id is
+0x9C27B31342B7511D, and his PGP fingerprint is:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">63CB 1DF1 EF12 CF2A C0EE 5A32 9C27 B313 42B7 511D</span>
+</pre></div>
+</div>
+<p>and you can get more identification information from &lt;<a class="reference external" href="https://keybase.io/nijel">https://keybase.io/nijel</a>&gt;.</p>
 <p>You should verify that the signature matches
 the archive you have downloaded. This way you can be sure that you are using
 the same code that was released.</p>
@@ -387,7 +410,7 @@ point you should do one of the following steps:</p>
 <ul class="simple">
 <li>Download and import the key from one of the key servers:</li>
 </ul>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> gpg --keyserver hkp://pgp.mit.edu --recv-keys 8259BD92
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> gpg --keyserver hkp://pgp.mit.edu --recv-keys 3D06A59ECE730EB71B511C17CE752F178259BD92
 <span class="go">gpg: requesting key 8259BD92 from hkp server pgp.mit.edu</span>
 <span class="go">gpg: key 8259BD92: public key &quot;Isaac Bennetch &lt;bennetch@gmail.com&gt;&quot; imported</span>
 <span class="go">gpg: no ultimately trusted keys found</span>
@@ -413,7 +436,7 @@ Handbook covers this topic in the chapter <a class="reference external" href="ht
 keyring</a>. The most reliable method is to meet the developer in person and
 exchange key fingerprints, however you can also rely on the web of trust. This way
 you can trust the key transitively though signatures of others, who have met
-the developer in person. For example you can see how <a class="reference external" href="http://pgp.cs.uu.nl/mk_path.cgi?FROM=00411886&amp;TO=8259BD92">Isaac&#8217;s key links to
+the developer in person. For example you can see how <a class="reference external" href="https://pgp.cs.uu.nl/mk_path.cgi?FROM=ABAF11C65A2970B130ABE3C479BE3E4300411886&amp;TO=3D06A59ECE730EB71B511C17CE752F178259BD92">Isaac&#8217;s key links to
 Linus&#8217;s key</a>.</p>
 <p>Once the key is trusted, the warning will not occur:</p>
 <div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> gpg --verify phpMyAdmin-4.5.4.1-all-languages.zip.asc
@@ -615,13 +638,13 @@ the login process.</li>
 <span class="sd"> */</span>
 
 <span class="cm">/* Need to have cookie visible from parent directory */</span>
-<span class="nb">session_set_cookie_params</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+<span class="nb">session_set_cookie_params</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
 <span class="cm">/* Create signon session */</span>
 <span class="nv">$session_name</span> <span class="o">=</span> <span class="s1">&#39;SignonSession&#39;</span><span class="p">;</span>
 <span class="nb">session_name</span><span class="p">(</span><span class="nv">$session_name</span><span class="p">);</span>
 <span class="c1">// Uncomment and change the following line to match your $cfg[&#39;SessionSavePath&#39;]</span>
 <span class="c1">//session_save_path(&#39;/foobar&#39;);</span>
-<span class="nb">session_start</span><span class="p">();</span>
+<span class="o">@</span><span class="nb">session_start</span><span class="p">();</span>
 
 <span class="cm">/* Was data posted? */</span>
 <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">]))</span> <span class="p">{</span>
@@ -634,7 +657,7 @@ the login process.</li>
     <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;PMA_single_signon_cfgupdate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;verbose&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Signon test&#39;</span><span class="p">);</span>
     <span class="nv">$id</span> <span class="o">=</span> <span class="nb">session_id</span><span class="p">();</span>
     <span class="cm">/* Close that session */</span>
-    <span class="nb">session_write_close</span><span class="p">();</span>
+    <span class="o">@</span><span class="nb">session_write_close</span><span class="p">();</span>
     <span class="cm">/* Redirect to phpMyAdmin (should use absolute URL here!) */</span>
     <span class="nb">header</span><span class="p">(</span><span class="s1">&#39;Location: ../index.php&#39;</span><span class="p">);</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
@@ -752,11 +775,11 @@ in <tt class="file docutils literal"><span class="pre">examples/openid.php</span
 
 
 <span class="cm">/* Need to have cookie visible from parent directory */</span>
-<span class="nb">session_set_cookie_params</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+<span class="nb">session_set_cookie_params</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
 <span class="cm">/* Create signon session */</span>
 <span class="nv">$session_name</span> <span class="o">=</span> <span class="s1">&#39;SignonSession&#39;</span><span class="p">;</span>
 <span class="nb">session_name</span><span class="p">(</span><span class="nv">$session_name</span><span class="p">);</span>
-<span class="nb">session_start</span><span class="p">();</span>
+<span class="o">@</span><span class="nb">session_start</span><span class="p">();</span>
 
 <span class="c1">// Determine realm and return_to</span>
 <span class="nv">$base</span> <span class="o">=</span> <span class="s1">&#39;http&#39;</span><span class="p">;</span>
@@ -915,77 +938,6 @@ of which are beyond the scope of this manual but easily searchable
 with Google).</li>
 </ul>
 </div>
-<div class="section" id="swekey-authentication-mode">
-<span id="swekey"></span><span id="index-28"></span><h3>Swekey authentication mode<a class="headerlink" href="#swekey-authentication-mode" title="Permalink to this headline">¶</a></h3>
-<p>The Swekey is a low cost authentication USB key that can be used in
-web applications. When Swekey authentication is activated, phpMyAdmin
-requires the users&#8217;s Swekey to be plugged before entering the login
-page (currently supported for cookie authentication mode only). Swekey
-Authentication is disabled by default. To enable it, add the following
-line to <tt class="file docutils literal"><span class="pre">config.inc.php</span></tt>:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Servers&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;auth_swekey_config&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;/etc/swekey.conf&#39;</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>You then have to create the <tt class="docutils literal"><span class="pre">swekey.conf</span></tt> file that will associate
-each user with their Swekey Id. It is important to place this file
-outside of your web server&#8217;s document root (in the example, it is
-located in <tt class="docutils literal"><span class="pre">/etc</span></tt>). Feel free to use it with your own users&#8217;
-information. If you want to purchase a Swekey please visit
-<a class="reference external" href="https://www.phpmyadmin.net/auth_key/">https://www.phpmyadmin.net/auth_key/</a>
-since this link provides funding for phpMyAdmin.</p>
-<p>A self documented sample file is provided in the
-file <tt class="file docutils literal"><span class="pre">examples/swekey.sample.conf</span></tt>:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span class="c"># This is a typical file used to enable Swekey hardware authentication.</span>
-<span class="c">#</span>
-<span class="c"># To activate the Swekey authentication add the following line to your config.inc.php file.</span>
-<span class="c">#       $cfg[&#39;Servers&#39;][$i][&#39;auth_swekey_config&#39;] = &#39;/etc/swekey-pma.conf&#39;;</span>
-<span class="c"># Then rename this file &quot;swekey-pma.conf&quot; and copy it to the /etc directory.</span>
-<span class="c"># Add all the Swekey ids you want to grant access to in the file.</span>
-<span class="c"># After each Swekey id put the corresponding user name.</span>
-<span class="c">#</span>
-<span class="c"># If you don&#39;t know the id of a Swekey just visit http://www.swekey.com?sel=support</span>
-<span class="c"># while your Swekey is connected.</span>
-<span class="c">#</span>
-<span class="c"># If you need to purchase a Swekey please visit https://www.phpmyadmin.net/auth_key/</span>
-<span class="c"># since this link provides funding to PhpMyAdmin.</span>
-<span class="c">#</span>
-
-0000000000000000000000000000763A:root
-000000000000000000000000000089E4:steve
-0000000000000000000000000000231E:scott
-
-<span class="c">#</span>
-<span class="c"># It is recommended to include the following lines to contact the</span>
-<span class="c"># authentication servers in SSL mode.</span>
-<span class="c">#</span>
-
-<span class="nv">SERVER_CHECK</span><span class="o">=</span>https://auth-check-ssl.musbe.net
-<span class="nv">SERVER_RNDTOKEN</span><span class="o">=</span>https://auth-rnd-gen-ssl.musbe.net
-<span class="nv">SERVER_STATUS</span><span class="o">=</span>https://auth-status-ssl.musbe.net
-
-<span class="c">#</span>
-<span class="c"># The path of the root certificate file used to ensure a secure</span>
-<span class="c"># communication with the authentication servers in SSL mode.</span>
-<span class="c"># If not specified, will use musbe-ca.crt found in your</span>
-<span class="c"># phpMyAdmin/libraries/auth/swekey.</span>
-<span class="c">#</span>
-
-<span class="c">#CA_FILE=/var/http-root/phpmyadmin/libraries/auth/swekey/musbe-ca.crt</span>
-
-<span class="c">#</span>
-<span class="c"># If your server receives many login requests, you can enable the random</span>
-<span class="c"># token caching to accelerate the authentication process.</span>
-<span class="c"># Token caching is enabled by default.</span>
-<span class="c">#</span>
-
-<span class="c">#ENABLE_TOKEN_CACHE=0</span>
-</pre></div>
-</div>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><span class="target" id="index-29"></span><a class="reference internal" href="config.html#cfg_Servers_auth_swekey_config"><tt class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['auth_swekey_config']</span></tt></a></p>
-</div>
-</div>
 </div>
 <div class="section" id="securing-your-phpmyadmin-installation">
 <h2>Securing your phpMyAdmin installation<a class="headerlink" href="#securing-your-phpmyadmin-installation" title="Permalink to this headline">¶</a></h2>
@@ -1002,7 +954,7 @@ use it after the initial setup.</p>
 is probably the best choice for shared hosting.</p>
 </li>
 <li><p class="first">In case you don&#8217;t want all MySQL users to be able to access
-phpMyAdmin, you can use <span class="target" id="index-30"></span><a class="reference internal" href="config.html#cfg_Servers_AllowDeny_rules"><tt class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['AllowDeny']['rules']</span></tt></a> to limit them.</p>
+phpMyAdmin, you can use <span class="target" id="index-28"></span><a class="reference internal" href="config.html#cfg_Servers_AllowDeny_rules"><tt class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['AllowDeny']['rules']</span></tt></a> to limit them.</p>
 </li>
 <li><p class="first">Consider hiding phpMyAdmin behind an authentication proxy, so that
 users need to authenticate prior to providing MySQL credentials
@@ -1021,8 +973,8 @@ can authenticate. This can be done using the <strong class="program">htpasswd</s
 </div>
 </li>
 <li><p class="first">If you are afraid of automated attacks, enabling Captcha by
-<span class="target" id="index-31"></span><a class="reference internal" href="config.html#cfg_CaptchaLoginPublicKey"><tt class="xref config config-option docutils literal"><span class="pre">$cfg['CaptchaLoginPublicKey']</span></tt></a> and
-<span class="target" id="index-32"></span><a class="reference internal" href="config.html#cfg_CaptchaLoginPrivateKey"><tt class="xref config config-option docutils literal"><span class="pre">$cfg['CaptchaLoginPrivateKey']</span></tt></a> might be an option.</p>
+<span class="target" id="index-29"></span><a class="reference internal" href="config.html#cfg_CaptchaLoginPublicKey"><tt class="xref config config-option docutils literal"><span class="pre">$cfg['CaptchaLoginPublicKey']</span></tt></a> and
+<span class="target" id="index-30"></span><a class="reference internal" href="config.html#cfg_CaptchaLoginPrivateKey"><tt class="xref config config-option docutils literal"><span class="pre">$cfg['CaptchaLoginPrivateKey']</span></tt></a> might be an option.</p>
 </li>
 </ul>
 </div>
@@ -1065,6 +1017,7 @@ manually or after a period of inactivity). <a class="reference external" href="h
 <li><a class="reference internal" href="#installing-on-windows">Installing on Windows</a></li>
 <li><a class="reference internal" href="#installing-using-composer">Installing using Composer</a></li>
 <li><a class="reference internal" href="#installing-using-docker">Installing using Docker</a><ul>
+<li><a class="reference internal" href="#docker-examples">Docker Examples</a></li>
 <li><a class="reference internal" href="#using-docker-compose">Using docker-compose</a></li>
 </ul>
 </li>
@@ -1085,7 +1038,6 @@ manually or after a period of inactivity). <a class="reference external" href="h
 <li><a class="reference internal" href="#cookie-authentication-mode">Cookie authentication mode</a></li>
 <li><a class="reference internal" href="#signon-authentication-mode">Signon authentication mode</a></li>
 <li><a class="reference internal" href="#config-authentication-mode">Config authentication mode</a></li>
-<li><a class="reference internal" href="#swekey-authentication-mode">Swekey authentication mode</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#securing-your-phpmyadmin-installation">Securing your phpMyAdmin installation</a></li>
@@ -1138,11 +1090,11 @@ manually or after a period of inactivity). <a class="reference external" href="h
         <li class="right" >
           <a href="require.html" title="Requirements"
              >previous</a> |</li>
-        <li><a href="index.html">phpMyAdmin 4.6.3 documentation</a> &raquo;</li> 
+        <li><a href="index.html">phpMyAdmin 4.6.4 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; <a href="copyright.html">Copyright</a> 2012 - 2014, The phpMyAdmin devel team.
+        &copy; <a href="copyright.html">Copyright</a> 2012 - 2016, The phpMyAdmin devel team.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>
