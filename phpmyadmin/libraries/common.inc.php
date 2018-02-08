@@ -361,31 +361,56 @@ if (PMA_checkPageValidity($_REQUEST['back'], $goto_whitelist)) {
  * could access this variables before we reach this point
  * f.e. PMA\libraries\Config: fontsize
  *
- * Check for token mismatch only if the Request method is POST
- * GET Requests would never have token and therefore checking
- * mis-match does not make sense
- *
  * @todo variables should be handled by their respective owners (objects)
  * f.e. lang, server, collation_connection in PMA\libraries\Config
  */
-
 $token_mismatch = true;
 $token_provided = false;
+if (PMA_isValid($_REQUEST['token'])) {
+    $token_provided = true;
+    $token_mismatch = ! hash_equals($_SESSION[' PMA_token '], $_REQUEST['token']);
+}
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (PMA_isValid($_POST['token'])) {
-        $token_provided = true;
-        $token_mismatch = ! hash_equals($_SESSION[' PMA_token '], $_POST['token']);
-    }
-
-    if ($token_mismatch) {
-        /**
-         * We don't allow any POST operation parameters if the token is mismatched
-         * or is not provided
+if ($token_mismatch) {
+    /**
+     *  List of parameters which are allowed from unsafe source
+     */
+    $allow_list = array(
+        /* needed for direct access, see FAQ 1.34
+         * also, server needed for cookie login screen (multi-server)
          */
-        $whitelist = array('ajax_request');
-        PMA\libraries\Sanitize::removeRequestVars($whitelist);
+        'server', 'db', 'table', 'target', 'lang',
+        /* Session ID */
+        'phpMyAdmin',
+        /* Cookie preferences */
+        'pma_lang', 'pma_collation_connection',
+        /* Possible login form */
+        'pma_servername', 'pma_username', 'pma_password',
+        'g-recaptcha-response',
+        /* Needed to send the correct reply */
+        'ajax_request',
+        /* Permit to log out even if there is a token mismatch */
+        'old_usr',
+        /* Permit redirection with token-mismatch in url.php */
+        'url',
+        /* Permit session expiry flag */
+        'session_expired',
+        /* JS loading */
+        'scripts', 'call_done',
+        /* Navigation panel */
+        'aPath', 'vPath', 'pos', 'pos2_name', 'pos2_value', 'searchClause', 'searchClause2'
+    );
+    /**
+     * Allow changing themes in test/theme.php
+     */
+    if (defined('PMA_TEST_THEME')) {
+        $allow_list[] = 'set_theme';
     }
+    /**
+     * Do actual cleanup
+     */
+    PMA\libraries\Sanitize::removeRequestVars($allow_list);
+
 }
 
 
@@ -460,13 +485,29 @@ $GLOBALS['PMA_Config']->checkErrors();
 /**
  * As we try to handle charsets by ourself, mbstring overloads just
  * break it, see bug 1063821.
+ *
+ * We specifically use empty here as we are looking for anything else than
+ * empty value or 0.
  */
-if (@extension_loaded('mbstring') && @ini_get('mbstring.func_overload') != '0') {
+if (@extension_loaded('mbstring') && !empty(@ini_get('mbstring.func_overload'))) {
     PMA_fatalError(
         __(
             'You have enabled mbstring.func_overload in your PHP '
             . 'configuration. This option is incompatible with phpMyAdmin '
             . 'and might cause some data to be corrupted!'
+        )
+    );
+}
+
+/**
+ * The ini_set and ini_get functions can be disabled using
+ * disable_functions but we're relying quite a lot of them.
+ */
+if (! function_exists('ini_get') || ! function_exists('ini_set')) {
+    PMA_fatalError(
+        __(
+            'You have disabled ini_get and/or ini_set in php.ini. '
+            . 'This option is incompatible with phpMyAdmin!'
         )
     );
 }
@@ -524,11 +565,6 @@ if (! isset($cfg['Servers']) || count($cfg['Servers']) == 0) {
 unset($default_server);
 
 
-/******************************************************************************/
-/* setup themes                                          LABEL_theme_setup    */
-
-ThemeManager::initializeTheme();
-
 if (! defined('PMA_MINIMUM_COMMON')) {
     /**
      * Lookup server by name
@@ -555,34 +591,41 @@ if (! defined('PMA_MINIMUM_COMMON')) {
         }
         unset($i);
     }
+}
 
-    /**
-     * If no server is selected, make sure that $cfg['Server'] is empty (so
-     * that nothing will work), and skip server authentication.
-     * We do NOT exit here, but continue on without logging into any server.
-     * This way, the welcome page will still come up (with no server info) and
-     * present a choice of servers in the case that there are multiple servers
-     * and '$cfg['ServerDefault'] = 0' is set.
-     */
+/**
+ * If no server is selected, make sure that $cfg['Server'] is empty (so
+ * that nothing will work), and skip server authentication.
+ * We do NOT exit here, but continue on without logging into any server.
+ * This way, the welcome page will still come up (with no server info) and
+ * present a choice of servers in the case that there are multiple servers
+ * and '$cfg['ServerDefault'] = 0' is set.
+ */
 
-    if (isset($_REQUEST['server'])
-        && (is_string($_REQUEST['server']) || is_numeric($_REQUEST['server']))
-        && ! empty($_REQUEST['server'])
-        && ! empty($cfg['Servers'][$_REQUEST['server']])
-    ) {
-        $GLOBALS['server'] = $_REQUEST['server'];
+if (isset($_REQUEST['server'])
+    && (is_string($_REQUEST['server']) || is_numeric($_REQUEST['server']))
+    && ! empty($_REQUEST['server'])
+    && ! empty($cfg['Servers'][$_REQUEST['server']])
+) {
+    $GLOBALS['server'] = $_REQUEST['server'];
+    $cfg['Server'] = $cfg['Servers'][$GLOBALS['server']];
+} else {
+    if (!empty($cfg['Servers'][$cfg['ServerDefault']])) {
+        $GLOBALS['server'] = $cfg['ServerDefault'];
         $cfg['Server'] = $cfg['Servers'][$GLOBALS['server']];
     } else {
-        if (!empty($cfg['Servers'][$cfg['ServerDefault']])) {
-            $GLOBALS['server'] = $cfg['ServerDefault'];
-            $cfg['Server'] = $cfg['Servers'][$GLOBALS['server']];
-        } else {
-            $GLOBALS['server'] = 0;
-            $cfg['Server'] = array();
-        }
+        $GLOBALS['server'] = 0;
+        $cfg['Server'] = array();
     }
-    $GLOBALS['url_params']['server'] = $GLOBALS['server'];
+}
+$GLOBALS['url_params']['server'] = $GLOBALS['server'];
 
+/******************************************************************************/
+/* setup themes                                          LABEL_theme_setup    */
+
+ThemeManager::initializeTheme();
+
+if (! defined('PMA_MINIMUM_COMMON')) {
     /**
      * save some settings in cookies
      * @todo should be done in PMA\libraries\Config
@@ -630,7 +673,7 @@ if (! defined('PMA_MINIMUM_COMMON')) {
          * the required auth type plugin
          */
         $auth_class = "Authentication" . ucfirst($cfg['Server']['auth_type']);
-        if (! file_exists(
+        if (! @file_exists(
             './libraries/plugins/auth/'
             . $auth_class . '.php'
         )) {
@@ -788,7 +831,9 @@ if (! defined('PMA_MINIMUM_COMMON')) {
         $GLOBALS['PMA_Types'] = new TypesMySQL();
 
         // Loads closest context to this version.
-        PhpMyAdmin\SqlParser\Context::loadClosest('MySql' . PMA_MYSQL_INT_VERSION);
+        PhpMyAdmin\SqlParser\Context::loadClosest(
+            (PMA_MARIADB ? 'MariaDb' : 'MySql') . PMA_MYSQL_INT_VERSION
+        );
 
         // Sets the default delimiter (if specified).
         if (!empty($_REQUEST['sql_delimiter'])) {

@@ -167,6 +167,7 @@ class Token
     const FLAG_SYMBOL_BACKTICK = 2;
     const FLAG_SYMBOL_USER = 4;
     const FLAG_SYMBOL_SYSTEM = 8;
+    const FLAG_SYMBOL_PARAMETER = 16;
 
     /**
      * The token it its raw string representation.
@@ -205,6 +206,9 @@ class Token
 
     /**
      * The position in the initial string where this token started.
+     *
+     * The position is counted in chars, not bytes, so you should
+     * use mb_* functions to properly handle utf-8 multibyte chars.
      *
      * @var int
      */
@@ -300,6 +304,9 @@ class Token
                         mb_strlen($str),
                         'UTF-8'
                     );
+                }
+                if ((isset($str[0])) && ($str[0] === ':')) {
+                    $str = mb_substr($str, 1, mb_strlen($str), 'UTF-8');
                 }
                 if ((isset($str[0])) && (($str[0] === '`')
                 || ($str[0] === '"') || ($str[0] === '\''))

@@ -128,9 +128,17 @@ function PMA_addDatepicker($this_element, type, options)
                     });
                 }, 0);
             }
-            // Fix wrong timepicker z-index, doesn't work without timeout
             setTimeout(function () {
+                // Fix wrong timepicker z-index, doesn't work without timeout
                 $('#ui-timepicker-div').css('z-index', $('#ui-datepicker-div').css('z-index'));
+                // Integrate tooltip text into dialog
+                var tooltip = $this_element.tooltip('instance');
+                if(typeof tooltip !== 'undefined') {
+                    tooltip.disable();
+                    var $note = $('<p class="note"></div>');
+                    $note.text(tooltip.option('content'));
+                    $('div.ui-datepicker').append($note);
+                }
             }, 0);
         },
         onSelect: function() {
@@ -142,18 +150,18 @@ function PMA_addDatepicker($this_element, type, options)
             if (typeof $this_element.data('datepicker') !== 'undefined') {
                 $this_element.data('datepicker').inline = false;
             }
+            var tooltip = $this_element.tooltip('instance');
+            if(typeof tooltip !== 'undefined') {
+                tooltip.enable();
+            }
         }
     };
-    if (type == "datetime" || type == "timestamp") {
-        $this_element.datetimepicker($.extend(defaultOptions, options));
-    }
-    else if (type == "date") {
-        $this_element.datetimepicker($.extend(defaultOptions, options));
-    }
-    else if (type == "time") {
+    if (type == "time") {
         $this_element.timepicker($.extend(defaultOptions, options));
         // Add a tip regarding entering MySQL allowed-values for TIME data-type
         PMA_tooltip($this_element, 'input', PMA_messages.strMysqlAllowedValuesTipTime);
+    } else {
+        $this_element.datetimepicker($.extend(defaultOptions, options));
     }
 }
 
@@ -281,6 +289,15 @@ function PMA_getSQLEditor($textarea, options, resize, lintOptions) {
             });
         // enable autocomplete
         codemirrorEditor.on("inputRead", codemirrorAutocompleteOnInputRead);
+
+        // page locking
+        codemirrorEditor.on('change', function (e) {
+            e.data = {
+                value: 3,
+                content: codemirrorEditor.isClean(),
+            };
+            AJAX.lockPageHandler(e);
+        });
 
         return codemirrorEditor;
     }
@@ -520,7 +537,7 @@ function PMA_current_version(data)
     if (data && data.version && data.date) {
         var current = parseVersionString($('span.version').text());
         var latest = parseVersionString(data.version);
-        var url = 'https://web.phpmyadmin.net/files/' + escapeHtml(encodeURIComponent(data.version)) + '/';
+        var url = 'https://www.phpmyadmin.net/files/' + escapeHtml(encodeURIComponent(data.version)) + '/';
         var version_information_message = document.createElement('span');
         version_information_message.className = 'latest';
         var version_information_message_link = document.createElement('a');
@@ -1057,7 +1074,7 @@ AJAX.registerOnload('functions.js', function () {
                 end = last_clicked_row;
             }
             $tr.parent().find('tr:not(.noclick)')
-                .slice(start, end + 1)
+                .slice(start, end)
                 .addClass('marked')
                 .find(':checkbox')
                 .prop('checked', true)
@@ -3869,8 +3886,7 @@ function indexEditorDialog(url, title, callback_success, callback_failure)
             .append(data.message)
             .dialog({
                 title: title,
-                width: 450,
-                height: 350,
+                width: 'auto',
                 open: PMA_verifyColumnsProperties,
                 modal: true,
                 buttons: button_options,
@@ -4571,100 +4587,6 @@ function printPage(){
 }
 
 /**
- * Print button
- */
-function copyToClipboard()
-{
-    var textArea = document.createElement("textarea");
-
-    //
-    // *** This styling is an extra step which is likely not required. ***
-    //
-    // Why is it here? To ensure:
-    // 1. the element is able to have focus and selection.
-    // 2. if element was to flash render it has minimal visual impact.
-    // 3. less flakyness with selection and copying which **might** occur if
-    //    the textarea element is not visible.
-    //
-    // The likelihood is the element won't even render, not even a flash,
-    // so some of these are just precautions. However in IE the element
-    // is visible whilst the popup box asking the user for permission for
-    // the web page to copy to the clipboard.
-    //
-
-    // Place in top-left corner of screen regardless of scroll position.
-    textArea.style.position = 'fixed';
-    textArea.style.top = 0;
-    textArea.style.left = 0;
-
-    // Ensure it has a small width and height. Setting to 1px / 1em
-    // doesn't work as this gives a negative w/h on some browsers.
-    textArea.style.width = '2em';
-    textArea.style.height = '2em';
-
-    // We don't need padding, reducing the size if it does flash render.
-    textArea.style.padding = 0;
-
-    // Clean up any borders.
-    textArea.style.border = 'none';
-    textArea.style.outline = 'none';
-    textArea.style.boxShadow = 'none';
-
-    // Avoid flash of white box if rendered for any reason.
-    textArea.style.background = 'transparent';
-
-    textArea.value = '';
-
-    var elementList = $('#serverinfo a');
-
-    elementList.each(function(){
-        textArea.value += $(this).text().split(':')[1].trim() + '/';
-    });
-    textArea.value += '\t\t' + window.location.href;
-    textArea.value += '\n';
-
-    elementList = $('.notice,.success');
-
-    elementList.each(function(){
-        textArea.value += $(this).clone().children().remove().end().text() + '\n\n';
-    });
-
-    elementList = $('.sql pre');
-
-    elementList.each(function() {
-        textArea.value += $(this).text() + '\n\n';
-    });
-
-    elementList = $('.table_results .column_heading a');
-
-    elementList.each(function() {
-        textArea.value += $(this).clone().children().remove().end().text() + '\t';
-    });
-
-    textArea.value += '\n';
-    elementList = $('tbody tr');
-    elementList.each(function() {
-        var childElementList = $(this).find('.data span');
-        childElementList.each(function(){
-            textArea.value += $(this).clone().children().remove().end().text() + '\t';
-        });
-        textArea.value += '\n';
-    });
-
-    document.body.appendChild(textArea);
-
-    textArea.select();
-
-    try {
-        document.execCommand('copy');
-    } catch (err) {
-        alert('Sorry! Unable to copy');
-    }
-
-    document.body.removeChild(textArea);
-}
-
-/**
  * Unbind all event handlers before tearing down a page
  */
 AJAX.registerTeardown('functions.js', function () {
@@ -4824,7 +4746,7 @@ $(document).on("change", checkboxes_sel, checkboxes_changed);
 
 $(document).on("change", "input.checkall_box", function () {
     var is_checked = $(this).is(":checked");
-    $(this.form).find(checkboxes_sel).prop("checked", is_checked)
+    $(this.form).find(checkboxes_sel).not('.row-hidden').prop("checked", is_checked)
     .parents("tr").toggleClass("marked", is_checked);
 });
 

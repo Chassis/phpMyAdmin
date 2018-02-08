@@ -1,6 +1,91 @@
 phpMyAdmin - ChangeLog
 ======================
 
+4.7.7 (2017-12-23)
+- issue #13865 Fixed displaying of formatted numeric values for some locales
+- issue #13856 Ensure datetimepicker is always loaded for datetime fields
+- issue #13848 Fixed PHP error when browsing certain results
+- issue        [security] Fix XSRF/CSRF vulnerability, see PMASA-2017-09
+
+4.7.6 (2017-11-29)
+- issue #13517 Fixed check all interaction with filtering
+- issue #13803 Add SJIS-win to default list of allowed charsets
+- issue #13436 Improve detection that MySQL server needs SSL connection
+- issue #13038 Support JSON datatype on MariaDB 10.2.7 and newer
+- issue #13824 Fixed constructing ALTER query with AFTER
+- issue #13821 Lock page when changes are done in the SQL editor
+- issue #13842 Prefer iconv for encoding conversions
+- issue #13737 Fixed changing password on MariaDB cluster
+
+4.7.5 (2017-10-23)
+- issue #13615 Avoid problems with browsing unknown query types
+- issue #13612 Integrate tooltip into datetime pickers
+- issue #13628 Fixed javascript error in server monitor
+- issue #13444 Fixed server monitor on non Linux and Windows systems
+- issue #13633 Reload javscript messages when changing language
+- issue #13604 Fixed crash on invalid ordering data
+- issue #13639 Fixed error when browsing non SELECT results
+- issue #13533 Fixed saving column to display
+- issue #13647 Fixed export of tables with VIRTUAL columns
+- issue #13669 Fixed selecting multiple rows accidentally selects the next row too
+- issue #13513 Fixed edit index Column alignment issue
+- issue #13515 Fixed rendering of add index dialog
+- issue #13710 Fixed possible error in server advisor
+- issue #13477 Fixed setting input transformations
+- issue #13552 Fixed IPv4/IPv6 To Binary input transformation
+- issue #13686 Clicking on column name to trigger sort with an active search leads to logout
+- issue #13725 Fixed copying tables with specific PARTITION definition
+- issue #13761 Fixed listing of bookmarks for a database
+- issue #13800 Database lost when renaming to similar name and lower_case_table_names=1
+
+4.7.4 (2017-08-23)
+- issue #13415 Remove shadow from the logo
+- issue #13507 Fixed per server theme feature
+- issue #13523 Missing newline in ALTER exports
+- issue #13414 Fixed several compatibility issues with PHP 7.2
+- issue #13550 Fixed copy results to clipboard
+- issue #13562 Add limitation for user group length
+- issue #13561 Fixed edit variable link in advisor
+- issue #13579 Optimize table link should not be visible in print page
+- issue #13553 Improved error handling on corrupted tables
+- issue #13512 Fixed rendering of add index dialog
+- issue #13606 Fixed refreshing server variables
+
+4.7.3 (2017-07-20)
+- issue #13447 Large multi-line query removes Export operation and blanks query box options
+- issue #13445 Fixed rendering of query results
+- issue #13437 Fixed version check when not connected to a database
+- issue #13465 Fixed creating relation
+- issue #13475 Fixed export without backquotes
+- issue #13482 Improved handling of uploaded files with open_basedir
+- issue #13387 Fixed inline editing of hex values
+- issue #13382 Fixed size of index edit dialog
+- issue #13489 Fixed rendering SQL lint errors
+- issue #13468 Avoid breakage if set_time_limit is disabled
+- issue #13471 Fail if ini_set/ini_get are disabled
+- issue #13436 Automatically connect using SSL when server is configured so
+- issue #13478 Fixed usage of some browser transformations
+
+4.7.2 (2017-06-29)
+- issue #13314 Make theme selection keep current server
+- issue #13311 Fixed direct login for accounts without password
+- issue #13316 Fixed check for mbstring.func_overload
+- issue #13323 Fixed wrong encoding of table at triggers
+- issue #12976 Fixed natural sorting in several places
+- issue #12718 Show warning for users removed from mysql.user table
+- issue #13362 Fixed loading additional javascripts
+- issue #13343 Fixed editing QBE
+- issue #13193 Improved documentation on user settings
+- issue #13092 Gracefully handle early fatal errors in AJAX requests
+- issue #13327 Fixed Incorrect NavigationTreeEnableExpansion default value in the documentation
+- issue #13008 Fixed export of database with a lot of tables
+- issue #13318 Improved performance when importing with enabled tracking
+- issue #13386 Avoid PHP errors with non existing configuration on OS X
+- issue #13388 Show only supported charsets for conversion
+- issue #13392 Fixed operation with session.auto_start enabled
+- issue #13383 "Create PHP code" is broken
+- issue #13189 Fixed links to resume timeouted import
+
 4.7.1 (2017-05-25)
 - issue #13132 Always execute tracking queries as controluser
 - issue #13125 Focus on SQL editor after inserting field name

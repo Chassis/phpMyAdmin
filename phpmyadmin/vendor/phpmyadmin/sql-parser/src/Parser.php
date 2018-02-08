@@ -110,6 +110,14 @@ class Parser extends Core
             'field' => 'end_options',
         ),
 
+        'INTERSECT' => array(
+            'class' => 'PhpMyAdmin\\SqlParser\\Components\\UnionKeyword',
+            'field' => 'union',
+        ),
+        'EXCEPT' => array(
+            'class' => 'PhpMyAdmin\\SqlParser\\Components\\UnionKeyword',
+            'field' => 'union',
+        ),
         'UNION' => array(
             'class' => 'PhpMyAdmin\\SqlParser\\Components\\UnionKeyword',
             'field' => 'union',
@@ -168,7 +176,7 @@ class Parser extends Core
             'options' => array('field' => 'table'),
         ),
         'GROUP BY' => array(
-            'class' => 'PhpMyAdmin\\SqlParser\\Components\\OrderKeyword',
+            'class' => 'PhpMyAdmin\\SqlParser\\Components\\GroupKeyword',
             'field' => 'group',
         ),
         'HAVING' => array(
@@ -427,7 +435,12 @@ class Parser extends Core
                 continue;
             }
 
-            if (($token->keyword === 'UNION') || ($token->keyword === 'UNION ALL') || ($token->keyword === 'UNION DISTINCT')) {
+            if (($token->keyword === 'UNION') ||
+                    ($token->keyword === 'UNION ALL') ||
+                    ($token->keyword === 'UNION DISTINCT') ||
+                    ($token->keyword === 'EXCEPT') ||
+                    ($token->keyword === 'INTERSECT')
+            ) {
                 $unionType = $token->keyword;
                 continue;
             }

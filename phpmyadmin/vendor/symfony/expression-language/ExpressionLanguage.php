@@ -23,9 +23,6 @@ use Symfony\Component\ExpressionLanguage\ParserCache\ParserCacheInterface;
  */
 class ExpressionLanguage
 {
-    /**
-     * @var CacheItemPoolInterface
-     */
     private $cache;
     private $lexer;
     private $parser;
@@ -149,11 +146,7 @@ class ExpressionLanguage
 
     protected function registerFunctions()
     {
-        $this->register('constant', function ($constant) {
-            return sprintf('constant(%s)', $constant);
-        }, function (array $values, $constant) {
-            return constant($constant);
-        });
+        $this->addFunction(ExpressionFunction::fromPhp('constant'));
     }
 
     private function getLexer()
