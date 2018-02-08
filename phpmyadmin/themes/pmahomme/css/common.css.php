@@ -542,7 +542,7 @@ button.mult_submit {
 table tbody:first-of-type tr:nth-child(odd),
 table tbody:first-of-type tr:nth-child(odd) th {
     background: #fff;
-} 
+}
 
 /* even items 2,4,6,8,... */
 table tbody:first-of-type tr:nth-child(even),
@@ -2186,9 +2186,9 @@ input#input_import_file {
 /**
  * Indexes
  */
-#index_frm .index_info input,
+#index_frm .index_info input[type="text"],
 #index_frm .index_info select {
-    width: 14em;
+    width: 100%;
     margin: 0;
     box-sizing: border-box;
     -ms-box-sizing: border-box;
@@ -2233,7 +2233,7 @@ table#index_columns {
 
 table#index_columns select {
     width: 85%;
-    float: right;
+    float: <?php echo $left; ?>;
 }
 
 #move_columns_dialog div {
@@ -2979,19 +2979,8 @@ table.show_create td {
     border-right: 1px solid #bbb;
 }
 
-#alias_modal table th {
-    vertical-align: middle;
-    padding-left: 1em;
-}
-
-#alias_modal label.col-2 {
-    min-width: 20%;
-    display: inline-block;
-}
-
-#alias_modal select {
-    width: 25%;
-    margin-right: 2em;
+#alias_modal table {
+    width: 100%;
 }
 
 #alias_modal label {

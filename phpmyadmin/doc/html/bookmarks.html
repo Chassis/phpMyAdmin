@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Bookmarks &#8212; phpMyAdmin 4.7.1 documentation</title>
+    <title>Bookmarks &#8212; phpMyAdmin 4.7.7 documentation</title>
     
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.7.1',
+        VERSION:     '4.7.7',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="copyright" title="Copyright" href="copyright.html" />
-    <link rel="top" title="phpMyAdmin 4.7.1 documentation" href="index.html" />
+    <link rel="top" title="phpMyAdmin 4.7.7 documentation" href="index.html" />
     <link rel="up" title="User Guide" href="user.html" />
     <link rel="next" title="User management" href="privileges.html" />
     <link rel="prev" title="Transformations" href="transformations.html" /> 
@@ -44,7 +44,7 @@
         <li class="right" >
           <a href="transformations.html" title="Transformations"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.7.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.7.7 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="user.html" accesskey="U">User Guide</a> &#187;</li> 
       </ul>
     </div>  
@@ -83,22 +83,22 @@ your stored query.</p>
 <p>Also remember, that everything else inside the <code class="docutils literal"><span class="pre">/*[VARIABLE{variable-number}]*/</span></code> string for
 your query will remain the way it is, but will be stripped of the <code class="docutils literal"><span class="pre">/**/</span></code>
 chars. So you can use:</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span class="cm">/*, [VARIABLE1] AS myname */</span>
+<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="cm">/*, [VARIABLE1] AS myname */</span>
 </pre></div>
 </div>
 <p>which will be expanded to</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span class="p">,</span> <span class="n">VARIABLE1</span> <span class="k">as</span> <span class="n">myname</span>
+<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="p">,</span> <span class="n">VARIABLE1</span> <span class="k">as</span> <span class="n">myname</span>
 </pre></div>
 </div>
 <p>in your query, where VARIABLE1 is the string you entered in the Variable 1 input box.</p>
 <p>A more complex example. Say you have stored
 this query:</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span class="k">SELECT</span> <span class="n">Name</span><span class="p">,</span> <span class="n">Address</span> <span class="k">FROM</span> <span class="n">addresses</span> <span class="k">WHERE</span> <span class="mi">1</span> <span class="cm">/* AND Name LIKE &#39;%[VARIABLE1]%&#39; */</span>
+<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">Name</span><span class="p">,</span> <span class="n">Address</span> <span class="k">FROM</span> <span class="n">addresses</span> <span class="k">WHERE</span> <span class="mi">1</span> <span class="cm">/* AND Name LIKE &#39;%[VARIABLE1]%&#39; */</span>
 </pre></div>
 </div>
 <p>Say, you now enter &#8220;phpMyAdmin&#8221; as the variable for the stored query, the full
 query will be:</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span class="k">SELECT</span> <span class="n">Name</span><span class="p">,</span> <span class="n">Address</span> <span class="k">FROM</span> <span class="n">addresses</span> <span class="k">WHERE</span> <span class="mi">1</span> <span class="k">AND</span> <span class="n">Name</span> <span class="k">LIKE</span> <span class="s1">&#39;%phpMyAdmin%&#39;</span>
+<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">Name</span><span class="p">,</span> <span class="n">Address</span> <span class="k">FROM</span> <span class="n">addresses</span> <span class="k">WHERE</span> <span class="mi">1</span> <span class="k">AND</span> <span class="n">Name</span> <span class="k">LIKE</span> <span class="s1">&#39;%phpMyAdmin%&#39;</span>
 </pre></div>
 </div>
 <p><strong>NOTE THE ABSENCE OF SPACES</strong> inside the <code class="docutils literal"><span class="pre">/**/</span></code> construct. Any spaces
@@ -173,7 +173,7 @@ this table.</p>
         <li class="right" >
           <a href="transformations.html" title="Transformations"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.7.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.7.7 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="user.html" >User Guide</a> &#187;</li> 
       </ul>
     </div>

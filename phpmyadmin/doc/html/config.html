@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Configuration &#8212; phpMyAdmin 4.7.1 documentation</title>
+    <title>Configuration &#8212; phpMyAdmin 4.7.7 documentation</title>
     
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.7.1',
+        VERSION:     '4.7.7',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="copyright" title="Copyright" href="copyright.html" />
-    <link rel="top" title="phpMyAdmin 4.7.1 documentation" href="index.html" />
+    <link rel="top" title="phpMyAdmin 4.7.7 documentation" href="index.html" />
     <link rel="next" title="User Guide" href="user.html" />
     <link rel="prev" title="Installation" href="setup.html" /> 
   </head>
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="setup.html" title="Installation"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.7.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.7.7 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -476,7 +476,7 @@ none of the remaining <code class="docutils literal"><span class="pre">'ssl...'<
 </table>
 <p>Path to the key file when using SSL for connecting to the MySQL server.</p>
 <p>For example:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Servers&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;ssl_key&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;/etc/mysql/server-key.pem&#39;</span><span class="p">;</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Servers&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;ssl_key&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;/etc/mysql/server-key.pem&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
 <div class="admonition seealso">
@@ -614,7 +614,7 @@ none of the remaining <code class="docutils literal"><span class="pre">'ssl...'<
 MySQL server is 5.6 or later, and your SSL certificate is self-signed,
 there is a chance your SSL connection will fail due to validation.
 Setting this to <code class="docutils literal"><span class="pre">false</span></code> will disable the validation check.</p>
-<p>Since PHP 5.6.0 it also verifies whether server name matches CN of it&#8217;s
+<p>Since PHP 5.6.0 it also verifies whether server name matches CN of its
 certificate. There is currently no way to disable just this check without
 disabling complete SSL verification.</p>
 <div class="admonition warning">
@@ -791,7 +791,7 @@ access <a class="reference internal" href="setup.html#linked-tables"><span class
 <p>This can be used to change any aspect of the control connection, which by
 default uses same parameters as the user one.</p>
 <p>For example you can configure SSL for the control connection:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="c1">// Enable SSL</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="c1">// Enable SSL</span>
 <span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Servers&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;control_ssl&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
 <span class="c1">// Client secret key</span>
 <span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Servers&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;control_ssl_key&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;../client-key.pem&#39;</span><span class="p">;</span>
@@ -947,7 +947,7 @@ database list. But <strong>it does not replace the privileges rules of the
 MySQL database server</strong>. If set, it just means only these databases
 will be displayed but <strong>not that all other databases can&#8217;t be used.</strong></p>
 <p>An example of using more that one database:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Servers&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;only_db&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;db1&#39;</span><span class="p">,</span> <span class="s1">&#39;db2&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Servers&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;only_db&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;db1&#39;</span><span class="p">,</span> <span class="s1">&#39;db2&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <div class="versionchanged">
@@ -974,11 +974,11 @@ This only hides them from listing, but a user is still able to access
 them (using, for example, the SQL query area). To limit access, use
 the MySQL privilege system.  For example, to hide all databases
 starting with the letter &#8220;a&#8221;, use</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Servers&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;hide_db&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;^a&#39;</span><span class="p">;</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Servers&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;hide_db&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;^a&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>and to hide both &#8220;db1&#8221; and &#8220;db2&#8221; use</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Servers&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;hide_db&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;^(db1|db2)$&#39;</span><span class="p">;</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Servers&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;hide_db&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;^(db1|db2)$&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>More information on regular expressions can be found in the <a class="reference external" href="https://secure.php.net/manual/en/reference.pcre.pattern.syntax.php">PCRE
@@ -1251,7 +1251,7 @@ to upgrade it manually.</p>
 remember that the Variable in <code class="file docutils literal"><span class="pre">config.inc.php</span></code> has been renamed from
 <code class="samp docutils literal"><span class="pre">$cfg['Servers'][$i]['column_comments']</span></code> to
 <span class="target" id="index-86"></span><a class="reference internal" href="#cfg_Servers_column_info"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['column_info']</span></code></a></p>
-<div class="highlight-mysql"><div class="highlight"><pre><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="ss">`pma__column_comments`</span>
+<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="ss">`pma__column_comments`</span>
 <span class="k">ADD</span> <span class="ss">`mimetype`</span> <span class="kt">VARCHAR</span><span class="p">(</span> <span class="mi">255</span> <span class="p">)</span> <span class="k">NOT</span> <span class="no">NULL</span><span class="p">,</span>
 <span class="k">ADD</span> <span class="ss">`transformation`</span> <span class="kt">VARCHAR</span><span class="p">(</span> <span class="mi">255</span> <span class="p">)</span> <span class="k">NOT</span> <span class="no">NULL</span><span class="p">,</span>
 <span class="k">ADD</span> <span class="ss">`transformation_options`</span> <span class="kt">VARCHAR</span><span class="p">(</span> <span class="mi">255</span> <span class="p">)</span> <span class="k">NOT</span> <span class="no">NULL</span><span class="p">;</span>
@@ -1850,7 +1850,7 @@ detecting IP address behind proxies.</p>
 </tbody>
 </table>
 <p>The general format for the rules is as such:</p>
-<div class="highlight-none"><div class="highlight"><pre>&lt;&#39;allow&#39; | &#39;deny&#39;&gt; &lt;username&gt; [from] &lt;ipmask&gt;
+<div class="highlight-none"><div class="highlight"><pre><span></span>&lt;&#39;allow&#39; | &#39;deny&#39;&gt; &lt;username&gt; [from] &lt;ipmask&gt;
 </pre></div>
 </div>
 <p>If you wish to match all users, it is possible to use a <code class="docutils literal"><span class="pre">'%'</span></code> as a
@@ -1858,7 +1858,7 @@ wildcard in the <em>username</em> field.</p>
 <p>There are a few shortcuts you can
 use in the <em>ipmask</em> field as well (please note that those containing
 SERVER_ADDRESS might not be available on all webservers):</p>
-<div class="highlight-none"><div class="highlight"><pre>&#39;all&#39; -&gt; 0.0.0.0/0
+<div class="highlight-none"><div class="highlight"><pre><span></span>&#39;all&#39; -&gt; 0.0.0.0/0
 &#39;localhost&#39; -&gt; 127.0.0.1/8
 &#39;localnetA&#39; -&gt; SERVER_ADDRESS/8
 &#39;localnetB&#39; -&gt; SERVER_ADDRESS/16
@@ -1928,13 +1928,16 @@ MySQL servers.</p>
 </tr>
 </tbody>
 </table>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 3.5.0.</span></p>
+</div>
 <p>Name of PHP script to be sourced and executed to obtain login
 credentials. This is alternative approach to session based single
 signon. The script has to provide a function called
 <code class="docutils literal"><span class="pre">get_login_credentials</span></code> which returns list of username and
 password, accepting single parameter of existing username (can be
 empty). See <code class="file docutils literal"><span class="pre">examples/signon-script.php</span></code> for an example:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="cm">/* vim: set expandtab sw=4 ts=4 sts=4: */</span>
 <span class="sd">/**</span>
 <span class="sd"> * Single signon for phpMyAdmin</span>
@@ -2684,7 +2687,7 @@ with a delimiter character.</p>
 <p>It is recommended to include start and end symbols in the regullar
 expression, so that you can avoid partial matches on the string.</p>
 <p><strong>Examples:</strong></p>
-<div class="highlight-php"><div class="highlight"><pre><span class="c1">// Allow connection to three listed servers:</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="c1">// Allow connection to three listed servers:</span>
 <span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;ArbitraryServerRegexp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;/^(server|another|yetdifferent)$/&#39;</span><span class="p">;</span>
 
 <span class="c1">// Allow connection to range of IP addresses:</span>
@@ -3122,7 +3125,7 @@ localized equivalent of:</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">boolean</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">false</td>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">true</td>
 </tr>
 </tbody>
 </table>
@@ -3266,7 +3269,7 @@ You can additionally hide more information by using
 the starting main (right) frame.</p>
 <p>Please note that to block the usage of <code class="docutils literal"><span class="pre">phpinfo()</span></code> in scripts, you have to
 put this in your <code class="file docutils literal"><span class="pre">php.ini</span></code>:</p>
-<div class="highlight-ini"><div class="highlight"><pre><span class="na">disable_functions</span> <span class="o">=</span> <span class="s">phpinfo()</span>
+<div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">disable_functions</span> <span class="o">=</span> <span class="s">phpinfo()</span>
 </pre></div>
 </div>
 <div class="admonition warning">
@@ -3421,6 +3424,22 @@ check&#8221; column that displays when each table was last checked.</p>
 </table>
 <p>Defines whether the table structure actions are hidden under a &#8220;More&#8221;
 drop-down.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cfg_ShowColumnComments">
+<code class="descname">$cfg['ShowColumnComments']</code><a class="headerlink" href="#cfg_ShowColumnComments" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">boolean</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">true</td>
+</tr>
+</tbody>
+</table>
+<p>Defines whether to show column comments as a column in the table structure view.</p>
 </dd></dl>
 
 </div>
@@ -4273,7 +4292,7 @@ want to use rules for IP addresses behind proxy.</p>
 <p>The following example specifies that phpMyAdmin should trust a
 HTTP_X_FORWARDED_FOR (<code class="docutils literal"><span class="pre">X</span> <span class="pre">-Forwarded-For</span></code>) header coming from the proxy
 1.2.3.4:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;TrustedProxies&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;1.2.3.4&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;HTTP_X_FORWARDED_FOR&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;TrustedProxies&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;1.2.3.4&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;HTTP_X_FORWARDED_FOR&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>The <span class="target" id="index-142"></span><a class="reference internal" href="#cfg_Servers_AllowDeny_rules"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['AllowDeny']['rules']</span></code></a> directive uses the
@@ -4359,7 +4378,7 @@ Security Policy header.</p>
 in <code class="file docutils literal"><span class="pre">config.footer.inc.php</span></code> or <code class="file docutils literal"><span class="pre">config.header.inc.php</span></code>, which
 would be normally not allowed by Content Security Policy.</p>
 <p>To allow some sites, just list them within the string:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;CSPAllow&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;example.com example.net&#39;</span><span class="p">;</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;CSPAllow&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;example.com example.net&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
 <div class="versionadded">
@@ -4915,13 +4934,13 @@ work around limitations of <code class="docutils literal"><span class="pre">open
 user required to access this directory is the one who runs the webserver.
 If you have root privileges, simply make this user owner of this directory
 and make it accessible only by it:</p>
-<div class="highlight-sh"><div class="highlight"><pre>chown www-data:www-data tmp
+<div class="highlight-sh"><div class="highlight"><pre><span></span>chown www-data:www-data tmp
 chmod <span class="m">700</span> tmp
 </pre></div>
 </div>
 <p>If you cannot change owner of the directory, you can achieve a similar
 setup using <a class="reference internal" href="glossary.html#term-acl"><span class="xref std std-term">ACL</span></a>:</p>
-<div class="highlight-sh"><div class="highlight"><pre>chmod <span class="m">700</span> tmp
+<div class="highlight-sh"><div class="highlight"><pre><span></span>chmod <span class="m">700</span> tmp
 setfacl -m <span class="s2">&quot;g:www-data:rwx&quot;</span> tmp
 setfacl -d -m <span class="s2">&quot;g:www-data:rwx&quot;</span> tmp
 </pre></div>
@@ -5396,7 +5415,7 @@ This is used for <a class="reference external" href="https://www.phpmyadmin.net/
 get some core configuration layout; it is distributed with phpMyAdmin as
 <code class="file docutils literal"><span class="pre">config.sample.inc.php</span></code>. Please note that it does not contain all
 configuration options, only the most frequently used ones.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="cm">/* vim: set expandtab sw=4 ts=4 sts=4: */</span>
 <span class="sd">/**</span>
 <span class="sd"> * phpMyAdmin sample configuration, you can use it as base for</span>
@@ -5561,7 +5580,7 @@ as password.</p>
 <div class="section" id="example-for-signon-authentication">
 <span id="example-signon"></span><h3>Example for signon authentication<a class="headerlink" href="#example-for-signon-authentication" title="Permalink to this headline">¶</a></h3>
 <p>This example uses <code class="file docutils literal"><span class="pre">examples/signon.php</span></code> to demonstrate usage of <a class="reference internal" href="setup.html#auth-signon"><span class="std std-ref">Signon authentication mode</span></a>:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 <span class="nv">$i</span><span class="o">++</span><span class="p">;</span>
 <span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Servers&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;extension&#39;</span><span class="p">]</span>     <span class="o">=</span> <span class="s1">&#39;mysqli&#39;</span><span class="p">;</span>
@@ -5576,7 +5595,7 @@ as password.</p>
 <h3>Example for IP address limited autologin<a class="headerlink" href="#example-for-ip-address-limited-autologin" title="Permalink to this headline">¶</a></h3>
 <p>If you want to automatically login when accessing phpMyAdmin locally while asking
 for a password when accessing remotely, you can achieve it using following snippet:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="k">if</span> <span class="p">(</span><span class="nv">$_SERVER</span><span class="p">[</span><span class="s2">&quot;REMOTE_ADDR&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;127.0.0.1&quot;</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nv">$_SERVER</span><span class="p">[</span><span class="s2">&quot;REMOTE_ADDR&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;127.0.0.1&quot;</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Servers&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;auth_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;config&#39;</span><span class="p">;</span>
     <span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Servers&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;user&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;root&#39;</span><span class="p">;</span>
     <span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Servers&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;password&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;yourpassword&#39;</span><span class="p">;</span>
@@ -5595,7 +5614,7 @@ only for local address.</p>
 <h3>Example for using multiple MySQL servers<a class="headerlink" href="#example-for-using-multiple-mysql-servers" title="Permalink to this headline">¶</a></h3>
 <p>You can configure any number of servers using <span class="target" id="index-149"></span><a class="reference internal" href="#cfg_Servers"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers']</span></code></a>,
 following example shows two of them:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;blowfish_secret&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;multiServerExample70518&#39;</span><span class="p">;</span>
 <span class="c1">//any string of your choice</span>
 <span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
@@ -5630,7 +5649,7 @@ following example shows two of them:</p>
 verification. This is caused by the certficate being issued for CN matching
 your instance name, but you connect to an IP address and PHP tries to match
 these two. With verfication you end up with error message like:</p>
-<div class="highlight-text"><div class="highlight"><pre>Peer certificate CN=`api-project-851612429544:pmatest&#39; did not match expected CN=`8.8.8.8&#39;
+<div class="highlight-text"><div class="highlight"><pre><span></span>Peer certificate CN=`api-project-851612429544:pmatest&#39; did not match expected CN=`8.8.8.8&#39;
 </pre></div>
 </div>
 <div class="admonition warning">
@@ -5640,7 +5659,7 @@ man in the middle attacks.</p>
 </div>
 <p>To connect phpMyAdmin to Google Cloud SQL using SSL download the client and
 server certificates and tell phpMyAdmin to use them:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="c1">// IP address of your instance</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="c1">// IP address of your instance</span>
 <span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Servers&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;host&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;8.8.8.8&#39;</span><span class="p">;</span>
 <span class="c1">// Use SSL for connection</span>
 <span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Servers&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;ssl&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
@@ -5752,7 +5771,7 @@ server certificates and tell phpMyAdmin to use them:</p>
         <li class="right" >
           <a href="setup.html" title="Installation"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.7.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.7.7 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

@@ -1,5 +1,53 @@
 # Change Log
 
+## [4.2.4] - 2017-12-06
+
+* Fix parsing of CREATE TABLE with per field COLLATE.
+* Improved Context::loadClosest to better deal with corner cases.
+* Localizaton updates.
+
+## [4.2.3] - 2017-10-10
+
+* Make mbstring extension optional (though Symfony polyfill).
+* Fixed build CREATE TABLE query with PARTITIONS having ENGINE but not VALUES.
+
+## [4.2.2] - 2017-09-28
+
+* Added support for binding parameters.
+
+## [4.2.1] - 2017-09-08
+
+* Fixed minor bug in Query::getFlags.
+* Localizaton updates.
+
+## [4.2.0] - 2017-08-30
+
+* Initial support for MariaDB SQL contexts.
+* Add support for MariaDB 10.3 INTERSECT and EXCEPT.
+
+## [4.1.10] - 2017-08-21
+
+* Use custom LoaderException for context loading errors.
+
+## [4.1.9] - 2017-07-12
+
+* Various code cleanups.
+* Improved error handling of several invalid statements.
+
+## [4.1.8] - 2017-07-09
+
+* Fixed parsing SQL comment at the end of query.
+* Improved handing of non utf-8 strings.
+* Added query flag for SET queries.
+
+## [4.1.7] - 2017-06-06
+
+* Fixed setting combination SQL Modes.
+
+## [4.1.6] - 2017-06-01
+
+* Fixed building query with GROUP BY clause.
+
 ## [4.1.5] - 2017-05-15
 
 * Fixed invalid lexing of queries with : in strings.

@@ -66,7 +66,7 @@ class IntoKeyword extends Component
     /**
      * The values to be selected into (SELECT .. INTO @var1).
      *
-     * @var ExpressionArray
+     * @var Expression[]
      */
     public $values;
 
@@ -94,6 +94,32 @@ class IntoKeyword extends Component
      * @see static::$LINES_OPTIONS
      */
     public $lines_options;
+
+    /**
+     * Constructor.
+     *
+     * @param string            $type           type of destination (may be OUTFILE)
+     * @param string|Expression $dest           actual destination
+     * @param array             $columns        column list of destination
+     * @param array             $values         selected fields
+     * @param OptionsArray      $fields_options options for FIELDS/COLUMNS keyword
+     * @param OptionsArray      $fields_keyword options for OPTINOS keyword
+     */
+    public function __construct(
+        $type = null,
+        $dest = null,
+        $columns = null,
+        $values = null,
+        $fields_options = null,
+        $fields_keyword = null
+    ) {
+        $this->type = $type;
+        $this->dest = $dest;
+        $this->columns = $columns;
+        $this->values = $values;
+        $this->fields_options = $fields_options;
+        $this->fields_keyword = $fields_keyword;
+    }
 
     /**
      * @param Parser     $parser  the parser that serves as context

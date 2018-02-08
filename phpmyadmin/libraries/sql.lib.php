@@ -612,7 +612,7 @@ function PMA_isRememberSortingOrder($analyzed_sql_results)
             || $analyzed_sql_results['is_analyse'])
         && $analyzed_sql_results['select_from']
         && ((empty($analyzed_sql_results['select_expr']))
-            || (count($analyzed_sql_results['select_expr'] == 1)
+            || ((count($analyzed_sql_results['select_expr']) == 1)
                 && ($analyzed_sql_results['select_expr'][0] == '*')))
         && count($analyzed_sql_results['select_tables']) == 1;
 }
@@ -1287,7 +1287,7 @@ function PMA_executeTheQuery($analyzed_sql_results, $full_sql_query, $is_gotofil
     );
 }
 /**
- * Delete related tranformation information
+ * Delete related transformation information
  *
  * @param String $db                   current database
  * @param String $table                current table
@@ -1298,6 +1298,9 @@ function PMA_executeTheQuery($analyzed_sql_results, $full_sql_query, $is_gotofil
 function PMA_deleteTransformationInfo($db, $table, $analyzed_sql_results)
 {
     include_once 'libraries/transformations.lib.php';
+    if (! isset($analyzed_sql_results['statement'])) {
+        return;
+    }
     $statement = $analyzed_sql_results['statement'];
     if ($statement instanceof PhpMyAdmin\SqlParser\Statements\AlterStatement) {
         if (!empty($statement->altered[0])
@@ -1657,7 +1660,7 @@ function PMA_getHtmlForSqlQueryResultsTable($displayResultsObject,
         } while ($GLOBALS['dbi']->moreResults() && $GLOBALS['dbi']->nextResult());
 
     } else {
-        if (isset($result) && $result) {
+        if (isset($result) && $result !== false) {
             $fields_meta = $GLOBALS['dbi']->getFieldsMeta($result);
             $fields_cnt  = count($fields_meta);
         }

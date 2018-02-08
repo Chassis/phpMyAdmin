@@ -295,6 +295,10 @@ $js_messages['strProfilingResults'] = __('Profiling results');
 $js_messages['strTable'] = _pgettext('Display format', 'Table');
 $js_messages['strChart'] = __('Chart');
 
+$js_messages['strAliasDatabase'] = _pgettext('Alias', 'Database');
+$js_messages['strAliasTable'] = _pgettext('Alias', 'Table');
+$js_messages['strAliasColumn'] = _pgettext('Alias', 'Column');
+
 /* l10n: A collection of available filters */
 $js_messages['strFiltersForLogTable'] = __('Log table filter options');
 /* l10n: Filter as in "Start Filtering" */
@@ -361,6 +365,10 @@ $js_messages['strRequestFailed'] = __('Request failed!!');
 $js_messages['strErrorProcessingRequest'] = __('Error in processing request');
 $js_messages['strErrorCode'] = __('Error code: %s');
 $js_messages['strErrorText'] = __('Error text: %s');
+$js_messages['strErrorConnection'] = __(
+    'It seems that the connection to server has been lost. Please check your ' .
+    'network connectivity and server status.'
+);
 $js_messages['strNoDatabasesSelected'] = __('No databases selected.');
 $js_messages['strDroppingColumn'] = __('Dropping column');
 $js_messages['strAddingPrimaryKey'] = __('Adding primary key');

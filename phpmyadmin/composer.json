@@ -38,12 +38,15 @@
         "ext-xml": "*",
         "ext-pcre": "*",
         "ext-json": "*",
-        "phpmyadmin/sql-parser": "^4.1.2",
-        "phpmyadmin/motranslator": "^3.0",
+        "phpmyadmin/sql-parser": "^4.2.3",
+        "phpmyadmin/motranslator": "^3.4",
         "phpmyadmin/shapefile": "^2.0",
         "tecnickcom/tcpdf": "^6.2",
         "phpseclib/phpseclib": "^2.0",
         "google/recaptcha": "^1.1"
+    },
+    "conflict": {
+        "phpseclib/phpseclib": "2.0.8"
     },
     "suggest": {
         "ext-openssl": "Cookie encryption",
@@ -56,9 +59,8 @@
         "tecnickcom/tcpdf": "For PDF support"
     },
     "require-dev": {
-        "satooshi/php-coveralls": "^1.0",
         "phpunit/phpunit": "~4.1",
-        "codacy/coverage": "dev-master",
+        "codacy/coverage": "^1.3.0",
         "phpunit/phpunit-selenium": "~1.2",
         "squizlabs/php_codesniffer": "2.*",
         "phpmyadmin/coding-standard": ">=0.1.0"

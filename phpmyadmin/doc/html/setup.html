@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Installation &#8212; phpMyAdmin 4.7.1 documentation</title>
+    <title>Installation &#8212; phpMyAdmin 4.7.7 documentation</title>
     
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.7.1',
+        VERSION:     '4.7.7',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="copyright" title="Copyright" href="copyright.html" />
-    <link rel="top" title="phpMyAdmin 4.7.1 documentation" href="index.html" />
+    <link rel="top" title="phpMyAdmin 4.7.7 documentation" href="index.html" />
     <link rel="next" title="Configuration" href="config.html" />
     <link rel="prev" title="Requirements" href="require.html" /> 
   </head>
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="require.html" title="Requirements"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.7.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.7.7 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -143,16 +143,16 @@ which include phpMyAdmin together with a database and web server such as
 <h2>Installing from Git<a class="headerlink" href="#installing-from-git" title="Permalink to this headline">¶</a></h2>
 <p>You can clone current phpMyAdmin source from
 <code class="docutils literal"><span class="pre">https://github.com/phpmyadmin/phpmyadmin.git</span></code>:</p>
-<div class="highlight-sh"><div class="highlight"><pre>git clone https://github.com/phpmyadmin/phpmyadmin.git
+<div class="highlight-sh"><div class="highlight"><pre><span></span>git clone https://github.com/phpmyadmin/phpmyadmin.git
 </pre></div>
 </div>
 <p>Additionally you need to install dependencies using the <a class="reference external" href="https://getcomposer.org/">Composer tool</a>:</p>
-<div class="highlight-sh"><div class="highlight"><pre>composer update
+<div class="highlight-sh"><div class="highlight"><pre><span></span>composer update
 </pre></div>
 </div>
 <p>If you do not intend to develop, you can skip the installation of developer tools
 by invoking:</p>
-<div class="highlight-sh"><div class="highlight"><pre>composer update --no-dev
+<div class="highlight-sh"><div class="highlight"><pre><span></span>composer update --no-dev
 </pre></div>
 </div>
 </div>
@@ -168,13 +168,13 @@ separately from the releases, so the content doesn&#8217;t have to be
 functional differences though.</p>
 </div>
 <p>To install phpMyAdmin simply run:</p>
-<div class="highlight-sh"><div class="highlight"><pre>composer create-project phpmyadmin/phpmyadmin
+<div class="highlight-sh"><div class="highlight"><pre><span></span>composer create-project phpmyadmin/phpmyadmin
 </pre></div>
 </div>
 <p>Alternatively you can use our own composer repository, which contains
 the release tarballs and is available at
 &lt;<a class="reference external" href="https://www.phpmyadmin.net/packages.json">https://www.phpmyadmin.net/packages.json</a>&gt;:</p>
-<div class="highlight-sh"><div class="highlight"><pre>composer create-project phpmyadmin/phpmyadmin --repository-url<span class="o">=</span>https://www.phpmyadmin.net/packages.json --no-dev
+<div class="highlight-sh"><div class="highlight"><pre><span></span>composer create-project phpmyadmin/phpmyadmin --repository-url<span class="o">=</span>https://www.phpmyadmin.net/packages.json --no-dev
 </pre></div>
 </div>
 </div>
@@ -182,7 +182,7 @@ the release tarballs and is available at
 <span id="docker"></span><h2>Installing using Docker<a class="headerlink" href="#installing-using-docker" title="Permalink to this headline">¶</a></h2>
 <p>phpMyAdmin comes with a <a class="reference external" href="https://hub.docker.com/r/phpmyadmin/phpmyadmin/">Docker image</a>, which you can easily deploy. You can
 download it using:</p>
-<div class="highlight-sh"><div class="highlight"><pre>docker pull phpmyadmin/phpmyadmin
+<div class="highlight-sh"><div class="highlight"><pre><span></span>docker pull phpmyadmin/phpmyadmin
 </pre></div>
 </div>
 <p>The phpMyAdmin server will listen on port 80. It supports several ways of
@@ -305,7 +305,7 @@ configuration can be added as a volume when invoking docker using
 but you can override any of the values.</p>
 <p>For example to change default behaviour of CSV export you can use following
 configuration file:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Export&#39;</span><span class="p">][</span><span class="s1">&#39;csv_columns&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -328,23 +328,23 @@ for example when using <a class="reference internal" href="#auth-signon"><span c
 <div class="section" id="docker-examples">
 <h3>Docker Examples<a class="headerlink" href="#docker-examples" title="Permalink to this headline">¶</a></h3>
 <p>To connect phpMyAdmin to a given server use:</p>
-<div class="highlight-sh"><div class="highlight"><pre>docker run --name myadmin -d -e <span class="nv">PMA_HOST</span><span class="o">=</span>dbhost -p 8080:80 phpmyadmin/phpmyadmin
+<div class="highlight-sh"><div class="highlight"><pre><span></span>docker run --name myadmin -d -e <span class="nv">PMA_HOST</span><span class="o">=</span>dbhost -p <span class="m">8080</span>:80 phpmyadmin/phpmyadmin
 </pre></div>
 </div>
 <p>To connect phpMyAdmin to more servers use:</p>
-<div class="highlight-sh"><div class="highlight"><pre>docker run --name myadmin -d -e <span class="nv">PMA_HOSTS</span><span class="o">=</span>dbhost1,dbhost2,dbhost3 -p 8080:80 phpmyadmin/phpmyadmin
+<div class="highlight-sh"><div class="highlight"><pre><span></span>docker run --name myadmin -d -e <span class="nv">PMA_HOSTS</span><span class="o">=</span>dbhost1,dbhost2,dbhost3 -p <span class="m">8080</span>:80 phpmyadmin/phpmyadmin
 </pre></div>
 </div>
 <p>To use arbitrary server option:</p>
-<div class="highlight-sh"><div class="highlight"><pre>docker run --name myadmin -d --link mysql_db_server:db -p 8080:80 -e <span class="nv">PMA_ARBITRARY</span><span class="o">=</span><span class="m">1</span> phpmyadmin/phpmyadmin
+<div class="highlight-sh"><div class="highlight"><pre><span></span>docker run --name myadmin -d --link mysql_db_server:db -p <span class="m">8080</span>:80 -e <span class="nv">PMA_ARBITRARY</span><span class="o">=</span><span class="m">1</span> phpmyadmin/phpmyadmin
 </pre></div>
 </div>
 <p>You can also link the database container using Docker:</p>
-<div class="highlight-sh"><div class="highlight"><pre>docker run --name phpmyadmin -d --link mysql_db_server:db -p 8080:80 phpmyadmin/phpmyadmin
+<div class="highlight-sh"><div class="highlight"><pre><span></span>docker run --name phpmyadmin -d --link mysql_db_server:db -p <span class="m">8080</span>:80 phpmyadmin/phpmyadmin
 </pre></div>
 </div>
 <p>Running with additional configuration:</p>
-<div class="highlight-sh"><div class="highlight"><pre>docker run --name phpmyadmin -d --link mysql_db_server:db -p 8080:80 -v /some/local/directory/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php phpmyadmin/phpmyadmin
+<div class="highlight-sh"><div class="highlight"><pre><span></span>docker run --name phpmyadmin -d --link mysql_db_server:db -p <span class="m">8080</span>:80 -v /some/local/directory/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php phpmyadmin/phpmyadmin
 </pre></div>
 </div>
 </div>
@@ -353,7 +353,7 @@ for example when using <a class="reference internal" href="#auth-signon"><span c
 <p>Alternatively you can also use docker-compose with the docker-compose.yml from
 &lt;<a class="reference external" href="https://github.com/phpmyadmin/docker">https://github.com/phpmyadmin/docker</a>&gt;.  This will run phpMyAdmin with an
 arbitrary server - allowing you to specify MySQL/MariaDB server on login page.</p>
-<div class="highlight-sh"><div class="highlight"><pre>docker-compose up -d
+<div class="highlight-sh"><div class="highlight"><pre><span></span>docker-compose up -d
 </pre></div>
 </div>
 </div>
@@ -361,17 +361,17 @@ arbitrary server - allowing you to specify MySQL/MariaDB server on login page.</
 <h3>Customizing configuration file using docker-compose<a class="headerlink" href="#customizing-configuration-file-using-docker-compose" title="Permalink to this headline">¶</a></h3>
 <p>You can use an external file to customize phpMyAdmin configuration and pass it
 using the volumes directive:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span class="l-Scalar-Plain">phpmyadmin</span><span class="p-Indicator">:</span>
-    <span class="l-Scalar-Plain">image</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">phpmyadmin/phpmyadmin</span>
-    <span class="l-Scalar-Plain">container_name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">phpmyadmin</span>
-    <span class="l-Scalar-Plain">environment</span><span class="p-Indicator">:</span>
-     <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">PMA_ARBITRARY=1</span>
-    <span class="l-Scalar-Plain">restart</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">always</span>
-    <span class="l-Scalar-Plain">ports</span><span class="p-Indicator">:</span>
-     <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">8080:80</span>
-    <span class="l-Scalar-Plain">volumes</span><span class="p-Indicator">:</span>
-     <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">/sessions</span>
-     <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">~/docker/phpmyadmin/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php</span>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">phpmyadmin</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">image</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">phpmyadmin/phpmyadmin</span>
+    <span class="l l-Scalar l-Scalar-Plain">container_name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">phpmyadmin</span>
+    <span class="l l-Scalar l-Scalar-Plain">environment</span><span class="p p-Indicator">:</span>
+     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">PMA_ARBITRARY=1</span>
+    <span class="l l-Scalar l-Scalar-Plain">restart</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">always</span>
+    <span class="l l-Scalar l-Scalar-Plain">ports</span><span class="p p-Indicator">:</span>
+     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">8080:80</span>
+    <span class="l l-Scalar l-Scalar-Plain">volumes</span><span class="p p-Indicator">:</span>
+     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">/sessions</span>
+     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">~/docker/phpmyadmin/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php</span>
 </pre></div>
 </div>
 <div class="admonition seealso">
@@ -384,7 +384,7 @@ using the volumes directive:</p>
 <p>When you want to expose phpMyAdmin running in a Docker container in a
 subdirectory, you need to rewrite the request path in the server proxying the
 requests. For example using haproxy it can be done as:</p>
-<div class="highlight-text"><div class="highlight"><pre>frontend http
+<div class="highlight-text"><div class="highlight"><pre><span></span>frontend http
     bind *:80
     option forwardfor
     option http-server-close
@@ -407,23 +407,23 @@ backend phpmyadmin
 </div>
 <p>You then should specify <span class="target" id="index-9"></span><a class="reference internal" href="#envvar-PMA_ABSOLUTE_URI"><code class="xref std std-envvar docutils literal"><span class="pre">PMA_ABSOLUTE_URI</span></code></a> in the docker-compose
 configuration:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span class="l-Scalar-Plain">version</span><span class="p-Indicator">:</span> <span class="s">&#39;2&#39;</span>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="s">&#39;2&#39;</span>
 
-<span class="l-Scalar-Plain">services</span><span class="p-Indicator">:</span>
-  <span class="l-Scalar-Plain">phpmyadmin</span><span class="p-Indicator">:</span>
-    <span class="l-Scalar-Plain">restart</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">always</span>
-    <span class="l-Scalar-Plain">image</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">phpmyadmin/phpmyadmin</span>
-    <span class="l-Scalar-Plain">container_name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">phpmyadmin</span>
-    <span class="l-Scalar-Plain">hostname</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">phpmyadmin</span>
-    <span class="l-Scalar-Plain">domainname</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">example.com</span>
-    <span class="l-Scalar-Plain">ports</span><span class="p-Indicator">:</span>
-      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">8000:80</span>
-    <span class="l-Scalar-Plain">environment</span><span class="p-Indicator">:</span>
-      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">PMA_HOSTS=172.26.36.7,172.26.36.8,172.26.36.9,172.26.36.10</span>
-      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">PMA_VERBOSES=production-db1,production-db2,dev-db1,dev-db2</span>
-      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">PMA_USER=root</span>
-      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">PMA_PASSWORD=</span>
-      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">PMA_ABSOLUTE_URI=http://example.com/phpmyadmin/</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">phpmyadmin</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">restart</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">always</span>
+    <span class="l l-Scalar l-Scalar-Plain">image</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">phpmyadmin/phpmyadmin</span>
+    <span class="l l-Scalar l-Scalar-Plain">container_name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">phpmyadmin</span>
+    <span class="l l-Scalar l-Scalar-Plain">hostname</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">phpmyadmin</span>
+    <span class="l l-Scalar l-Scalar-Plain">domainname</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">example.com</span>
+    <span class="l l-Scalar l-Scalar-Plain">ports</span><span class="p p-Indicator">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">8000:80</span>
+    <span class="l l-Scalar l-Scalar-Plain">environment</span><span class="p p-Indicator">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">PMA_HOSTS=172.26.36.7,172.26.36.8,172.26.36.9,172.26.36.10</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">PMA_VERBOSES=production-db1,production-db2,dev-db1,dev-db2</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">PMA_USER=root</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">PMA_PASSWORD=</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">PMA_ABSOLUTE_URI=http://example.com/phpmyadmin/</span>
 </pre></div>
 </div>
 </div>
@@ -464,7 +464,7 @@ with anything found in <code class="file docutils literal"><span class="pre">con
 okay for a particular setting, there is no need to include it in
 <code class="file docutils literal"><span class="pre">config.inc.php</span></code>. You&#8217;ll probably need only a few directives to get going; a
 simple configuration may look like this:</p>
-<div class="highlight-xml+php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-xml+php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 <span class="c1">// use here a value of your choice at least 32 chars long</span>
 <span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;blowfish_secret&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;1{dd0`&lt;Q),5XP_:R9UK%%8\&quot;EEcyH#{o&#39;</span><span class="p">;</span>
 
@@ -477,7 +477,7 @@ simple configuration may look like this:</p>
 </pre></div>
 </div>
 <p>Or, if you prefer to not be prompted every time you log in:</p>
-<div class="highlight-xml+php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-xml+php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
 <span class="nv">$i</span><span class="o">++</span><span class="p">;</span>
@@ -525,11 +525,11 @@ cookie authentication mode.</li>
 <p>Debian and Ubuntu have changed way how setup is enabled and disabled, in a way
 that single command has to be executed for either of these.</p>
 <p>To allow editing configuration invoke:</p>
-<div class="highlight-sh"><div class="highlight"><pre>/usr/sbin/pma-configure
+<div class="highlight-sh"><div class="highlight"><pre><span></span>/usr/sbin/pma-configure
 </pre></div>
 </div>
 <p>To block editing configuration invoke:</p>
-<div class="highlight-sh"><div class="highlight"><pre>/usr/sbin/pma-secure
+<div class="highlight-sh"><div class="highlight"><pre><span></span>/usr/sbin/pma-secure
 </pre></div>
 </div>
 </div>
@@ -547,19 +547,19 @@ server: &lt;<a class="reference external" href="https://demo.phpmyadmin.net/STAB
 <p>Since July 2015 all phpMyAdmin releases are cryptographically signed by the
 releasing developer, who through January 2016 was Marc Delisle. His key id is
 0xFEFC65D181AF644A, his PGP fingerprint is:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="go">436F F188 4B1A 0C3F DCBF 0D79 FEFC 65D1 81AF 644A</span>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">436F F188 4B1A 0C3F DCBF 0D79 FEFC 65D1 81AF 644A</span>
 </pre></div>
 </div>
 <p>and you can get more identification information from &lt;<a class="reference external" href="https://keybase.io/lem9">https://keybase.io/lem9</a>&gt;.</p>
 <p>Beginning in January 2016, the release manager is Isaac Bennetch. His key id is
 0xCE752F178259BD92, and his PGP fingerprint is:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="go">3D06 A59E CE73 0EB7 1B51 1C17 CE75 2F17 8259 BD92</span>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">3D06 A59E CE73 0EB7 1B51 1C17 CE75 2F17 8259 BD92</span>
 </pre></div>
 </div>
 <p>and you can get more identification information from &lt;<a class="reference external" href="https://keybase.io/ibennetch">https://keybase.io/ibennetch</a>&gt;.</p>
 <p>Some additional downloads (for example themes) might be signed by Michal Čihař. His key id is
 0x9C27B31342B7511D, and his PGP fingerprint is:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="go">63CB 1DF1 EF12 CF2A C0EE 5A32 9C27 B313 42B7 511D</span>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">63CB 1DF1 EF12 CF2A C0EE 5A32 9C27 B313 42B7 511D</span>
 </pre></div>
 </div>
 <p>and you can get more identification information from &lt;<a class="reference external" href="https://keybase.io/nijel">https://keybase.io/nijel</a>&gt;.</p>
@@ -569,7 +569,7 @@ You should also verify the date of the signature to make sure that you
 downloaded the latest version.</p>
 <p>Each archive is accompanied with <code class="docutils literal"><span class="pre">.asc</span></code> files which contains the PGP signature
 for it. Once you have both of them in the same folder, you can verify the signature:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> gpg --verify phpMyAdmin-4.5.4.1-all-languages.zip.asc
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> gpg --verify phpMyAdmin-4.5.4.1-all-languages.zip.asc
 <span class="go">gpg: Signature made Fri 29 Jan 2016 08:59:37 AM EST using RSA key ID 8259BD92</span>
 <span class="go">gpg: Can&#39;t check signature: public key not found</span>
 </pre></div>
@@ -579,13 +579,13 @@ point you should do one of the following steps:</p>
 <ul class="simple">
 <li>Download the keyring from <a class="reference external" href="https://files.phpmyadmin.net/phpmyadmin.keyring">our download server</a>, then import it with:</li>
 </ul>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> gpg --import phpmyadmin.keyring
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> gpg --import phpmyadmin.keyring
 </pre></div>
 </div>
 <ul class="simple">
 <li>Download and import the key from one of the key servers:</li>
 </ul>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> gpg --keyserver hkp://pgp.mit.edu --recv-keys 3D06A59ECE730EB71B511C17CE752F178259BD92
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> gpg --keyserver hkp://pgp.mit.edu --recv-keys 3D06A59ECE730EB71B511C17CE752F178259BD92
 <span class="go">gpg: requesting key 8259BD92 from hkp server pgp.mit.edu</span>
 <span class="go">gpg: key 8259BD92: public key &quot;Isaac Bennetch &lt;bennetch@gmail.com&gt;&quot; imported</span>
 <span class="go">gpg: no ultimately trusted keys found</span>
@@ -596,7 +596,7 @@ point you should do one of the following steps:</p>
 <p>This will improve the situation a bit - at this point you can verify that the
 signature from the given key is correct but you still can not trust the name used
 in the key:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> gpg --verify phpMyAdmin-4.5.4.1-all-languages.zip.asc
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> gpg --verify phpMyAdmin-4.5.4.1-all-languages.zip.asc
 <span class="go">gpg: Signature made Fri 29 Jan 2016 08:59:37 AM EST using RSA key ID 8259BD92</span>
 <span class="go">gpg: Good signature from &quot;Isaac Bennetch &lt;bennetch@gmail.com&gt;&quot;</span>
 <span class="go">gpg:                 aka &quot;Isaac Bennetch &lt;isaac@bennetch.org&gt;&quot;</span>
@@ -614,14 +614,14 @@ you can trust the key transitively though signatures of others, who have met
 the developer in person. For example you can see how <a class="reference external" href="https://pgp.cs.uu.nl/mk_path.cgi?FROM=ABAF11C65A2970B130ABE3C479BE3E4300411886&amp;TO=3D06A59ECE730EB71B511C17CE752F178259BD92">Isaac&#8217;s key links to
 Linus&#8217;s key</a>.</p>
 <p>Once the key is trusted, the warning will not occur:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> gpg --verify phpMyAdmin-4.5.4.1-all-languages.zip.asc
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> gpg --verify phpMyAdmin-4.5.4.1-all-languages.zip.asc
 <span class="go">gpg: Signature made Fri 29 Jan 2016 08:59:37 AM EST using RSA key ID 8259BD92</span>
 <span class="go">gpg: Good signature from &quot;Isaac Bennetch &lt;bennetch@gmail.com&gt;&quot; [full]</span>
 </pre></div>
 </div>
 <p>Should the signature be invalid (the archive has been changed), you would get a
 clear error regardless of the fact that the key is trusted or not:</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> gpg --verify phpMyAdmin-4.5.4.1-all-languages.zip.asc
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> gpg --verify phpMyAdmin-4.5.4.1-all-languages.zip.asc
 <span class="go">gpg: Signature made Fri 29 Jan 2016 08:59:37 AM EST using RSA key ID 8259BD92</span>
 <span class="go">gpg: BAD signature from &quot;Isaac Bennetch &lt;bennetch@gmail.com&gt;&quot; [unknown]</span>
 </pre></div>
@@ -640,7 +640,7 @@ in your own database, or in a central database for a multi-user installation
 (this database would then be accessed by the controluser, so no other user
 should have rights to it).</p>
 <div class="section" id="zero-configuration">
-<h3>Zero configuration<a class="headerlink" href="#zero-configuration" title="Permalink to this headline">¶</a></h3>
+<span id="zeroconf"></span><h3>Zero configuration<a class="headerlink" href="#zero-configuration" title="Permalink to this headline">¶</a></h3>
 <p>In many cases, this database structure can be automatically created and
 configured. This is called “Zero Configuration” mode and can be particularly
 useful in shared hosting situations. “Zeroconf” mode is on by default, to
@@ -689,7 +689,7 @@ directives used for that can be found in the <a class="reference internal" href=
 <span class="target" id="index-14"></span><a class="reference internal" href="config.html#cfg_Servers_controlpass"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['controlpass']</span></code></a> settings)
 with the proper rights to those tables. For example you can create it
 using following statement:</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span class="k">GRANT</span> <span class="k">SELECT</span><span class="p">,</span> <span class="k">INSERT</span><span class="p">,</span> <span class="k">UPDATE</span><span class="p">,</span> <span class="k">DELETE</span> <span class="k">ON</span> <span class="o">&lt;</span><span class="n">pma_db</span><span class="o">&gt;</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">&#39;pma&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span>  <span class="n">IDENTIFIED</span> <span class="k">BY</span> <span class="s1">&#39;pmapass&#39;</span><span class="p">;</span>
+<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">GRANT</span> <span class="k">SELECT</span><span class="p">,</span> <span class="k">INSERT</span><span class="p">,</span> <span class="k">UPDATE</span><span class="p">,</span> <span class="k">DELETE</span> <span class="k">ON</span> <span class="o">&lt;</span><span class="n">pma_db</span><span class="o">&gt;</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">&#39;pma&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span>  <span class="n">IDENTIFIED</span> <span class="k">BY</span> <span class="s1">&#39;pmapass&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
 </div>
@@ -755,7 +755,7 @@ privileges to an ordinary user, unless you understand the impact of those
 privileges (for example, you are creating a superuser).
 For example, to grant the user <em>real_user</em> with all privileges on
 the database <em>user_base</em>:</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span class="k">GRANT</span> <span class="k">ALL</span> <span class="n">PRIVILEGES</span> <span class="k">ON</span> <span class="n">user_base</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">&#39;real_user&#39;</span><span class="o">@</span><span class="n">localhost</span> <span class="n">IDENTIFIED</span> <span class="k">BY</span> <span class="s1">&#39;real_password&#39;</span><span class="p">;</span>
+<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">GRANT</span> <span class="k">ALL</span> <span class="n">PRIVILEGES</span> <span class="k">ON</span> <span class="n">user_base</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">&#39;real_user&#39;</span><span class="o">@</span><span class="n">localhost</span> <span class="n">IDENTIFIED</span> <span class="k">BY</span> <span class="s1">&#39;real_password&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>What the user may now do is controlled entirely by the MySQL user management
@@ -783,7 +783,7 @@ support using <a class="reference internal" href="glossary.html#term-cgi"><span 
 <code class="docutils literal"><span class="pre">Authorization</span></code> headers are not passed to the underlying FCGI application,
 such that your credentials will not reach the application. In this case, you can
 add the following configuration directive:</p>
-<div class="highlight-apache"><div class="highlight"><pre><span class="nb">SetEnvIf</span> Authorization <span class="s2">&quot;(.*)&quot;</span> HTTP_AUTHORIZATION=$1
+<div class="highlight-apache"><div class="highlight"><pre><span></span><span class="nb">SetEnvIf</span> Authorization <span class="s2">&quot;(.*)&quot;</span> HTTP_AUTHORIZATION=$1
 </pre></div>
 </div>
 </li>
@@ -830,7 +830,7 @@ the login process.</li>
 </ul>
 <p>The very basic example of saving credentials in a session is available as
 <code class="file docutils literal"><span class="pre">examples/signon.php</span></code>:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="cm">/* vim: set expandtab sw=4 ts=4 sts=4: */</span>
 <span class="sd">/**</span>
 <span class="sd"> * Single signon for phpMyAdmin</span>
@@ -843,8 +843,10 @@ the login process.</li>
 <span class="sd"> * @subpackage Example</span>
 <span class="sd"> */</span>
 
+<span class="cm">/* Change this to true if using phpMyAdmin over https */</span>
+<span class="nv">$secure_cookie</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
 <span class="cm">/* Need to have cookie visible from parent directory */</span>
-<span class="nb">session_set_cookie_params</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+<span class="nb">session_set_cookie_params</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nv">$secure_cookie</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
 <span class="cm">/* Create signon session */</span>
 <span class="nv">$session_name</span> <span class="o">=</span> <span class="s1">&#39;SignonSession&#39;</span><span class="p">;</span>
 <span class="nb">session_name</span><span class="p">(</span><span class="nv">$session_name</span><span class="p">);</span>
@@ -905,7 +907,7 @@ the login process.</li>
 </div>
 <p>Alternatively you can also use this way to integrate with OpenID as shown
 in <code class="file docutils literal"><span class="pre">examples/openid.php</span></code>:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="cm">/* vim: set expandtab sw=4 ts=4 sts=4: */</span>
 <span class="sd">/**</span>
 <span class="sd"> * Single signon for phpMyAdmin using OpenID</span>
@@ -926,6 +928,9 @@ in <code class="file docutils literal"><span class="pre">examples/openid.php</sp
 <span class="k">if</span> <span class="p">(</span><span class="k">false</span> <span class="o">===</span> <span class="o">@</span><span class="k">include_once</span> <span class="s1">&#39;OpenID/RelyingParty.php&#39;</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">exit</span><span class="p">;</span>
 <span class="p">}</span>
+
+<span class="cm">/* Change this to true if using phpMyAdmin over https */</span>
+<span class="nv">$secure_cookie</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
 
 <span class="sd">/**</span>
 <span class="sd"> * Map of authenticated users to MySQL user/password pairs.</span>
@@ -981,7 +986,7 @@ in <code class="file docutils literal"><span class="pre">examples/openid.php</sp
 
 
 <span class="cm">/* Need to have cookie visible from parent directory */</span>
-<span class="nb">session_set_cookie_params</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+<span class="nb">session_set_cookie_params</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nv">$secure_cookie</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
 <span class="cm">/* Create signon session */</span>
 <span class="nv">$session_name</span> <span class="o">=</span> <span class="s1">&#39;SignonSession&#39;</span><span class="p">;</span>
 <span class="nb">session_name</span><span class="p">(</span><span class="nv">$session_name</span><span class="p">);</span>
@@ -1077,7 +1082,7 @@ in <code class="file docutils literal"><span class="pre">examples/openid.php</sp
 implement wrapper in PHP to get that data and set it to
 <span class="target" id="index-26"></span><a class="reference internal" href="config.html#cfg_Servers_SignonScript"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['SignonScript']</span></code></a>. There is very minimal example
 in <code class="file docutils literal"><span class="pre">examples/signon-script.php</span></code>:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="cm">/* vim: set expandtab sw=4 ts=4 sts=4: */</span>
 <span class="sd">/**</span>
 <span class="sd"> * Single signon for phpMyAdmin</span>
@@ -1190,7 +1195,7 @@ or <span class="target" id="index-38"></span><a class="reference internal" href=
 users need to authenticate prior to providing MySQL credentials
 to phpMyAdmin. You can achieve this by configuring your web server to request
 HTTP authentication. For example in Apache this can be done with:</p>
-<div class="highlight-apache"><div class="highlight"><pre><span class="nb">AuthType</span> Basic
+<div class="highlight-apache"><div class="highlight"><pre><span></span><span class="nb">AuthType</span> Basic
 <span class="nb">AuthName</span> <span class="s2">&quot;Restricted Access&quot;</span>
 <span class="nb">AuthUserFile</span> <span class="sx">/usr/share/phpmyadmin/passwd</span>
 <span class="nb">Require</span> valid-user
@@ -1198,7 +1203,7 @@ HTTP authentication. For example in Apache this can be done with:</p>
 </div>
 <p>Once you have changed the configuration, you need to create a list of users which
 can authenticate. This can be done using the <strong class="program">htpasswd</strong> utility:</p>
-<div class="highlight-sh"><div class="highlight"><pre>htpasswd -c /usr/share/phpmyadmin/passwd username
+<div class="highlight-sh"><div class="highlight"><pre><span></span>htpasswd -c /usr/share/phpmyadmin/passwd username
 </pre></div>
 </div>
 </li>
@@ -1333,7 +1338,7 @@ manually or after a period of inactivity). <a class="reference external" href="h
         <li class="right" >
           <a href="require.html" title="Requirements"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.7.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.7.7 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

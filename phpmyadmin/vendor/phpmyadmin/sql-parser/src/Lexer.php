@@ -567,7 +567,7 @@ class Lexer extends Core
 
                     while (
                         ++$this->last < $this->len
-                        && '0' <= $this->str[$this->last]
+                        && $this->str[$this->last] >= '0'
                         && $this->str[$this->last] <= '9'
                     ) {
                         $token .= $this->str[$this->last];
@@ -602,23 +602,27 @@ class Lexer extends Core
         // SQL style comments. (-- comment\n)
         if (++$this->last < $this->len) {
             $token .= $this->str[$this->last];
-            if (Context::isComment($token)) {
-                // Checking if this comment did not end already (```--\n```).
-                if ($this->str[$this->last] !== "\n") {
-                    while (
-                        ++$this->last < $this->len
-                        && $this->str[$this->last] !== "\n"
-                    ) {
-                        $token .= $this->str[$this->last];
-                    }
+            $end = false;
+        } else {
+            --$this->last;
+            $end = true;
+        }
+        if (Context::isComment($token, $end)) {
+            // Checking if this comment did not end already (```--\n```).
+            if ($this->str[$this->last] !== "\n") {
+                while (
+                    ++$this->last < $this->len
+                    && $this->str[$this->last] !== "\n"
+                ) {
+                    $token .= $this->str[$this->last];
                 }
-                // Include trailing \n as whitespace token
-                if ($this->last < $this->len) {
-                    --$this->last;
-                }
-
-                return new Token($token, Token::TYPE_COMMENT, Token::FLAG_COMMENT_SQL);
             }
+            // Include trailing \n as whitespace token
+            if ($this->last < $this->len) {
+                --$this->last;
+            }
+
+            return new Token($token, Token::TYPE_COMMENT, Token::FLAG_COMMENT_SQL);
         }
 
         $this->last = $iBak;
@@ -866,6 +870,10 @@ class Lexer extends Core
                 // This is a system variable (e.g. `@@hostname`).
                 $token .= $this->str[$this->last++];
                 $flags |= Token::FLAG_SYMBOL_SYSTEM;
+            }
+        } elseif ($flags & Token::FLAG_SYMBOL_PARAMETER) {
+            if ($this->last + 1 < $this->len) {
+                ++$this->last;
             }
         } else {
             $token = '';
