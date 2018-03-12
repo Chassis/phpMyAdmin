@@ -1,9 +1,8 @@
 <?php
-declare(strict_types=1);
 namespace ParagonIE\ConstantTime;
 
 /**
- *  Copyright (c) 2016 - 2017 Paragon Initiative Enterprises.
+ *  Copyright (c) 2016 Paragon Initiative Enterprises.
  *  Copyright (c) 2014 Steve "Sc00bz" Thomas (steve at tobtu dot com)
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -43,12 +42,12 @@ abstract class Binary
      * @param string $str
      * @return int
      */
-    public static function safeStrlen(string $str): int
+    public static function safeStrlen($str)
     {
         if (\function_exists('mb_strlen')) {
-            return (int) \mb_strlen($str, '8bit');
+            return \mb_strlen($str, '8bit');
         } else {
-            return (int) \strlen($str);
+            return \strlen($str);
         }
     }
 
@@ -65,15 +64,28 @@ abstract class Binary
      * @throws \TypeError
      */
     public static function safeSubstr(
-        string $str,
-        int $start = 0,
+        $str,
+        $start = 0,
         $length = null
-    ): string {
+    ) {
+        if (\function_exists('mb_substr')) {
+            // mb_substr($str, 0, NULL, '8bit') returns an empty string on PHP
+            // 5.3, so we have to find the length ourselves.
+            if ($length === null) {
+                if ($start >= 0) {
+                    $length = self::safeStrlen($str) - $start;
+                } else {
+                    $length = -$start;
+                }
+            }
+            // $length calculation above might result in a 0-length string
+            if ($length === 0) {
+                return '';
+            }
+            return \mb_substr($str, $start, $length, '8bit');
+        }
         if ($length === 0) {
             return '';
-        }
-        if (\function_exists('mb_substr')) {
-            return \mb_substr($str, $start, $length, '8bit');
         }
         // Unlike mb_substr(), substr() doesn't accept NULL for length
         if ($length !== null) {

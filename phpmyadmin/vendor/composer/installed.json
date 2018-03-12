@@ -1,305 +1,27 @@
 [
     {
-        "name": "psr/simple-cache",
-        "version": "1.0.0",
-        "version_normalized": "1.0.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/php-fig/simple-cache.git",
-            "reference": "753fa598e8f3b9966c886fe13f370baa45ef0e24"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/753fa598e8f3b9966c886fe13f370baa45ef0e24",
-            "reference": "753fa598e8f3b9966c886fe13f370baa45ef0e24",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.0"
-        },
-        "time": "2017-01-02T13:31:39+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Psr\\SimpleCache\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "PHP-FIG",
-                "homepage": "http://www.php-fig.org/"
-            }
-        ],
-        "description": "Common interfaces for simple caching",
-        "keywords": [
-            "cache",
-            "caching",
-            "psr",
-            "psr-16",
-            "simple-cache"
-        ]
-    },
-    {
-        "name": "psr/log",
-        "version": "1.0.2",
-        "version_normalized": "1.0.2.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/php-fig/log.git",
-            "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/php-fig/log/zipball/4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
-            "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.0"
-        },
-        "time": "2016-10-10T12:19:37+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Psr\\Log\\": "Psr/Log/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "PHP-FIG",
-                "homepage": "http://www.php-fig.org/"
-            }
-        ],
-        "description": "Common interface for logging libraries",
-        "homepage": "https://github.com/php-fig/log",
-        "keywords": [
-            "log",
-            "psr",
-            "psr-3"
-        ]
-    },
-    {
-        "name": "psr/cache",
-        "version": "1.0.1",
-        "version_normalized": "1.0.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/php-fig/cache.git",
-            "reference": "d11b50ad223250cf17b86e38383413f5a6764bf8"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/php-fig/cache/zipball/d11b50ad223250cf17b86e38383413f5a6764bf8",
-            "reference": "d11b50ad223250cf17b86e38383413f5a6764bf8",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.0"
-        },
-        "time": "2016-08-06T20:24:11+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Psr\\Cache\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "PHP-FIG",
-                "homepage": "http://www.php-fig.org/"
-            }
-        ],
-        "description": "Common interface for caching libraries",
-        "keywords": [
-            "cache",
-            "psr",
-            "psr-6"
-        ]
-    },
-    {
-        "name": "symfony/polyfill-apcu",
-        "version": "v1.6.0",
-        "version_normalized": "1.6.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/polyfill-apcu.git",
-            "reference": "04f62674339602def515bff4bc6901fc1d4951e8"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/polyfill-apcu/zipball/04f62674339602def515bff4bc6901fc1d4951e8",
-            "reference": "04f62674339602def515bff4bc6901fc1d4951e8",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3"
-        },
-        "time": "2017-10-11T12:05:26+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.6-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Symfony\\Polyfill\\Apcu\\": ""
-            },
-            "files": [
-                "bootstrap.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Nicolas Grekas",
-                "email": "p@tchwork.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony polyfill backporting apcu_* functions to lower PHP versions",
-        "homepage": "https://symfony.com",
-        "keywords": [
-            "apcu",
-            "compatibility",
-            "polyfill",
-            "portable",
-            "shim"
-        ]
-    },
-    {
-        "name": "symfony/cache",
-        "version": "v3.4.2",
-        "version_normalized": "3.4.2.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/cache.git",
-            "reference": "94ce2a457bfc720be2720767b97caf44ecac6c41"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/cache/zipball/94ce2a457bfc720be2720767b97caf44ecac6c41",
-            "reference": "94ce2a457bfc720be2720767b97caf44ecac6c41",
-            "shasum": ""
-        },
-        "require": {
-            "php": "^5.5.9|>=7.0.8",
-            "psr/cache": "~1.0",
-            "psr/log": "~1.0",
-            "psr/simple-cache": "^1.0",
-            "symfony/polyfill-apcu": "~1.1"
-        },
-        "conflict": {
-            "symfony/var-dumper": "<3.3"
-        },
-        "provide": {
-            "psr/cache-implementation": "1.0",
-            "psr/simple-cache-implementation": "1.0"
-        },
-        "require-dev": {
-            "cache/integration-tests": "dev-master",
-            "doctrine/cache": "~1.6",
-            "doctrine/dbal": "~2.4",
-            "predis/predis": "~1.0"
-        },
-        "time": "2017-12-08T16:11:27+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "3.4-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Symfony\\Component\\Cache\\": ""
-            },
-            "exclude-from-classmap": [
-                "/Tests/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Nicolas Grekas",
-                "email": "p@tchwork.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony Cache component with PSR-6, PSR-16, and tags",
-        "homepage": "https://symfony.com",
-        "keywords": [
-            "caching",
-            "psr6"
-        ]
-    },
-    {
         "name": "symfony/expression-language",
-        "version": "v3.4.2",
-        "version_normalized": "3.4.2.0",
+        "version": "v2.8.35",
+        "version_normalized": "2.8.35.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/expression-language.git",
-            "reference": "c4b195436a74d9672d8463e4d427ca42449238e5"
+            "reference": "422bf02386ab46f615d1d784b771599357461d73"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/expression-language/zipball/c4b195436a74d9672d8463e4d427ca42449238e5",
-            "reference": "c4b195436a74d9672d8463e4d427ca42449238e5",
+            "url": "https://api.github.com/repos/symfony/expression-language/zipball/422bf02386ab46f615d1d784b771599357461d73",
+            "reference": "422bf02386ab46f615d1d784b771599357461d73",
             "shasum": ""
         },
         "require": {
-            "php": "^5.5.9|>=7.0.8",
-            "symfony/cache": "~3.1|~4.0"
+            "php": ">=5.3.9"
         },
-        "time": "2017-12-08T15:24:53+00:00",
+        "time": "2018-01-03T07:36:31+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "3.4-dev"
+                "dev-master": "2.8-dev"
             }
         },
         "installation-source": "dist",
@@ -330,17 +52,17 @@
     },
     {
         "name": "phpmyadmin/motranslator",
-        "version": "3.4",
-        "version_normalized": "3.4.0.0",
+        "version": "4.0",
+        "version_normalized": "4.0.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/phpmyadmin/motranslator.git",
-            "reference": "d4190a4976c80c221aebd5208ae546dbfb5f8147"
+            "reference": "fcb370254998fda7eeccfd7c787b4deb71b0d77c"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/phpmyadmin/motranslator/zipball/d4190a4976c80c221aebd5208ae546dbfb5f8147",
-            "reference": "d4190a4976c80c221aebd5208ae546dbfb5f8147",
+            "url": "https://api.github.com/repos/phpmyadmin/motranslator/zipball/fcb370254998fda7eeccfd7c787b4deb71b0d77c",
+            "reference": "fcb370254998fda7eeccfd7c787b4deb71b0d77c",
             "shasum": ""
         },
         "require": {
@@ -352,7 +74,7 @@
             "phpunit/php-code-coverage": "*",
             "phpunit/phpunit": "~4.8 || ~5.7 || ~6.5"
         },
-        "time": "2017-12-15T09:44:45+00:00",
+        "time": "2018-02-12T13:22:52+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -362,7 +84,7 @@
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
-            "GPL-2.0+"
+            "GPL-2.0-or-later"
         ],
         "authors": [
             {
@@ -382,17 +104,17 @@
     },
     {
         "name": "symfony/polyfill-mbstring",
-        "version": "v1.6.0",
-        "version_normalized": "1.6.0.0",
+        "version": "v1.7.0",
+        "version_normalized": "1.7.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/polyfill-mbstring.git",
-            "reference": "2ec8b39c38cb16674bbf3fea2b6ce5bf117e1296"
+            "reference": "78be803ce01e55d3491c1397cf1c64beb9c1b63b"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/2ec8b39c38cb16674bbf3fea2b6ce5bf117e1296",
-            "reference": "2ec8b39c38cb16674bbf3fea2b6ce5bf117e1296",
+            "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/78be803ce01e55d3491c1397cf1c64beb9c1b63b",
+            "reference": "78be803ce01e55d3491c1397cf1c64beb9c1b63b",
             "shasum": ""
         },
         "require": {
@@ -401,11 +123,11 @@
         "suggest": {
             "ext-mbstring": "For best performance"
         },
-        "time": "2017-10-11T12:05:26+00:00",
+        "time": "2018-01-30T19:27:44+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.6-dev"
+                "dev-master": "1.7-dev"
             }
         },
         "installation-source": "dist",
@@ -561,23 +283,23 @@
     },
     {
         "name": "tecnickcom/tcpdf",
-        "version": "6.2.13",
-        "version_normalized": "6.2.13.0",
+        "version": "6.2.17",
+        "version_normalized": "6.2.17.0",
         "source": {
             "type": "git",
             "url": "https://github.com/tecnickcom/TCPDF.git",
-            "reference": "95c5938aafe4b20df1454dbddb3e5005c0b26f64"
+            "reference": "64fc19439863e1b1314487a72a74d9bfd0b55a53"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/95c5938aafe4b20df1454dbddb3e5005c0b26f64",
-            "reference": "95c5938aafe4b20df1454dbddb3e5005c0b26f64",
+            "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/64fc19439863e1b1314487a72a74d9bfd0b55a53",
+            "reference": "64fc19439863e1b1314487a72a74d9bfd0b55a53",
             "shasum": ""
         },
         "require": {
             "php": ">=5.3.0"
         },
-        "time": "2017-04-26T08:14:48+00:00",
+        "time": "2018-02-24T11:48:20+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -602,13 +324,13 @@
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
-            "LGPLv3"
+            "LGPL-3.0"
         ],
         "authors": [
             {
                 "name": "Nicola Asuni",
                 "email": "info@tecnick.com",
-                "homepage": "http://nicolaasuni.tecnick.com"
+                "role": "lead"
             }
         ],
         "description": "TCPDF is a PHP class for generating PDF documents and barcodes.",
@@ -625,17 +347,17 @@
     },
     {
         "name": "phpseclib/phpseclib",
-        "version": "2.0.9",
-        "version_normalized": "2.0.9.0",
+        "version": "2.0.10",
+        "version_normalized": "2.0.10.0",
         "source": {
             "type": "git",
             "url": "https://github.com/phpseclib/phpseclib.git",
-            "reference": "c9a3fe35e20eb6eeaca716d6a23cde03f52d1558"
+            "reference": "d305b780829ea4252ed9400b3f5937c2c99b51d4"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/c9a3fe35e20eb6eeaca716d6a23cde03f52d1558",
-            "reference": "c9a3fe35e20eb6eeaca716d6a23cde03f52d1558",
+            "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/d305b780829ea4252ed9400b3f5937c2c99b51d4",
+            "reference": "d305b780829ea4252ed9400b3f5937c2c99b51d4",
             "shasum": ""
         },
         "require": {
@@ -643,7 +365,7 @@
         },
         "require-dev": {
             "phing/phing": "~2.7",
-            "phpunit/phpunit": "~4.0",
+            "phpunit/phpunit": "^4.8.35|^5.7|^6.0",
             "sami/sami": "~2.0",
             "squizlabs/php_codesniffer": "~2.0"
         },
@@ -653,7 +375,7 @@
             "ext-mcrypt": "Install the Mcrypt extension in order to speed up a few other cryptographic operations.",
             "ext-openssl": "Install the OpenSSL extension in order to speed up a wide variety of cryptographic operations."
         },
-        "time": "2017-11-29T06:38:08+00:00",
+        "time": "2018-02-19T04:29:13+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -766,27 +488,27 @@
     },
     {
         "name": "symfony/polyfill-util",
-        "version": "v1.6.0",
-        "version_normalized": "1.6.0.0",
+        "version": "v1.7.0",
+        "version_normalized": "1.7.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/polyfill-util.git",
-            "reference": "6e719200c8e540e0c0effeb31f96bdb344b94176"
+            "reference": "e17c808ec4228026d4f5a8832afa19be85979563"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/polyfill-util/zipball/6e719200c8e540e0c0effeb31f96bdb344b94176",
-            "reference": "6e719200c8e540e0c0effeb31f96bdb344b94176",
+            "url": "https://api.github.com/repos/symfony/polyfill-util/zipball/e17c808ec4228026d4f5a8832afa19be85979563",
+            "reference": "e17c808ec4228026d4f5a8832afa19be85979563",
             "shasum": ""
         },
         "require": {
             "php": ">=5.3.3"
         },
-        "time": "2017-10-11T12:05:26+00:00",
+        "time": "2018-01-31T18:08:44+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.6-dev"
+                "dev-master": "1.7-dev"
             }
         },
         "installation-source": "dist",
@@ -820,28 +542,28 @@
     },
     {
         "name": "symfony/polyfill-php56",
-        "version": "v1.6.0",
-        "version_normalized": "1.6.0.0",
+        "version": "v1.7.0",
+        "version_normalized": "1.7.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/polyfill-php56.git",
-            "reference": "265fc96795492430762c29be291a371494ba3a5b"
+            "reference": "ebc999ce5f14204c5150b9bd15f8f04e621409d8"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/polyfill-php56/zipball/265fc96795492430762c29be291a371494ba3a5b",
-            "reference": "265fc96795492430762c29be291a371494ba3a5b",
+            "url": "https://api.github.com/repos/symfony/polyfill-php56/zipball/ebc999ce5f14204c5150b9bd15f8f04e621409d8",
+            "reference": "ebc999ce5f14204c5150b9bd15f8f04e621409d8",
             "shasum": ""
         },
         "require": {
             "php": ">=5.3.3",
             "symfony/polyfill-util": "~1.0"
         },
-        "time": "2017-10-11T12:05:26+00:00",
+        "time": "2018-01-30T19:27:44+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.6-dev"
+                "dev-master": "1.7-dev"
             }
         },
         "installation-source": "dist",
@@ -928,27 +650,27 @@
     },
     {
         "name": "paragonie/constant_time_encoding",
-        "version": "v2.2.0",
-        "version_normalized": "2.2.0.0",
+        "version": "v1.0.1",
+        "version_normalized": "1.0.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/paragonie/constant_time_encoding.git",
-            "reference": "9e7d88e6e4015c2f06a3fa22f06e1d5faa77e6c4"
+            "reference": "d96e63b79a7135a65659ba5b1cb02826172bfedd"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/paragonie/constant_time_encoding/zipball/9e7d88e6e4015c2f06a3fa22f06e1d5faa77e6c4",
-            "reference": "9e7d88e6e4015c2f06a3fa22f06e1d5faa77e6c4",
+            "url": "https://api.github.com/repos/paragonie/constant_time_encoding/zipball/d96e63b79a7135a65659ba5b1cb02826172bfedd",
+            "reference": "d96e63b79a7135a65659ba5b1cb02826172bfedd",
             "shasum": ""
         },
         "require": {
-            "php": "^7"
+            "php": "^5.3|^7"
         },
         "require-dev": {
-            "phpunit/phpunit": "^6",
-            "vimeo/psalm": "^0.3|^1"
+            "paragonie/random_compat": "^1.4|^2.0",
+            "phpunit/phpunit": "4.*|5.*"
         },
-        "time": "2017-09-22T14:55:37+00:00",
+        "time": "2016-06-13T01:00:24+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -992,17 +714,17 @@
     },
     {
         "name": "pragmarx/google2fa",
-        "version": "v2.0.6",
-        "version_normalized": "2.0.6.0",
+        "version": "v2.0.7",
+        "version_normalized": "2.0.7.0",
         "source": {
             "type": "git",
             "url": "https://github.com/antonioribeiro/google2fa.git",
-            "reference": "bc2d654305e4d09254125f8cd390a7fbc4742d46"
+            "reference": "5a818bda62fab0c0a79060b06d50d50b5525d631"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/antonioribeiro/google2fa/zipball/bc2d654305e4d09254125f8cd390a7fbc4742d46",
-            "reference": "bc2d654305e4d09254125f8cd390a7fbc4742d46",
+            "url": "https://api.github.com/repos/antonioribeiro/google2fa/zipball/5a818bda62fab0c0a79060b06d50d50b5525d631",
+            "reference": "5a818bda62fab0c0a79060b06d50d50b5525d631",
             "shasum": ""
         },
         "require": {
@@ -1013,13 +735,12 @@
         },
         "require-dev": {
             "bacon/bacon-qr-code": "~1.0",
-            "phpspec/phpspec": "~2.1",
-            "phpunit/phpunit": "~4"
+            "phpunit/phpunit": "~4|~5|~6"
         },
         "suggest": {
             "bacon/bacon-qr-code": "Required to generate inline QR Codes."
         },
-        "time": "2017-09-12T06:55:05+00:00",
+        "time": "2018-01-06T16:21:07+00:00",
         "type": "library",
         "extra": {
             "component": "package",
@@ -1030,7 +751,8 @@
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "PragmaRX\\Google2FA\\": "src/"
+                "PragmaRX\\Google2FA\\": "src/",
+                "PragmaRX\\Google2FA\\Tests\\": "tests/"
             }
         },
         "notification-url": "https://packagist.org/downloads/",

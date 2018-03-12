@@ -17,13 +17,13 @@
         "symfony/polyfill-php56": "~1.2"
     },
     "require-dev": {
-        "phpspec/phpspec": "~2.1",
-        "phpunit/phpunit": "~4",
+        "phpunit/phpunit": "~4|~5|~6",
         "bacon/bacon-qr-code": "~1.0"
     },
     "autoload": {
         "psr-4": {
-            "PragmaRX\\Google2FA\\": "src/"
+            "PragmaRX\\Google2FA\\": "src/",
+            "PragmaRX\\Google2FA\\Tests\\": "tests/"
         }
     },
     "extra": {
@@ -35,5 +35,6 @@
     "suggest": {
       "bacon/bacon-qr-code": "Required to generate inline QR Codes."
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

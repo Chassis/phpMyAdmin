@@ -1,3 +1,8 @@
+# Version 4.0
+
+* Released on 2018-02-12.
+* The library no longer changes system locales.
+
 # Version 3.4
 
 * Released on 2017-12-15.
