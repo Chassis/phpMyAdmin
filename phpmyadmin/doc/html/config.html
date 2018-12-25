@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Configuration &#8212; phpMyAdmin 4.7.9 documentation</title>
+    <title>Configuration &#8212; phpMyAdmin 4.8.4 documentation</title>
     
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.7.9',
+        VERSION:     '4.8.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="copyright" title="Copyright" href="copyright.html" />
-    <link rel="top" title="phpMyAdmin 4.7.9 documentation" href="index.html" />
+    <link rel="top" title="phpMyAdmin 4.8.4 documentation" href="index.html" />
     <link rel="next" title="User Guide" href="user.html" />
     <link rel="prev" title="Installation" href="setup.html" /> 
   </head>
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="setup.html" title="Installation"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.7.9 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.8.4 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -142,6 +142,66 @@ of one database where you would like to use it. You will find a link
 that will analyze why those features have been disabled.</p>
 <p>If you do not want to use those features set this variable to <code class="docutils literal"><span class="pre">true</span></code> to
 stop this message from appearing.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cfg_AuthLog">
+<code class="descname">$cfg['AuthLog']</code><a class="headerlink" href="#cfg_AuthLog" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">string</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body"><code class="docutils literal"><span class="pre">'auto'</span></code></td>
+</tr>
+</tbody>
+</table>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 4.8.0: </span>This is supported since phpMyAdmin 4.8.0.</p>
+</div>
+<p>Configure authentication logging destination. Failed (or all, depending on
+<span class="target" id="index-2"></span><a class="reference internal" href="#cfg_AuthLogSuccess"><code class="xref config config-option docutils literal"><span class="pre">$cfg['AuthLogSuccess']</span></code></a>) authentication attempts will be
+logged according to this directive:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">auto</span></code></dt>
+<dd>Let phpMyAdmin automatically choose between <code class="docutils literal"><span class="pre">syslog</span></code> and <code class="docutils literal"><span class="pre">php</span></code>.</dd>
+<dt><code class="docutils literal"><span class="pre">syslog</span></code></dt>
+<dd>Log using syslog, using AUTH facility, on most systems this ends up
+in <code class="file docutils literal"><span class="pre">/var/log/auth.log</span></code>.</dd>
+<dt><code class="docutils literal"><span class="pre">php</span></code></dt>
+<dd>Log into PHP error log.</dd>
+<dt><code class="docutils literal"><span class="pre">sapi</span></code></dt>
+<dd>Log into PHP SAPI logging.</dd>
+<dt><code class="docutils literal"><span class="pre">/path/to/file</span></code></dt>
+<dd>Any other value is treated as a filename and log entries are written there.</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When logging to a file, make sure its permissions are correctly set
+for a web server user, the setup should closely match instructions
+described in <span class="target" id="index-3"></span><a class="reference internal" href="#cfg_TempDir"><code class="xref config config-option docutils literal"><span class="pre">$cfg['TempDir']</span></code></a>:</p>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="cfg_AuthLogSuccess">
+<code class="descname">$cfg['AuthLogSuccess']</code><a class="headerlink" href="#cfg_AuthLogSuccess" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">boolean</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">false</td>
+</tr>
+</tbody>
+</table>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 4.8.0: </span>This is supported since phpMyAdmin 4.8.0.</p>
+</div>
+<p>Whether to log successful authentication attempts into
+<span class="target" id="index-4"></span><a class="reference internal" href="#cfg_AuthLog"><code class="xref config config-option docutils literal"><span class="pre">$cfg['AuthLog']</span></code></a>.</p>
 </dd></dl>
 
 <dl class="option">
@@ -258,7 +318,7 @@ never send error reports.</p>
 <p>This directive is available both in the configuration file and in users
 preferences. If the person in charge of a multi-user installation prefers
 to disable this feature for all users, a value of <code class="docutils literal"><span class="pre">'never'</span></code> should be
-set, and the <span class="target" id="index-2"></span><a class="reference internal" href="#cfg_UserprefsDisallow"><code class="xref config config-option docutils literal"><span class="pre">$cfg['UserprefsDisallow']</span></code></a> directive should
+set, and the <span class="target" id="index-5"></span><a class="reference internal" href="#cfg_UserprefsDisallow"><code class="xref config config-option docutils literal"><span class="pre">$cfg['UserprefsDisallow']</span></code></a> directive should
 contain <code class="docutils literal"><span class="pre">'SendErrorReports'</span></code> in one of its array values.</p>
 </dd></dl>
 
@@ -316,10 +376,10 @@ clickjacking.</p>
 </tbody>
 </table>
 <p>Since version 1.4.2, phpMyAdmin supports the administration of multiple
-MySQL servers. Therefore, a <span class="target" id="index-3"></span><a class="reference internal" href="#cfg_Servers"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers']</span></code></a>-array has been
+MySQL servers. Therefore, a <span class="target" id="index-6"></span><a class="reference internal" href="#cfg_Servers"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers']</span></code></a>-array has been
 added which contains the login information for the different servers. The
-first <span class="target" id="index-4"></span><a class="reference internal" href="#cfg_Servers_host"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['host']</span></code></a> contains the hostname of
-the first server, the second <span class="target" id="index-5"></span><a class="reference internal" href="#cfg_Servers_host"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['host']</span></code></a>
+first <span class="target" id="index-7"></span><a class="reference internal" href="#cfg_Servers_host"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['host']</span></code></a> contains the hostname of
+the first server, the second <span class="target" id="index-8"></span><a class="reference internal" href="#cfg_Servers_host"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['host']</span></code></a>
 the hostname of the second server, etc. In
 <code class="file docutils literal"><span class="pre">libraries/config.default.php</span></code>, there is only one section for server
 definition, however you can put as many as you need in
@@ -327,7 +387,7 @@ definition, however you can put as many as you need in
 define all settings, just those you need to change).</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The <span class="target" id="index-6"></span><a class="reference internal" href="#cfg_Servers"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers']</span></code></a> array starts with
+<p class="last">The <span class="target" id="index-9"></span><a class="reference internal" href="#cfg_Servers"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers']</span></code></a> array starts with
 $cfg[&#8216;Servers&#8217;][1]. Do not use $cfg[&#8216;Servers&#8217;][0]. If you want more
 than one server, just copy following section (including $i
 incrementation) serveral times. There is no need to define full server
@@ -364,11 +424,11 @@ array, just define values you need to change.</p>
 the socket based connection protocol. To use TCP/IP networking, use an
 IP address or hostname such as <code class="docutils literal"><span class="pre">127.0.0.1</span></code> or <code class="docutils literal"><span class="pre">db.example.com</span></code>. You
 can configure the path to the socket with
-<span class="target" id="index-7"></span><a class="reference internal" href="#cfg_Servers_socket"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['socket']</span></code></a>.</p>
+<span class="target" id="index-10"></span><a class="reference internal" href="#cfg_Servers_socket"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['socket']</span></code></a>.</p>
 </div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><span class="target" id="index-8"></span><a class="reference internal" href="#cfg_Servers_port"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['port']</span></code></a>,
+<p class="last"><span class="target" id="index-11"></span><a class="reference internal" href="#cfg_Servers_port"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['port']</span></code></a>,
 &lt;<a class="reference external" href="https://dev.mysql.com/doc/refman/5.7/en/connecting.html">https://dev.mysql.com/doc/refman/5.7/en/connecting.html</a>&gt;</p>
 </div>
 </dd></dl>
@@ -393,11 +453,11 @@ blank).</p>
 <p class="last">If you use <code class="docutils literal"><span class="pre">localhost</span></code> as the hostname, MySQL ignores this port number
 and connects with the socket, so if you want to connect to a port
 different from the default port, use <code class="docutils literal"><span class="pre">127.0.0.1</span></code> or the real hostname
-in <span class="target" id="index-9"></span><a class="reference internal" href="#cfg_Servers_host"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['host']</span></code></a>.</p>
+in <span class="target" id="index-12"></span><a class="reference internal" href="#cfg_Servers_host"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['host']</span></code></a>.</p>
 </div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><span class="target" id="index-10"></span><a class="reference internal" href="#cfg_Servers_host"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['host']</span></code></a>,
+<p class="last"><span class="target" id="index-13"></span><a class="reference internal" href="#cfg_Servers_host"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['host']</span></code></a>,
 &lt;<a class="reference external" href="https://dev.mysql.com/doc/refman/5.7/en/connecting.html">https://dev.mysql.com/doc/refman/5.7/en/connecting.html</a>&gt;</p>
 </div>
 </dd></dl>
@@ -421,12 +481,12 @@ the correct socket, check your MySQL configuration or, using the
 resulting information displayed will be the socket used.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">This takes effect only if <span class="target" id="index-11"></span><a class="reference internal" href="#cfg_Servers_host"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['host']</span></code></a> is set
+<p class="last">This takes effect only if <span class="target" id="index-14"></span><a class="reference internal" href="#cfg_Servers_host"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['host']</span></code></a> is set
 to <code class="docutils literal"><span class="pre">localhost</span></code>.</p>
 </div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><span class="target" id="index-12"></span><a class="reference internal" href="#cfg_Servers_host"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['host']</span></code></a>,
+<p class="last"><span class="target" id="index-15"></span><a class="reference internal" href="#cfg_Servers_host"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['host']</span></code></a>,
 &lt;<a class="reference external" href="https://dev.mysql.com/doc/refman/5.7/en/connecting.html">https://dev.mysql.com/doc/refman/5.7/en/connecting.html</a>&gt;</p>
 </div>
 </dd></dl>
@@ -451,13 +511,14 @@ none of the remaining <code class="docutils literal"><span class="pre">'ssl...'<
 <p>We strongly recommend the <code class="docutils literal"><span class="pre">'mysqli'</span></code> extension when using this option.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#example-google-ssl"><span class="std std-ref">Google Cloud SQL with SSL</span></a>
-<span class="target" id="index-13"></span><a class="reference internal" href="#cfg_Servers_ssl_key"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_key']</span></code></a>,
-<span class="target" id="index-14"></span><a class="reference internal" href="#cfg_Servers_ssl_cert"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_cert']</span></code></a>,
-<span class="target" id="index-15"></span><a class="reference internal" href="#cfg_Servers_ssl_ca"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ca']</span></code></a>,
-<span class="target" id="index-16"></span><a class="reference internal" href="#cfg_Servers_ssl_ca_path"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ca_path']</span></code></a>,
-<span class="target" id="index-17"></span><a class="reference internal" href="#cfg_Servers_ssl_ciphers"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ciphers']</span></code></a>,
-<span class="target" id="index-18"></span><a class="reference internal" href="#cfg_Servers_ssl_verify"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_verify']</span></code></a></p>
+<p class="last"><a class="reference internal" href="setup.html#ssl"><span class="std std-ref">Using SSL for connection to database server</span></a>,
+<a class="reference internal" href="#example-google-ssl"><span class="std std-ref">Google Cloud SQL with SSL</span></a>,
+<span class="target" id="index-16"></span><a class="reference internal" href="#cfg_Servers_ssl_key"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_key']</span></code></a>,
+<span class="target" id="index-17"></span><a class="reference internal" href="#cfg_Servers_ssl_cert"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_cert']</span></code></a>,
+<span class="target" id="index-18"></span><a class="reference internal" href="#cfg_Servers_ssl_ca"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ca']</span></code></a>,
+<span class="target" id="index-19"></span><a class="reference internal" href="#cfg_Servers_ssl_ca_path"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ca_path']</span></code></a>,
+<span class="target" id="index-20"></span><a class="reference internal" href="#cfg_Servers_ssl_ciphers"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ciphers']</span></code></a>,
+<span class="target" id="index-21"></span><a class="reference internal" href="#cfg_Servers_ssl_verify"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_verify']</span></code></a></p>
 </div>
 </dd></dl>
 
@@ -474,20 +535,22 @@ none of the remaining <code class="docutils literal"><span class="pre">'ssl...'<
 </tr>
 </tbody>
 </table>
-<p>Path to the key file when using SSL for connecting to the MySQL server.</p>
+<p>Path to the client key file when using SSL for connecting to the MySQL
+server. This is used to authenticate the client to the server.</p>
 <p>For example:</p>
 <div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Servers&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;ssl_key&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;/etc/mysql/server-key.pem&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#example-google-ssl"><span class="std std-ref">Google Cloud SQL with SSL</span></a>
-<span class="target" id="index-19"></span><a class="reference internal" href="#cfg_Servers_ssl"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl']</span></code></a>,
-<span class="target" id="index-20"></span><a class="reference internal" href="#cfg_Servers_ssl_cert"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_cert']</span></code></a>,
-<span class="target" id="index-21"></span><a class="reference internal" href="#cfg_Servers_ssl_ca"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ca']</span></code></a>,
-<span class="target" id="index-22"></span><a class="reference internal" href="#cfg_Servers_ssl_ca_path"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ca_path']</span></code></a>,
-<span class="target" id="index-23"></span><a class="reference internal" href="#cfg_Servers_ssl_ciphers"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ciphers']</span></code></a>,
-<span class="target" id="index-24"></span><a class="reference internal" href="#cfg_Servers_ssl_verify"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_verify']</span></code></a></p>
+<p class="last"><a class="reference internal" href="setup.html#ssl"><span class="std std-ref">Using SSL for connection to database server</span></a>,
+<a class="reference internal" href="#example-google-ssl"><span class="std std-ref">Google Cloud SQL with SSL</span></a>,
+<span class="target" id="index-22"></span><a class="reference internal" href="#cfg_Servers_ssl"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl']</span></code></a>,
+<span class="target" id="index-23"></span><a class="reference internal" href="#cfg_Servers_ssl_cert"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_cert']</span></code></a>,
+<span class="target" id="index-24"></span><a class="reference internal" href="#cfg_Servers_ssl_ca"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ca']</span></code></a>,
+<span class="target" id="index-25"></span><a class="reference internal" href="#cfg_Servers_ssl_ca_path"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ca_path']</span></code></a>,
+<span class="target" id="index-26"></span><a class="reference internal" href="#cfg_Servers_ssl_ciphers"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ciphers']</span></code></a>,
+<span class="target" id="index-27"></span><a class="reference internal" href="#cfg_Servers_ssl_verify"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_verify']</span></code></a></p>
 </div>
 </dd></dl>
 
@@ -504,16 +567,18 @@ none of the remaining <code class="docutils literal"><span class="pre">'ssl...'<
 </tr>
 </tbody>
 </table>
-<p>Path to the cert file when using SSL for connecting to the MySQL server.</p>
+<p>Path to the client certificate file when using SSL for connecting to the
+MySQL server. This is used to authenticate the client to the server.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#example-google-ssl"><span class="std std-ref">Google Cloud SQL with SSL</span></a>
-<span class="target" id="index-25"></span><a class="reference internal" href="#cfg_Servers_ssl"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl']</span></code></a>,
-<span class="target" id="index-26"></span><a class="reference internal" href="#cfg_Servers_ssl_key"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_key']</span></code></a>,
-<span class="target" id="index-27"></span><a class="reference internal" href="#cfg_Servers_ssl_ca"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ca']</span></code></a>,
-<span class="target" id="index-28"></span><a class="reference internal" href="#cfg_Servers_ssl_ca_path"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ca_path']</span></code></a>,
-<span class="target" id="index-29"></span><a class="reference internal" href="#cfg_Servers_ssl_ciphers"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ciphers']</span></code></a>,
-<span class="target" id="index-30"></span><a class="reference internal" href="#cfg_Servers_ssl_verify"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_verify']</span></code></a></p>
+<p class="last"><a class="reference internal" href="setup.html#ssl"><span class="std std-ref">Using SSL for connection to database server</span></a>,
+<a class="reference internal" href="#example-google-ssl"><span class="std std-ref">Google Cloud SQL with SSL</span></a>,
+<span class="target" id="index-28"></span><a class="reference internal" href="#cfg_Servers_ssl"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl']</span></code></a>,
+<span class="target" id="index-29"></span><a class="reference internal" href="#cfg_Servers_ssl_key"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_key']</span></code></a>,
+<span class="target" id="index-30"></span><a class="reference internal" href="#cfg_Servers_ssl_ca"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ca']</span></code></a>,
+<span class="target" id="index-31"></span><a class="reference internal" href="#cfg_Servers_ssl_ca_path"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ca_path']</span></code></a>,
+<span class="target" id="index-32"></span><a class="reference internal" href="#cfg_Servers_ssl_ciphers"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ciphers']</span></code></a>,
+<span class="target" id="index-33"></span><a class="reference internal" href="#cfg_Servers_ssl_verify"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_verify']</span></code></a></p>
 </div>
 </dd></dl>
 
@@ -533,13 +598,14 @@ none of the remaining <code class="docutils literal"><span class="pre">'ssl...'<
 <p>Path to the CA file when using SSL for connecting to the MySQL server.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#example-google-ssl"><span class="std std-ref">Google Cloud SQL with SSL</span></a>
-<span class="target" id="index-31"></span><a class="reference internal" href="#cfg_Servers_ssl"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl']</span></code></a>,
-<span class="target" id="index-32"></span><a class="reference internal" href="#cfg_Servers_ssl_key"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_key']</span></code></a>,
-<span class="target" id="index-33"></span><a class="reference internal" href="#cfg_Servers_ssl_cert"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_cert']</span></code></a>,
-<span class="target" id="index-34"></span><a class="reference internal" href="#cfg_Servers_ssl_ca_path"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ca_path']</span></code></a>,
-<span class="target" id="index-35"></span><a class="reference internal" href="#cfg_Servers_ssl_ciphers"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ciphers']</span></code></a>,
-<span class="target" id="index-36"></span><a class="reference internal" href="#cfg_Servers_ssl_verify"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_verify']</span></code></a></p>
+<p class="last"><a class="reference internal" href="setup.html#ssl"><span class="std std-ref">Using SSL for connection to database server</span></a>,
+<a class="reference internal" href="#example-google-ssl"><span class="std std-ref">Google Cloud SQL with SSL</span></a>,
+<span class="target" id="index-34"></span><a class="reference internal" href="#cfg_Servers_ssl"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl']</span></code></a>,
+<span class="target" id="index-35"></span><a class="reference internal" href="#cfg_Servers_ssl_key"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_key']</span></code></a>,
+<span class="target" id="index-36"></span><a class="reference internal" href="#cfg_Servers_ssl_cert"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_cert']</span></code></a>,
+<span class="target" id="index-37"></span><a class="reference internal" href="#cfg_Servers_ssl_ca_path"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ca_path']</span></code></a>,
+<span class="target" id="index-38"></span><a class="reference internal" href="#cfg_Servers_ssl_ciphers"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ciphers']</span></code></a>,
+<span class="target" id="index-39"></span><a class="reference internal" href="#cfg_Servers_ssl_verify"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_verify']</span></code></a></p>
 </div>
 </dd></dl>
 
@@ -559,13 +625,14 @@ none of the remaining <code class="docutils literal"><span class="pre">'ssl...'<
 <p>Directory containing trusted SSL CA certificates in PEM format.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#example-google-ssl"><span class="std std-ref">Google Cloud SQL with SSL</span></a>
-<span class="target" id="index-37"></span><a class="reference internal" href="#cfg_Servers_ssl"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl']</span></code></a>,
-<span class="target" id="index-38"></span><a class="reference internal" href="#cfg_Servers_ssl_key"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_key']</span></code></a>,
-<span class="target" id="index-39"></span><a class="reference internal" href="#cfg_Servers_ssl_cert"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_cert']</span></code></a>,
-<span class="target" id="index-40"></span><a class="reference internal" href="#cfg_Servers_ssl_ca"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ca']</span></code></a>,
-<span class="target" id="index-41"></span><a class="reference internal" href="#cfg_Servers_ssl_ciphers"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ciphers']</span></code></a>,
-<span class="target" id="index-42"></span><a class="reference internal" href="#cfg_Servers_ssl_verify"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_verify']</span></code></a></p>
+<p class="last"><a class="reference internal" href="setup.html#ssl"><span class="std std-ref">Using SSL for connection to database server</span></a>,
+<a class="reference internal" href="#example-google-ssl"><span class="std std-ref">Google Cloud SQL with SSL</span></a>,
+<span class="target" id="index-40"></span><a class="reference internal" href="#cfg_Servers_ssl"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl']</span></code></a>,
+<span class="target" id="index-41"></span><a class="reference internal" href="#cfg_Servers_ssl_key"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_key']</span></code></a>,
+<span class="target" id="index-42"></span><a class="reference internal" href="#cfg_Servers_ssl_cert"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_cert']</span></code></a>,
+<span class="target" id="index-43"></span><a class="reference internal" href="#cfg_Servers_ssl_ca"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ca']</span></code></a>,
+<span class="target" id="index-44"></span><a class="reference internal" href="#cfg_Servers_ssl_ciphers"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ciphers']</span></code></a>,
+<span class="target" id="index-45"></span><a class="reference internal" href="#cfg_Servers_ssl_verify"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_verify']</span></code></a></p>
 </div>
 </dd></dl>
 
@@ -585,12 +652,14 @@ none of the remaining <code class="docutils literal"><span class="pre">'ssl...'<
 <p>List of allowable ciphers for SSL connections to the MySQL server.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><span class="target" id="index-43"></span><a class="reference internal" href="#cfg_Servers_ssl"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl']</span></code></a>,
-<span class="target" id="index-44"></span><a class="reference internal" href="#cfg_Servers_ssl_key"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_key']</span></code></a>,
-<span class="target" id="index-45"></span><a class="reference internal" href="#cfg_Servers_ssl_cert"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_cert']</span></code></a>,
-<span class="target" id="index-46"></span><a class="reference internal" href="#cfg_Servers_ssl_ca"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ca']</span></code></a>,
-<span class="target" id="index-47"></span><a class="reference internal" href="#cfg_Servers_ssl_ca_path"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ca_path']</span></code></a>,
-<span class="target" id="index-48"></span><a class="reference internal" href="#cfg_Servers_ssl_verify"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_verify']</span></code></a></p>
+<p class="last"><a class="reference internal" href="setup.html#ssl"><span class="std std-ref">Using SSL for connection to database server</span></a>,
+<a class="reference internal" href="#example-google-ssl"><span class="std std-ref">Google Cloud SQL with SSL</span></a>,
+<span class="target" id="index-46"></span><a class="reference internal" href="#cfg_Servers_ssl"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl']</span></code></a>,
+<span class="target" id="index-47"></span><a class="reference internal" href="#cfg_Servers_ssl_key"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_key']</span></code></a>,
+<span class="target" id="index-48"></span><a class="reference internal" href="#cfg_Servers_ssl_cert"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_cert']</span></code></a>,
+<span class="target" id="index-49"></span><a class="reference internal" href="#cfg_Servers_ssl_ca"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ca']</span></code></a>,
+<span class="target" id="index-50"></span><a class="reference internal" href="#cfg_Servers_ssl_ca_path"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ca_path']</span></code></a>,
+<span class="target" id="index-51"></span><a class="reference internal" href="#cfg_Servers_ssl_verify"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_verify']</span></code></a></p>
 </div>
 </dd></dl>
 
@@ -628,14 +697,15 @@ This will make the connection vulnerable to man in the middle attacks.</p>
 </div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#example-google-ssl"><span class="std std-ref">Google Cloud SQL with SSL</span></a>
-<span class="target" id="index-49"></span><a class="reference internal" href="#cfg_Servers_ssl"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl']</span></code></a>,
-<span class="target" id="index-50"></span><a class="reference internal" href="#cfg_Servers_ssl_key"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_key']</span></code></a>,
-<span class="target" id="index-51"></span><a class="reference internal" href="#cfg_Servers_ssl_cert"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_cert']</span></code></a>,
-<span class="target" id="index-52"></span><a class="reference internal" href="#cfg_Servers_ssl_ca"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ca']</span></code></a>,
-<span class="target" id="index-53"></span><a class="reference internal" href="#cfg_Servers_ssl_ca_path"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ca_path']</span></code></a>,
-<span class="target" id="index-54"></span><a class="reference internal" href="#cfg_Servers_ssl_ciphers"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ciphers']</span></code></a>,
-<span class="target" id="index-55"></span><a class="reference internal" href="#cfg_Servers_ssl_verify"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_verify']</span></code></a></p>
+<p class="last"><a class="reference internal" href="setup.html#ssl"><span class="std std-ref">Using SSL for connection to database server</span></a>,
+<a class="reference internal" href="#example-google-ssl"><span class="std std-ref">Google Cloud SQL with SSL</span></a>,
+<span class="target" id="index-52"></span><a class="reference internal" href="#cfg_Servers_ssl"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl']</span></code></a>,
+<span class="target" id="index-53"></span><a class="reference internal" href="#cfg_Servers_ssl_key"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_key']</span></code></a>,
+<span class="target" id="index-54"></span><a class="reference internal" href="#cfg_Servers_ssl_cert"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_cert']</span></code></a>,
+<span class="target" id="index-55"></span><a class="reference internal" href="#cfg_Servers_ssl_ca"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ca']</span></code></a>,
+<span class="target" id="index-56"></span><a class="reference internal" href="#cfg_Servers_ssl_ca_path"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ca_path']</span></code></a>,
+<span class="target" id="index-57"></span><a class="reference internal" href="#cfg_Servers_ssl_ciphers"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ciphers']</span></code></a>,
+<span class="target" id="index-58"></span><a class="reference internal" href="#cfg_Servers_ssl_verify"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_verify']</span></code></a></p>
 </div>
 </dd></dl>
 
@@ -655,7 +725,7 @@ This will make the connection vulnerable to man in the middle attacks.</p>
 <div class="deprecated">
 <p><span class="versionmodified">Deprecated since version 4.7.0: </span>This setting is no longer used as of 4.7.0, since MySQL decides the
 connection type based on host, so it could lead to unexpected results.
-Please set <span class="target" id="index-56"></span><a class="reference internal" href="#cfg_Servers_host"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['host']</span></code></a> accordingly
+Please set <span class="target" id="index-59"></span><a class="reference internal" href="#cfg_Servers_host"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['host']</span></code></a> accordingly
 instead.</p>
 </div>
 <p>What type connection to use with the MySQL server. Your options are
@@ -699,7 +769,7 @@ or not (experimental).</p>
 data.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><span class="target" id="index-57"></span><a class="reference internal" href="#cfg_Servers_control_*"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['control_*']</span></code></a></p>
+<p class="last"><span class="target" id="index-60"></span><a class="reference internal" href="#cfg_Servers_control_*"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['control_*']</span></code></a></p>
 </div>
 </dd></dl>
 
@@ -720,7 +790,7 @@ data.</p>
 holds the configuration storage.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><span class="target" id="index-58"></span><a class="reference internal" href="#cfg_Servers_control_*"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['control_*']</span></code></a></p>
+<p class="last"><span class="target" id="index-61"></span><a class="reference internal" href="#cfg_Servers_control_*"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['control_*']</span></code></a></p>
 </div>
 </dd></dl>
 
@@ -765,10 +835,10 @@ the features without need to have direct access to <a class="reference internal"
 <p class="last"><a class="reference internal" href="setup.html#setup"><span class="std std-ref">Installation</span></a>,
 <a class="reference internal" href="setup.html#authentication-modes"><span class="std std-ref">Using authentication modes</span></a>,
 <a class="reference internal" href="setup.html#linked-tables"><span class="std std-ref">phpMyAdmin configuration storage</span></a>,
-<span class="target" id="index-59"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a>,
-<span class="target" id="index-60"></span><a class="reference internal" href="#cfg_Servers_controlhost"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['controlhost']</span></code></a>,
-<span class="target" id="index-61"></span><a class="reference internal" href="#cfg_Servers_controlport"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['controlport']</span></code></a>,
-<span class="target" id="index-62"></span><a class="reference internal" href="#cfg_Servers_control_*"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['control_*']</span></code></a></p>
+<span class="target" id="index-62"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a>,
+<span class="target" id="index-63"></span><a class="reference internal" href="#cfg_Servers_controlhost"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['controlhost']</span></code></a>,
+<span class="target" id="index-64"></span><a class="reference internal" href="#cfg_Servers_controlport"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['controlport']</span></code></a>,
+<span class="target" id="index-65"></span><a class="reference internal" href="#cfg_Servers_control_*"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['control_*']</span></code></a></p>
 </div>
 </dd></dl>
 
@@ -803,13 +873,13 @@ default uses same parameters as the user one.</p>
 </div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><span class="target" id="index-63"></span><a class="reference internal" href="#cfg_Servers_ssl"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl']</span></code></a>,
-<span class="target" id="index-64"></span><a class="reference internal" href="#cfg_Servers_ssl_key"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_key']</span></code></a>,
-<span class="target" id="index-65"></span><a class="reference internal" href="#cfg_Servers_ssl_cert"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_cert']</span></code></a>,
-<span class="target" id="index-66"></span><a class="reference internal" href="#cfg_Servers_ssl_ca"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ca']</span></code></a>,
-<span class="target" id="index-67"></span><a class="reference internal" href="#cfg_Servers_ssl_ca_path"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ca_path']</span></code></a>,
-<span class="target" id="index-68"></span><a class="reference internal" href="#cfg_Servers_ssl_ciphers"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ciphers']</span></code></a>,
-<span class="target" id="index-69"></span><a class="reference internal" href="#cfg_Servers_ssl_verify"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_verify']</span></code></a></p>
+<p class="last"><span class="target" id="index-66"></span><a class="reference internal" href="#cfg_Servers_ssl"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl']</span></code></a>,
+<span class="target" id="index-67"></span><a class="reference internal" href="#cfg_Servers_ssl_key"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_key']</span></code></a>,
+<span class="target" id="index-68"></span><a class="reference internal" href="#cfg_Servers_ssl_cert"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_cert']</span></code></a>,
+<span class="target" id="index-69"></span><a class="reference internal" href="#cfg_Servers_ssl_ca"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ca']</span></code></a>,
+<span class="target" id="index-70"></span><a class="reference internal" href="#cfg_Servers_ssl_ca_path"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ca_path']</span></code></a>,
+<span class="target" id="index-71"></span><a class="reference internal" href="#cfg_Servers_ssl_ciphers"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ciphers']</span></code></a>,
+<span class="target" id="index-72"></span><a class="reference internal" href="#cfg_Servers_ssl_verify"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_verify']</span></code></a></p>
 </div>
 </dd></dl>
 
@@ -860,8 +930,8 @@ log in from prepared PHP session data or using supplied PHP script.</li>
 <p>When using auth_type = <code class="docutils literal"><span class="pre">http</span></code>, this field allows to define a custom
 <a class="reference internal" href="glossary.html#term-http"><span class="xref std std-term">HTTP</span></a> Basic Auth Realm which will be displayed to the user. If not
 explicitly specified in your configuration, a string combined of
-&#8220;phpMyAdmin &#8221; and either <span class="target" id="index-70"></span><a class="reference internal" href="#cfg_Servers_verbose"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['verbose']</span></code></a> or
-<span class="target" id="index-71"></span><a class="reference internal" href="#cfg_Servers_host"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['host']</span></code></a> will be used.</p>
+&#8220;phpMyAdmin &#8221; and either <span class="target" id="index-73"></span><a class="reference internal" href="#cfg_Servers_verbose"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['verbose']</span></code></a> or
+<span class="target" id="index-74"></span><a class="reference internal" href="#cfg_Servers_host"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['host']</span></code></a> will be used.</p>
 </dd></dl>
 
 <span class="target" id="servers-user"></span><dl class="option">
@@ -892,7 +962,7 @@ explicitly specified in your configuration, a string combined of
 </tr>
 </tbody>
 </table>
-<p>When using <span class="target" id="index-72"></span><a class="reference internal" href="#cfg_Servers_auth_type"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['auth_type']</span></code></a> set to
+<p>When using <span class="target" id="index-75"></span><a class="reference internal" href="#cfg_Servers_auth_type"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['auth_type']</span></code></a> set to
 &#8216;config&#8217;, this is the user/password-pair which phpMyAdmin will use to
 connect to the MySQL server. This user/password pair is not needed when
 <a class="reference internal" href="glossary.html#term-http"><span class="xref std std-term">HTTP</span></a> or cookie authentication is used
@@ -1043,7 +1113,7 @@ this feature, and for a quick way of creating this database and the needed
 tables.</p>
 <p>If you are the only user of this phpMyAdmin installation, you can use your
 current database to store those special tables; in this case, just put your
-current database name in <span class="target" id="index-73"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a>. For a
+current database name in <span class="target" id="index-76"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a>. For a
 multi-user installation, set this parameter to the name of your central
 database containing the phpMyAdmin configuration storage.</p>
 </dd></dl>
@@ -1065,8 +1135,8 @@ database containing the phpMyAdmin configuration storage.</p>
 can be useful for queries you often run. To allow the usage of this
 functionality:</p>
 <ul class="simple">
-<li>set up <span class="target" id="index-74"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a> and the phpMyAdmin configuration storage</li>
-<li>enter the table name in <span class="target" id="index-75"></span><a class="reference internal" href="#cfg_Servers_bookmarktable"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['bookmarktable']</span></code></a></li>
+<li>set up <span class="target" id="index-77"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a> and the phpMyAdmin configuration storage</li>
+<li>enter the table name in <span class="target" id="index-78"></span><a class="reference internal" href="#cfg_Servers_bookmarktable"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['bookmarktable']</span></code></a></li>
 </ul>
 <p>This feature can be disabled by setting the configuration to <code class="docutils literal"><span class="pre">false</span></code>.</p>
 </dd></dl>
@@ -1104,8 +1174,8 @@ your database (also uses the table_coords table).</li>
 <p>The keys can be numeric or character.</p>
 <p>To allow the usage of this functionality:</p>
 <ul class="simple">
-<li>set up <span class="target" id="index-76"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a> and the phpMyAdmin configuration storage</li>
-<li>put the relation table name in <span class="target" id="index-77"></span><a class="reference internal" href="#cfg_Servers_relation"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['relation']</span></code></a></li>
+<li>set up <span class="target" id="index-79"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a> and the phpMyAdmin configuration storage</li>
+<li>put the relation table name in <span class="target" id="index-80"></span><a class="reference internal" href="#cfg_Servers_relation"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['relation']</span></code></a></li>
 <li>now as normal user open phpMyAdmin and for each one of your tables
 where you want to use this feature, click <span class="guilabel">Structure/Relation view/</span>
 and choose foreign columns.</li>
@@ -1138,8 +1208,8 @@ cursor over the corresponding key. This configuration variable will
 hold the name of this special table. To allow the usage of this
 functionality:</p>
 <ul class="simple">
-<li>set up <span class="target" id="index-78"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a> and the phpMyAdmin configuration storage</li>
-<li>put the table name in <span class="target" id="index-79"></span><a class="reference internal" href="#cfg_Servers_table_info"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['table_info']</span></code></a> (e.g.
+<li>set up <span class="target" id="index-81"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a> and the phpMyAdmin configuration storage</li>
+<li>put the table name in <span class="target" id="index-82"></span><a class="reference internal" href="#cfg_Servers_table_info"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['table_info']</span></code></a> (e.g.
 <code class="docutils literal"><span class="pre">pma__table_info</span></code>)</li>
 <li>then for each table where you want to use this feature, click
 &#8220;Structure/Relation view/Choose column to display&#8221; to choose the
@@ -1169,7 +1239,7 @@ column.</li>
 button in the expanding designer menu, you can customize the layout and have it loaded the next
 time you use the designer. That layout is stored in this table. Furthermore, this table is also
 required for using the PDF relation export feature, see
-<span class="target" id="index-80"></span><a class="reference internal" href="#cfg_Servers_pdf_pages"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pdf_pages']</span></code></a> for additional details.</p>
+<span class="target" id="index-83"></span><a class="reference internal" href="#cfg_Servers_pdf_pages"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pdf_pages']</span></code></a> for additional details.</p>
 </dd></dl>
 
 <dl class="option">
@@ -1193,10 +1263,10 @@ and &#8220;table_coords&#8221; (storing coordinates where each table will be pla
 a <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> schema output).  You must be using the &#8220;relation&#8221; feature.</p>
 <p>To allow the usage of this functionality:</p>
 <ul class="simple">
-<li>set up <span class="target" id="index-81"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a> and the phpMyAdmin configuration storage</li>
+<li>set up <span class="target" id="index-84"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a> and the phpMyAdmin configuration storage</li>
 <li>put the correct table names in
-<span class="target" id="index-82"></span><a class="reference internal" href="#cfg_Servers_table_coords"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['table_coords']</span></code></a> and
-<span class="target" id="index-83"></span><a class="reference internal" href="#cfg_Servers_pdf_pages"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pdf_pages']</span></code></a></li>
+<span class="target" id="index-85"></span><a class="reference internal" href="#cfg_Servers_table_coords"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['table_coords']</span></code></a> and
+<span class="target" id="index-86"></span><a class="reference internal" href="#cfg_Servers_pdf_pages"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pdf_pages']</span></code></a></li>
 </ul>
 <p>This feature can be disabled by setting either of the configurations to <code class="docutils literal"><span class="pre">false</span></code>.</p>
 <div class="admonition seealso">
@@ -1242,15 +1312,15 @@ use the SQL script found in <code class="docutils literal"><span class="pre">./s
 to upgrade it manually.</p>
 <p>To allow the usage of this functionality:</p>
 <ul>
-<li><p class="first">set up <span class="target" id="index-84"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a> and the phpMyAdmin configuration storage</p>
+<li><p class="first">set up <span class="target" id="index-87"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a> and the phpMyAdmin configuration storage</p>
 </li>
-<li><p class="first">put the table name in <span class="target" id="index-85"></span><a class="reference internal" href="#cfg_Servers_column_info"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['column_info']</span></code></a> (e.g.
+<li><p class="first">put the table name in <span class="target" id="index-88"></span><a class="reference internal" href="#cfg_Servers_column_info"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['column_info']</span></code></a> (e.g.
 <code class="docutils literal"><span class="pre">pma__column_info</span></code>)</p>
 </li>
 <li><p class="first">to update your PRE-2.5.0 Column_comments table use this:  and
 remember that the Variable in <code class="file docutils literal"><span class="pre">config.inc.php</span></code> has been renamed from
 <code class="samp docutils literal"><span class="pre">$cfg['Servers'][$i]['column_comments']</span></code> to
-<span class="target" id="index-86"></span><a class="reference internal" href="#cfg_Servers_column_info"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['column_info']</span></code></a></p>
+<span class="target" id="index-89"></span><a class="reference internal" href="#cfg_Servers_column_info"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['column_info']</span></code></a></p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="ss">`pma__column_comments`</span>
 <span class="k">ADD</span> <span class="ss">`mimetype`</span> <span class="kt">VARCHAR</span><span class="p">(</span> <span class="mi">255</span> <span class="p">)</span> <span class="k">NOT</span> <span class="no">NULL</span><span class="p">,</span>
 <span class="k">ADD</span> <span class="ss">`transformation`</span> <span class="kt">VARCHAR</span><span class="p">(</span> <span class="mi">255</span> <span class="p">)</span> <span class="k">NOT</span> <span class="no">NULL</span><span class="p">,</span>
@@ -1266,7 +1336,7 @@ remember that the Variable in <code class="file docutils literal"><span class="p
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">For auto-upgrade functionality to work, your
-<code class="docutils literal"><span class="pre">$cfg['Servers'][$i]['controluser']</span></code> must have ALTER privilege on
+<span class="target" id="index-90"></span><a class="reference internal" href="#cfg_Servers_controluser"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['controluser']</span></code></a> must have ALTER privilege on
 <code class="docutils literal"><span class="pre">phpmyadmin</span></code> database. See the <a class="reference external" href="https://dev.mysql.com/doc/refman/5.7/en/grant.html">MySQL documentation for GRANT</a> on how to
 <code class="docutils literal"><span class="pre">GRANT</span></code> privileges to a user.</p>
 </div>
@@ -1290,15 +1360,15 @@ queries you entered manually into the phpMyAdmin interface. If you don&#8217;t
 want to use a table-based history, you can use the JavaScript-based
 history.</p>
 <p>Using that, all your history items are deleted when closing the window.
-Using <span class="target" id="index-87"></span><a class="reference internal" href="#cfg_QueryHistoryMax"><code class="xref config config-option docutils literal"><span class="pre">$cfg['QueryHistoryMax']</span></code></a> you can specify an amount of
+Using <span class="target" id="index-91"></span><a class="reference internal" href="#cfg_QueryHistoryMax"><code class="xref config config-option docutils literal"><span class="pre">$cfg['QueryHistoryMax']</span></code></a> you can specify an amount of
 history items you want to have on hold. On every login, this list gets cut
 to the maximum amount.</p>
 <p>The query history is only available if JavaScript is enabled in
 your browser.</p>
 <p>To allow the usage of this functionality:</p>
 <ul class="simple">
-<li>set up <span class="target" id="index-88"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a> and the phpMyAdmin configuration storage</li>
-<li>put the table name in <span class="target" id="index-89"></span><a class="reference internal" href="#cfg_Servers_history"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['history']</span></code></a> (e.g.
+<li>set up <span class="target" id="index-92"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a> and the phpMyAdmin configuration storage</li>
+<li>put the table name in <span class="target" id="index-93"></span><a class="reference internal" href="#cfg_Servers_history"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['history']</span></code></a> (e.g.
 <code class="docutils literal"><span class="pre">pma__history</span></code>)</li>
 </ul>
 <p>This feature can be disabled by setting the configuration to <code class="docutils literal"><span class="pre">false</span></code>.</p>
@@ -1320,15 +1390,15 @@ your browser.</p>
 <p>Since release 3.5.0 you can show recently used tables in the
 navigation panel. It helps you to jump across table directly, without
 the need to select the database, and then select the table. Using
-<span class="target" id="index-90"></span><a class="reference internal" href="#cfg_NumRecentTables"><code class="xref config config-option docutils literal"><span class="pre">$cfg['NumRecentTables']</span></code></a> you can configure the maximum number
+<span class="target" id="index-94"></span><a class="reference internal" href="#cfg_NumRecentTables"><code class="xref config config-option docutils literal"><span class="pre">$cfg['NumRecentTables']</span></code></a> you can configure the maximum number
 of recent tables shown. When you select a table from the list, it will jump to
-the page specified in <span class="target" id="index-91"></span><a class="reference internal" href="#cfg_NavigationTreeDefaultTabTable"><code class="xref config config-option docutils literal"><span class="pre">$cfg['NavigationTreeDefaultTabTable']</span></code></a>.</p>
+the page specified in <span class="target" id="index-95"></span><a class="reference internal" href="#cfg_NavigationTreeDefaultTabTable"><code class="xref config config-option docutils literal"><span class="pre">$cfg['NavigationTreeDefaultTabTable']</span></code></a>.</p>
 <p>Without configuring the storage, you can still access the recently used tables,
 but it will disappear after you logout.</p>
 <p>To allow the usage of this functionality persistently:</p>
 <ul class="simple">
-<li>set up <span class="target" id="index-92"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a> and the phpMyAdmin configuration storage</li>
-<li>put the table name in <span class="target" id="index-93"></span><a class="reference internal" href="#cfg_Servers_recent"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['recent']</span></code></a> (e.g.
+<li>set up <span class="target" id="index-96"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a> and the phpMyAdmin configuration storage</li>
+<li>put the table name in <span class="target" id="index-97"></span><a class="reference internal" href="#cfg_Servers_recent"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['recent']</span></code></a> (e.g.
 <code class="docutils literal"><span class="pre">pma__recent</span></code>)</li>
 </ul>
 <p>This feature can be disabled by setting the configuration to <code class="docutils literal"><span class="pre">false</span></code>.</p>
@@ -1351,17 +1421,17 @@ but it will disappear after you logout.</p>
 navigation panel. It helps you to jump to the table directly, without
 the need to select the database, and then select the table. When you
 select a table from the list, it will jump to the page specified in
-<span class="target" id="index-94"></span><a class="reference internal" href="#cfg_NavigationTreeDefaultTabTable"><code class="xref config config-option docutils literal"><span class="pre">$cfg['NavigationTreeDefaultTabTable']</span></code></a>.</p>
+<span class="target" id="index-98"></span><a class="reference internal" href="#cfg_NavigationTreeDefaultTabTable"><code class="xref config config-option docutils literal"><span class="pre">$cfg['NavigationTreeDefaultTabTable']</span></code></a>.</p>
 <p>You can add tables to this list or remove tables from it in database
 structure page by clicking on the star icons next to table names. Using
-<span class="target" id="index-95"></span><a class="reference internal" href="#cfg_NumFavoriteTables"><code class="xref config config-option docutils literal"><span class="pre">$cfg['NumFavoriteTables']</span></code></a> you can configure the maximum
+<span class="target" id="index-99"></span><a class="reference internal" href="#cfg_NumFavoriteTables"><code class="xref config config-option docutils literal"><span class="pre">$cfg['NumFavoriteTables']</span></code></a> you can configure the maximum
 number of favorite tables shown.</p>
 <p>Without configuring the storage, you can still access the favorite tables,
 but it will disappear after you logout.</p>
 <p>To allow the usage of this functionality persistently:</p>
 <ul class="simple">
-<li>set up <span class="target" id="index-96"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a> and the phpMyAdmin configuration storage</li>
-<li>put the table name in <span class="target" id="index-97"></span><a class="reference internal" href="#cfg_Servers_favorite"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['favorite']</span></code></a> (e.g.
+<li>set up <span class="target" id="index-100"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a> and the phpMyAdmin configuration storage</li>
+<li>put the table name in <span class="target" id="index-101"></span><a class="reference internal" href="#cfg_Servers_favorite"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['favorite']</span></code></a> (e.g.
 <code class="docutils literal"><span class="pre">pma__favorite</span></code>)</li>
 </ul>
 <p>This feature can be disabled by setting the configuration to <code class="docutils literal"><span class="pre">false</span></code>.</p>
@@ -1381,14 +1451,14 @@ but it will disappear after you logout.</p>
 </tbody>
 </table>
 <p>Since release 3.5.0 phpMyAdmin can be configured to remember several
-things (sorted column <span class="target" id="index-98"></span><a class="reference internal" href="#cfg_RememberSorting"><code class="xref config config-option docutils literal"><span class="pre">$cfg['RememberSorting']</span></code></a>, column order,
+things (sorted column <span class="target" id="index-102"></span><a class="reference internal" href="#cfg_RememberSorting"><code class="xref config config-option docutils literal"><span class="pre">$cfg['RememberSorting']</span></code></a>, column order,
 and column visibility from a database table) for browsing tables. Without
 configuring the storage, these features still can be used, but the values will
 disappear after you logout.</p>
 <p>To allow the usage of these functionality persistently:</p>
 <ul class="simple">
-<li>set up <span class="target" id="index-99"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a> and the phpMyAdmin configuration storage</li>
-<li>put the table name in <span class="target" id="index-100"></span><a class="reference internal" href="#cfg_Servers_table_uiprefs"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['table_uiprefs']</span></code></a> (e.g.
+<li>set up <span class="target" id="index-103"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a> and the phpMyAdmin configuration storage</li>
+<li>put the table name in <span class="target" id="index-104"></span><a class="reference internal" href="#cfg_Servers_table_uiprefs"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['table_uiprefs']</span></code></a> (e.g.
 <code class="docutils literal"><span class="pre">pma__table_uiprefs</span></code>)</li>
 </ul>
 <p>This feature can be disabled by setting the configuration to <code class="docutils literal"><span class="pre">false</span></code>.</p>
@@ -1429,10 +1499,10 @@ To do this it needs two tables &#8220;usergroups&#8221; (storing allowed menu it
 user group) and &#8220;users&#8221; (storing users and their assignments to user groups).</p>
 <p>To allow the usage of this functionality:</p>
 <ul class="simple">
-<li>set up <span class="target" id="index-101"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a> and the phpMyAdmin configuration storage</li>
+<li>set up <span class="target" id="index-105"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a> and the phpMyAdmin configuration storage</li>
 <li>put the correct table names in
-<span class="target" id="index-102"></span><a class="reference internal" href="#cfg_Servers_users"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['users']</span></code></a> (e.g. <code class="docutils literal"><span class="pre">pma__users</span></code>) and
-<span class="target" id="index-103"></span><a class="reference internal" href="#cfg_Servers_usergroups"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['usergroups']</span></code></a> (e.g. <code class="docutils literal"><span class="pre">pma__usergroups</span></code>)</li>
+<span class="target" id="index-106"></span><a class="reference internal" href="#cfg_Servers_users"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['users']</span></code></a> (e.g. <code class="docutils literal"><span class="pre">pma__users</span></code>) and
+<span class="target" id="index-107"></span><a class="reference internal" href="#cfg_Servers_usergroups"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['usergroups']</span></code></a> (e.g. <code class="docutils literal"><span class="pre">pma__usergroups</span></code>)</li>
 </ul>
 <p>This feature can be disabled by setting either of the configurations to <code class="docutils literal"><span class="pre">false</span></code>.</p>
 <div class="admonition seealso">
@@ -1457,8 +1527,8 @@ user group) and &#8220;users&#8221; (storing users and their assignments to user
 <p>Since release 4.1.0 you can hide/show items in the navigation tree.</p>
 <p>To allow the usage of this functionality:</p>
 <ul class="simple">
-<li>set up <span class="target" id="index-104"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a> and the phpMyAdmin configuration storage</li>
-<li>put the table name in <span class="target" id="index-105"></span><a class="reference internal" href="#cfg_Servers_navigationhiding"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['navigationhiding']</span></code></a> (e.g.
+<li>set up <span class="target" id="index-108"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a> and the phpMyAdmin configuration storage</li>
+<li>put the table name in <span class="target" id="index-109"></span><a class="reference internal" href="#cfg_Servers_navigationhiding"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['navigationhiding']</span></code></a> (e.g.
 <code class="docutils literal"><span class="pre">pma__navigationhiding</span></code>)</li>
 </ul>
 <p>This feature can be disabled by setting the configuration to <code class="docutils literal"><span class="pre">false</span></code>.</p>
@@ -1485,8 +1555,8 @@ while creating a new column, it will save you from writing the same column defin
 over again or from writing different names for similar column.</p>
 <p>To allow the usage of this functionality:</p>
 <ul class="simple">
-<li>set up <span class="target" id="index-106"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a> and the phpMyAdmin configuration storage</li>
-<li>put the table name in <span class="target" id="index-107"></span><a class="reference internal" href="#cfg_Servers_central_columns"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['central_columns']</span></code></a> (e.g.
+<li>set up <span class="target" id="index-110"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a> and the phpMyAdmin configuration storage</li>
+<li>put the table name in <span class="target" id="index-111"></span><a class="reference internal" href="#cfg_Servers_central_columns"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['central_columns']</span></code></a> (e.g.
 <code class="docutils literal"><span class="pre">pma__central_columns</span></code>)</li>
 </ul>
 <p>This feature can be disabled by setting the configuration to <code class="docutils literal"><span class="pre">false</span></code>.</p>
@@ -1510,8 +1580,8 @@ Your choice regarding &#8216;Angular/Direct Links&#8217;, &#8216;Snap to Grid&#8
 &#8216;Small/Big All&#8217;, &#8216;Move Menu&#8217; and &#8216;Pin Text&#8217; can be remembered persistently.</p>
 <p>To allow the usage of this functionality:</p>
 <ul class="simple">
-<li>set up <span class="target" id="index-108"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a> and the phpMyAdmin configuration storage</li>
-<li>put the table name in <span class="target" id="index-109"></span><a class="reference internal" href="#cfg_Servers_designer_settings"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['designer_settings']</span></code></a> (e.g.
+<li>set up <span class="target" id="index-112"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a> and the phpMyAdmin configuration storage</li>
+<li>put the table name in <span class="target" id="index-113"></span><a class="reference internal" href="#cfg_Servers_designer_settings"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['designer_settings']</span></code></a> (e.g.
 <code class="docutils literal"><span class="pre">pma__designer_settings</span></code>)</li>
 </ul>
 <p>This feature can be disabled by setting the configuration to <code class="docutils literal"><span class="pre">false</span></code>.</p>
@@ -1533,8 +1603,8 @@ Your choice regarding &#8216;Angular/Direct Links&#8217;, &#8216;Snap to Grid&#8
 <p>Since release 4.2.0 you can save and load query-by-example searches from the Database &gt; Query panel.</p>
 <p>To allow the usage of this functionality:</p>
 <ul class="simple">
-<li>set up <span class="target" id="index-110"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a> and the phpMyAdmin configuration storage</li>
-<li>put the table name in <span class="target" id="index-111"></span><a class="reference internal" href="#cfg_Servers_savedsearches"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['savedsearches']</span></code></a> (e.g.
+<li>set up <span class="target" id="index-114"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a> and the phpMyAdmin configuration storage</li>
+<li>put the table name in <span class="target" id="index-115"></span><a class="reference internal" href="#cfg_Servers_savedsearches"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['savedsearches']</span></code></a> (e.g.
 <code class="docutils literal"><span class="pre">pma__savedsearches</span></code>)</li>
 </ul>
 <p>This feature can be disabled by setting the configuration to <code class="docutils literal"><span class="pre">false</span></code>.</p>
@@ -1556,8 +1626,8 @@ Your choice regarding &#8216;Angular/Direct Links&#8217;, &#8216;Snap to Grid&#8
 <p>Since release 4.5.0 you can save and load export templates.</p>
 <p>To allow the usage of this functionality:</p>
 <ul class="simple">
-<li>set up <span class="target" id="index-112"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a> and the phpMyAdmin configuration storage</li>
-<li>put the table name in <span class="target" id="index-113"></span><a class="reference internal" href="#cfg_Servers_export_templates"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['export_templates']</span></code></a> (e.g.
+<li>set up <span class="target" id="index-116"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a> and the phpMyAdmin configuration storage</li>
+<li>put the table name in <span class="target" id="index-117"></span><a class="reference internal" href="#cfg_Servers_export_templates"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['export_templates']</span></code></a> (e.g.
 <code class="docutils literal"><span class="pre">pma__export_templates</span></code>)</li>
 </ul>
 <p>This feature can be disabled by setting the configuration to <code class="docutils literal"><span class="pre">false</span></code>.</p>
@@ -1596,8 +1666,8 @@ you enter a list of names separated by &#8216;,&#8217;. In addition you can expo
 (filtered) report to a file or to a temporary database.</p>
 <p>To allow the usage of this functionality:</p>
 <ul class="simple">
-<li>set up <span class="target" id="index-114"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a> and the phpMyAdmin configuration storage</li>
-<li>put the table name in <span class="target" id="index-115"></span><a class="reference internal" href="#cfg_Servers_tracking"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['tracking']</span></code></a> (e.g.
+<li>set up <span class="target" id="index-118"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a> and the phpMyAdmin configuration storage</li>
+<li>put the table name in <span class="target" id="index-119"></span><a class="reference internal" href="#cfg_Servers_tracking"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['tracking']</span></code></a> (e.g.
 <code class="docutils literal"><span class="pre">pma__tracking</span></code>)</li>
 </ul>
 <p>This feature can be disabled by setting the configuration to <code class="docutils literal"><span class="pre">false</span></code>.</p>
@@ -1711,13 +1781,13 @@ line to the log when creating a database.</p>
 <p>Since release 3.4.x phpMyAdmin allows users to set most preferences by
 themselves and store them in the database.</p>
 <p>If you don&#8217;t allow for storing preferences in
-<span class="target" id="index-116"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a>, users can still personalize
+<span class="target" id="index-120"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a>, users can still personalize
 phpMyAdmin, but settings will be saved in browser&#8217;s local storage, or, it
 is is unavailable, until the end of session.</p>
 <p>To allow the usage of this functionality:</p>
 <ul class="simple">
-<li>set up <span class="target" id="index-117"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a> and the phpMyAdmin configuration storage</li>
-<li>put the table name in <span class="target" id="index-118"></span><a class="reference internal" href="#cfg_Servers_userconfig"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['userconfig']</span></code></a></li>
+<li>set up <span class="target" id="index-121"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a> and the phpMyAdmin configuration storage</li>
+<li>put the table name in <span class="target" id="index-122"></span><a class="reference internal" href="#cfg_Servers_userconfig"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['userconfig']</span></code></a></li>
 </ul>
 <p>This feature can be disabled by setting the configuration to <code class="docutils literal"><span class="pre">false</span></code>.</p>
 </dd></dl>
@@ -1736,11 +1806,11 @@ is is unavailable, until the end of session.</p>
 </tbody>
 </table>
 <p>Maximum number of rows saved in
-<span class="target" id="index-119"></span><a class="reference internal" href="#cfg_Servers_table_uiprefs"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['table_uiprefs']</span></code></a> table.</p>
+<span class="target" id="index-123"></span><a class="reference internal" href="#cfg_Servers_table_uiprefs"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['table_uiprefs']</span></code></a> table.</p>
 <p>When tables are dropped or renamed,
-<span class="target" id="index-120"></span><a class="reference internal" href="#cfg_Servers_table_uiprefs"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['table_uiprefs']</span></code></a> may contain invalid data
+<span class="target" id="index-124"></span><a class="reference internal" href="#cfg_Servers_table_uiprefs"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['table_uiprefs']</span></code></a> may contain invalid data
 (referring to tables which no longer exist). We only keep this number of newest
-rows in <span class="target" id="index-121"></span><a class="reference internal" href="#cfg_Servers_table_uiprefs"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['table_uiprefs']</span></code></a> and automatically
+rows in <span class="target" id="index-125"></span><a class="reference internal" href="#cfg_Servers_table_uiprefs"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['table_uiprefs']</span></code></a> and automatically
 delete older rows.</p>
 </dd></dl>
 
@@ -1778,7 +1848,7 @@ time zone you want to use in phpMyAdmin.</p>
 </tbody>
 </table>
 <p>Whether to allow root access. This is just a shortcut for the
-<span class="target" id="index-122"></span><a class="reference internal" href="#cfg_Servers_AllowDeny_rules"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['AllowDeny']['rules']</span></code></a> below.</p>
+<span class="target" id="index-126"></span><a class="reference internal" href="#cfg_Servers_AllowDeny_rules"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['AllowDeny']['rules']</span></code></a> below.</p>
 </dd></dl>
 
 <dl class="option">
@@ -1832,7 +1902,7 @@ listed in the <em>allow</em> rules, and not listed in the <em>deny</em> rules. T
 is the <strong>most</strong> secure means of using Allow/Deny rules, and was
 available in Apache by specifying allow and deny rules without setting
 any order.</p>
-<p>Please also see <span class="target" id="index-123"></span><a class="reference internal" href="#cfg_TrustedProxies"><code class="xref config config-option docutils literal"><span class="pre">$cfg['TrustedProxies']</span></code></a> for
+<p>Please also see <span class="target" id="index-127"></span><a class="reference internal" href="#cfg_TrustedProxies"><code class="xref config config-option docutils literal"><span class="pre">$cfg['TrustedProxies']</span></code></a> for
 detecting IP address behind proxies.</p>
 </dd></dl>
 
@@ -1890,6 +1960,24 @@ system, the following work:</p>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xx[yyy-zzz]</span></code> (partial <a class="reference internal" href="glossary.html#term-ipv6"><span class="xref std std-term">IPv6</span></a> address range)</li>
 </ul>
+<p>Examples:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>$cfg[&#39;Servers&#39;][$i][&#39;AllowDeny&#39;][&#39;order&#39;] = &#39;allow,deny&#39;;
+$cfg[&#39;Servers&#39;][$i][&#39;AllowDeny&#39;][&#39;rules&#39;] = array(&#39;allow bob from all&#39;);
+// Allow only &#39;bob&#39; to connect from any host
+
+$cfg[&#39;Servers&#39;][$i][&#39;AllowDeny&#39;][&#39;order&#39;] = &#39;allow,deny&#39;;
+$cfg[&#39;Servers&#39;][$i][&#39;AllowDeny&#39;][&#39;rules&#39;] = array(&#39;allow mary from 192.168.100.[50-100]&#39;);
+// Allow only &#39;mary&#39; to connect from host 192.168.100.50 through 192.168.100.100
+
+$cfg[&#39;Servers&#39;][$i][&#39;AllowDeny&#39;][&#39;order&#39;] = &#39;allow,deny&#39;;
+$cfg[&#39;Servers&#39;][$i][&#39;AllowDeny&#39;][&#39;rules&#39;] = array(&#39;allow % from 192.168.[5-6].10&#39;);
+// Allow any user to connect from host 192.168.5.10 or 192.168.6.10
+
+$cfg[&#39;Servers&#39;][$i][&#39;AllowDeny&#39;][&#39;order&#39;] = &#39;allow,deny&#39;;
+$cfg[&#39;Servers&#39;][$i][&#39;AllowDeny&#39;][&#39;rules&#39;] = array(&#39;allow root from 192.168.5.50&#39;,&#39;allow % from 192.168.6.10&#39;);
+// Allow any user to connect from 192.168.6.10, and additionally allow root to connect from 192.168.5.50
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="option">
@@ -1910,7 +1998,7 @@ system, the following work:</p>
 databases are present.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Enabling this option might give you big performance boost on older
+<p class="last">Enabling this option might give you a big performance boost on older
 MySQL servers.</p>
 </div>
 </dd></dl>
@@ -1996,7 +2084,7 @@ empty). See <code class="file docutils literal"><span class="pre">examples/signo
 <p>Name of session which will be used for signon authentication method.
 You should use something different than <code class="docutils literal"><span class="pre">phpMyAdmin</span></code>, because this
 is session which phpMyAdmin uses internally. Takes effect only if
-<span class="target" id="index-124"></span><a class="reference internal" href="#cfg_Servers_SignonScript"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['SignonScript']</span></code></a> is not configured.</p>
+<span class="target" id="index-128"></span><a class="reference internal" href="#cfg_Servers_SignonScript"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['SignonScript']</span></code></a> is not configured.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="setup.html#auth-signon"><span class="std std-ref">Signon authentication mode</span></a></p>
@@ -2022,9 +2110,9 @@ is session which phpMyAdmin uses internally. Takes effect only if
 <p>An associative array of session cookie parameters of other authentication system.
 It is not needed if the other system doesn&#8217;t use session_set_cookie_params().
 Keys should include &#8216;lifetime&#8217;, &#8216;path&#8217;, &#8216;domain&#8217;, &#8216;secure&#8217; or &#8216;httponly&#8217;.
-Valid values are mentioned in <a class="reference external" href="https://php.net/manual/en/function.session-get-cookie-params.php">session_get_cookie_params</a>, they should be set to same values as the
+Valid values are mentioned in <a class="reference external" href="https://secure.php.net/manual/en/function.session-get-cookie-params.php">session_get_cookie_params</a>, they should be set to same values as the
 other application uses. Takes effect only if
-<span class="target" id="index-125"></span><a class="reference internal" href="#cfg_Servers_SignonScript"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['SignonScript']</span></code></a> is not configured.</p>
+<span class="target" id="index-129"></span><a class="reference internal" href="#cfg_Servers_SignonScript"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['SignonScript']</span></code></a> is not configured.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="setup.html#auth-signon"><span class="std std-ref">Signon authentication mode</span></a></p>
@@ -2087,7 +2175,7 @@ absolute including protocol.</p>
 </tr>
 </tbody>
 </table>
-<p>You can disable phpMyAdmin shortcut keys by setting <span class="target" id="index-126"></span><a class="reference internal" href="#cfg_DisableShortcutKeys"><code class="xref config config-option docutils literal"><span class="pre">$cfg['DisableShortcutKeys']</span></code></a> to false.</p>
+<p>You can disable phpMyAdmin shortcut keys by setting <span class="target" id="index-130"></span><a class="reference internal" href="#cfg_DisableShortcutKeys"><code class="xref config config-option docutils literal"><span class="pre">$cfg['DisableShortcutKeys']</span></code></a> to false.</p>
 </dd></dl>
 
 <dl class="option">
@@ -2104,11 +2192,11 @@ absolute including protocol.</p>
 </tbody>
 </table>
 <p>If you have more than one server configured, you can set
-<span class="target" id="index-127"></span><a class="reference internal" href="#cfg_ServerDefault"><code class="xref config config-option docutils literal"><span class="pre">$cfg['ServerDefault']</span></code></a> to any one of them to autoconnect to that
+<span class="target" id="index-131"></span><a class="reference internal" href="#cfg_ServerDefault"><code class="xref config config-option docutils literal"><span class="pre">$cfg['ServerDefault']</span></code></a> to any one of them to autoconnect to that
 server when phpMyAdmin is started, or set it to 0 to be given a list
 of servers without logging in.</p>
 <p>If you have only one server configured,
-<span class="target" id="index-128"></span><a class="reference internal" href="#cfg_ServerDefault"><code class="xref config config-option docutils literal"><span class="pre">$cfg['ServerDefault']</span></code></a> MUST be set to that server.</p>
+<span class="target" id="index-132"></span><a class="reference internal" href="#cfg_ServerDefault"><code class="xref config config-option docutils literal"><span class="pre">$cfg['ServerDefault']</span></code></a> MUST be set to that server.</p>
 </dd></dl>
 
 <dl class="option">
@@ -2301,7 +2389,7 @@ proxy setup, setting this to <code class="docutils literal"><span class="pre">tr
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">In some setups (like separate SSL proxy or load balancer) you might
-have to set <span class="target" id="index-129"></span><a class="reference internal" href="#cfg_PmaAbsoluteUri"><code class="xref config config-option docutils literal"><span class="pre">$cfg['PmaAbsoluteUri']</span></code></a> for correct
+have to set <span class="target" id="index-133"></span><a class="reference internal" href="#cfg_PmaAbsoluteUri"><code class="xref config config-option docutils literal"><span class="pre">$cfg['PmaAbsoluteUri']</span></code></a> for correct
 redirection.</p>
 </div>
 </dd></dl>
@@ -2339,6 +2427,11 @@ no effect when PHP is running in safe mode.</p>
 </tbody>
 </table>
 <p>Path for storing session data (<a class="reference external" href="https://secure.php.net/session_save_path">session_save_path PHP parameter</a>).</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This folder should not be publicly accessible through the webserver,
+otherwise you risk leaking private data from your session.</p>
+</div>
 </dd></dl>
 
 <dl class="option">
@@ -2584,7 +2677,7 @@ cookie.</p>
 <p>Define whether the previous login should be recalled or not in cookie
 authentication mode.</p>
 <p>This is automatically disabled if you do not have
-configured <span class="target" id="index-130"></span><a class="reference internal" href="#cfg_blowfish_secret"><code class="xref config config-option docutils literal"><span class="pre">$cfg['blowfish_secret']</span></code></a>.</p>
+configured <span class="target" id="index-134"></span><a class="reference internal" href="#cfg_blowfish_secret"><code class="xref config config-option docutils literal"><span class="pre">$cfg['blowfish_secret']</span></code></a>.</p>
 </dd></dl>
 
 <dl class="option">
@@ -2604,7 +2697,7 @@ configured <span class="target" id="index-130"></span><a class="reference intern
 configuration option <a class="reference external" href="https://secure.php.net/manual/en/session.configuration.php#ini.session.gc-maxlifetime">session.gc_maxlifetime</a> might limit session validity and if the session is lost,
 the login cookie is also invalidated. So it is a good idea to set
 <code class="docutils literal"><span class="pre">session.gc_maxlifetime</span></code> at least to the same value of
-<span class="target" id="index-131"></span><a class="reference internal" href="#cfg_LoginCookieValidity"><code class="xref config config-option docutils literal"><span class="pre">$cfg['LoginCookieValidity']</span></code></a>.</p>
+<span class="target" id="index-135"></span><a class="reference internal" href="#cfg_LoginCookieValidity"><code class="xref config config-option docutils literal"><span class="pre">$cfg['LoginCookieValidity']</span></code></a>.</p>
 </dd></dl>
 
 <dl class="option">
@@ -2662,7 +2755,7 @@ authentication.</p>
 <p class="first admonition-title">Note</p>
 <p class="last">Please use this carefully, as this may allow users access to MySQL servers
 behind the firewall where your <a class="reference internal" href="glossary.html#term-http"><span class="xref std std-term">HTTP</span></a> server is placed.
-See also <span class="target" id="index-132"></span><a class="reference internal" href="#cfg_ArbitraryServerRegexp"><code class="xref config config-option docutils literal"><span class="pre">$cfg['ArbitraryServerRegexp']</span></code></a>.</p>
+See also <span class="target" id="index-136"></span><a class="reference internal" href="#cfg_ArbitraryServerRegexp"><code class="xref config config-option docutils literal"><span class="pre">$cfg['ArbitraryServerRegexp']</span></code></a>.</p>
 </div>
 </dd></dl>
 
@@ -2680,7 +2773,7 @@ See also <span class="target" id="index-132"></span><a class="reference internal
 </tbody>
 </table>
 <p>Restricts the MySQL servers to which the user can log in when
-<span class="target" id="index-133"></span><a class="reference internal" href="#cfg_AllowArbitraryServer"><code class="xref config config-option docutils literal"><span class="pre">$cfg['AllowArbitraryServer']</span></code></a> is enabled by
+<span class="target" id="index-137"></span><a class="reference internal" href="#cfg_AllowArbitraryServer"><code class="xref config config-option docutils literal"><span class="pre">$cfg['AllowArbitraryServer']</span></code></a> is enabled by
 matching the <a class="reference internal" href="glossary.html#term-ip"><span class="xref std std-term">IP</span></a> or the hostname of the MySQL server
 to the given regular expression. The regular expression must be enclosed
 with a delimiter character.</p>
@@ -2810,7 +2903,7 @@ page of the navigation tree.</p>
 </tbody>
 </table>
 <p>Defines whether to group the databases based on a common prefix
-in their name <span class="target" id="index-134"></span><a class="reference internal" href="#cfg_NavigationTreeDbSeparator"><code class="xref config config-option docutils literal"><span class="pre">$cfg['NavigationTreeDbSeparator']</span></code></a>.</p>
+in their name <span class="target" id="index-138"></span><a class="reference internal" href="#cfg_NavigationTreeDbSeparator"><code class="xref config config-option docutils literal"><span class="pre">$cfg['NavigationTreeDbSeparator']</span></code></a>.</p>
 </dd></dl>
 
 <dl class="option">
@@ -2920,7 +3013,7 @@ create phpMyAdmin configuration storage in the current database
 or use the existing one, if already present.</p>
 <p>This setting has no effect if the phpMyAdmin configuration storage database
 is properly created and the related configuration directives (such as
-<span class="target" id="index-135"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a> and so on) are configured.</p>
+<span class="target" id="index-139"></span><a class="reference internal" href="#cfg_Servers_pmadb"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['pmadb']</span></code></a> and so on) are configured.</p>
 </dd></dl>
 
 <dl class="option">
@@ -3212,6 +3305,22 @@ localized equivalent of:</p>
 <p>Whether to show events under database in the navigation panel.</p>
 </dd></dl>
 
+<dl class="option">
+<dt id="cfg_NavigationWidth">
+<code class="descname">$cfg['NavigationWidth']</code><a class="headerlink" href="#cfg_NavigationWidth" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">240</td>
+</tr>
+</tbody>
+</table>
+<p>Navigation panel width, set to 0 to collapse it by default.</p>
+</dd></dl>
+
 </div>
 <div class="section" id="main-panel">
 <h2>Main panel<a class="headerlink" href="#main-panel" title="Permalink to this headline">¶</a></h2>
@@ -3249,7 +3358,7 @@ for Berkeley DB tables.</p>
 </table>
 <p>Defines whether to display detailed server information on main page.
 You can additionally hide more information by using
-<span class="target" id="index-136"></span><a class="reference internal" href="#cfg_Servers_verbose"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['verbose']</span></code></a>.</p>
+<span class="target" id="index-140"></span><a class="reference internal" href="#cfg_Servers_verbose"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['verbose']</span></code></a>.</p>
 </dd></dl>
 
 <dl class="option">
@@ -3682,7 +3791,9 @@ edit/insert mode. The user can toggle this setting from the interface.</p>
 </tr>
 </tbody>
 </table>
-<p>Defines the maximum number of concurrent entries for the Insert page.</p>
+<p>Defines the default number of rows to be entered from the Insert page.
+Users can manually change this from the bottom of that page to add or remove
+blank rows.</p>
 </dd></dl>
 
 <dl class="option">
@@ -3700,7 +3811,7 @@ edit/insert mode. The user can toggle this setting from the interface.</p>
 </table>
 <p>If there are fewer items than this in the set of foreign keys, then a
 drop-down box of foreign keys is presented, in the style described by
-the <span class="target" id="index-137"></span><a class="reference internal" href="#cfg_ForeignKeyDropdownOrder"><code class="xref config config-option docutils literal"><span class="pre">$cfg['ForeignKeyDropdownOrder']</span></code></a> setting.</p>
+the <span class="target" id="index-141"></span><a class="reference internal" href="#cfg_ForeignKeyDropdownOrder"><code class="xref config config-option docutils literal"><span class="pre">$cfg['ForeignKeyDropdownOrder']</span></code></a> setting.</p>
 </dd></dl>
 
 <dl class="option">
@@ -4103,7 +4214,7 @@ are the localized equivalent of:</p>
 </tbody>
 </table>
 <p>Default page size to use when creating PDF pages. Valid values are any
-listed in <span class="target" id="index-138"></span><a class="reference internal" href="#cfg_PDFPageSizes"><code class="xref config config-option docutils literal"><span class="pre">$cfg['PDFPageSizes']</span></code></a>.</p>
+listed in <span class="target" id="index-142"></span><a class="reference internal" href="#cfg_PDFPageSizes"><code class="xref config config-option docutils literal"><span class="pre">$cfg['PDFPageSizes']</span></code></a>.</p>
 </dd></dl>
 
 </div>
@@ -4206,7 +4317,7 @@ recode)</li>
 <p>Enabled charset conversion activates a pull-down menu in the Export
 and Import pages, to choose the character set when exporting a file.
 The default value in this menu comes from
-<span class="target" id="index-139"></span><a class="reference internal" href="#cfg_Export_charset"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Export']['charset']</span></code></a> and <span class="target" id="index-140"></span><a class="reference internal" href="#cfg_Import_charset"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Import']['charset']</span></code></a>.</p>
+<span class="target" id="index-143"></span><a class="reference internal" href="#cfg_Export_charset"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Export']['charset']</span></code></a> and <span class="target" id="index-144"></span><a class="reference internal" href="#cfg_Import_charset"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Import']['charset']</span></code></a>.</p>
 </dd></dl>
 
 <dl class="option">
@@ -4286,7 +4397,7 @@ buffering.</p>
 </tbody>
 </table>
 <p>Lists proxies and HTTP headers which are trusted for
-<span class="target" id="index-141"></span><a class="reference internal" href="#cfg_Servers_AllowDeny_order"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['AllowDeny']['order']</span></code></a>. This list is by
+<span class="target" id="index-145"></span><a class="reference internal" href="#cfg_Servers_AllowDeny_order"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['AllowDeny']['order']</span></code></a>. This list is by
 default empty, you need to fill in some trusted proxy servers if you
 want to use rules for IP addresses behind proxy.</p>
 <p>The following example specifies that phpMyAdmin should trust a
@@ -4295,7 +4406,7 @@ HTTP_X_FORWARDED_FOR (<code class="docutils literal"><span class="pre">X</span> 
 <div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;TrustedProxies&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;1.2.3.4&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;HTTP_X_FORWARDED_FOR&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>The <span class="target" id="index-142"></span><a class="reference internal" href="#cfg_Servers_AllowDeny_rules"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['AllowDeny']['rules']</span></code></a> directive uses the
+<p>The <span class="target" id="index-146"></span><a class="reference internal" href="#cfg_Servers_AllowDeny_rules"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['AllowDeny']['rules']</span></code></a> directive uses the
 client&#8217;s IP address as usual.</p>
 </dd></dl>
 
@@ -4713,7 +4824,7 @@ emphasized (*2) for <a class="reference internal" href="glossary.html#term-sql">
 textareas and (*1.25) for <a class="reference internal" href="glossary.html#term-sql"><span class="xref std std-term">SQL</span></a>
 textareas inside the query window.</p>
 <p>The Char* values are used for CHAR
-and VARCHAR editing (if configured via <span class="target" id="index-143"></span><a class="reference internal" href="#cfg_CharEditing"><code class="xref config config-option docutils literal"><span class="pre">$cfg['CharEditing']</span></code></a>).</p>
+and VARCHAR editing (if configured via <span class="target" id="index-147"></span><a class="reference internal" href="#cfg_CharEditing"><code class="xref config config-option docutils literal"><span class="pre">$cfg['CharEditing']</span></code></a>).</p>
 </dd></dl>
 
 <dl class="option">
@@ -4922,14 +5033,18 @@ to setup this directory and how to make its usage secure.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">string</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body"><code class="docutils literal"><span class="pre">''</span></code></td>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body"><code class="docutils literal"><span class="pre">'./tmp/'</span></code></td>
 </tr>
 </tbody>
 </table>
-<p>The name of the directory where temporary files can be stored.</p>
-<p>This is needed for importing ESRI Shapefiles, see <a class="reference internal" href="faq.html#faq6-30"><span class="std std-ref">6.30 Import: How can I import ESRI Shapefiles?</span></a> and to
-work around limitations of <code class="docutils literal"><span class="pre">open_basedir</span></code> for uploaded files, see
-<a class="reference internal" href="faq.html#faq1-11"><span class="std std-ref">1.11 I get an &#8216;open_basedir restriction&#8217; while uploading a file from the import tab.</span></a>.</p>
+<p>The name of the directory where temporary files can be stored. It is used
+for several purposes, currently:</p>
+<ul class="simple">
+<li>The templates cache which speeds up page loading.</li>
+<li>ESRI Shapefiles import, see <a class="reference internal" href="faq.html#faq6-30"><span class="std std-ref">6.30 Import: How can I import ESRI Shapefiles?</span></a>.</li>
+<li>To work around limitations of <code class="docutils literal"><span class="pre">open_basedir</span></code> for uploaded files, see
+<a class="reference internal" href="faq.html#faq1-11"><span class="std std-ref">1.11 I get an &#8216;open_basedir restriction&#8217; while uploading a file from the import tab.</span></a>.</li>
+</ul>
 <p>This directory should have as strict permissions as possible as the only
 user required to access this directory is the one who runs the webserver.
 If you have root privileges, simply make this user owner of this directory
@@ -5002,9 +5117,9 @@ to setup this directory and how to make its usage secure.</p>
 </tr>
 </tbody>
 </table>
-<p>If <span class="target" id="index-144"></span><a class="reference internal" href="#cfg_QueryHistoryDB"><code class="xref config config-option docutils literal"><span class="pre">$cfg['QueryHistoryDB']</span></code></a> is set to <code class="docutils literal"><span class="pre">true</span></code>, all your
+<p>If <span class="target" id="index-148"></span><a class="reference internal" href="#cfg_QueryHistoryDB"><code class="xref config config-option docutils literal"><span class="pre">$cfg['QueryHistoryDB']</span></code></a> is set to <code class="docutils literal"><span class="pre">true</span></code>, all your
 Queries are logged to a table, which has to be created by you (see
-<span class="target" id="index-145"></span><a class="reference internal" href="#cfg_Servers_history"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['history']</span></code></a>). If set to false, all your
+<span class="target" id="index-149"></span><a class="reference internal" href="#cfg_Servers_history"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['history']</span></code></a>). If set to false, all your
 queries will be appended to the form, but only as long as your window is
 opened they remain saved.</p>
 <p>When using the JavaScript based query window, it will always get updated
@@ -5018,9 +5133,9 @@ you first have to look in. The checkbox will get automatically checked
 whenever you change the contents of the textarea. Please uncheck the button
 whenever you definitely want the query window to get updated even though
 you have made alterations.</p>
-<p>If <span class="target" id="index-146"></span><a class="reference internal" href="#cfg_QueryHistoryDB"><code class="xref config config-option docutils literal"><span class="pre">$cfg['QueryHistoryDB']</span></code></a> is set to <code class="docutils literal"><span class="pre">true</span></code> you can
+<p>If <span class="target" id="index-150"></span><a class="reference internal" href="#cfg_QueryHistoryDB"><code class="xref config config-option docutils literal"><span class="pre">$cfg['QueryHistoryDB']</span></code></a> is set to <code class="docutils literal"><span class="pre">true</span></code> you can
 specify the amount of saved history items using
-<span class="target" id="index-147"></span><a class="reference internal" href="#cfg_QueryHistoryMax"><code class="xref config config-option docutils literal"><span class="pre">$cfg['QueryHistoryMax']</span></code></a>.</p>
+<span class="target" id="index-151"></span><a class="reference internal" href="#cfg_QueryHistoryMax"><code class="xref config config-option docutils literal"><span class="pre">$cfg['QueryHistoryMax']</span></code></a>.</p>
 </dd></dl>
 
 <dl class="option">
@@ -5048,7 +5163,7 @@ specify the amount of saved history items using
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">500000</td>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">50000</td>
 </tr>
 </tbody>
 </table>
@@ -5057,6 +5172,12 @@ get the exact row count using <code class="docutils literal"><span class="pre">S
 count as returned by <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">TABLE</span> <span class="pre">STATUS</span></code> is smaller than this value,
 <code class="docutils literal"><span class="pre">SELECT</span> <span class="pre">COUNT</span></code> will be used, otherwise the approximate count will be
 used.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 4.8.0: </span>The default value was lowered to 50000 for performance reasons.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 4.2.6: </span>The default value was changed to 500000.</p>
+</div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="faq.html#faq3-11"><span class="std std-ref">3.11 The number of rows for InnoDB tables is not correct.</span></a></p>
@@ -5133,7 +5254,7 @@ all visual sliders, use <code class="docutils literal"><span class="pre">'disabl
 </table>
 <p>Contains names of configuration options (keys in <code class="docutils literal"><span class="pre">$cfg</span></code> array) that
 users can&#8217;t set through user preferences. For possible values, refer
-to <code class="file docutils literal"><span class="pre">libraries/config/user_preferences.forms.php</span></code>.</p>
+to clases under <code class="file docutils literal"><span class="pre">libraries/classes/Config/Forms/User/</span></code>.</p>
 </dd></dl>
 
 <dl class="option">
@@ -5268,6 +5389,22 @@ developers of phpMyAdmin.</p>
 <p>Whether to allow different theme for each server.</p>
 </dd></dl>
 
+<dl class="option">
+<dt id="cfg_FontSize">
+<code class="descname">$cfg['FontSize']</code><a class="headerlink" href="#cfg_FontSize" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">string</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">&#8216;82%&#8217;</td>
+</tr>
+</tbody>
+</table>
+<p>Font size to use, is applied in CSS.</p>
+</dd></dl>
+
 </div>
 <div class="section" id="default-queries">
 <h2>Default queries<a class="headerlink" href="#default-queries" title="Permalink to this headline">¶</a></h2>
@@ -5326,6 +5463,278 @@ for first timestamp column in table.</p>
 </dd></dl>
 
 </div>
+<div class="section" id="default-options-for-transformations">
+<h2>Default options for Transformations<a class="headerlink" href="#default-options-for-transformations" title="Permalink to this headline">¶</a></h2>
+<dl class="option">
+<dt id="cfg_DefaultTransformations">
+<code class="descname">$cfg['DefaultTransformations']</code><a class="headerlink" href="#cfg_DefaultTransformations" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">An array with below listed key-values</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="option">
+<dt id="cfg_DefaultTransformations_Substring">
+<code class="descname">$cfg['DefaultTransformations']['Substring']</code><a class="headerlink" href="#cfg_DefaultTransformations_Substring" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">array(0, &#8216;all&#8217;, &#8216;…&#8217;)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="option">
+<dt id="cfg_DefaultTransformations_Bool2Text">
+<code class="descname">$cfg['DefaultTransformations']['Bool2Text']</code><a class="headerlink" href="#cfg_DefaultTransformations_Bool2Text" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">array(&#8216;T&#8217;, &#8216;F&#8217;)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="option">
+<dt id="cfg_DefaultTransformations_External">
+<code class="descname">$cfg['DefaultTransformations']['External']</code><a class="headerlink" href="#cfg_DefaultTransformations_External" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">array(0, &#8216;-f /dev/null -i -wrap -q&#8217;, 1, 1)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="option">
+<dt id="cfg_DefaultTransformations_PreApPend">
+<code class="descname">$cfg['DefaultTransformations']['PreApPend']</code><a class="headerlink" href="#cfg_DefaultTransformations_PreApPend" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">array(&#8216;&#8217;, &#8216;&#8217;)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="option">
+<dt id="cfg_DefaultTransformations_Hex">
+<code class="descname">$cfg['DefaultTransformations']['Hex']</code><a class="headerlink" href="#cfg_DefaultTransformations_Hex" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">array(&#8216;2&#8217;)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="option">
+<dt id="cfg_DefaultTransformations_DateFormat">
+<code class="descname">$cfg['DefaultTransformations']['DateFormat']</code><a class="headerlink" href="#cfg_DefaultTransformations_DateFormat" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">array(0, &#8216;&#8217;, &#8216;local&#8217;)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="option">
+<dt id="cfg_DefaultTransformations_Inline">
+<code class="descname">$cfg['DefaultTransformations']['Inline']</code><a class="headerlink" href="#cfg_DefaultTransformations_Inline" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">array(&#8216;100&#8217;, 100)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="option">
+<dt id="cfg_DefaultTransformations_TextImageLink">
+<code class="descname">$cfg['DefaultTransformations']['TextImageLink']</code><a class="headerlink" href="#cfg_DefaultTransformations_TextImageLink" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">array(&#8216;&#8217;, 100, 50)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="option">
+<dt id="cfg_DefaultTransformations_TextLink">
+<code class="descname">$cfg['DefaultTransformations']['TextLink']</code><a class="headerlink" href="#cfg_DefaultTransformations_TextLink" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">array(&#8216;&#8217;, &#8216;&#8217;, &#8216;&#8217;)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="console-settings">
+<h2>Console settings<a class="headerlink" href="#console-settings" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">These settings are mostly meant to be changed by user.</p>
+</div>
+<dl class="option">
+<dt id="cfg_Console_StartHistory">
+<code class="descname">$cfg['Console']['StartHistory']</code><a class="headerlink" href="#cfg_Console_StartHistory" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">boolean</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">false</td>
+</tr>
+</tbody>
+</table>
+<p>Show query history at start</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cfg_Console_AlwaysExpand">
+<code class="descname">$cfg['Console']['AlwaysExpand']</code><a class="headerlink" href="#cfg_Console_AlwaysExpand" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">boolean</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">false</td>
+</tr>
+</tbody>
+</table>
+<p>Always expand query messages</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cfg_Console_CurrentQuery">
+<code class="descname">$cfg['Console']['CurrentQuery']</code><a class="headerlink" href="#cfg_Console_CurrentQuery" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">boolean</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">true</td>
+</tr>
+</tbody>
+</table>
+<p>Show current browsing query</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cfg_Console_EnterExecutes">
+<code class="descname">$cfg['Console']['EnterExecutes']</code><a class="headerlink" href="#cfg_Console_EnterExecutes" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">boolean</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">false</td>
+</tr>
+</tbody>
+</table>
+<p>Execute queries on Enter and insert new line with Shift + Enter</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cfg_Console_DarkTheme">
+<code class="descname">$cfg['Console']['DarkTheme']</code><a class="headerlink" href="#cfg_Console_DarkTheme" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">boolean</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">false</td>
+</tr>
+</tbody>
+</table>
+<p>Switch to dark theme</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cfg_Console_Mode">
+<code class="descname">$cfg['Console']['Mode']</code><a class="headerlink" href="#cfg_Console_Mode" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">string</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">&#8216;info&#8217;</td>
+</tr>
+</tbody>
+</table>
+<p>Console mode</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cfg_Console_Height">
+<code class="descname">$cfg['Console']['Height']</code><a class="headerlink" href="#cfg_Console_Height" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">92</td>
+</tr>
+</tbody>
+</table>
+<p>Console height</p>
+</dd></dl>
+
+</div>
 <div class="section" id="developer">
 <h2>Developer<a class="headerlink" href="#developer" title="Permalink to this headline">¶</a></h2>
 <div class="admonition warning">
@@ -5378,7 +5787,7 @@ displayed in the console&#8217;s Debug SQL tab.</p>
 </tbody>
 </table>
 <p>Enable logging of queries and execution times to the syslog.
-Requires <span class="target" id="index-148"></span><a class="reference internal" href="#cfg_DBG_sql"><code class="xref config config-option docutils literal"><span class="pre">$cfg['DBG']['sql']</span></code></a> to be enabled.</p>
+Requires <span class="target" id="index-152"></span><a class="reference internal" href="#cfg_DBG_sql"><code class="xref config config-option docutils literal"><span class="pre">$cfg['DBG']['sql']</span></code></a> to be enabled.</p>
 </dd></dl>
 
 <dl class="option">
@@ -5403,6 +5812,22 @@ This is used for <a class="reference external" href="https://www.phpmyadmin.net/
 <li>The setup script is enabled even with existing configuration.</li>
 <li>The setup does not try to connect to the MySQL server.</li>
 </ul>
+</dd></dl>
+
+<dl class="option">
+<dt id="cfg_DBG_simple2fa">
+<code class="descname">$cfg['DBG']['simple2fa']</code><a class="headerlink" href="#cfg_DBG_simple2fa" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">boolean</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">false</td>
+</tr>
+</tbody>
+</table>
+<p>Can be used for testing two-factor authentication using <a class="reference internal" href="two_factor.html#simple2fa"><span class="std std-ref">Simple two-factor authentication</span></a>.</p>
 </dd></dl>
 
 </div>
@@ -5612,7 +6037,7 @@ only for local address.</p>
 </div>
 <div class="section" id="example-for-using-multiple-mysql-servers">
 <h3>Example for using multiple MySQL servers<a class="headerlink" href="#example-for-using-multiple-mysql-servers" title="Permalink to this headline">¶</a></h3>
-<p>You can configure any number of servers using <span class="target" id="index-149"></span><a class="reference internal" href="#cfg_Servers"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers']</span></code></a>,
+<p>You can configure any number of servers using <span class="target" id="index-153"></span><a class="reference internal" href="#cfg_Servers"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers']</span></code></a>,
 following example shows two of them:</p>
 <div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;blowfish_secret&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;multiServerExample70518&#39;</span><span class="p">;</span>
@@ -5675,11 +6100,12 @@ server certificates and tell phpMyAdmin to use them:</p>
 </div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><span class="target" id="index-150"></span><a class="reference internal" href="#cfg_Servers_ssl"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl']</span></code></a>,
-<span class="target" id="index-151"></span><a class="reference internal" href="#cfg_Servers_ssl_key"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_key']</span></code></a>,
-<span class="target" id="index-152"></span><a class="reference internal" href="#cfg_Servers_ssl_cert"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_cert']</span></code></a>,
-<span class="target" id="index-153"></span><a class="reference internal" href="#cfg_Servers_ssl_ca"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ca']</span></code></a>,
-<span class="target" id="index-154"></span><a class="reference internal" href="#cfg_Servers_ssl_verify"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_verify']</span></code></a>,
+<p class="last"><a class="reference internal" href="setup.html#ssl"><span class="std std-ref">Using SSL for connection to database server</span></a>,
+<span class="target" id="index-154"></span><a class="reference internal" href="#cfg_Servers_ssl"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl']</span></code></a>,
+<span class="target" id="index-155"></span><a class="reference internal" href="#cfg_Servers_ssl_key"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_key']</span></code></a>,
+<span class="target" id="index-156"></span><a class="reference internal" href="#cfg_Servers_ssl_cert"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_cert']</span></code></a>,
+<span class="target" id="index-157"></span><a class="reference internal" href="#cfg_Servers_ssl_ca"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ca']</span></code></a>,
+<span class="target" id="index-158"></span><a class="reference internal" href="#cfg_Servers_ssl_verify"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_verify']</span></code></a>,
 &lt;<a class="reference external" href="https://bugs.php.net/bug.php?id=72048">https://bugs.php.net/bug.php?id=72048</a>&gt;</p>
 </div>
 </div>
@@ -5719,6 +6145,8 @@ server certificates and tell phpMyAdmin to use them:</p>
 <li><a class="reference internal" href="#theme-manager-settings">Theme manager settings</a></li>
 <li><a class="reference internal" href="#default-queries">Default queries</a></li>
 <li><a class="reference internal" href="#mysql-settings">MySQL settings</a></li>
+<li><a class="reference internal" href="#default-options-for-transformations">Default options for Transformations</a></li>
+<li><a class="reference internal" href="#console-settings">Console settings</a></li>
 <li><a class="reference internal" href="#developer">Developer</a></li>
 <li><a class="reference internal" href="#examples">Examples</a><ul>
 <li><a class="reference internal" href="#basic-example">Basic example</a></li>
@@ -5771,11 +6199,11 @@ server certificates and tell phpMyAdmin to use them:</p>
         <li class="right" >
           <a href="setup.html" title="Installation"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.7.9 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.8.4 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; <a href="copyright.html">Copyright</a> 2012 - 2017, The phpMyAdmin devel team.
+        &#169; <a href="copyright.html">Copyright</a> 2012 - 2018, The phpMyAdmin devel team.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.9.
     </div>
   </body>

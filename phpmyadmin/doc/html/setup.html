@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Installation &#8212; phpMyAdmin 4.7.9 documentation</title>
+    <title>Installation &#8212; phpMyAdmin 4.8.4 documentation</title>
     
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.7.9',
+        VERSION:     '4.8.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="copyright" title="Copyright" href="copyright.html" />
-    <link rel="top" title="phpMyAdmin 4.7.9 documentation" href="index.html" />
+    <link rel="top" title="phpMyAdmin 4.8.4 documentation" href="index.html" />
     <link rel="next" title="Configuration" href="config.html" />
     <link rel="prev" title="Requirements" href="require.html" /> 
   </head>
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="require.html" title="Requirements"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.7.9 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.8.4 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -83,7 +83,7 @@ some ways from the official phpMyAdmin documentation. Specifically it does:</p>
 </ul>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last">More information can be found in <a class="reference external" href="https://anonscm.debian.org/cgit/collab-maint/phpmyadmin.git/tree/debian/README.Debian">README.Debian</a>
+<p class="last">More information can be found in <a class="reference external" href="https://salsa.debian.org/phpmyadmin-team/phpmyadmin/blob/master/debian/README.Debian">README.Debian</a>
 (it is installed as <code class="file docutils literal"><span class="pre">/usr/share/doc/phmyadmin/README.Debian</span></code> with the package).</p>
 </div>
 </div>
@@ -136,7 +136,7 @@ official phpMyAdmin documentation.</p>
 <h2>Installing on Windows<a class="headerlink" href="#installing-on-windows" title="Permalink to this headline">¶</a></h2>
 <p>The easiest way to get phpMyAdmin on Windows is using third party products
 which include phpMyAdmin together with a database and web server such as
-<a class="reference external" href="https://www.apachefriends.org/">XAMPP</a>.</p>
+<a class="reference external" href="https://www.apachefriends.org/index.html">XAMPP</a>.</p>
 <p>You can find more of such options at <a class="reference external" href="https://en.wikipedia.org/wiki/List_of_AMP_packages">Wikipedia</a>.</p>
 </div>
 <div class="section" id="installing-from-git">
@@ -307,6 +307,27 @@ but you can override any of the values.</p>
 configuration file:</p>
 <div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Export&#39;</span><span class="p">][</span><span class="s1">&#39;csv_columns&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+</div>
+<p>You can also use it to define server configuration instead of using the
+environment variables listed in <a class="reference internal" href="#docker-vars"><span class="std std-ref">Docker environment variables</span></a>:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="cm">/* Override Servers array */</span>
+<span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Servers&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="mi">1</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;auth_type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;cookie&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;host&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;mydb1&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;port&#39;</span> <span class="o">=&gt;</span> <span class="mi">3306</span><span class="p">,</span>
+        <span class="s1">&#39;verbose&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Verbose name 1&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="mi">2</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;auth_type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;cookie&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;host&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;mydb2&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;port&#39;</span> <span class="o">=&gt;</span> <span class="mi">3306</span><span class="p">,</span>
+        <span class="s1">&#39;verbose&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Verbose name 2&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">];</span>
 </pre></div>
 </div>
 <div class="admonition seealso">
@@ -324,6 +345,11 @@ configuration file:</p>
 <blockquote>
 <div>Directory where PHP sessions are stored. You might want to share this
 for example when using <a class="reference internal" href="#auth-signon"><span class="std std-ref">Signon authentication mode</span></a>.</div></blockquote>
+<p><code class="file docutils literal"><span class="pre">/www/themes/</span></code></p>
+<blockquote>
+<div>Directory where phpMyAdmin looks for themes. By default only those shipped
+with phpMyAdmin are included, but you can include additional phpMyAdmin
+themes (see <a class="reference internal" href="themes.html#themes"><span class="std std-ref">Custom Themes</span></a>) by using Docker volumes.</div></blockquote>
 </div>
 <div class="section" id="docker-examples">
 <h3>Docker Examples<a class="headerlink" href="#docker-examples" title="Permalink to this headline">¶</a></h3>
@@ -345,6 +371,10 @@ for example when using <a class="reference internal" href="#auth-signon"><span c
 </div>
 <p>Running with additional configuration:</p>
 <div class="highlight-sh"><div class="highlight"><pre><span></span>docker run --name phpmyadmin -d --link mysql_db_server:db -p <span class="m">8080</span>:80 -v /some/local/directory/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php phpmyadmin/phpmyadmin
+</pre></div>
+</div>
+<p>Running with additional themes:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>docker run --name phpmyadmin -d --link mysql_db_server:db -p <span class="m">8080</span>:80 -v /custom/phpmyadmin/theme/:/www/themes/theme/ phpmyadmin/phpmyadmin
 </pre></div>
 </div>
 </div>
@@ -372,6 +402,7 @@ using the volumes directive:</p>
     <span class="l l-Scalar l-Scalar-Plain">volumes</span><span class="p p-Indicator">:</span>
      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">/sessions</span>
      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">~/docker/phpmyadmin/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php</span>
+     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">/custom/phpmyadmin/theme/:/www/themes/theme/</span>
 </pre></div>
 </div>
 <div class="admonition seealso">
@@ -383,7 +414,8 @@ using the volumes directive:</p>
 <h3>Running behind haproxy in a subdirectory<a class="headerlink" href="#running-behind-haproxy-in-a-subdirectory" title="Permalink to this headline">¶</a></h3>
 <p>When you want to expose phpMyAdmin running in a Docker container in a
 subdirectory, you need to rewrite the request path in the server proxying the
-requests. For example using haproxy it can be done as:</p>
+requests.</p>
+<p>For example using haproxy it can be done as:</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>frontend http
     bind *:80
     option forwardfor
@@ -403,6 +435,28 @@ backend phpmyadmin
 
     # phpMyAdmin container IP
     server localhost     172.30.21.21:80
+</pre></div>
+</div>
+<p>When using traefik, something like following should work:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>defaultEntryPoints = [&quot;http&quot;]
+[entryPoints]
+  [entryPoints.http]
+  address = &quot;:80&quot;
+    [entryPoints.http.redirect]
+      regex = &quot;(http:\\/\\/[^\\/]+\\/([^\\?\\.]+)[^\\/])$&quot;
+      replacement = &quot;$1/&quot;
+
+[backends]
+  [backends.myadmin]
+    [backends.myadmin.servers.myadmin]
+    url=&quot;http://internal.address.to.pma&quot;
+
+[frontends]
+   [frontends.myadmin]
+   backend = &quot;myadmin&quot;
+   passHostHeader = true
+     [frontends.myadmin.routes.default]
+     rule=&quot;PathPrefixStrip:/phpmyadmin/;AddPrefix:/&quot;
 </pre></div>
 </div>
 <p>You then should specify <span class="target" id="index-9"></span><a class="reference internal" href="#envvar-PMA_ABSOLUTE_URI"><code class="xref std std-envvar docutils literal"><span class="pre">PMA_ABSOLUTE_URI</span></code></a> in the docker-compose
@@ -538,7 +592,7 @@ that single command has to be executed for either of these.</p>
 <p>Some openSUSE releases do not include setup script in the package. In case you
 want to generate configuration on these you can either download original
 package from &lt;<a class="reference external" href="https://www.phpmyadmin.net/">https://www.phpmyadmin.net/</a>&gt; or use setup script on our demo
-server: &lt;<a class="reference external" href="https://demo.phpmyadmin.net/STABLE/setup/">https://demo.phpmyadmin.net/STABLE/setup/</a>&gt;.</p>
+server: &lt;<a class="reference external" href="https://demo.phpmyadmin.net/master/setup/">https://demo.phpmyadmin.net/master/setup/</a>&gt;.</p>
 </div>
 </div>
 </div>
@@ -611,7 +665,7 @@ Handbook covers this topic in the chapter <a class="reference external" href="ht
 keyring</a>. The most reliable method is to meet the developer in person and
 exchange key fingerprints, however you can also rely on the web of trust. This way
 you can trust the key transitively though signatures of others, who have met
-the developer in person. For example you can see how <a class="reference external" href="https://pgp.cs.uu.nl/mk_path.cgi?FROM=ABAF11C65A2970B130ABE3C479BE3E4300411886&amp;TO=3D06A59ECE730EB71B511C17CE752F178259BD92">Isaac&#8217;s key links to
+the developer in person. For example you can see how <a class="reference external" href="https://pgp.cs.uu.nl/paths/79be3e4300411886/to/ce752f178259bd92.html">Isaac&#8217;s key links to
 Linus&#8217;s key</a>.</p>
 <p>Once the key is trusted, the warning will not occur:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> gpg --verify phpMyAdmin-4.5.4.1-all-languages.zip.asc
@@ -843,6 +897,8 @@ the login process.</li>
 <span class="sd"> * @subpackage Example</span>
 <span class="sd"> */</span>
 
+<span class="cm">/* Use cookies for session */</span>
+<span class="nb">ini_set</span><span class="p">(</span><span class="s1">&#39;session.use_cookies&#39;</span><span class="p">,</span> <span class="s1">&#39;true&#39;</span><span class="p">);</span>
 <span class="cm">/* Change this to true if using phpMyAdmin over https */</span>
 <span class="nv">$secure_cookie</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
 <span class="cm">/* Need to have cookie visible from parent directory */</span>
@@ -975,6 +1031,13 @@ in <code class="file docutils literal"><span class="pre">examples/openid.php</sp
 <span class="x">    </span><span class="cp">&lt;?php</span>
 <span class="p">}</span>
 
+<span class="sd">/**</span>
+<span class="sd"> * Display error and exit</span>
+<span class="sd"> *</span>
+<span class="sd"> * @param Exception $e Exception object</span>
+<span class="sd"> *</span>
+<span class="sd"> * @return void</span>
+<span class="sd"> */</span>
 <span class="k">function</span> <span class="nf">Die_error</span><span class="p">(</span><span class="nv">$e</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="nv">$contents</span> <span class="o">=</span> <span class="s2">&quot;&lt;div class=&#39;relyingparty_results&#39;&gt;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
@@ -1022,7 +1085,7 @@ in <code class="file docutils literal"><span class="pre">examples/openid.php</sp
 <span class="cm">/* Grab identifier */</span>
 <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;identifier&#39;</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nb">is_string</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;identifier&#39;</span><span class="p">]))</span> <span class="p">{</span>
     <span class="nv">$identifier</span> <span class="o">=</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;identifier&#39;</span><span class="p">];</span>
-<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;identifier&#39;</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nb">is_string</span><span class="p">(</span><span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;identifier&#39;</span><span class="p">]))</span> <span class="p">{</span>
+<span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;identifier&#39;</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nb">is_string</span><span class="p">(</span><span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;identifier&#39;</span><span class="p">]))</span> <span class="p">{</span>
     <span class="nv">$identifier</span> <span class="o">=</span> <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;identifier&#39;</span><span class="p">];</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="nv">$identifier</span> <span class="o">=</span> <span class="k">null</span><span class="p">;</span>
@@ -1153,7 +1216,7 @@ with Google).</li>
 </div>
 </div>
 <div class="section" id="securing-your-phpmyadmin-installation">
-<h2>Securing your phpMyAdmin installation<a class="headerlink" href="#securing-your-phpmyadmin-installation" title="Permalink to this headline">¶</a></h2>
+<span id="securing"></span><h2>Securing your phpMyAdmin installation<a class="headerlink" href="#securing-your-phpmyadmin-installation" title="Permalink to this headline">¶</a></h2>
 <p>The phpMyAdmin team tries hard to make the application secure, however there
 are always ways to make your installation more secure:</p>
 <ul>
@@ -1182,14 +1245,19 @@ scripting vulnerabilities that might happen to be found in that code. For the
 Apache webserver, this is often accomplished with a <a class="reference internal" href="glossary.html#term-htaccess"><span class="xref std std-term">.htaccess</span></a> file in
 those directories.</p>
 </li>
+<li><p class="first">Deny access to temporary files, see <span class="target" id="index-37"></span><a class="reference internal" href="config.html#cfg_TempDir"><code class="xref config config-option docutils literal"><span class="pre">$cfg['TempDir']</span></code></a> (if that
+is placed inside your web root, see also <a class="reference internal" href="config.html#web-dirs"><span class="std std-ref">Web server upload/save/import directories</span></a>.</p>
+</li>
 <li><p class="first">It is generally a good idea to protect a public phpMyAdmin installation
 against access by robots as they usually can not do anything good there. You
 can do this using <code class="docutils literal"><span class="pre">robots.txt</span></code> file in root of your webserver or limit
 access by web server configuration, see <a class="reference internal" href="faq.html#faq1-42"><span class="std std-ref">1.42 How can I prevent robots from accessing phpMyAdmin?</span></a>.</p>
 </li>
 <li><p class="first">In case you don&#8217;t want all MySQL users to be able to access
-phpMyAdmin, you can use <span class="target" id="index-37"></span><a class="reference internal" href="config.html#cfg_Servers_AllowDeny_rules"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['AllowDeny']['rules']</span></code></a> to limit them
-or <span class="target" id="index-38"></span><a class="reference internal" href="config.html#cfg_Servers_AllowRoot"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['AllowRoot']</span></code></a> to deny root user access.</p>
+phpMyAdmin, you can use <span class="target" id="index-38"></span><a class="reference internal" href="config.html#cfg_Servers_AllowDeny_rules"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['AllowDeny']['rules']</span></code></a> to limit them
+or <span class="target" id="index-39"></span><a class="reference internal" href="config.html#cfg_Servers_AllowRoot"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['AllowRoot']</span></code></a> to deny root user access.</p>
+</li>
+<li><p class="first">Enable <a class="reference internal" href="two_factor.html#fa"><span class="std std-ref">Two-factor authentication</span></a> for your account.</p>
 </li>
 <li><p class="first">Consider hiding phpMyAdmin behind an authentication proxy, so that
 users need to authenticate prior to providing MySQL credentials
@@ -1208,14 +1276,50 @@ can authenticate. This can be done using the <strong class="program">htpasswd</s
 </div>
 </li>
 <li><p class="first">If you are afraid of automated attacks, enabling Captcha by
-<span class="target" id="index-39"></span><a class="reference internal" href="config.html#cfg_CaptchaLoginPublicKey"><code class="xref config config-option docutils literal"><span class="pre">$cfg['CaptchaLoginPublicKey']</span></code></a> and
-<span class="target" id="index-40"></span><a class="reference internal" href="config.html#cfg_CaptchaLoginPrivateKey"><code class="xref config config-option docutils literal"><span class="pre">$cfg['CaptchaLoginPrivateKey']</span></code></a> might be an option.</p>
+<span class="target" id="index-40"></span><a class="reference internal" href="config.html#cfg_CaptchaLoginPublicKey"><code class="xref config config-option docutils literal"><span class="pre">$cfg['CaptchaLoginPublicKey']</span></code></a> and
+<span class="target" id="index-41"></span><a class="reference internal" href="config.html#cfg_CaptchaLoginPrivateKey"><code class="xref config config-option docutils literal"><span class="pre">$cfg['CaptchaLoginPrivateKey']</span></code></a> might be an option.</p>
 </li>
-<li><p class="first">Failed login attemps are logged to syslog (if available). This can allow using a tool such as
-fail2ban to block brute-force attempts. Note that the log file used by syslog is not the same
-as the Apache error or access log files.</p>
+<li><p class="first">Failed login attemps are logged to syslog (if available, see
+<span class="target" id="index-42"></span><a class="reference internal" href="config.html#cfg_AuthLog"><code class="xref config config-option docutils literal"><span class="pre">$cfg['AuthLog']</span></code></a>). This can allow using a tool such as
+fail2ban to block brute-force attempts. Note that the log file used by syslog
+is not the same as the Apache error or access log files.</p>
+</li>
+<li><p class="first">In case you&#8217;re running phpMyAdmin together with other PHP applications, it is
+generally advised to use separate session storage for phpMyAdmin to avoid
+possible session based attacks against it. You can use
+<span class="target" id="index-43"></span><a class="reference internal" href="config.html#cfg_SessionSavePath"><code class="xref config config-option docutils literal"><span class="pre">$cfg['SessionSavePath']</span></code></a> to achieve this.</p>
 </li>
 </ul>
+</div>
+<div class="section" id="using-ssl-for-connection-to-database-server">
+<span id="ssl"></span><h2>Using SSL for connection to database server<a class="headerlink" href="#using-ssl-for-connection-to-database-server" title="Permalink to this headline">¶</a></h2>
+<p>It is recommended to use SSL when connecting to remote database server. There
+are several configuration options involved in the SSL setup:</p>
+<dl class="docutils">
+<dt><span class="target" id="index-44"></span><a class="reference internal" href="config.html#cfg_Servers_ssl"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl']</span></code></a></dt>
+<dd>Defines whether to use SSL at all. If you enable only this, the connection
+will be encrypted, but there is not authentication of the connection - you
+can not verify that you are talking to the right server.</dd>
+<dt><span class="target" id="index-45"></span><a class="reference internal" href="config.html#cfg_Servers_ssl_key"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_key']</span></code></a> and <span class="target" id="index-46"></span><a class="reference internal" href="config.html#cfg_Servers_ssl_cert"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_cert']</span></code></a></dt>
+<dd>This is used for authentication of client to the server.</dd>
+<dt><span class="target" id="index-47"></span><a class="reference internal" href="config.html#cfg_Servers_ssl_ca"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ca']</span></code></a> and <span class="target" id="index-48"></span><a class="reference internal" href="config.html#cfg_Servers_ssl_ca_path"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ca_path']</span></code></a></dt>
+<dd>The certificate authorities you trust for server certificates.
+This is used to ensure that you are talking to a trusted server.</dd>
+<dt><span class="target" id="index-49"></span><a class="reference internal" href="config.html#cfg_Servers_ssl_verify"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_verify']</span></code></a></dt>
+<dd>This configuration disables server certificate verification. Use with
+caution.</dd>
+</dl>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="config.html#example-google-ssl"><span class="std std-ref">Google Cloud SQL with SSL</span></a>,
+<span class="target" id="index-50"></span><a class="reference internal" href="config.html#cfg_Servers_ssl"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl']</span></code></a>,
+<span class="target" id="index-51"></span><a class="reference internal" href="config.html#cfg_Servers_ssl_key"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_key']</span></code></a>,
+<span class="target" id="index-52"></span><a class="reference internal" href="config.html#cfg_Servers_ssl_cert"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_cert']</span></code></a>,
+<span class="target" id="index-53"></span><a class="reference internal" href="config.html#cfg_Servers_ssl_ca"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ca']</span></code></a>,
+<span class="target" id="index-54"></span><a class="reference internal" href="config.html#cfg_Servers_ssl_ca_path"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ca_path']</span></code></a>,
+<span class="target" id="index-55"></span><a class="reference internal" href="config.html#cfg_Servers_ssl_ciphers"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_ciphers']</span></code></a>,
+<span class="target" id="index-56"></span><a class="reference internal" href="config.html#cfg_Servers_ssl_verify"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['ssl_verify']</span></code></a></p>
+</div>
 </div>
 <div class="section" id="known-issues">
 <h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h2>
@@ -1290,6 +1394,7 @@ manually or after a period of inactivity). <a class="reference external" href="h
 </ul>
 </li>
 <li><a class="reference internal" href="#securing-your-phpmyadmin-installation">Securing your phpMyAdmin installation</a></li>
+<li><a class="reference internal" href="#using-ssl-for-connection-to-database-server">Using SSL for connection to database server</a></li>
 <li><a class="reference internal" href="#known-issues">Known issues</a><ul>
 <li><a class="reference internal" href="#users-with-column-specific-privileges-are-unable-to-browse">Users with column-specific privileges are unable to &#8220;Browse&#8221;</a></li>
 <li><a class="reference internal" href="#trouble-logging-back-in-after-logging-out-using-http-authentication">Trouble logging back in after logging out using &#8216;http&#8217; authentication</a></li>
@@ -1338,11 +1443,11 @@ manually or after a period of inactivity). <a class="reference external" href="h
         <li class="right" >
           <a href="require.html" title="Requirements"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.7.9 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.8.4 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; <a href="copyright.html">Copyright</a> 2012 - 2017, The phpMyAdmin devel team.
+        &#169; <a href="copyright.html">Copyright</a> 2012 - 2018, The phpMyAdmin devel team.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.9.
     </div>
   </body>
