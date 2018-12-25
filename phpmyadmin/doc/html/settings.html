@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Configuring phpMyAdmin &#8212; phpMyAdmin 4.7.9 documentation</title>
+    <title>Configuring phpMyAdmin &#8212; phpMyAdmin 4.8.4 documentation</title>
     
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.7.9',
+        VERSION:     '4.8.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,9 +26,9 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="copyright" title="Copyright" href="copyright.html" />
-    <link rel="top" title="phpMyAdmin 4.7.9 documentation" href="index.html" />
+    <link rel="top" title="phpMyAdmin 4.8.4 documentation" href="index.html" />
     <link rel="up" title="User Guide" href="user.html" />
-    <link rel="next" title="Transformations" href="transformations.html" />
+    <link rel="next" title="Two-factor authentication" href="two_factor.html" />
     <link rel="prev" title="User Guide" href="user.html" /> 
   </head>
   <body role="document">
@@ -39,12 +39,12 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="transformations.html" title="Transformations"
+          <a href="two_factor.html" title="Two-factor authentication"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="user.html" title="User Guide"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.7.9 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.8.4 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="user.html" accesskey="U">User Guide</a> &#187;</li> 
       </ul>
     </div>  
@@ -56,7 +56,8 @@
             
   <div class="section" id="configuring-phpmyadmin">
 <h1>Configuring phpMyAdmin<a class="headerlink" href="#configuring-phpmyadmin" title="Permalink to this headline">¶</a></h1>
-<p>phpMyAdmin has quite a lot of configuration settings, those are described in
+<p>There are many configuration settings that can be used to customize the
+interface. Those settings are described in
 <a class="reference internal" href="config.html#config"><span class="std std-ref">Configuration</span></a>. There are several layers of the configuration.</p>
 <p>The global settings can be configured in <code class="file docutils literal"><span class="pre">config.inc.php</span></code> as described in
 <a class="reference internal" href="config.html#config"><span class="std std-ref">Configuration</span></a>. This is only way to configure connections to databases and other
@@ -64,7 +65,7 @@ system wide settings.</p>
 <p>On top of this there are user settings which can be persistently stored in
 <a class="reference internal" href="setup.html#linked-tables"><span class="std std-ref">phpMyAdmin configuration storage</span></a>, possibly automatically configured through
 <a class="reference internal" href="setup.html#zeroconf"><span class="std std-ref">Zero configuration</span></a>.  If the <a class="reference internal" href="setup.html#linked-tables"><span class="std std-ref">phpMyAdmin configuration storage</span></a> are not configured, the settings
-are temporarily stored in the session data, these are valid only until you
+are temporarily stored in the session data; these are valid only until you
 logout.</p>
 <p>You can also save the user configuration for further use, either download them
 as a file or to the browser local storage. You can find both those options in
@@ -82,8 +83,8 @@ be automatically offered for loading upon your login to phpMyAdmin.</p>
   <p class="topless"><a href="user.html"
                         title="previous chapter">User Guide</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="transformations.html"
-                        title="next chapter">Transformations</a></p>
+  <p class="topless"><a href="two_factor.html"
+                        title="next chapter">Two-factor authentication</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -112,17 +113,17 @@ be automatically offered for loading upon your login to phpMyAdmin.</p>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="transformations.html" title="Transformations"
+          <a href="two_factor.html" title="Two-factor authentication"
              >next</a> |</li>
         <li class="right" >
           <a href="user.html" title="User Guide"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.7.9 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.8.4 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="user.html" >User Guide</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; <a href="copyright.html">Copyright</a> 2012 - 2017, The phpMyAdmin devel team.
+        &#169; <a href="copyright.html">Copyright</a> 2012 - 2018, The phpMyAdmin devel team.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.9.
     </div>
   </body>

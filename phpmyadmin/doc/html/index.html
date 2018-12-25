@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Welcome to phpMyAdmin’s documentation! &#8212; phpMyAdmin 4.7.9 documentation</title>
+    <title>Welcome to phpMyAdmin’s documentation! &#8212; phpMyAdmin 4.8.4 documentation</title>
     
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.7.9',
+        VERSION:     '4.8.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="copyright" title="Copyright" href="copyright.html" />
-    <link rel="top" title="phpMyAdmin 4.7.9 documentation" href="#" />
+    <link rel="top" title="phpMyAdmin 4.8.4 documentation" href="#" />
     <link rel="next" title="Introduction" href="intro.html" /> 
   </head>
   <body role="document">
@@ -39,7 +39,7 @@
         <li class="right" >
           <a href="intro.html" title="Introduction"
              accesskey="N">next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">phpMyAdmin 4.7.9 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="#">phpMyAdmin 4.8.4 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -78,6 +78,7 @@
 <li class="toctree-l2"><a class="reference internal" href="setup.html#upgrading-from-an-older-version">Upgrading from an older version</a></li>
 <li class="toctree-l2"><a class="reference internal" href="setup.html#using-authentication-modes">Using authentication modes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="setup.html#securing-your-phpmyadmin-installation">Securing your phpMyAdmin installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html#using-ssl-for-connection-to-database-server">Using SSL for connection to database server</a></li>
 <li class="toctree-l2"><a class="reference internal" href="setup.html#known-issues">Known issues</a></li>
 </ul>
 </li>
@@ -106,18 +107,22 @@
 <li class="toctree-l2"><a class="reference internal" href="config.html#theme-manager-settings">Theme manager settings</a></li>
 <li class="toctree-l2"><a class="reference internal" href="config.html#default-queries">Default queries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="config.html#mysql-settings">MySQL settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html#default-options-for-transformations">Default options for Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html#console-settings">Console settings</a></li>
 <li class="toctree-l2"><a class="reference internal" href="config.html#developer">Developer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="config.html#examples">Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="user.html">User Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="settings.html">Configuring phpMyAdmin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="two_factor.html">Two-factor authentication</a></li>
 <li class="toctree-l2"><a class="reference internal" href="transformations.html">Transformations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bookmarks.html">Bookmarks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="privileges.html">User management</a></li>
 <li class="toctree-l2"><a class="reference internal" href="relations.html">Relations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="charts.html">Charts</a></li>
 <li class="toctree-l2"><a class="reference internal" href="import_export.html">Import and export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="themes.html">Custom Themes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="other.html">Other sources of information</a></li>
 </ul>
 </li>
@@ -134,6 +139,11 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="developers.html">Developers Information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security policy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="security.html#typical-vulnerabilities">Typical vulnerabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#reporting-security-issues">Reporting security issues</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="vendors.html">Distributing and packaging phpMyAdmin</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="vendors.html#external-libraries">External libraries</a></li>
 </ul>
@@ -207,11 +217,11 @@
         <li class="right" >
           <a href="intro.html" title="Introduction"
              >next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">phpMyAdmin 4.7.9 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="#">phpMyAdmin 4.8.4 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; <a href="copyright.html">Copyright</a> 2012 - 2017, The phpMyAdmin devel team.
+        &#169; <a href="copyright.html">Copyright</a> 2012 - 2018, The phpMyAdmin devel team.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.9.
     </div>
   </body>

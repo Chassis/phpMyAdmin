@@ -23,10 +23,10 @@ Third party tutorials and articles which you might find interesting:
 English
 +++++++
 
-- `Having fun with phpMyAdmin's MIME-transformations & PDF-features <http://garv.in/tops/texte/mimetutorial>`_
+- `Having fun with phpMyAdmin's MIME-transformations & PDF-features <https://garv.in/tops/texte/mimetutorial>`_
 - `Learning SQL Using phpMyAdmin (old tutorial) <http://www.php-editors.com/articles/sql_phpmyadmin.php>`_
 
 Русский (Russian)
 +++++++++++++++++
 
-* `Russian server about phpMyAdmin <http://php-myadmin.ru/>`_
+* `Russian server about phpMyAdmin <https://php-myadmin.ru/>`_

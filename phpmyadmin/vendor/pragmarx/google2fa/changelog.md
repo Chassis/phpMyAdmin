@@ -1,5 +1,17 @@
 ## Change Log
 
+## [4.0.0] - 2018-10-06
+### Changed
+- Bacon QRCode package removed
+
+## [3.0.1] - 2018-03-15
+### Changed
+- Relicensed to MIT
+
+## [3.0.0] - 2018-03-07
+### Changed
+- It's now mandatory to enable Google Api secret key access by executing `setAllowInsecureCallToGoogleApis(true);`
+
 ## [2.0.4] - 2017-06-22
 ### Fixed
 - Fix Base32 to keep supporting PHP 5.4 && 5.5.

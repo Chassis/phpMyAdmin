@@ -4,10 +4,11 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitd32f002ef796223f70863cf686620a9d
+class ComposerStaticInit8aff85c9f9e5ea077c34656dcaaad322
 {
     public static $files = array (
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
+        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         'bd9634f2d41831496de0d3dfe4c94881' => __DIR__ . '/..' . '/symfony/polyfill-php56/bootstrap.php',
         'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
@@ -18,11 +19,17 @@ class ComposerStaticInitd32f002ef796223f70863cf686620a9d
         array (
             'phpseclib\\' => 10,
         ),
+        'T' => 
+        array (
+            'Twig\\Extensions\\' => 16,
+            'Twig\\' => 5,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Util\\' => 22,
             'Symfony\\Polyfill\\Php56\\' => 23,
             'Symfony\\Polyfill\\Mbstring\\' => 26,
+            'Symfony\\Polyfill\\Ctype\\' => 23,
             'Symfony\\Component\\ExpressionLanguage\\' => 37,
             'Samyoul\\U2F\\U2FServer\\' => 22,
         ),
@@ -32,13 +39,15 @@ class ComposerStaticInitd32f002ef796223f70863cf686620a9d
         ),
         'P' => 
         array (
+            'Psr\\Container\\' => 14,
             'PragmaRX\\Google2FA\\Tests\\' => 25,
             'PragmaRX\\Google2FA\\' => 19,
             'PhpMyAdmin\\SqlParser\\' => 21,
             'PhpMyAdmin\\ShapeFile\\' => 21,
+            'PhpMyAdmin\\Setup\\' => 17,
             'PhpMyAdmin\\MoTranslator\\' => 24,
+            'PhpMyAdmin\\' => 11,
             'ParagonIE\\ConstantTime\\' => 23,
-            'PMA\\' => 4,
         ),
     );
 
@@ -46,6 +55,14 @@ class ComposerStaticInitd32f002ef796223f70863cf686620a9d
         'phpseclib\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib',
+        ),
+        'Twig\\Extensions\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/twig/extensions/src',
+        ),
+        'Twig\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/twig/twig/src',
         ),
         'Symfony\\Polyfill\\Util\\' => 
         array (
@@ -59,6 +76,10 @@ class ComposerStaticInitd32f002ef796223f70863cf686620a9d
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
         ),
+        'Symfony\\Polyfill\\Ctype\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
+        ),
         'Symfony\\Component\\ExpressionLanguage\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/expression-language',
@@ -70,6 +91,10 @@ class ComposerStaticInitd32f002ef796223f70863cf686620a9d
         'ReCaptcha\\' => 
         array (
             0 => __DIR__ . '/..' . '/google/recaptcha/src/ReCaptcha',
+        ),
+        'Psr\\Container\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/container/src',
         ),
         'PragmaRX\\Google2FA\\Tests\\' => 
         array (
@@ -87,21 +112,36 @@ class ComposerStaticInitd32f002ef796223f70863cf686620a9d
         array (
             0 => __DIR__ . '/..' . '/phpmyadmin/shapefile/src',
         ),
+        'PhpMyAdmin\\Setup\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/setup/lib',
+        ),
         'PhpMyAdmin\\MoTranslator\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpmyadmin/motranslator/src',
+        ),
+        'PhpMyAdmin\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/libraries/classes',
         ),
         'ParagonIE\\ConstantTime\\' => 
         array (
             0 => __DIR__ . '/..' . '/paragonie/constant_time_encoding/src',
         ),
-        'PMA\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/',
-        ),
     );
 
     public static $prefixesPsr0 = array (
+        'T' => 
+        array (
+            'Twig_Extensions_' => 
+            array (
+                0 => __DIR__ . '/..' . '/twig/extensions/lib',
+            ),
+            'Twig_' => 
+            array (
+                0 => __DIR__ . '/..' . '/twig/twig/lib',
+            ),
+        ),
         'B' => 
         array (
             'BaconQrCode' => 
@@ -131,10 +171,10 @@ class ComposerStaticInitd32f002ef796223f70863cf686620a9d
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitd32f002ef796223f70863cf686620a9d::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitd32f002ef796223f70863cf686620a9d::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitd32f002ef796223f70863cf686620a9d::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitd32f002ef796223f70863cf686620a9d::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit8aff85c9f9e5ea077c34656dcaaad322::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit8aff85c9f9e5ea077c34656dcaaad322::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit8aff85c9f9e5ea077c34656dcaaad322::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit8aff85c9f9e5ea077c34656dcaaad322::$classMap;
 
         }, null, ClassLoader::class);
     }

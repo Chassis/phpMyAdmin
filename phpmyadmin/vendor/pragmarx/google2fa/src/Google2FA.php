@@ -2,38 +2,10 @@
 
 namespace PragmaRX\Google2FA;
 
-/*
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
- * PHP Google two-factor authentication module.
- *
- * See http://www.idontplaydarts.com/2011/07/google-totp-two-factor-authentication-for-php/
- * for more details
- *
- * @author Phil (Orginal author of this class)
- *
- * Changes have been made in the original class to remove all static methods and, also,
- * provide some other methods.
- *
- * @package    Google2FA
- * @author     Antonio Carlos Ribeiro @ PragmaRX
- **/
-
-use PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException;
+use PragmaRX\Google2FA\Support\QRCode;
 use PragmaRX\Google2FA\Support\Base32;
 use PragmaRX\Google2FA\Support\Constants;
-use PragmaRX\Google2FA\Support\QRCode;
+use PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException;
 
 class Google2FA
 {
@@ -62,14 +34,17 @@ class Google2FA
     /**
      * Find a valid One Time Password.
      *
-     * @param $binarySeed
+     * @param $secret
      * @param $key
      * @param $window
      * @param $startingTimestamp
      * @param $timestamp
-     * @param $oldTimestamp
+     * @param string $oldTimestamp
      *
      * @return bool
+     * @throws \PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException
+     * @throws \PragmaRX\Google2FA\Exceptions\InvalidCharactersException
+     * @throws \PragmaRX\Google2FA\Exceptions\IncompatibleWithGoogleAuthenticatorException
      */
     public function findValidOTP($secret, $key, $window, $startingTimestamp, $timestamp, $oldTimestamp = Constants::ARGUMENT_NOT_SET)
     {
@@ -88,10 +63,12 @@ class Google2FA
     /**
      * Generate a digit secret key in base32 format.
      *
-     * @param int    $length
+     * @param int $length
      * @param string $prefix
      *
      * @return string
+     * @throws Exceptions\InvalidCharactersException
+     * @throws Exceptions\IncompatibleWithGoogleAuthenticatorException
      */
     public function generateSecretKey($length = 16, $prefix = '')
     {
@@ -104,6 +81,9 @@ class Google2FA
      * @param $secret
      *
      * @return string
+     * @throws \PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException
+     * @throws \PragmaRX\Google2FA\Exceptions\InvalidCharactersException
+     * @throws \PragmaRX\Google2FA\Exceptions\IncompatibleWithGoogleAuthenticatorException
      */
     public function getCurrentOtp($secret)
     {
@@ -132,6 +112,8 @@ class Google2FA
 
     /**
      * Get secret.
+     *
+     * @param string|null $secret
      *
      * @return mixed
      */
@@ -205,10 +187,12 @@ class Google2FA
      * Takes the secret key and the timestamp and returns the one time
      * password.
      *
-     * @param string $secret  - Secret key in binary form.
-     * @param int    $counter - Timestamp as returned by getTimestamp.
+     * @param string $secret - Secret key in binary form.
+     * @param int $counter - Timestamp as returned by getTimestamp.
      *
-     * @throws SecretKeyTooShortException
+     * @throws \PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException
+     * @throws \PragmaRX\Google2FA\Exceptions\InvalidCharactersException
+     * @throws Exceptions\IncompatibleWithGoogleAuthenticatorException
      *
      * @return string
      */
@@ -314,13 +298,16 @@ class Google2FA
      * Verifies a user inputted key against the current timestamp. Checks $window
      * keys either side of the timestamp.
      *
-     * @param string          $key          - User specified key
-     * @param null|string     $secret
-     * @param null|int        $window
-     * @param null|int        $timestamp
+     * @param string $key - User specified key
+     * @param null|string $secret
+     * @param null|int $window
+     * @param null|int $timestamp
      * @param null|string|int $oldTimestamp
      *
      * @return bool|int
+     * @throws \PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException
+     * @throws \PragmaRX\Google2FA\Exceptions\InvalidCharactersException
+     * @throws \PragmaRX\Google2FA\Exceptions\IncompatibleWithGoogleAuthenticatorException
      */
     public function verify($key, $secret = null, $window = null, $timestamp = null, $oldTimestamp = Constants::ARGUMENT_NOT_SET)
     {
@@ -337,13 +324,16 @@ class Google2FA
      * Verifies a user inputted key against the current timestamp. Checks $window
      * keys either side of the timestamp.
      *
-     * @param string          $secret
-     * @param string          $key          - User specified key
-     * @param null|int        $window
-     * @param null|int        $timestamp
+     * @param string $secret
+     * @param string $key - User specified key
+     * @param null|int $window
+     * @param null|int $timestamp
      * @param null|string|int $oldTimestamp
      *
      * @return bool|int
+     * @throws \PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException
+     * @throws \PragmaRX\Google2FA\Exceptions\InvalidCharactersException
+     * @throws \PragmaRX\Google2FA\Exceptions\IncompatibleWithGoogleAuthenticatorException
      */
     public function verifyKey($secret, $key, $window = null, $timestamp = null, $oldTimestamp = Constants::ARGUMENT_NOT_SET)
     {
@@ -365,14 +355,18 @@ class Google2FA
      * the given oldTimestamp. Useful if you need to ensure that a single key cannot
      * be used twice.
      *
-     * @param string   $secret
-     * @param string   $key          - User specified key
-     * @param int      $oldTimestamp - The timestamp from the last verified key
+     * @param string $secret
+     * @param string $key - User specified key
+     * @param int $oldTimestamp - The timestamp from the last verified key
      * @param int|null $window
      * @param int|null $timestamp
      *
      * @return bool|int - false (not verified) or the timestamp of the verified key
-     **/
+     *
+     * @throws \PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException
+     * @throws \PragmaRX\Google2FA\Exceptions\InvalidCharactersException
+     * @throws \PragmaRX\Google2FA\Exceptions\IncompatibleWithGoogleAuthenticatorException
+     */
     public function verifyKeyNewer($secret, $key, $oldTimestamp, $window = null, $timestamp = null)
     {
         return $this->verifyKey($secret, $key, $window, $timestamp, $oldTimestamp);

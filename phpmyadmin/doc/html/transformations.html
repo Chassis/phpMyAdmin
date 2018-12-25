@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Transformations &#8212; phpMyAdmin 4.7.9 documentation</title>
+    <title>Transformations &#8212; phpMyAdmin 4.8.4 documentation</title>
     
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.7.9',
+        VERSION:     '4.8.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,10 +26,10 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="copyright" title="Copyright" href="copyright.html" />
-    <link rel="top" title="phpMyAdmin 4.7.9 documentation" href="index.html" />
+    <link rel="top" title="phpMyAdmin 4.8.4 documentation" href="index.html" />
     <link rel="up" title="User Guide" href="user.html" />
     <link rel="next" title="Bookmarks" href="bookmarks.html" />
-    <link rel="prev" title="Configuring phpMyAdmin" href="settings.html" /> 
+    <link rel="prev" title="Two-factor authentication" href="two_factor.html" /> 
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -42,9 +42,9 @@
           <a href="bookmarks.html" title="Bookmarks"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="settings.html" title="Configuring phpMyAdmin"
+          <a href="two_factor.html" title="Two-factor authentication"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.7.9 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.8.4 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="user.html" accesskey="U">User Guide</a> &#187;</li> 
       </ul>
     </div>  
@@ -122,15 +122,16 @@ the set. Use the format &#8220;&#8217;; charset=XXX&#8217;&#8221;. If you use a 
 which you can specify 2 options and you want to append a character
 set, enter &#8220;&#8216;first parameter&#8217;,&#8217;second parameter&#8217;,&#8217;charset=us-ascii&#8217;&#8221;.
 You can, however use the defaults for the parameters: &#8220;&#8217;&#8216;,&#8217;&#8216;,&#8217;charset
-=us-ascii&#8217;&#8221;.</li>
+=us-ascii&#8217;&#8221;. The default options can be configured using
+<span class="target" id="index-0"></span><a class="reference internal" href="config.html#cfg_DefaultTransformations"><code class="xref config config-option docutils literal"><span class="pre">$cfg['DefaultTransformations']</span></code></a></li>
 </ul>
 </div>
 <div class="section" id="file-structure">
 <span id="transformationsfiles"></span><h2>File structure<a class="headerlink" href="#file-structure" title="Permalink to this headline">¶</a></h2>
 <p>All specific transformations for mimetypes are defined through class
-files in the directory &#8216;libraries/plugins/transformations/&#8217;. Each of
+files in the directory &#8216;libraries/classes/Plugins/Transformations/&#8217;. Each of
 them extends a certain transformation abstract class declared in
-libraries/plugins/transformations/abstract.</p>
+libraries/classes/Plugins/Transformations/Abs.</p>
 <p>They are stored in files to ease up customization and easy adding of
 new transformations.</p>
 <p>Because the user cannot enter own mimetypes, it is kept sure that
@@ -153,8 +154,8 @@ name of the MIME type, MIME Subtype and transformation accordingly.
 getInfo() returns the transformation&#8217;s description and possible
 options it may receive and applyTransformation() is the method that
 does the actual work of the transformation plug-in.</p>
-<p>Please see the libraries/plugins/transformations/TEMPLATE and
-libraries/plugins/transformations/TEMPLATE_ABSTRACT files for adding
+<p>Please see the libraries/classes/Plugins/Transformations/TEMPLATE and
+libraries/classes/Plugins/Transformations/TEMPLATE_ABSTRACT files for adding
 your own transformation plug-in. You can also generate a new
 transformation plug-in (with or without the abstract transformation
 class), by using
@@ -194,8 +195,8 @@ variable contains the original MIME-type of the column (i.e.
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="settings.html"
-                        title="previous chapter">Configuring phpMyAdmin</a></p>
+  <p class="topless"><a href="two_factor.html"
+                        title="previous chapter">Two-factor authentication</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="bookmarks.html"
                         title="next chapter">Bookmarks</a></p>
@@ -230,14 +231,14 @@ variable contains the original MIME-type of the column (i.e.
           <a href="bookmarks.html" title="Bookmarks"
              >next</a> |</li>
         <li class="right" >
-          <a href="settings.html" title="Configuring phpMyAdmin"
+          <a href="two_factor.html" title="Two-factor authentication"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.7.9 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.8.4 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="user.html" >User Guide</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; <a href="copyright.html">Copyright</a> 2012 - 2017, The phpMyAdmin devel team.
+        &#169; <a href="copyright.html">Copyright</a> 2012 - 2018, The phpMyAdmin devel team.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.9.
     </div>
   </body>

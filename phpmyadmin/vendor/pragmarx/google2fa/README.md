@@ -2,15 +2,14 @@
 
 <p align="center">
     <a href="https://packagist.org/packages/pragmarx/google2fa"><img alt="Latest Stable Version" src="https://img.shields.io/packagist/v/pragmarx/google2fa.svg?style=flat-square"></a>
-    <a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square"></a>
+    <a href="LICENSE.md"><img alt="License" src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square"></a>
     <a href="https://scrutinizer-ci.com/g/antonioribeiro/google2fa/?branch=master"><img alt="Code Quality" src="https://img.shields.io/scrutinizer/g/antonioribeiro/google2fa.svg?style=flat-square"></a>
     <a href="https://travis-ci.org/antonioribeiro/google2fa"><img alt="Build" src="https://img.shields.io/travis/antonioribeiro/google2fa.svg?style=flat-square"></a>
-    <a href="https://packagist.org/packages/pragmarx/google2fa"><img alt="Downloads" src="https://img.shields.io/packagist/dt/pragmarx/google2fa.svg?style=flat-square"></a>
 </p>
 <p align="center">
+    <a href="https://packagist.org/packages/pragmarx/google2fa"><img alt="Downloads" src="https://img.shields.io/packagist/dt/pragmarx/google2fa.svg?style=flat-square"></a>
     <a href="https://scrutinizer-ci.com/g/antonioribeiro/google2fa/?branch=master"><img alt="Coverage" src="https://img.shields.io/scrutinizer/coverage/g/antonioribeiro/google2fa.svg?style=flat-square"></a>
     <a href="https://styleci.io/repos/24296182"><img alt="StyleCI" src="https://styleci.io/repos/24296182/shield"></a>
-    <a href="https://insight.sensiolabs.com/projects/156fbef1-b03f-4fca-ba97-57874b7a35bf"><img alt="SensioLabsInsight" src="https://img.shields.io/sensiolabs/i/156fbef1-b03f-4fca-ba97-57874b7a35bf.svg?style=flat-square"></a>
     <a href="https://travis-ci.org/antonioribeiro/google2fa"><img alt="PHP" src="https://img.shields.io/badge/PHP-5.4%20--%207.2-brightgreen.svg?style=flat-square"></a>
 </p>
 
@@ -22,7 +21,7 @@ This package is agnostic, but there's a [Laravel bridge](https://github.com/anto
 
 ## Demos, Example & Playground
 
-Please check the [Google2FA Package Playground](https://pragmarx.com/google2fa). 
+Please check the [Google2FA Package Playground](http://pragmarx.com/playground/google2fa). 
 
 ![playground](docs/playground.jpg)
 
@@ -46,7 +45,7 @@ If you prefer inline QRCodes instead of a Google generated url, you'll need to i
 
 ## Using It
 
-#### Instantiate it directly
+### Instantiate it directly
 
 ```php
 use PragmaRX\Google2FA\Google2FA;
@@ -64,9 +63,35 @@ Generate a secret key for your user and save it:
 $user->google2fa_secret = $google2fa->generateSecretKey();
 ```
 
-Show the QR Code to your user:
+## Generating QRCodes
+
+The securer way of creating QRCode is to do it yourself or using a library. First you have to install the BaconQrCode package, as stated above, then you just have to generate the inline string using:
+ 
+```php
+$inlineUrl = $google2fa->getQRCodeInline(
+    $companyName,
+    $companyEmail,
+    $secretKey
+);
+```
+
+And use it in your blade template this way:
+
+```html
+<img src="{{ $inlineUrl }}">
+```
 
 ```php
+$secretKey = $google2fa->generateSecretKey(16, $userId);
+```
+
+## Show the QR Code to your user, via Google Apis
+
+It's insecure to use it via Google Apis, so you have to enable it before using it.
+
+```php
+$google2fa->setAllowInsecureCallToGoogleApis(true);
+
 $google2fa_url = $google2fa->getQRCodeGoogleUrl(
     'YourCompany',
     $user->email,
@@ -195,28 +220,6 @@ You can change key regeneration interval, which defaults to 30 seconds, but reme
 $google2fa->setKeyRegeneration(40);
 ```
 
-#### Generating Inline QRCodes
-
-First you have to install the BaconQrCode package, as stated above, then you just have to generate the inline string using:
- 
-```php
-$inlineUrl = $google2fa->getQRCodeInline(
-    $companyName,
-    $companyEmail,
-    $secretKey
-);
-```
-
-And use it in your blade template this way:
-
-```html
-<img src="{{ $inlineUrl }}">
-```
-
-```php
-$secretKey = $google2fa->generateSecretKey(16, $userId);
-```
-
 ## Google Authenticator secret key compatibility
 
 To be compatible with Google Authenticator, your (converted to base 32) secret key length must be at least 8 chars and be a power of 2: 8, 16, 32, 64...
@@ -258,13 +261,15 @@ To use the two factor authentication, your user will have to install a Google Au
 
 The package tests were written with [phpspec](http://www.phpspec.net/en/latest/).
 
-## Author
+## Authors
 
-[Antonio Carlos Ribeiro](http://twitter.com/iantonioribeiro)
+- [Antonio Carlos Ribeiro](http://twitter.com/iantonioribeiro)
+- [Phil (Orginal author of this class)](https://www.idontplaydarts.com/static/ga.php_.txt)
+- [All Contributors](https://github.com/antonioribeiro/google2fa/graphs/contributors)
 
 ## License
 
-Google2FA is licensed under the BSD 3-Clause License - see the `LICENSE` file for details
+Google2FA is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.
 
 ## Contributing
 
