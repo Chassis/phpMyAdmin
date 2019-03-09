@@ -1,7 +1,7 @@
 <?php
 
 /* javascript/display.twig */
-class __TwigTemplate_7373de8e4375aba2f159d9d9001a5fa056ca4a83c3b5fddf7c42cb835992e74b extends Twig_Template
+class __TwigTemplate_19e8334a430bcb33984d85e50bffa23cd10c7554cc13366ee0529be7b15bc7d9 extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
     {
@@ -9,11 +9,11 @@ class __TwigTemplate_7373de8e4375aba2f159d9d9001a5fa056ca4a83c3b5fddf7c42cb83599
 
         $this->parent = false;
 
-        $this->blocks = array(
-        );
+        $this->blocks = [
+        ];
     }
 
-    protected function doDisplay(array $context, array $blocks = array())
+    protected function doDisplay(array $context, array $blocks = [])
     {
         // line 1
         echo "<script type=\"text/javascript\">

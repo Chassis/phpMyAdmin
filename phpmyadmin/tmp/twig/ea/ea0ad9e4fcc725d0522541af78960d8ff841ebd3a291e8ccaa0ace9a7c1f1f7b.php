@@ -1,7 +1,7 @@
 <?php
 
 /* navigation/logo.twig */
-class __TwigTemplate_a22b47854f7c355cea6e808c549faa685e4f3d94c3e4b0683786d1a8457ba50b extends Twig_Template
+class __TwigTemplate_f959e4e2295ae2e24e2cbc35e3dd95b0be1cace68063671874236277c9e915ba extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
     {
@@ -9,11 +9,11 @@ class __TwigTemplate_a22b47854f7c355cea6e808c549faa685e4f3d94c3e4b0683786d1a8457
 
         $this->parent = false;
 
-        $this->blocks = array(
-        );
+        $this->blocks = [
+        ];
     }
 
-    protected function doDisplay(array $context, array $blocks = array())
+    protected function doDisplay(array $context, array $blocks = [])
     {
         // line 1
         if (($context["display_logo"] ?? null)) {

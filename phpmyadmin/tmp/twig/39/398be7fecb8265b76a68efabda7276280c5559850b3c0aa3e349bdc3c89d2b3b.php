@@ -1,7 +1,7 @@
 <?php
 
 /* config/form_display/fieldset_top.twig */
-class __TwigTemplate_845d95330ca550133fe27c3b823ba7fe2c538571dd8a7daf87978908e198fa07 extends Twig_Template
+class __TwigTemplate_6db613c1e38ad768179ff130ac79582f616fa9872e40e03d4fd3316f0e24ab56 extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
     {
@@ -9,11 +9,11 @@ class __TwigTemplate_845d95330ca550133fe27c3b823ba7fe2c538571dd8a7daf87978908e19
 
         $this->parent = false;
 
-        $this->blocks = array(
-        );
+        $this->blocks = [
+        ];
     }
 
-    protected function doDisplay(array $context, array $blocks = array())
+    protected function doDisplay(array $context, array $blocks = [])
     {
         // line 1
         echo "<fieldset";

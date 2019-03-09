@@ -1,7 +1,7 @@
 <?php
 
 /* list/unordered.twig */
-class __TwigTemplate_3bd5992eef7d0b31bfdc3caf35e25a76b50d8240951bca4f820f06989dc3d87d extends Twig_Template
+class __TwigTemplate_fda3457976cdb36e73e2daf014ac013f32c270e8441cd269a177d17370e1f976 extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
     {
@@ -9,11 +9,11 @@ class __TwigTemplate_3bd5992eef7d0b31bfdc3caf35e25a76b50d8240951bca4f820f06989dc
 
         $this->parent = false;
 
-        $this->blocks = array(
-        );
+        $this->blocks = [
+        ];
     }
 
-    protected function doDisplay(array $context, array $blocks = array())
+    protected function doDisplay(array $context, array $blocks = [])
     {
         // line 1
         echo "<ul";
@@ -43,7 +43,7 @@ class __TwigTemplate_3bd5992eef7d0b31bfdc3caf35e25a76b50d8240951bca4f820f06989dc
                 if ( !twig_test_iterable($context["item"])) {
                     // line 7
                     echo "                ";
-                    $context["item"] = array("content" => $context["item"]);
+                    $context["item"] = ["content" => $context["item"]];
                     // line 8
                     echo "            ";
                 }
