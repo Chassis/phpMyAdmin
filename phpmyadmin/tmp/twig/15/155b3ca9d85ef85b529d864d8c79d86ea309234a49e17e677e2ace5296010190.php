@@ -1,7 +1,7 @@
 <?php
 
 /* select_lang.twig */
-class __TwigTemplate_88192a018792792fe54b0307f11a2d90750574316444174a1fad434ef61092fb extends Twig_Template
+class __TwigTemplate_e163494680709b647bea624b4515a3745b90238b73954982b1cc350175b469de extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
     {
@@ -9,11 +9,11 @@ class __TwigTemplate_88192a018792792fe54b0307f11a2d90750574316444174a1fad434ef61
 
         $this->parent = false;
 
-        $this->blocks = array(
-        );
+        $this->blocks = [
+        ];
     }
 
-    protected function doDisplay(array $context, array $blocks = array())
+    protected function doDisplay(array $context, array $blocks = [])
     {
         // line 1
         echo "    <form method=\"get\" action=\"index.php\" class=\"disableAjax\">
@@ -55,10 +55,10 @@ class __TwigTemplate_88192a018792792fe54b0307f11a2d90750574316444174a1fad434ef61
             echo "        ";
             // line 17
             echo "        <option value=\"";
-            echo twig_escape_filter($this->env, twig_lower_filter($this->env, $this->getAttribute($context["language"], "getCode", array(), "method")), "html", null, true);
+            echo twig_escape_filter($this->env, twig_lower_filter($this->env, $this->getAttribute($context["language"], "getCode", [], "method")), "html", null, true);
             echo "\"";
             // line 18
-            if ($this->getAttribute($context["language"], "isActive", array(), "method")) {
+            if ($this->getAttribute($context["language"], "isActive", [], "method")) {
                 // line 19
                 echo "                selected=\"selected\"";
             }
@@ -66,7 +66,7 @@ class __TwigTemplate_88192a018792792fe54b0307f11a2d90750574316444174a1fad434ef61
             echo ">
         ";
             // line 22
-            echo $this->getAttribute($context["language"], "getName", array(), "method");
+            echo $this->getAttribute($context["language"], "getName", [], "method");
             echo "
         </option>
     ";

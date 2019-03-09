@@ -1,7 +1,7 @@
 <?php
 
 /* console/display.twig */
-class __TwigTemplate_02ae083ffe4e51c5630908fdd1cd35e9efb1c43dc2147c6ca46a2c9e391ac084 extends Twig_Template
+class __TwigTemplate_3a1795ae9a4fe741d454f9b94efbf4578003aadec588c71f78161756b441451f extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
     {
@@ -9,11 +9,11 @@ class __TwigTemplate_02ae083ffe4e51c5630908fdd1cd35e9efb1c43dc2147c6ca46a2c9e391
 
         $this->parent = false;
 
-        $this->blocks = array(
-        );
+        $this->blocks = [
+        ];
     }
 
-    protected function doDisplay(array $context, array $blocks = array())
+    protected function doDisplay(array $context, array $blocks = [])
     {
         // line 1
         echo "<div id=\"pma_console_container\">
@@ -21,9 +21,9 @@ class __TwigTemplate_02ae083ffe4e51c5630908fdd1cd35e9efb1c43dc2147c6ca46a2c9e391
         ";
         // line 4
         echo "        ";
-        $this->loadTemplate("console/toolbar.twig", "console/display.twig", 4)->display(array("parent_div_classes" => "collapsed", "content_array" => array(0 => array(0 => "switch_button console_switch", 1 => _gettext("Console"), "image" =>         // line 7
-($context["image"] ?? null)), 1 => array(0 => "button clear", 1 => _gettext("Clear")), 2 => array(0 => "button history", 1 => _gettext("History")), 3 => array(0 => "button options", 1 => _gettext("Options")), 4 => ((        // line 11
-(isset($context["cfg_bookmark"]) || array_key_exists("cfg_bookmark", $context))) ? (array(0 => "button bookmarks", 1 => _gettext("Bookmarks"))) : (null)), 5 => array(0 => "button debug hide", 1 => _gettext("Debug SQL")))));
+        $this->loadTemplate("console/toolbar.twig", "console/display.twig", 4)->display(["parent_div_classes" => "collapsed", "content_array" => [0 => [0 => "switch_button console_switch", 1 => _gettext("Console"), "image" =>         // line 7
+($context["image"] ?? null)], 1 => [0 => "button clear", 1 => _gettext("Clear")], 2 => [0 => "button history", 1 => _gettext("History")], 3 => [0 => "button options", 1 => _gettext("Options")], 4 => ((        // line 11
+(isset($context["cfg_bookmark"]) || array_key_exists("cfg_bookmark", $context))) ? ([0 => "button bookmarks", 1 => _gettext("Bookmarks")]) : (null)), 5 => [0 => "button debug hide", 1 => _gettext("Debug SQL")]]]);
         // line 15
         echo "        ";
         // line 16
@@ -54,24 +54,24 @@ class __TwigTemplate_02ae083ffe4e51c5630908fdd1cd35e9efb1c43dc2147c6ca46a2c9e391
                 // line 28
                 echo "                        <div class=\"message history collapsed hide";
                 // line 29
-                echo ((preg_match("@^SELECT[[:space:]]+@i", $this->getAttribute($context["record"], "sqlquery", array(), "array"))) ? (" select") : (""));
+                echo ((preg_match("@^SELECT[[:space:]]+@i", $this->getAttribute($context["record"], "sqlquery", [], "array"))) ? (" select") : (""));
                 echo "\"
                             targetdb=\"";
                 // line 30
-                echo twig_escape_filter($this->env, $this->getAttribute($context["record"], "db", array(), "array"), "html", null, true);
+                echo twig_escape_filter($this->env, $this->getAttribute($context["record"], "db", [], "array"), "html", null, true);
                 echo "\" targettable=\"";
-                echo twig_escape_filter($this->env, $this->getAttribute($context["record"], "table", array(), "array"), "html", null, true);
+                echo twig_escape_filter($this->env, $this->getAttribute($context["record"], "table", [], "array"), "html", null, true);
                 echo "\">
                             ";
                 // line 31
-                $this->loadTemplate("console/query_action.twig", "console/display.twig", 31)->display(array("parent_div_classes" => "action_content", "content_array" => array(0 => array(0 => "action collapse", 1 => _gettext("Collapse")), 1 => array(0 => "action expand", 1 => _gettext("Expand")), 2 => array(0 => "action requery", 1 => _gettext("Requery")), 3 => array(0 => "action edit", 1 => _gettext("Edit")), 4 => array(0 => "action explain", 1 => _gettext("Explain")), 5 => array(0 => "action profiling", 1 => _gettext("Profiling")), 6 => ((                // line 40
-(isset($context["cfg_bookmark"]) || array_key_exists("cfg_bookmark", $context))) ? (array(0 => "action bookmark", 1 => _gettext("Bookmark"))) : (null)), 7 => array(0 => "text failed", 1 => _gettext("Query failed")), 8 => array(0 => "text targetdb", 1 => _gettext("Database"), "extraSpan" => $this->getAttribute(                // line 42
-$context["record"], "db", array(), "array")), 9 => array(0 => "text query_time", 1 => _gettext("Queried time"), "extraSpan" => (($this->getAttribute(                // line 46
-$context["record"], "timevalue", array(), "array", true, true)) ? ($this->getAttribute(                // line 47
-$context["record"], "timevalue", array(), "array")) : (_gettext("During current session")))))));
+                $this->loadTemplate("console/query_action.twig", "console/display.twig", 31)->display(["parent_div_classes" => "action_content", "content_array" => [0 => [0 => "action collapse", 1 => _gettext("Collapse")], 1 => [0 => "action expand", 1 => _gettext("Expand")], 2 => [0 => "action requery", 1 => _gettext("Requery")], 3 => [0 => "action edit", 1 => _gettext("Edit")], 4 => [0 => "action explain", 1 => _gettext("Explain")], 5 => [0 => "action profiling", 1 => _gettext("Profiling")], 6 => ((                // line 40
+(isset($context["cfg_bookmark"]) || array_key_exists("cfg_bookmark", $context))) ? ([0 => "action bookmark", 1 => _gettext("Bookmark")]) : (null)), 7 => [0 => "text failed", 1 => _gettext("Query failed")], 8 => [0 => "text targetdb", 1 => _gettext("Database"), "extraSpan" => $this->getAttribute(                // line 42
+$context["record"], "db", [], "array")], 9 => [0 => "text query_time", 1 => _gettext("Queried time"), "extraSpan" => (($this->getAttribute(                // line 46
+$context["record"], "timevalue", [], "array", true, true)) ? ($this->getAttribute(                // line 47
+$context["record"], "timevalue", [], "array")) : (_gettext("During current session")))]]]);
                 // line 51
                 echo "                            <span class=\"query\">";
-                echo twig_escape_filter($this->env, $this->getAttribute($context["record"], "sqlquery", array(), "array"), "html", null, true);
+                echo twig_escape_filter($this->env, $this->getAttribute($context["record"], "sqlquery", [], "array"), "html", null, true);
                 echo "</span>
                         </div>
                     ";
@@ -96,7 +96,7 @@ $context["record"], "timevalue", array(), "array")) : (_gettext("During current 
         echo "        <div class=\"card\" id=\"debug_console\">
             ";
         // line 64
-        $this->loadTemplate("console/toolbar.twig", "console/display.twig", 64)->display(array("parent_div_classes" => "", "content_array" => array(0 => array(0 => "button order order_asc", 1 => _gettext("ascending")), 1 => array(0 => "button order order_desc", 1 => _gettext("descending")), 2 => array(0 => "text", 1 => _gettext("Order:")), 3 => array(0 => "switch_button", 1 => _gettext("Debug SQL")), 4 => array(0 => "button order_by sort_count", 1 => _gettext("Count")), 5 => array(0 => "button order_by sort_exec", 1 => _gettext("Execution order")), 6 => array(0 => "button order_by sort_time", 1 => _gettext("Time taken")), 7 => array(0 => "text", 1 => _gettext("Order by:")), 8 => array(0 => "button group_queries", 1 => _gettext("Group queries")), 9 => array(0 => "button ungroup_queries", 1 => _gettext("Ungroup queries")))));
+        $this->loadTemplate("console/toolbar.twig", "console/display.twig", 64)->display(["parent_div_classes" => "", "content_array" => [0 => [0 => "button order order_asc", 1 => _gettext("ascending")], 1 => [0 => "button order order_desc", 1 => _gettext("descending")], 2 => [0 => "text", 1 => _gettext("Order:")], 3 => [0 => "switch_button", 1 => _gettext("Debug SQL")], 4 => [0 => "button order_by sort_count", 1 => _gettext("Count")], 5 => [0 => "button order_by sort_exec", 1 => _gettext("Execution order")], 6 => [0 => "button order_by sort_time", 1 => _gettext("Time taken")], 7 => [0 => "text", 1 => _gettext("Order by:")], 8 => [0 => "button group_queries", 1 => _gettext("Group queries")], 9 => [0 => "button ungroup_queries", 1 => _gettext("Ungroup queries")]]]);
         // line 79
         echo "            <div class=\"content debug\">
                 <div class=\"message welcome\"></div>
@@ -105,7 +105,7 @@ $context["record"], "timevalue", array(), "array")) : (_gettext("During current 
             <div class=\"templates\">
                 ";
         // line 84
-        $this->loadTemplate("console/query_action.twig", "console/display.twig", 84)->display(array("parent_div_classes" => "debug_query action_content", "content_array" => array(0 => array(0 => "action collapse", 1 => _gettext("Collapse")), 1 => array(0 => "action expand", 1 => _gettext("Expand")), 2 => array(0 => "action dbg_show_trace", 1 => _gettext("Show trace")), 3 => array(0 => "action dbg_hide_trace", 1 => _gettext("Hide trace")), 4 => array(0 => "text count hide", 1 => _gettext("Count")), 5 => array(0 => "text time", 1 => _gettext("Time taken")))));
+        $this->loadTemplate("console/query_action.twig", "console/display.twig", 84)->display(["parent_div_classes" => "debug_query action_content", "content_array" => [0 => [0 => "action collapse", 1 => _gettext("Collapse")], 1 => [0 => "action expand", 1 => _gettext("Expand")], 2 => [0 => "action dbg_show_trace", 1 => _gettext("Show trace")], 3 => [0 => "action dbg_hide_trace", 1 => _gettext("Hide trace")], 4 => [0 => "text count hide", 1 => _gettext("Count")], 5 => [0 => "text time", 1 => _gettext("Time taken")]]]);
         // line 95
         echo "            </div> <!-- Template -->
         </div> <!-- Debug SQL card -->
@@ -116,7 +116,7 @@ $context["record"], "timevalue", array(), "array")) : (_gettext("During current 
             echo "            <div class=\"card\" id=\"pma_bookmarks\">
                 ";
             // line 99
-            $this->loadTemplate("console/toolbar.twig", "console/display.twig", 99)->display(array("parent_div_classes" => "", "content_array" => array(0 => array(0 => "switch_button", 1 => _gettext("Bookmarks")), 1 => array(0 => "button refresh", 1 => _gettext("Refresh")), 2 => array(0 => "button add", 1 => _gettext("Add")))));
+            $this->loadTemplate("console/toolbar.twig", "console/display.twig", 99)->display(["parent_div_classes" => "", "content_array" => [0 => [0 => "switch_button", 1 => _gettext("Bookmarks")], 1 => [0 => "button refresh", 1 => _gettext("Refresh")], 2 => [0 => "button add", 1 => _gettext("Add")]]]);
             // line 107
             echo "                <div class=\"content bookmark\">
                     ";
@@ -128,7 +128,7 @@ $context["record"], "timevalue", array(), "array")) : (_gettext("During current 
                 <div class=\"card add\">
                     ";
             // line 112
-            $this->loadTemplate("console/toolbar.twig", "console/display.twig", 112)->display(array("parent_div_classes" => "", "content_array" => array(0 => array(0 => "switch_button", 1 => _gettext("Add bookmark")))));
+            $this->loadTemplate("console/toolbar.twig", "console/display.twig", 112)->display(["parent_div_classes" => "", "content_array" => [0 => [0 => "switch_button", 1 => _gettext("Add bookmark")]]]);
             // line 118
             echo "                    <div class=\"content add_bookmark\">
                         <div class=\"options\">
@@ -169,7 +169,7 @@ $context["record"], "timevalue", array(), "array")) : (_gettext("During current 
         echo "        <div class=\"card\" id=\"pma_console_options\">
             ";
         // line 140
-        $this->loadTemplate("console/toolbar.twig", "console/display.twig", 140)->display(array("parent_div_classes" => "", "content_array" => array(0 => array(0 => "switch_button", 1 => _gettext("Options")), 1 => array(0 => "button default", 1 => _gettext("Set default")))));
+        $this->loadTemplate("console/toolbar.twig", "console/display.twig", 140)->display(["parent_div_classes" => "", "content_array" => [0 => [0 => "switch_button", 1 => _gettext("Options")], 1 => [0 => "button default", 1 => _gettext("Set default")]]]);
         // line 147
         echo "            <div class=\"content\">
                 <label>
@@ -214,8 +214,8 @@ $context["record"], "timevalue", array(), "array")) : (_gettext("During current 
             ";
         // line 175
         echo "            ";
-        $this->loadTemplate("console/query_action.twig", "console/display.twig", 175)->display(array("parent_div_classes" => "query_actions", "content_array" => array(0 => array(0 => "action collapse", 1 => _gettext("Collapse")), 1 => array(0 => "action expand", 1 => _gettext("Expand")), 2 => array(0 => "action requery", 1 => _gettext("Requery")), 3 => array(0 => "action edit", 1 => _gettext("Edit")), 4 => array(0 => "action explain", 1 => _gettext("Explain")), 5 => array(0 => "action profiling", 1 => _gettext("Profiling")), 6 => ((        // line 184
-(isset($context["cfg_bookmark"]) || array_key_exists("cfg_bookmark", $context))) ? (array(0 => "action bookmark", 1 => _gettext("Bookmark"))) : (null)), 7 => array(0 => "text failed", 1 => _gettext("Query failed")), 8 => array(0 => "text targetdb", 1 => _gettext("Database")), 9 => array(0 => "text query_time", 1 => _gettext("Queried time")))));
+        $this->loadTemplate("console/query_action.twig", "console/display.twig", 175)->display(["parent_div_classes" => "query_actions", "content_array" => [0 => [0 => "action collapse", 1 => _gettext("Collapse")], 1 => [0 => "action expand", 1 => _gettext("Expand")], 2 => [0 => "action requery", 1 => _gettext("Requery")], 3 => [0 => "action edit", 1 => _gettext("Edit")], 4 => [0 => "action explain", 1 => _gettext("Explain")], 5 => [0 => "action profiling", 1 => _gettext("Profiling")], 6 => ((        // line 184
+(isset($context["cfg_bookmark"]) || array_key_exists("cfg_bookmark", $context))) ? ([0 => "action bookmark", 1 => _gettext("Bookmark")]) : (null)), 7 => [0 => "text failed", 1 => _gettext("Query failed")], 8 => [0 => "text targetdb", 1 => _gettext("Database")], 9 => [0 => "text query_time", 1 => _gettext("Queried time")]]]);
         // line 190
         echo "        </div>
     </div> <!-- #console end -->

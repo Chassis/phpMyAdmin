@@ -1,7 +1,7 @@
 <?php
 
 /* console/query_action.twig */
-class __TwigTemplate_1c73de3d8eda43f647a3cb3a094a86d23b9c51cc2f380ca47d4784398c2aa733 extends Twig_Template
+class __TwigTemplate_5539220623d0a1b0aa1f55acaccdb8788c1b1fd805092de3ee945ddd552dc564 extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
     {
@@ -9,11 +9,11 @@ class __TwigTemplate_1c73de3d8eda43f647a3cb3a094a86d23b9c51cc2f380ca47d4784398c2
 
         $this->parent = false;
 
-        $this->blocks = array(
-        );
+        $this->blocks = [
+        ];
     }
 
-    protected function doDisplay(array $context, array $blocks = array())
+    protected function doDisplay(array $context, array $blocks = [])
     {
         // line 1
         echo "<div class=\"";
@@ -29,18 +29,18 @@ class __TwigTemplate_1c73de3d8eda43f647a3cb3a094a86d23b9c51cc2f380ca47d4784398c2
             if ((isset($context["content"]) || array_key_exists("content", $context))) {
                 // line 4
                 echo "        <span class=\"";
-                echo twig_escape_filter($this->env, $this->getAttribute($context["content"], 0, array(), "array"), "html", null, true);
+                echo twig_escape_filter($this->env, $this->getAttribute($context["content"], 0, [], "array"), "html", null, true);
                 echo "\">
             ";
                 // line 5
-                echo twig_escape_filter($this->env, $this->getAttribute($context["content"], 1, array(), "array"), "html", null, true);
+                echo twig_escape_filter($this->env, $this->getAttribute($context["content"], 1, [], "array"), "html", null, true);
                 echo "
             ";
                 // line 6
-                if ($this->getAttribute($context["content"], "extraSpan", array(), "array", true, true)) {
+                if ($this->getAttribute($context["content"], "extraSpan", [], "array", true, true)) {
                     // line 7
                     echo "                : <span>";
-                    echo twig_escape_filter($this->env, $this->getAttribute($context["content"], "extraSpan", array(), "array"), "html", null, true);
+                    echo twig_escape_filter($this->env, $this->getAttribute($context["content"], "extraSpan", [], "array"), "html", null, true);
                     echo "</span>
             ";
                 }

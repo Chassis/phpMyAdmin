@@ -1,7 +1,7 @@
 <?php
 
 /* config/form_display/form_bottom.twig */
-class __TwigTemplate_8b99bc806ab2ee4c516f8cff600a8e0ef788cbca60edd1a8116731ce4fac50f3 extends Twig_Template
+class __TwigTemplate_2dcede64c0a5ab44e16e1ff7e0e50d407d17cc2cfc7a663126dd4bb854fe9aeb extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
     {
@@ -9,11 +9,11 @@ class __TwigTemplate_8b99bc806ab2ee4c516f8cff600a8e0ef788cbca60edd1a8116731ce4fa
 
         $this->parent = false;
 
-        $this->blocks = array(
-        );
+        $this->blocks = [
+        ];
     }
 
-    protected function doDisplay(array $context, array $blocks = array())
+    protected function doDisplay(array $context, array $blocks = [])
     {
         // line 1
         echo "</form>

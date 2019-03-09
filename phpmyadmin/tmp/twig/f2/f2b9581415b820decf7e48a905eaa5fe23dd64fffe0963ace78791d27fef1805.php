@@ -1,7 +1,7 @@
 <?php
 
 /* console/toolbar.twig */
-class __TwigTemplate_34224f2571096b6ad73c9e73887deaeecea33cf930857ae5e4eab0988ad99633 extends Twig_Template
+class __TwigTemplate_adb3a68995d5d55ceeea4340099678c367ceecb10df9b27045e26ace1bd074da extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
     {
@@ -9,11 +9,11 @@ class __TwigTemplate_34224f2571096b6ad73c9e73887deaeecea33cf930857ae5e4eab0988ad
 
         $this->parent = false;
 
-        $this->blocks = array(
-        );
+        $this->blocks = [
+        ];
     }
 
-    protected function doDisplay(array $context, array $blocks = array())
+    protected function doDisplay(array $context, array $blocks = [])
     {
         // line 1
         echo "<div class=\"toolbar ";
@@ -29,15 +29,15 @@ class __TwigTemplate_34224f2571096b6ad73c9e73887deaeecea33cf930857ae5e4eab0988ad
             if ((isset($context["content"]) || array_key_exists("content", $context))) {
                 // line 4
                 echo "        <div class=\"";
-                echo twig_escape_filter($this->env, $this->getAttribute($context["content"], 0, array(), "array"), "html", null, true);
+                echo twig_escape_filter($this->env, $this->getAttribute($context["content"], 0, [], "array"), "html", null, true);
                 echo "\">
             ";
                 // line 5
-                echo (($this->getAttribute($context["content"], "image", array(), "array", true, true)) ? ($this->getAttribute($context["content"], "image", array(), "array")) : (""));
+                echo (($this->getAttribute($context["content"], "image", [], "array", true, true)) ? ($this->getAttribute($context["content"], "image", [], "array")) : (""));
                 echo "
             <span>";
                 // line 6
-                echo twig_escape_filter($this->env, $this->getAttribute($context["content"], 1, array(), "array"), "html", null, true);
+                echo twig_escape_filter($this->env, $this->getAttribute($context["content"], 1, [], "array"), "html", null, true);
                 echo "</span>
         </div>
         ";

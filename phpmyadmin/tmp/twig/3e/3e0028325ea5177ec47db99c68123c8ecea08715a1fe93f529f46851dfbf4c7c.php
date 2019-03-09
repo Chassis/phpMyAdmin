@@ -1,7 +1,7 @@
 <?php
 
 /* list/item.twig */
-class __TwigTemplate_db2416053f8337dc97d85528539045366317225a2bd7b18cff29b83b52905840 extends Twig_Template
+class __TwigTemplate_949524bb9c25b6c8653e2ef21950a4feb51865bd597c680412df8bee02954907 extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
     {
@@ -9,11 +9,11 @@ class __TwigTemplate_db2416053f8337dc97d85528539045366317225a2bd7b18cff29b83b529
 
         $this->parent = false;
 
-        $this->blocks = array(
-        );
+        $this->blocks = [
+        ];
     }
 
-    protected function doDisplay(array $context, array $blocks = array())
+    protected function doDisplay(array $context, array $blocks = [])
     {
         // line 1
         echo "<li";
@@ -32,40 +32,40 @@ class __TwigTemplate_db2416053f8337dc97d85528539045366317225a2bd7b18cff29b83b529
 
     ";
         // line 4
-        if ((((isset($context["url"]) || array_key_exists("url", $context)) && twig_test_iterable(($context["url"] ?? null))) &&  !twig_test_empty($this->getAttribute(($context["url"] ?? null), "href", array(), "array")))) {
+        if ((((isset($context["url"]) || array_key_exists("url", $context)) && twig_test_iterable(($context["url"] ?? null))) &&  !twig_test_empty($this->getAttribute(($context["url"] ?? null), "href", [], "array")))) {
             // line 5
             echo "        <a";
-            if ( !twig_test_empty($this->getAttribute(($context["url"] ?? null), "href", array(), "array"))) {
+            if ( !twig_test_empty($this->getAttribute(($context["url"] ?? null), "href", [], "array"))) {
                 echo " href=\"";
-                echo $this->getAttribute(($context["url"] ?? null), "href", array(), "array");
+                echo $this->getAttribute(($context["url"] ?? null), "href", [], "array");
                 echo "\"";
             }
             // line 6
-            if ( !twig_test_empty($this->getAttribute(($context["url"] ?? null), "target", array(), "array"))) {
+            if ( !twig_test_empty($this->getAttribute(($context["url"] ?? null), "target", [], "array"))) {
                 echo " target=\"";
-                echo twig_escape_filter($this->env, $this->getAttribute(($context["url"] ?? null), "target", array(), "array"), "html", null, true);
+                echo twig_escape_filter($this->env, $this->getAttribute(($context["url"] ?? null), "target", [], "array"), "html", null, true);
                 echo "\"";
             }
             // line 7
-            if (( !twig_test_empty($this->getAttribute(($context["url"] ?? null), "target", array(), "array")) && ($this->getAttribute(($context["url"] ?? null), "target", array(), "array") == "_blank"))) {
+            if (( !twig_test_empty($this->getAttribute(($context["url"] ?? null), "target", [], "array")) && ($this->getAttribute(($context["url"] ?? null), "target", [], "array") == "_blank"))) {
                 echo " rel=\"noopener noreferrer\"";
             }
             // line 8
-            if ( !twig_test_empty($this->getAttribute(($context["url"] ?? null), "id", array(), "array"))) {
+            if ( !twig_test_empty($this->getAttribute(($context["url"] ?? null), "id", [], "array"))) {
                 echo " id=\"";
-                echo twig_escape_filter($this->env, $this->getAttribute(($context["url"] ?? null), "id", array(), "array"), "html", null, true);
+                echo twig_escape_filter($this->env, $this->getAttribute(($context["url"] ?? null), "id", [], "array"), "html", null, true);
                 echo "\"";
             }
             // line 9
-            if ( !twig_test_empty($this->getAttribute(($context["url"] ?? null), "class", array(), "array"))) {
+            if ( !twig_test_empty($this->getAttribute(($context["url"] ?? null), "class", [], "array"))) {
                 echo " class=\"";
-                echo twig_escape_filter($this->env, $this->getAttribute(($context["url"] ?? null), "class", array(), "array"), "html", null, true);
+                echo twig_escape_filter($this->env, $this->getAttribute(($context["url"] ?? null), "class", [], "array"), "html", null, true);
                 echo "\"";
             }
             // line 10
-            if ( !twig_test_empty($this->getAttribute(($context["url"] ?? null), "title", array(), "array"))) {
+            if ( !twig_test_empty($this->getAttribute(($context["url"] ?? null), "title", [], "array"))) {
                 echo " title=\"";
-                echo twig_escape_filter($this->env, $this->getAttribute(($context["url"] ?? null), "title", array(), "array"), "html", null, true);
+                echo twig_escape_filter($this->env, $this->getAttribute(($context["url"] ?? null), "title", [], "array"), "html", null, true);
                 echo "\"";
             }
             echo ">
@@ -77,7 +77,7 @@ class __TwigTemplate_db2416053f8337dc97d85528539045366317225a2bd7b18cff29b83b529
         echo "
     ";
         // line 13
-        if ((((isset($context["url"]) || array_key_exists("url", $context)) && twig_test_iterable(($context["url"] ?? null))) &&  !twig_test_empty($this->getAttribute(($context["url"] ?? null), "href", array(), "array")))) {
+        if ((((isset($context["url"]) || array_key_exists("url", $context)) && twig_test_iterable(($context["url"] ?? null))) &&  !twig_test_empty($this->getAttribute(($context["url"] ?? null), "href", [], "array")))) {
             // line 14
             echo "        </a>
     ";

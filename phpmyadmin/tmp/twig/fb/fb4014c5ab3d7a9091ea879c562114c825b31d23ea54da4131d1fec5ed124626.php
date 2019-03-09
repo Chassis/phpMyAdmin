@@ -1,7 +1,7 @@
 <?php
 
 /* config/form_display/tabs_bottom.twig */
-class __TwigTemplate_698c53d98d8df5194f54422bb2b7c90a77d4d6916c4889f7ef12218d8851b9e2 extends Twig_Template
+class __TwigTemplate_554f3d3c07947cc602407eee4d6650a88fd46845dabd7bff332930b02cd41de8 extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
     {
@@ -9,11 +9,11 @@ class __TwigTemplate_698c53d98d8df5194f54422bb2b7c90a77d4d6916c4889f7ef12218d885
 
         $this->parent = false;
 
-        $this->blocks = array(
-        );
+        $this->blocks = [
+        ];
     }
 
-    protected function doDisplay(array $context, array $blocks = array())
+    protected function doDisplay(array $context, array $blocks = [])
     {
         // line 1
         echo "</div>

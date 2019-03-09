@@ -1,7 +1,7 @@
 <?php
 
 /* config/form_display/fieldset_bottom.twig */
-class __TwigTemplate_068a8ed54d2523ff857d9939bd583bfa8090f9320deca91b68eb9e0cdc81e599 extends Twig_Template
+class __TwigTemplate_57c1280c6a9ab1c8310e47335815e2c42773f8327e971434e075e9137416811c extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
     {
@@ -9,11 +9,11 @@ class __TwigTemplate_068a8ed54d2523ff857d9939bd583bfa8090f9320deca91b68eb9e0cdc8
 
         $this->parent = false;
 
-        $this->blocks = array(
-        );
+        $this->blocks = [
+        ];
     }
 
-    protected function doDisplay(array $context, array $blocks = array())
+    protected function doDisplay(array $context, array $blocks = [])
     {
         // line 1
         $context["colspan"] = 2;
