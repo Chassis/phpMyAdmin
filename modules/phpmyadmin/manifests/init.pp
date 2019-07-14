@@ -15,7 +15,7 @@ class phpmyadmin (
 
 	file { "${path}/phpmyadmin/config.inc.php":
 		ensure  => $file,
-		content => template('phpmyadmin/config.inc.php.erb')
+		content => template('phpmyadmin/config.inc.php.erb'),
 	}
 
 	file { '/vagrant/phpmyadmin':

@@ -24,7 +24,7 @@ class TruncateStatement extends Statement
      * @var array
      */
     public static $OPTIONS = array(
-        'TABLE' => 1,
+        'TABLE' => 1
     );
 
     /**

@@ -92,7 +92,7 @@ class Parser extends Core
         // Lock statements
         // https://dev.mysql.com/doc/refman/5.7/en/lock-tables.html
         'LOCK' => 'PhpMyAdmin\\SqlParser\\Statements\\LockStatement',
-        'UNLOCK' => 'PhpMyAdmin\\SqlParser\\Statements\\LockStatement',
+        'UNLOCK' => 'PhpMyAdmin\\SqlParser\\Statements\\LockStatement'
     );
 
     /**
@@ -331,7 +331,7 @@ class Parser extends Core
         'WHERE' => array(
             'class' => 'PhpMyAdmin\\SqlParser\\Components\\Condition',
             'field' => 'where',
-        ),
+        )
     );
 
     /**
@@ -470,7 +470,7 @@ class Parser extends Core
 
             // Checking if it is a known statement that can be parsed.
             if (empty(static::$STATEMENT_PARSERS[$token->keyword])) {
-                if (!isset(static::$STATEMENT_PARSERS[$token->keyword])) {
+                if (! isset(static::$STATEMENT_PARSERS[$token->keyword])) {
                     // A statement is considered recognized if the parser
                     // is aware that it is a statement, but it does not have
                     // a parser for it yet.
@@ -511,7 +511,7 @@ class Parser extends Core
             $prevLastIdx = $list->idx;
 
             // Handles unions.
-            if (!empty($unionType)
+            if (! empty($unionType)
                 && ($lastStatement instanceof SelectStatement)
                 && ($statement instanceof SelectStatement)
             ) {
@@ -526,7 +526,10 @@ class Parser extends Core
                  *
                  * @var SelectStatement $lastStatement
                  */
-                $lastStatement->union[] = array($unionType, $statement);
+                $lastStatement->union[] = array(
+                    $unionType,
+                    $statement
+                );
 
                 // if there are no no delimiting brackets, the `ORDER` and
                 // `LIMIT` keywords actually belong to the first statement.
@@ -600,7 +603,8 @@ class Parser extends Core
     {
         $error = new ParserException(
             Translator::gettext($msg),
-            $token, $code
+            $token,
+            $code
         );
         parent::error($error);
     }

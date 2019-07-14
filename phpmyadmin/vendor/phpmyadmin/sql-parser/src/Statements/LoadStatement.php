@@ -52,7 +52,7 @@ class LoadStatement extends Statement
     public static $OPTIONS = array(
         'LOW_PRIORITY' => 1,
         'CONCURRENT' => 1,
-        'LOCAL' => 2,
+        'LOCAL' => 2
     );
 
     /**
@@ -61,10 +61,19 @@ class LoadStatement extends Statement
      * @var array
      */
     public static $FIELDS_OPTIONS = array(
-        'TERMINATED BY' => array(1, 'expr'),
+        'TERMINATED BY' => array(
+            1,
+            'expr',
+        ),
         'OPTIONALLY' => 2,
-        'ENCLOSED BY' => array(3, 'expr'),
-        'ESCAPED BY' => array(4, 'expr'),
+        'ENCLOSED BY' => array(
+            3,
+            'expr',
+        ),
+        'ESCAPED BY' => array(
+            4,
+            'expr',
+        )
     );
 
     /**
@@ -73,8 +82,14 @@ class LoadStatement extends Statement
      * @var array
      */
     public static $LINES_OPTIONS = array(
-        'STARTING BY' => array(1, 'expr'),
-        'TERMINATED BY' => array(2, 'expr'),
+        'STARTING BY' => array(
+            1,
+            'expr',
+        ),
+        'TERMINATED BY' => array(
+            2,
+            'expr',
+        )
     );
 
     /**
@@ -292,7 +307,9 @@ class LoadStatement extends Statement
             } elseif ($state >= 3 && $state <= 7) {
                 if ($token->type === Token::TYPE_KEYWORD) {
                     $newState = $this->parseKeywordsAccordingToState(
-                        $parser, $list, $state
+                        $parser,
+                        $list,
+                        $state
                     );
                     if ($newState === $state) {
                         // Avoid infinite loop

@@ -70,7 +70,7 @@ class TransactionStatement extends Statement
         'AND NO CHAIN' => 3,
         'AND CHAIN' => 3,
         'RELEASE' => 4,
-        'NO RELEASE' => 4,
+        'NO RELEASE' => 4
     );
 
     /**

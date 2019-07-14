@@ -35,8 +35,8 @@ class LockExpression extends Component
     public $type;
 
     /**
-     * @param Parser     $parser the parser that serves as context
-     * @param TokensList $list   the list of tokens that are being parsed
+     * @param Parser     $parser  the parser that serves as context
+     * @param TokensList $list    the list of tokens that are being parsed
      * @param array      $options parameters for parsing
      *
      * @return CaseExpression
@@ -112,7 +112,8 @@ class LockExpression extends Component
         return $component->table . ' ' . $component->type;
     }
 
-    private static function parseLockType(Parser $parser, TokensList $list) {
+    private static function parseLockType(Parser $parser, TokensList $list)
+    {
         $lockType = '';
 
         /**
