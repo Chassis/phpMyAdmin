@@ -268,8 +268,7 @@ class BufferedQuery
                     $this->status = static::STATUS_COMMENT_SQL;
                     $this->current .= $this->query[$i];
                     continue;
-                }
-                elseif (($this->query[$i] === '/')
+                } elseif (($this->query[$i] === '/')
                  && ($this->query[$i + 1] === '*')
                  && ($this->query[$i + 2] !== '!')) {
                     $this->status = static::STATUS_COMMENT_C;
@@ -314,7 +313,7 @@ class BufferedQuery
 
                 // Parsing the delimiter.
                 $delimiter = '';
-                while (($i < $len) && (!Context::isWhitespace($this->query[$i]))) {
+                while (($i < $len) && (! Context::isWhitespace($this->query[$i]))) {
                     $delimiter .= $this->query[$i++];
                 }
 
@@ -328,7 +327,7 @@ class BufferedQuery
 
                     // Whether this statement should be returned or not.
                     $ret = '';
-                    if (!empty($this->options['parse_delimiter'])) {
+                    if (! empty($this->options['parse_delimiter'])) {
                         // Appending the `DELIMITER` statement that was just
                         // found to the current statement.
                         $ret = trim(
@@ -370,7 +369,7 @@ class BufferedQuery
                 $ret = $this->current;
 
                 // If needed, adds a delimiter at the end of the statement.
-                if (!empty($this->options['add_delimiter'])) {
+                if (! empty($this->options['add_delimiter'])) {
                     $ret .= $this->delimiter;
                 }
 

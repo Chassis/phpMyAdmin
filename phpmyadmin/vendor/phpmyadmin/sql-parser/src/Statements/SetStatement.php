@@ -27,8 +27,14 @@ class SetStatement extends Statement
      * @var array
      */
     public static $CLAUSES = array(
-        'SET' => array('SET', 3),
-        '_END_OPTIONS' => array('_END_OPTIONS', 1),
+        'SET' => array(
+            'SET',
+            3
+        ),
+        '_END_OPTIONS' => array(
+            '_END_OPTIONS',
+            1
+        )
     );
 
     /**
@@ -37,14 +43,29 @@ class SetStatement extends Statement
      * @var array
      */
     public static $OPTIONS = array(
-        'CHARSET' => array(3, 'var'),
-        'CHARACTER SET' => array(3, 'var'),
-        'NAMES' => array(3, 'var'),
-        'PASSWORD' => array(3, 'expr'),
+        'CHARSET' => array(
+            3,
+            'var',
+        ),
+        'CHARACTER SET' => array(
+            3,
+            'var',
+        ),
+        'NAMES' => array(
+            3,
+            'var',
+        ),
+        'PASSWORD' => array(
+            3,
+            'expr',
+        )
     );
 
     public static $END_OPTIONS = array(
-        'COLLATE' => array(1, 'var'),
+        'COLLATE' => array(
+            1,
+            'var',
+        ),
         'DEFAULT' => 1
     );
 

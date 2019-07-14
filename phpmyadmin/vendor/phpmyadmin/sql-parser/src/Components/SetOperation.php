@@ -119,7 +119,7 @@ class SetOperation extends Component
                     $parser,
                     $list,
                     array(
-                        'breakOnAlias' => true,
+                        'breakOnAlias' => true
                     )
                 );
                 if (is_null($tmp)) {

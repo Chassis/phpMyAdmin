@@ -44,7 +44,7 @@ class IndexHint extends Component
     /**
      * List of indexes in this hint
      *
-     *  @var array
+     * @var array
      */
     public $indexes = array();
 

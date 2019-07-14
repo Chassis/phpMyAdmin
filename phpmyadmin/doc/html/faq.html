@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>FAQ - Frequently Asked Questions &#8212; phpMyAdmin 4.8.5 documentation</title>
+    <title>FAQ - Frequently Asked Questions &#8212; phpMyAdmin 4.9.0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.8.5',
+        VERSION:     '4.9.0.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="copyright" title="Copyright" href="copyright.html" />
-    <link rel="top" title="phpMyAdmin 4.8.5 documentation" href="index.html" />
+    <link rel="top" title="phpMyAdmin 4.9.0.1 documentation" href="index.html" />
     <link rel="next" title="Developers Information" href="developers.html" />
     <link rel="prev" title="Other sources of information" href="other.html" /> 
   </head>
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="other.html" title="Other sources of information"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.8.5 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.9.0.1 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -935,18 +935,15 @@ name is defined in the config file.</p>
 </div>
 <div class="section" id="which-parameters-can-i-use-in-the-url-that-starts-phpmyadmin">
 <span id="faq4-8"></span><h3>4.8 Which parameters can I use in the URL that starts phpMyAdmin?<a class="headerlink" href="#which-parameters-can-i-use-in-the-url-that-starts-phpmyadmin" title="Permalink to this headline">¶</a></h3>
-<p>When starting phpMyAdmin, you can use the <code class="docutils literal"><span class="pre">db</span></code>, <code class="docutils literal"><span class="pre">pma_username</span></code>,
-<code class="docutils literal"><span class="pre">pma_password</span></code> and <code class="docutils literal"><span class="pre">server</span></code> parameters. This last one can contain
+<p>When starting phpMyAdmin, you can use the <code class="docutils literal"><span class="pre">db</span></code>
+and <code class="docutils literal"><span class="pre">server</span></code> parameters. This last one can contain
 either the numeric host index (from <code class="docutils literal"><span class="pre">$i</span></code> of the configuration file)
-or one of the host names present in the configuration file. Using
-<code class="docutils literal"><span class="pre">pma_username</span></code> and <code class="docutils literal"><span class="pre">pma_password</span></code> has been tested along with the
-usage of &#8216;cookie&#8217; <code class="docutils literal"><span class="pre">auth_type</span></code>.</p>
-<p>For example direct login URL can be constructed as
-<code class="docutils literal"><span class="pre">https://example.com/phpmyadmin/?pma_username=user&amp;pma_password=password</span></code>.</p>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Passing password and username in URL is insecure and should not be used in
-production environments.</p>
+or one of the host names present in the configuration file.</p>
+<p>For example, to jump directly to a particular database, a URL can be constructed as
+<code class="docutils literal"><span class="pre">https://example.com/phpmyadmin/?db=sakila</span></code>.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 4.9.0: </span>Support for using the <code class="docutils literal"><span class="pre">pma_username</span></code> and <code class="docutils literal"><span class="pre">pma_password</span></code> parameters was removed
+in phpMyAdmin 4.9.0 (see <a class="reference external" href="https://www.phpmyadmin.net/security/PMASA-2019-4/">PMASA-2019-4</a>).</p>
 </div>
 </div>
 </div>
@@ -2006,7 +2003,7 @@ spreadsheet program to properly parse and sanitize such data on input instead.</
         <li class="right" >
           <a href="other.html" title="Other sources of information"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.8.5 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.9.0.1 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

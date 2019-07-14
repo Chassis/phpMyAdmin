@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Configuration &#8212; phpMyAdmin 4.8.5 documentation</title>
+    <title>Configuration &#8212; phpMyAdmin 4.9.0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.8.5',
+        VERSION:     '4.9.0.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="copyright" title="Copyright" href="copyright.html" />
-    <link rel="top" title="phpMyAdmin 4.8.5 documentation" href="index.html" />
+    <link rel="top" title="phpMyAdmin 4.9.0.1 documentation" href="index.html" />
     <link rel="next" title="User Guide" href="user.html" />
     <link rel="prev" title="Installation" href="setup.html" /> 
   </head>
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="setup.html" title="Installation"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.8.5 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.9.0.1 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -3065,7 +3065,8 @@ the navigation panel.</p>
 </table>
 <p>Enter <a class="reference internal" href="glossary.html#term-url"><span class="xref std std-term">URL</span></a> where logo in the navigation panel will point to.
 For use especially with self made theme which changes this.
-For external URLs, you should include URL scheme as well.</p>
+For relative/internal URLs, you need to have leading `` ./ `` or trailing characters `` ? `` such as <code class="docutils literal"><span class="pre">'./sql.php?'</span></code>.
+For external URLs, you should include URL protocol schemes (<code class="docutils literal"><span class="pre">http</span></code> or <code class="docutils literal"><span class="pre">https</span></code>) with absolute URLs.</p>
 </dd></dl>
 
 <dl class="option">
@@ -4401,7 +4402,7 @@ buffering.</p>
 default empty, you need to fill in some trusted proxy servers if you
 want to use rules for IP addresses behind proxy.</p>
 <p>The following example specifies that phpMyAdmin should trust a
-HTTP_X_FORWARDED_FOR (<code class="docutils literal"><span class="pre">X</span> <span class="pre">-Forwarded-For</span></code>) header coming from the proxy
+HTTP_X_FORWARDED_FOR (<code class="docutils literal"><span class="pre">X-Forwarded-For</span></code>) header coming from the proxy
 1.2.3.4:</p>
 <div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;TrustedProxies&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;1.2.3.4&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;HTTP_X_FORWARDED_FOR&#39;</span><span class="p">);</span>
 </pre></div>
@@ -6199,7 +6200,7 @@ server certificates and tell phpMyAdmin to use them:</p>
         <li class="right" >
           <a href="setup.html" title="Installation"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.8.5 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.9.0.1 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

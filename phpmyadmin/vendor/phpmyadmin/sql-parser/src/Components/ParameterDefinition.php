@@ -160,7 +160,7 @@ class ParameterDefinition extends Component
         }
 
         $tmp = '';
-        if (!empty($component->inOut)) {
+        if (! empty($component->inOut)) {
             $tmp .= $component->inOut . ' ';
         }
 
