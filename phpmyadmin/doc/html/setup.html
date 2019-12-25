@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Installation &#8212; phpMyAdmin 4.9.1 documentation</title>
+    <title>Installation &#8212; phpMyAdmin 4.9.2 documentation</title>
     
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.9.1',
+        VERSION:     '4.9.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="copyright" title="Copyright" href="copyright.html" />
-    <link rel="top" title="phpMyAdmin 4.9.1 documentation" href="index.html" />
+    <link rel="top" title="phpMyAdmin 4.9.2 documentation" href="index.html" />
     <link rel="next" title="Configuration" href="config.html" />
     <link rel="prev" title="Requirements" href="require.html" /> 
   </head>
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="require.html" title="Requirements"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.9.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.9.2 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -75,9 +75,9 @@ distribution and you will automatically get security updates from your distribut
 <span id="debian-package"></span><h3>Debian and Ubuntu<a class="headerlink" href="#debian-and-ubuntu" title="Permalink to this headline">¶</a></h3>
 <p>Debian&#8217;s package repositories include a phpMyAdmin package, but be aware that
 the configuration file is maintained in <code class="docutils literal"><span class="pre">/etc/phpmyadmin</span></code> and may differ in
-some ways from the official phpMyAdmin documentation. Specifically it does:</p>
+some ways from the official phpMyAdmin documentation. Specifically, it does:</p>
 <ul class="simple">
-<li>Configuration of web server (works for Apache and lighttpd).</li>
+<li>Configuration of a web server (works for Apache and lighttpd).</li>
 <li>Creating of <a class="reference internal" href="#linked-tables"><span class="std std-ref">phpMyAdmin configuration storage</span></a> using dbconfig-common.</li>
 <li>Securing setup script, see <a class="reference internal" href="#debian-setup"><span class="std std-ref">Setup script on Debian, Ubuntu and derivatives</span></a>.</li>
 </ul>
@@ -94,7 +94,7 @@ the <a class="reference external" href="https://software.opensuse.org/package/ph
 </div>
 <div class="section" id="gentoo">
 <h3>Gentoo<a class="headerlink" href="#gentoo" title="Permalink to this headline">¶</a></h3>
-<p>Gentoo ships the phpMyAdmin package, both in a near stock configuration as well
+<p>Gentoo ships the phpMyAdmin package, both in a near-stock configuration as well
 as in a <code class="docutils literal"><span class="pre">webapp-config</span></code> configuration. Use <code class="docutils literal"><span class="pre">emerge</span> <span class="pre">dev-db/phpmyadmin</span></code> to
 install.</p>
 </div>
@@ -179,7 +179,7 @@ configuring the link to the database server, either by Docker&#8217;s link featu
 by linking your database container to <code class="docutils literal"><span class="pre">db</span></code> for phpMyAdmin (by specifying
 <code class="docutils literal"><span class="pre">--link</span> <span class="pre">your_db_host:db</span></code>) or by environment variables (in this case it&#8217;s up
 to you to set up networking in Docker to allow the phpMyAdmin container to access
-the database container over network).</p>
+the database container over the network).</p>
 <div class="section" id="docker-environment-variables">
 <span id="docker-vars"></span><h3>Docker environment variables<a class="headerlink" href="#docker-environment-variables" title="Permalink to this headline">¶</a></h3>
 <p>You can configure several phpMyAdmin features using environment variables:</p>
@@ -196,7 +196,7 @@ the database container over network).</p>
 <dl class="envvar">
 <dt id="envvar-PMA_HOST">
 <code class="descname">PMA_HOST</code><a class="headerlink" href="#envvar-PMA_HOST" title="Permalink to this definition">¶</a></dt>
-<dd><p>Host name or IP address of the database server to use.</p>
+<dd><p>Hostname or IP address of the database server to use.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><span class="target" id="index-1"></span><a class="reference internal" href="config.html#cfg_Servers_host"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['host']</span></code></a></p>
@@ -206,7 +206,7 @@ the database container over network).</p>
 <dl class="envvar">
 <dt id="envvar-PMA_HOSTS">
 <code class="descname">PMA_HOSTS</code><a class="headerlink" href="#envvar-PMA_HOSTS" title="Permalink to this definition">¶</a></dt>
-<dd><p>Comma-separated host names or IP addresses of the database servers to use.</p>
+<dd><p>Comma-separated hostnames or IP addresses of the database servers to use.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Used only if <span class="target" id="index-2"></span><a class="reference internal" href="#envvar-PMA_HOST"><code class="xref std std-envvar docutils literal"><span class="pre">PMA_HOST</span></code></a> is empty.</p>
@@ -277,7 +277,7 @@ proxy makes phpMyAdmin available.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">The credentials you need to log in are stored in the MySQL server, in case
-of Docker image there are various ways to set it (for example
+of Docker image, there are various ways to set it (for example
 <code class="samp docutils literal"><span class="pre">MYSQL_ROOT_PASSWORD</span></code> when starting the MySQL container). Please check
 documentation for <a class="reference external" href="https://hub.docker.com/_/mariadb">MariaDB container</a>
 or <a class="reference external" href="https://hub.docker.com/_/mysql">MySQL container</a>.</p>
@@ -292,7 +292,7 @@ configuration can be added as a volume when invoking docker using
 <cite>-v /some/local/directory/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php</cite> parameters.</p>
 <p>Note that the supplied configuration file is applied after <a class="reference internal" href="#docker-vars"><span class="std std-ref">Docker environment variables</span></a>,
 but you can override any of the values.</p>
-<p>For example to change default behaviour of CSV export you can use following
+<p>For example to change the default behavior of CSV export you can use the following
 configuration file:</p>
 <div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Export&#39;</span><span class="p">][</span><span class="s1">&#39;csv_columns&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
@@ -326,10 +326,10 @@ environment variables listed in <a class="reference internal" href="#docker-vars
 </div>
 <div class="section" id="docker-volumes">
 <h3>Docker Volumes<a class="headerlink" href="#docker-volumes" title="Permalink to this headline">¶</a></h3>
-<p>You can use following volumes to customize image behavior:</p>
+<p>You can use the following volumes to customize image behavior:</p>
 <p><code class="file docutils literal"><span class="pre">/etc/phpmyadmin/config.user.inc.php</span></code></p>
 <blockquote>
-<div>Can be used for additional settings, see previous chapter for more details.</div></blockquote>
+<div>Can be used for additional settings, see the previous chapter for more details.</div></blockquote>
 <p><code class="file docutils literal"><span class="pre">/sessions/</span></code></p>
 <blockquote>
 <div>Directory where PHP sessions are stored. You might want to share this
@@ -369,9 +369,9 @@ themes (see <a class="reference internal" href="themes.html#themes"><span class=
 </div>
 <div class="section" id="using-docker-compose">
 <h3>Using docker-compose<a class="headerlink" href="#using-docker-compose" title="Permalink to this headline">¶</a></h3>
-<p>Alternatively you can also use docker-compose with the docker-compose.yml from
+<p>Alternatively, you can also use docker-compose with the docker-compose.yml from
 &lt;<a class="reference external" href="https://github.com/phpmyadmin/docker">https://github.com/phpmyadmin/docker</a>&gt;.  This will run phpMyAdmin with an
-arbitrary server - allowing you to specify MySQL/MariaDB server on login page.</p>
+arbitrary server - allowing you to specify MySQL/MariaDB server on the login page.</p>
 <div class="highlight-sh"><div class="highlight"><pre><span></span>docker-compose up -d
 </pre></div>
 </div>
@@ -404,7 +404,7 @@ using the volumes directive:</p>
 <p>When you want to expose phpMyAdmin running in a Docker container in a
 subdirectory, you need to rewrite the request path in the server proxying the
 requests.</p>
-<p>For example using haproxy it can be done as:</p>
+<p>For example, using haproxy it can be done as:</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>frontend http
     bind *:80
     option forwardfor
@@ -538,8 +538,8 @@ manipulate your database.</p>
 <p>For a full explanation of possible configuration values, see the
 <a class="reference internal" href="config.html#config"><span class="std std-ref">Configuration</span></a> of this document.</p>
 </div>
-<div class="section" id="using-setup-script">
-<span id="setup-script"></span><span id="index-10"></span><h3>Using Setup script<a class="headerlink" href="#using-setup-script" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="using-the-setup-script">
+<span id="setup-script"></span><span id="index-10"></span><h3>Using the Setup script<a class="headerlink" href="#using-the-setup-script" title="Permalink to this headline">¶</a></h3>
 <p>Instead of manually editing <code class="file docutils literal"><span class="pre">config.inc.php</span></code>, you can use phpMyAdmin&#8217;s
 setup feature. The file can be generated using the setup and you can download it
 for upload to the server.</p>
@@ -549,7 +549,7 @@ use the <span class="guilabel">Download</span> button to save them to your compu
 to the server.</p>
 <p>Now the file is ready to be used. You can choose to review or edit the
 file with your favorite editor, if you prefer to set some advanced
-options which the setup script does not provide.</p>
+options that the setup script does not provide.</p>
 <ol class="arabic simple">
 <li>If you are using the <code class="docutils literal"><span class="pre">auth_type</span></code> &#8220;config&#8221;, it is suggested that you
 protect the phpMyAdmin installation directory because using config
@@ -565,7 +565,7 @@ cookie authentication mode.</li>
 </ol>
 <div class="section" id="setup-script-on-debian-ubuntu-and-derivatives">
 <span id="debian-setup"></span><h4>Setup script on Debian, Ubuntu and derivatives<a class="headerlink" href="#setup-script-on-debian-ubuntu-and-derivatives" title="Permalink to this headline">¶</a></h4>
-<p>Debian and Ubuntu have changed way how setup is enabled and disabled, in a way
+<p>Debian and Ubuntu have changed the way in which the setup script is enabled and disabled, in a way
 that single command has to be executed for either of these.</p>
 <p>To allow editing configuration invoke:</p>
 <div class="highlight-sh"><div class="highlight"><pre><span></span>/usr/sbin/pma-configure
@@ -610,7 +610,7 @@ releasing developer, who through January 2016 was Marc Delisle. His key id is
 This way you can be sure that you are using the same code that was released.
 You should also verify the date of the signature to make sure that you
 downloaded the latest version.</p>
-<p>Each archive is accompanied with <code class="docutils literal"><span class="pre">.asc</span></code> files which contains the PGP signature
+<p>Each archive is accompanied by <code class="docutils literal"><span class="pre">.asc</span></code> files which contain the PGP signature
 for it. Once you have both of them in the same folder, you can verify the signature:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> gpg --verify phpMyAdmin-4.5.4.1-all-languages.zip.asc
 <span class="go">gpg: Signature made Fri 29 Jan 2016 08:59:37 AM EST using RSA key ID 8259BD92</span>
@@ -618,7 +618,7 @@ for it. Once you have both of them in the same folder, you can verify the signat
 </pre></div>
 </div>
 <p>As you can see gpg complains that it does not know the public key. At this
-point you should do one of the following steps:</p>
+point, you should do one of the following steps:</p>
 <ul class="simple">
 <li>Download the keyring from <a class="reference external" href="https://files.phpmyadmin.net/phpmyadmin.keyring">our download server</a>, then import it with:</li>
 </ul>
@@ -636,7 +636,7 @@ point you should do one of the following steps:</p>
 <span class="go">gpg:               imported: 1  (RSA: 1)</span>
 </pre></div>
 </div>
-<p>This will improve the situation a bit - at this point you can verify that the
+<p>This will improve the situation a bit - at this point, you can verify that the
 signature from the given key is correct but you still can not trust the name used
 in the key:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> gpg --verify phpMyAdmin-4.5.4.1-all-languages.zip.asc
@@ -652,9 +652,9 @@ in the key:</p>
 ensure that the key is actually owned by the mentioned person.  The GNU Privacy
 Handbook covers this topic in the chapter <a class="reference external" href="https://www.gnupg.org/gph/en/manual.html#AEN335">Validating other keys on your public
 keyring</a>. The most reliable method is to meet the developer in person and
-exchange key fingerprints, however you can also rely on the web of trust. This way
+exchange key fingerprints, however, you can also rely on the web of trust. This way
 you can trust the key transitively though signatures of others, who have met
-the developer in person. For example you can see how <a class="reference external" href="https://pgp.cs.uu.nl/paths/79be3e4300411886/to/ce752f178259bd92.html">Isaac&#8217;s key links to
+the developer in person. For example, you can see how <a class="reference external" href="https://pgp.cs.uu.nl/paths/79be3e4300411886/to/ce752f178259bd92.html">Isaac&#8217;s key links to
 Linus&#8217;s key</a>.</p>
 <p>Once the key is trusted, the warning will not occur:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> gpg --verify phpMyAdmin-4.5.4.1-all-languages.zip.asc
@@ -674,7 +674,7 @@ clear error regardless of the fact that the key is trusted or not:</p>
 <span id="linked-tables"></span><span id="index-11"></span><h2>phpMyAdmin configuration storage<a class="headerlink" href="#phpmyadmin-configuration-storage" title="Permalink to this headline">¶</a></h2>
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 3.4.0: </span>Prior to phpMyAdmin 3.4.0 this was called Linked Tables Infrastructure, but
-the name was changed due to extended scope of the storage.</p>
+the name was changed due to the extended scope of the storage.</p>
 </div>
 <p>For a whole set of additional features (<a class="reference internal" href="bookmarks.html#bookmarks"><span class="std std-ref">Bookmarks</span></a>, comments, <a class="reference internal" href="glossary.html#term-sql"><span class="xref std std-term">SQL</span></a>-history,
 tracking mechanism, <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a>-generation, <a class="reference internal" href="transformations.html#transformations"><span class="std std-ref">Transformations</span></a>, <a class="reference internal" href="relations.html#relations"><span class="std std-ref">Relations</span></a>
@@ -744,7 +744,7 @@ using following statement:</p>
 <p><strong>Never</strong> extract the new version over an existing installation of
 phpMyAdmin, always first remove the old files keeping just the
 configuration.</p>
-<p class="last">This way you will not leave old no longer working code in the directory,
+<p class="last">This way, you will not leave any old or outdated files in the directory,
 which can have severe security implications or can cause various breakages.</p>
 </div>
 <p>Simply copy <code class="file docutils literal"><span class="pre">config.inc.php</span></code> from your previous installation into
@@ -756,14 +756,14 @@ the end of your configuration file.</p>
 <p>You should <strong>not</strong> copy <code class="file docutils literal"><span class="pre">libraries/config.default.php</span></code> over
 <code class="file docutils literal"><span class="pre">config.inc.php</span></code> because the default configuration file is version-
 specific.</p>
-<p>The complete upgrade can be performed in few simple steps:</p>
+<p>The complete upgrade can be performed in a few simple steps:</p>
 <ol class="arabic simple">
 <li>Download the latest phpMyAdmin version from &lt;<a class="reference external" href="https://www.phpmyadmin.net/downloads/">https://www.phpmyadmin.net/downloads/</a>&gt;.</li>
 <li>Rename existing phpMyAdmin folder (for example to <code class="docutils literal"><span class="pre">phpmyadmin-old</span></code>).</li>
-<li>Unpack freshly donwloaded phpMyAdmin to desired location (for example <code class="docutils literal"><span class="pre">phpmyadmin</span></code>).</li>
-<li>Copy <code class="file docutils literal"><span class="pre">config.inc.php`</span></code> from old location (<code class="docutils literal"><span class="pre">phpmyadmin-old</span></code>) to new one (<code class="docutils literal"><span class="pre">phpmyadmin</span></code>).</li>
+<li>Unpack freshly downloaded phpMyAdmin to the desired location (for example <code class="docutils literal"><span class="pre">phpmyadmin</span></code>).</li>
+<li>Copy <code class="file docutils literal"><span class="pre">config.inc.php`</span></code> from old location (<code class="docutils literal"><span class="pre">phpmyadmin-old</span></code>) to the new one (<code class="docutils literal"><span class="pre">phpmyadmin</span></code>).</li>
 <li>Test that everything works properly.</li>
-<li>Remove backup of previous version (<code class="docutils literal"><span class="pre">phpmyadmin-old</span></code>).</li>
+<li>Remove backup of a previous version (<code class="docutils literal"><span class="pre">phpmyadmin-old</span></code>).</li>
 </ol>
 <p>If you have upgraded your MySQL server from a version previous to 4.1.2 to
 version 5.x or newer and if you use the phpMyAdmin configuration storage, you
@@ -780,7 +780,7 @@ logging out and logging in again.</p>
 <span id="authentication-modes"></span><span id="index-15"></span><h2>Using authentication modes<a class="headerlink" href="#using-authentication-modes" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference internal" href="glossary.html#term-http"><span class="xref std std-term">HTTP</span></a> and cookie authentication modes are recommended in a <strong>multi-user
 environment</strong> where you want to give users access to their own database and
-don&#8217;t want them to play around with others. Nevertheless be aware that MS
+don&#8217;t want them to play around with others. Nevertheless, be aware that MS
 Internet Explorer seems to be really buggy about cookies, at least till version
 6. Even in a <strong>single-user environment</strong>, you might prefer to use <a class="reference internal" href="glossary.html#term-http"><span class="xref std std-term">HTTP</span></a>
 or cookie mode so that your user/password pair are not in clear in the
@@ -789,12 +789,12 @@ configuration file.</p>
 modes are more secure: the MySQL login information does not need to be
 set in the phpMyAdmin configuration file (except possibly for the
 <span class="target" id="index-16"></span><a class="reference internal" href="config.html#cfg_Servers_controluser"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['controluser']</span></code></a>).
-However, keep in mind that the password travels in plain text, unless
+However, keep in mind that the password travels in plain text unless
 you are using the HTTPS protocol. In cookie mode, the password is
 stored, encrypted with the AES algorithm, in a temporary cookie.</p>
 <p>Then each of the <em>true</em> users should be granted a set of privileges
 on a set of particular databases. Normally you shouldn&#8217;t give global
-privileges to an ordinary user, unless you understand the impact of those
+privileges to an ordinary user unless you understand the impact of those
 privileges (for example, you are creating a superuser).
 For example, to grant the user <em>real_user</em> with all privileges on
 the database <em>user_base</em>:</p>
@@ -838,8 +838,8 @@ add the following configuration directive:</p>
 <p class="first admonition-title">Note</p>
 <p class="last">There is no way to do proper logout in HTTP authentication, most browsers
 will remember credentials until there is no different successful
-authentication. Because of this this method has limitation that you can not
-login with same user after logout.</p>
+authentication. Because of this, this method has a limitation that you can not
+login with the same user after logout.</p>
 </div>
 </div>
 <div class="section" id="cookie-authentication-mode">
@@ -860,7 +860,7 @@ will speed up access considerably, but is not required.</li>
 <span id="auth-signon"></span><span id="index-21"></span><h3>Signon authentication mode<a class="headerlink" href="#signon-authentication-mode" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>This mode is a convenient way of using credentials from another
-application to authenticate to phpMyAdmin to implement single signon
+application to authenticate to phpMyAdmin to implement a single signon
 solution.</li>
 <li>The other application has to store login information into session
 data (see <span class="target" id="index-22"></span><a class="reference internal" href="config.html#cfg_Servers_SignonSession"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['SignonSession']</span></code></a> and
@@ -950,7 +950,7 @@ the login process.</li>
 <span class="cp">?&gt;</span><span class="x"></span>
 </pre></div>
 </div>
-<p>Alternatively you can also use this way to integrate with OpenID as shown
+<p>Alternatively, you can also use this way to integrate with OpenID as shown
 in <code class="file docutils literal"><span class="pre">examples/openid.php</span></code>:</p>
 <div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="cm">/* vim: set expandtab sw=4 ts=4 sts=4: */</span>
@@ -1132,7 +1132,7 @@ in <code class="file docutils literal"><span class="pre">examples/openid.php</sp
 </div>
 <p>If you intend to pass the credentials using some other means than, you have to
 implement wrapper in PHP to get that data and set it to
-<span class="target" id="index-26"></span><a class="reference internal" href="config.html#cfg_Servers_SignonScript"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['SignonScript']</span></code></a>. There is very minimal example
+<span class="target" id="index-26"></span><a class="reference internal" href="config.html#cfg_Servers_SignonScript"><code class="xref config config-option docutils literal"><span class="pre">$cfg['Servers'][$i]['SignonScript']</span></code></a>. There is a very minimal example
 in <code class="file docutils literal"><span class="pre">examples/signon-script.php</span></code>:</p>
 <div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="cm">/* vim: set expandtab sw=4 ts=4 sts=4: */</span>
@@ -1219,7 +1219,7 @@ you&#8217;re protected from protocol downgrade attacks.</p>
 <a class="reference external" href="https://secure.php.net/manual/en/errorfunc.configuration.php#ini.display-errors">display_errors</a>
 should be disabled.</p>
 </li>
-<li><p class="first">Remove the <code class="docutils literal"><span class="pre">test</span></code> directory from phpMyAdmin, unless you are developing and need test suite.</p>
+<li><p class="first">Remove the <code class="docutils literal"><span class="pre">test</span></code> directory from phpMyAdmin, unless you are developing and need a test suite.</p>
 </li>
 <li><p class="first">Remove the <code class="docutils literal"><span class="pre">setup</span></code> directory from phpMyAdmin, you will probably not
 use it after the initial setup.</p>
@@ -1239,7 +1239,7 @@ is placed inside your web root, see also <a class="reference internal" href="con
 </li>
 <li><p class="first">It is generally a good idea to protect a public phpMyAdmin installation
 against access by robots as they usually can not do anything good there. You
-can do this using <code class="docutils literal"><span class="pre">robots.txt</span></code> file in root of your webserver or limit
+can do this using <code class="docutils literal"><span class="pre">robots.txt</span></code> file in the root of your webserver or limit
 access by web server configuration, see <a class="reference internal" href="faq.html#faq1-42"><span class="std std-ref">1.42 How can I prevent robots from accessing phpMyAdmin?</span></a>.</p>
 </li>
 <li><p class="first">In case you don&#8217;t want all MySQL users to be able to access
@@ -1275,7 +1275,7 @@ is not the same as the Apache error or access log files.</p>
 </li>
 <li><p class="first">In case you&#8217;re running phpMyAdmin together with other PHP applications, it is
 generally advised to use separate session storage for phpMyAdmin to avoid
-possible session based attacks against it. You can use
+possible session-based attacks against it. You can use
 <span class="target" id="index-43"></span><a class="reference internal" href="config.html#cfg_SessionSavePath"><code class="xref config config-option docutils literal"><span class="pre">$cfg['SessionSavePath']</span></code></a> to achieve this.</p>
 </li>
 </ul>
@@ -1360,7 +1360,7 @@ manually or after a period of inactivity). <a class="reference external" href="h
 </li>
 <li><a class="reference internal" href="#quick-install">Quick Install</a><ul>
 <li><a class="reference internal" href="#manually-creating-the-file">Manually creating the file</a></li>
-<li><a class="reference internal" href="#using-setup-script">Using Setup script</a><ul>
+<li><a class="reference internal" href="#using-the-setup-script">Using the Setup script</a><ul>
 <li><a class="reference internal" href="#setup-script-on-debian-ubuntu-and-derivatives">Setup script on Debian, Ubuntu and derivatives</a></li>
 <li><a class="reference internal" href="#setup-script-on-opensuse">Setup script on openSUSE</a></li>
 </ul>
@@ -1431,7 +1431,7 @@ manually or after a period of inactivity). <a class="reference external" href="h
         <li class="right" >
           <a href="require.html" title="Requirements"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.9.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.9.2 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

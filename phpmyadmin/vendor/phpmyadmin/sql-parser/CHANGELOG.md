@@ -1,5 +1,12 @@
 # Change Log
 
+## [4.4.0] - 2019-11-12
+
+* Fix for PHP deprecations messages about implode for php 7.4+ (#258)
+* Parse CHECK keyword on table definition (#264)
+* Parse truncate statement (#221)
+* Fix wrong parsing of partitions (#265)
+
 ## [4.3.2] - 2019-06-03
 
 * Fix redundant whitespaces in build() outputs (#228)

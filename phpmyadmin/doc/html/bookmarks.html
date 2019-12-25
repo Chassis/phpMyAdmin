@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Bookmarks &#8212; phpMyAdmin 4.9.1 documentation</title>
+    <title>Bookmarks &#8212; phpMyAdmin 4.9.2 documentation</title>
     
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.9.1',
+        VERSION:     '4.9.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="copyright" title="Copyright" href="copyright.html" />
-    <link rel="top" title="phpMyAdmin 4.9.1 documentation" href="index.html" />
+    <link rel="top" title="phpMyAdmin 4.9.2 documentation" href="index.html" />
     <link rel="up" title="User Guide" href="user.html" />
     <link rel="next" title="User management" href="privileges.html" />
     <link rel="prev" title="Transformations" href="transformations.html" /> 
@@ -44,7 +44,7 @@
         <li class="right" >
           <a href="transformations.html" title="Transformations"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.9.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.9.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="user.html" accesskey="U">User Guide</a> &#187;</li> 
       </ul>
     </div>  
@@ -63,21 +63,20 @@ feature.</p>
 </div>
 <div class="section" id="storing-bookmarks">
 <h2>Storing bookmarks<a class="headerlink" href="#storing-bookmarks" title="Permalink to this headline">¶</a></h2>
-<p>Any query you have executed can be stored as a bookmark on the page
+<p>Any query that is executed can be marked as a bookmark on the page
 where the results are displayed. You will find a button labeled
 <span class="guilabel">Bookmark this query</span> just at the end of the page. As soon as you have
-stored a bookmark, it is related to the database you run the query on.
-You can now access a bookmark dropdown on each page, the query box
-appears on for that database.</p>
+stored a bookmark, that query is linked to the database.
+You can now access a bookmark dropdown on each page where the query box appears on for that database.</p>
 </div>
 <div class="section" id="variables-inside-bookmarks">
 <h2>Variables inside bookmarks<a class="headerlink" href="#variables-inside-bookmarks" title="Permalink to this headline">¶</a></h2>
-<p>You can also have, inside the query, placeholders for variables.
+<p>Inside a query, you can also add placeholders for variables.
 This is done by inserting into the query SQL comments between <code class="docutils literal"><span class="pre">/*</span></code> and
-<code class="docutils literal"><span class="pre">*/</span></code>. Inside the comments, the special strings <code class="docutils literal"><span class="pre">[VARIABLE{variable-number}]</span></code> is used.
+<code class="docutils literal"><span class="pre">*/</span></code>. The special string <code class="docutils literal"><span class="pre">[VARIABLE{variable-number}]</span></code> is used inside the comments.
 Be aware that the whole query minus the SQL comments must be
 valid by itself, otherwise you won&#8217;t be able to store it as a bookmark.
-Note also that the text &#8216;VARIABLE&#8217; is case-sensitive.</p>
+Also, note that the text &#8216;VARIABLE&#8217; is case-sensitive.</p>
 <p>When you execute the bookmark, everything typed into the <em>Variables</em>
 input boxes on the query box page will replace the strings <code class="docutils literal"><span class="pre">/*[VARIABLE{variable-number}]*/</span></code> in
 your stored query.</p>
@@ -92,12 +91,11 @@ chars. So you can use:</p>
 </pre></div>
 </div>
 <p>in your query, where VARIABLE1 is the string you entered in the Variable 1 input box.</p>
-<p>A more complex example. Say you have stored
-this query:</p>
+<p>A more complex example, say you have stored this query:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">Name</span><span class="p">,</span> <span class="n">Address</span> <span class="k">FROM</span> <span class="n">addresses</span> <span class="k">WHERE</span> <span class="mi">1</span> <span class="cm">/* AND Name LIKE &#39;%[VARIABLE1]%&#39; */</span>
 </pre></div>
 </div>
-<p>Say, you now enter &#8220;phpMyAdmin&#8221; as the variable for the stored query, the full
+<p>If you wish to enter &#8220;phpMyAdmin&#8221; as the variable for the stored query, the full
 query will be:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">Name</span><span class="p">,</span> <span class="n">Address</span> <span class="k">FROM</span> <span class="n">addresses</span> <span class="k">WHERE</span> <span class="mi">1</span> <span class="k">AND</span> <span class="n">Name</span> <span class="k">LIKE</span> <span class="s1">&#39;%phpMyAdmin%&#39;</span>
 </pre></div>
@@ -174,7 +172,7 @@ this table.</p>
         <li class="right" >
           <a href="transformations.html" title="Transformations"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.9.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.9.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="user.html" >User Guide</a> &#187;</li> 
       </ul>
     </div>

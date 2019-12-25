@@ -322,17 +322,17 @@
     },
     {
         "name": "phpmyadmin/sql-parser",
-        "version": "4.3.2",
-        "version_normalized": "4.3.2.0",
+        "version": "4.4.0",
+        "version_normalized": "4.4.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/phpmyadmin/sql-parser.git",
-            "reference": "b35c21f82e7202d739f6349a583b11e6d32b2b64"
+            "reference": "35a895a1ad4f4b068e44c4cd17c04759c71eed13"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/phpmyadmin/sql-parser/zipball/b35c21f82e7202d739f6349a583b11e6d32b2b64",
-            "reference": "b35c21f82e7202d739f6349a583b11e6d32b2b64",
+            "url": "https://api.github.com/repos/phpmyadmin/sql-parser/zipball/35a895a1ad4f4b068e44c4cd17c04759c71eed13",
+            "reference": "35a895a1ad4f4b068e44c4cd17c04759c71eed13",
             "shasum": ""
         },
         "require": {
@@ -352,7 +352,7 @@
             "ext-mbstring": "For best performance",
             "phpmyadmin/motranslator": "Translate messages to your favorite locale"
         },
-        "time": "2019-06-03T12:32:07+00:00",
+        "time": "2019-11-12T13:34:03+00:00",
         "bin": [
             "bin/highlight-query",
             "bin/lint-query",
@@ -635,8 +635,8 @@
     },
     {
         "name": "symfony/expression-language",
-        "version": "v2.8.50",
-        "version_normalized": "2.8.50.0",
+        "version": "v2.8.52",
+        "version_normalized": "2.8.52.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/expression-language.git",
@@ -1040,17 +1040,17 @@
     },
     {
         "name": "twig/twig",
-        "version": "v1.42.3",
-        "version_normalized": "1.42.3.0",
+        "version": "v1.42.4",
+        "version_normalized": "1.42.4.0",
         "source": {
             "type": "git",
             "url": "https://github.com/twigphp/Twig.git",
-            "reference": "201baee843e0ffe8b0b956f336dd42b2a92fae4e"
+            "reference": "e587180584c3d2d6cb864a0454e777bb6dcb6152"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/twigphp/Twig/zipball/201baee843e0ffe8b0b956f336dd42b2a92fae4e",
-            "reference": "201baee843e0ffe8b0b956f336dd42b2a92fae4e",
+            "url": "https://api.github.com/repos/twigphp/Twig/zipball/e587180584c3d2d6cb864a0454e777bb6dcb6152",
+            "reference": "e587180584c3d2d6cb864a0454e777bb6dcb6152",
             "shasum": ""
         },
         "require": {
@@ -1062,7 +1062,7 @@
             "symfony/debug": "^3.4|^4.2",
             "symfony/phpunit-bridge": "^4.4@dev|^5.0"
         },
-        "time": "2019-08-24T12:51:03+00:00",
+        "time": "2019-11-11T16:49:32+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
