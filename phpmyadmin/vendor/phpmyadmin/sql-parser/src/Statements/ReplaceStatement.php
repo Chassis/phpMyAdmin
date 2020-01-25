@@ -1,8 +1,8 @@
 <?php
-
 /**
  * `REPLACE` statement.
  */
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Statements;
 
@@ -35,10 +35,6 @@ use PhpMyAdmin\SqlParser\TokensList;
  *   [PARTITION (partition_name,...)]
  *   [(col_name,...)]
  *   SELECT ...
- *
- * @category   Statements
- *
- * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class ReplaceStatement extends Statement
 {
@@ -47,10 +43,10 @@ class ReplaceStatement extends Statement
      *
      * @var array
      */
-    public static $OPTIONS = array(
+    public static $OPTIONS = [
         'LOW_PRIORITY' => 1,
-        'DELAYED' => 1
-    );
+        'DELAYED' => 1,
+    ];
 
     /**
      * Tables used as target for this statement.
@@ -90,11 +86,11 @@ class ReplaceStatement extends Statement
         $ret = 'REPLACE ' . $this->options;
         $ret = trim($ret) . ' INTO ' . $this->into;
 
-        if (! is_null($this->values) && count($this->values) > 0) {
+        if ($this->values !== null && count($this->values) > 0) {
             $ret .= ' VALUES ' . Array2d::build($this->values);
-        } elseif (! is_null($this->set) && count($this->set) > 0) {
+        } elseif ($this->set !== null && count($this->set) > 0) {
             $ret .= ' SET ' . SetOperation::build($this->set);
-        } elseif (! is_null($this->select) && strlen($this->select) > 0) {
+        } elseif ($this->select !== null && strlen((string) $this->select) > 0) {
             $ret .= ' ' . $this->select->build();
         }
 
@@ -160,7 +156,7 @@ class ReplaceStatement extends Statement
                 $this->into = IntoKeyword::parse(
                     $parser,
                     $list,
-                    array('fromReplace' => true)
+                    ['fromReplace' => true]
                 );
 
                 $state = 1;

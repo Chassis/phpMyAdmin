@@ -1,8 +1,8 @@
 <?php
-
 /**
  * Parses a list of expressions delimited by a comma.
  */
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Components;
 
@@ -13,10 +13,6 @@ use PhpMyAdmin\SqlParser\TokensList;
 
 /**
  * Parses a list of expressions delimited by a comma.
- *
- * @category   Keywords
- *
- * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class ExpressionArray extends Component
 {
@@ -27,9 +23,9 @@ class ExpressionArray extends Component
      *
      * @return Expression[]
      */
-    public static function parse(Parser $parser, TokensList $list, array $options = array())
+    public static function parse(Parser $parser, TokensList $list, array $options = [])
     {
-        $ret = array();
+        $ret = [];
 
         /**
          * The state of the parser.
@@ -115,9 +111,9 @@ class ExpressionArray extends Component
      *
      * @return string
      */
-    public static function build($component, array $options = array())
+    public static function build($component, array $options = [])
     {
-        $ret = array();
+        $ret = [];
         foreach ($component as $frag) {
             $ret[] = $frag::build($frag);
         }

@@ -1,8 +1,8 @@
 <?php
-
 /**
  * Token utilities.
  */
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Utils;
 
@@ -12,10 +12,6 @@ use PhpMyAdmin\SqlParser\TokensList;
 
 /**
  * Token utilities.
- *
- * @category   Token
- *
- * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class Tokens
 {
@@ -44,7 +40,7 @@ class Tokens
         }
 
         if (isset($pattern['value_str'])
-            && strcasecmp($pattern['value_str'], $token->value)
+            && strcasecmp($pattern['value_str'], (string) $token->value)
         ) {
             return false;
         }
@@ -85,7 +81,7 @@ class Tokens
          *
          * @var array
          */
-        $newList = array();
+        $newList = [];
 
         /**
          * The length of the find pattern is calculated only once.

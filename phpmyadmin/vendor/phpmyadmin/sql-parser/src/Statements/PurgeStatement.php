@@ -1,13 +1,12 @@
 <?php
-
 /**
  * `PURGE` statement.
  */
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Statements;
 
 use PhpMyAdmin\SqlParser\Components\Expression;
-use PhpMyAdmin\SqlParser\Components\OptionsArray;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Statement;
 use PhpMyAdmin\SqlParser\Token;
@@ -18,10 +17,6 @@ use PhpMyAdmin\SqlParser\TokensList;
  *
  * PURGE { BINARY | MASTER } LOGS
  *   { TO 'log_name' | BEFORE datetime_expr }
- *
- * @category   Statements
- *
- * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class PurgeStatement extends Statement
 {
@@ -51,7 +46,7 @@ class PurgeStatement extends Statement
      */
     public function build()
     {
-        $ret = 'PURGE ' . $this->log_type . ' ' . 'LOGS '
+        $ret = 'PURGE ' . $this->log_type . ' LOGS '
             . ($this->end_option !== null ? ($this->end_option . ' ' . $this->end_expr) : '');
         return trim($ret);
     }
@@ -71,6 +66,7 @@ class PurgeStatement extends Statement
          */
         $state = 0;
 
+        $prevToken = null;
         for (; $list->idx < $list->count; ++$list->idx) {
             /**
              * Token parsed at this moment.
@@ -92,19 +88,19 @@ class PurgeStatement extends Statement
             switch ($state) {
                 case 0:
                     // parse `{ BINARY | MASTER }`
-                    $this->log_type = self::parseExpectedKeyword($parser, $token, array('BINARY', 'MASTER'));
+                    $this->log_type = self::parseExpectedKeyword($parser, $token, ['BINARY', 'MASTER']);
                     break;
                 case 1:
                     // parse `LOGS`
-                    self::parseExpectedKeyword($parser, $token, array('LOGS'));
+                    self::parseExpectedKeyword($parser, $token, ['LOGS']);
                     break;
                 case 2:
                     // parse `{ TO | BEFORE }`
-                    $this->end_option = self::parseExpectedKeyword($parser, $token, array('TO', 'BEFORE'));
+                    $this->end_option = self::parseExpectedKeyword($parser, $token, ['TO', 'BEFORE']);
                     break;
                 case 3:
                     // parse `expr`
-                    $this->end_expr = Expression::parse($parser, $list, array());
+                    $this->end_expr = Expression::parse($parser, $list, []);
                     break;
                 default:
                     $parser->error('Unexpected token.', $token);

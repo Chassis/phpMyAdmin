@@ -1,8 +1,8 @@
 <?php
-
 /**
  * Buffered query utilities.
  */
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Utils;
 
@@ -14,10 +14,6 @@ use PhpMyAdmin\SqlParser\Context;
  * Implements a specialized lexer used to extract statements from large inputs
  * that are being buffered. After each statement has been extracted, a lexer or
  * a parser may be used.
- *
- * @category   Lexer
- *
- * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class BufferedQuery
 {
@@ -49,7 +45,7 @@ class BufferedQuery
      *
      * @var array
      */
-    public $options = array();
+    public $options = [];
 
     /**
      * The last delimiter used.
@@ -80,16 +76,14 @@ class BufferedQuery
     public $current = '';
 
     /**
-     * Constructor.
-     *
      * @param string $query   the query to be parsed
      * @param array  $options the options of this parser
      */
-    public function __construct($query = '', array $options = array())
+    public function __construct($query = '', array $options = [])
     {
         // Merges specified options with defaults.
         $this->options = array_merge(
-            array(
+            [
                 /*
                  * The starting delimiter.
                  *
@@ -111,7 +105,7 @@ class BufferedQuery
                  * @var bool
                  */
                 'add_delimiter' => false,
-            ),
+            ],
             $options
         );
 
@@ -137,7 +131,7 @@ class BufferedQuery
      *
      * @param bool $end whether the end of the buffer was reached
      *
-     * @return string
+     * @return string|false
      */
     public function extract($end = false)
     {

@@ -1,8 +1,8 @@
 <?php
-
 /**
  * Parses the definition of a key.
  */
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Components;
 
@@ -16,10 +16,6 @@ use PhpMyAdmin\SqlParser\TokensList;
  * Parses the definition of a key.
  *
  * Used for parsing `CREATE TABLE` statement.
- *
- * @category   Components
- *
- * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class Key extends Component
 {
@@ -28,24 +24,24 @@ class Key extends Component
      *
      * @var array
      */
-    public static $KEY_OPTIONS = array(
-        'KEY_BLOCK_SIZE' => array(
+    public static $KEY_OPTIONS = [
+        'KEY_BLOCK_SIZE' => [
             1,
             'var',
-        ),
-        'USING' => array(
+        ],
+        'USING' => [
             2,
             'var',
-        ),
-        'WITH PARSER' => array(
+        ],
+        'WITH PARSER' => [
             3,
             'var',
-        ),
-        'COMMENT' => array(
+        ],
+        'COMMENT' => [
             4,
             'var=',
-        )
-    );
+        ],
+    ];
 
     /**
      * The name of this key.
@@ -76,8 +72,6 @@ class Key extends Component
     public $options;
 
     /**
-     * Constructor.
-     *
      * @param string       $name    the name of the key
      * @param array        $columns the columns covered by this key
      * @param string       $type    the type of this key
@@ -85,7 +79,7 @@ class Key extends Component
      */
     public function __construct(
         $name = null,
-        array $columns = array(),
+        array $columns = [],
         $type = null,
         $options = null
     ) {
@@ -102,16 +96,16 @@ class Key extends Component
      *
      * @return Key
      */
-    public static function parse(Parser $parser, TokensList $list, array $options = array())
+    public static function parse(Parser $parser, TokensList $list, array $options = [])
     {
-        $ret = new self();
+        $ret = new static();
 
         /**
          * Last parsed column.
          *
          * @var array
          */
-        $lastColumn = array();
+        $lastColumn = [];
 
         /**
          * The state of the parser.
@@ -161,10 +155,10 @@ class Key extends Component
                     if ($token->value === '(') {
                         $state = 3;
                     } elseif (($token->value === ',') || ($token->value === ')')) {
-                        $state = ($token->value === ',') ? 2 : 4;
+                        $state = $token->value === ',' ? 2 : 4;
                         if (! empty($lastColumn)) {
                             $ret->columns[] = $lastColumn;
-                            $lastColumn = array();
+                            $lastColumn = [];
                         }
                     }
                 } else {
@@ -194,14 +188,14 @@ class Key extends Component
      *
      * @return string
      */
-    public static function build($component, array $options = array())
+    public static function build($component, array $options = [])
     {
         $ret = $component->type . ' ';
         if (! empty($component->name)) {
             $ret .= Context::escape($component->name) . ' ';
         }
 
-        $columns = array();
+        $columns = [];
         foreach ($component->columns as $column) {
             $tmp = Context::escape($column['name']);
             if (isset($column['length'])) {

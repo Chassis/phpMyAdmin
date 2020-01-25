@@ -1,8 +1,8 @@
 <?php
-
 /**
  * CLI interface.
  */
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Utils;
 
@@ -12,10 +12,6 @@ use PhpMyAdmin\SqlParser\Parser;
 
 /**
  * CLI interface.
- *
- * @category   Exceptions
- *
- * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class CLI
 {
@@ -42,11 +38,11 @@ class CLI
 
     public function parseHighlight()
     {
-        $longopts = array(
+        $longopts = [
             'help',
             'query:',
-            'format:'
-        );
+            'format:',
+        ];
         $params = $this->getopt(
             'hq:f:',
             $longopts
@@ -58,7 +54,7 @@ class CLI
         if (! isset($params['f'])) {
             $params['f'] = 'cli';
         }
-        if (! in_array($params['f'], array('html', 'cli', 'text'))) {
+        if (! in_array($params['f'], ['html', 'cli', 'text'])) {
             echo "ERROR: Invalid value for format!\n";
 
             return false;
@@ -78,7 +74,7 @@ class CLI
 
             return 0;
         }
-        if (!isset($params['q'])) {
+        if (! isset($params['q'])) {
             if ($stdIn = $this->readStdin()) {
                 $params['q'] = $stdIn;
             }
@@ -86,7 +82,7 @@ class CLI
         if (isset($params['q'])) {
             echo Formatter::format(
                 $params['q'],
-                array('type' => $params['f'])
+                ['type' => $params['f']]
             );
             echo "\n";
 
@@ -106,11 +102,11 @@ class CLI
 
     public function parseLint()
     {
-        $longopts = array(
+        $longopts = [
             'help',
             'query:',
-            'context:'
-        );
+            'context:',
+        ];
         $params = $this->getopt(
             'hq:c:',
             $longopts
@@ -134,7 +130,7 @@ class CLI
         if (isset($params['c'])) {
             Context::load($params['c']);
         }
-        if (!isset($params['q'])) {
+        if (! isset($params['q'])) {
             if ($stdIn = $this->readStdin()) {
                 $params['q'] = $stdIn;
             }
@@ -142,7 +138,7 @@ class CLI
         if (isset($params['q'])) {
             $lexer = new Lexer($params['q'], false);
             $parser = new Parser($lexer->list);
-            $errors = Error::get(array($lexer, $parser));
+            $errors = Error::get([$lexer, $parser]);
             if (count($errors) === 0) {
                 return 0;
             }
@@ -166,10 +162,10 @@ class CLI
 
     public function parseTokenize()
     {
-        $longopts = array(
+        $longopts = [
             'help',
-            'query:'
-        );
+            'query:',
+        ];
         $params = $this->getopt(
             'hq:',
             $longopts
@@ -190,7 +186,7 @@ class CLI
 
             return 0;
         }
-        if (!isset($params['q'])) {
+        if (! isset($params['q'])) {
             if ($stdIn = $this->readStdin()) {
                 $params['q'] = $stdIn;
             }
@@ -218,7 +214,8 @@ class CLI
         return 1;
     }
 
-    private function readStdin() {
+    public function readStdin()
+    {
         stream_set_blocking(STDIN, false);
         $stdin = stream_get_contents(STDIN);
         // restore-default block-mode setting

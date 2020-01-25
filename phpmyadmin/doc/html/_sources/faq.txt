@@ -167,14 +167,14 @@ to the latest version to take advantage of the new import features.
 
 The first things to check (or ask your host provider to check) are the values
 of ``max_execution_time``, ``upload_max_filesize``, ``memory_limit`` and
-``post_max_size`` in the :file:`php.ini` configuration file. All of these three
+``post_max_size`` in the :file:`php.ini` configuration file. All of these
 settings limit the maximum size of data that can be submitted and handled by
 PHP. Please note that ``post_max_size`` needs to be larger than
 ``upload_max_filesize``. There exist several workarounds if your upload is too
 big or your hosting provider is unwilling to change the settings:
 
 * Look at the :config:option:`$cfg['UploadDir']` feature. This allows one to upload a file to the server
-  via scp, ftp, or your favorite file transfer method. PhpMyAdmin is
+  via scp, FTP, or your favorite file transfer method. PhpMyAdmin is
   then able to import the files from the temporary directory. More
   information is available in the :ref:`config`  of this document.
 * Using a utility (such as `BigDump
@@ -212,7 +212,7 @@ your server - as mentioned in :ref:`faq1_17`. This problem is
 generally caused by using MySQL version 4.1 or newer. MySQL changed
 the authentication hash and your PHP is trying to use the old method.
 The proper solution is to use the `mysqli extension
-<https://secure.php.net/mysqli>`_ with the proper client library to match
+<https://www.php.net/mysqli>`_ with the proper client library to match
 your MySQL installation. More
 information (and several workarounds) are located in the `MySQL
 Documentation <https://dev.mysql.com/doc/refman/5.7/en/common-errors.html>`_.
@@ -433,7 +433,9 @@ releases.
 PHP 7 is supported since phpMyAdmin 4.6, PHP 7.1 is supported since 4.6.5,
 PHP 7.2 is supported since 4.7.4.
 
-phpMyAdmin also works fine with HHVM.
+HHVM is supported up to phpMyAdmin 4.8.
+
+Since release 5.0, phpMyAdmin supports only PHP 7.1 and newer.
 
 .. _faq1_32:
 
@@ -461,20 +463,22 @@ Yes. This procedure was tested with phpMyAdmin 2.6.1, PHP 4.3.9 in
 
 .. _faq1_34:
 
-1.34 Can I access directly to database or table pages?
-------------------------------------------------------
+1.34 Can I directly access a database or table pages?
+-----------------------------------------------------
 
-Yes. Out of the box, you can use :term:`URL` like
+Yes. Out of the box, you can use a :term:`URL` like
 ``http://server/phpMyAdmin/index.php?server=X&db=database&table=table&target=script``.
-For ``server`` you use the server number
-which refers to the order of the server paragraph in
-:file:`config.inc.php`. Table and script parts are optional. If you want
-``http://server/phpMyAdmin/database[/table][/script]`` :term:`URL`, you need to do some configuration. Following
-lines apply only for `Apache <https://httpd.apache.org>`_ web server.
-First make sure, that you have enabled some features within global
+For ``server`` you can use the server number
+which refers to the numeric host index (from ``$i``) in
+:file:`config.inc.php`. The table and script parts are optional.
+
+If you want a URL like
+``http://server/phpMyAdmin/database[/table][/script]``, you need to do some additional configuration. The following
+lines apply only for the `Apache <https://httpd.apache.org>`_ web server.
+First, make sure that you have enabled some features within the Apache global
 configuration. You need ``Options SymLinksIfOwnerMatch`` and ``AllowOverride
 FileInfo`` enabled for directory where phpMyAdmin is installed and you
-need mod\_rewrite to be enabled. Then you just need to create
+need mod\_rewrite to be enabled. Then you just need to create the
 following :term:`.htaccess` file in root folder of phpMyAdmin installation (don't
 forget to change directory name inside of it):
 
@@ -486,6 +490,8 @@ forget to change directory name inside of it):
     RewriteRule ^([a-zA-Z0-9_]+)/([a-z_]+\.php)$ index.php?db=$1&target=$2 [R]
     RewriteRule ^([a-zA-Z0-9_]+)/([a-zA-Z0-9_]+)$ index.php?db=$1&table=$2 [R]
     RewriteRule ^([a-zA-Z0-9_]+)$ index.php?db=$1 [R]
+
+.. seealso:: :ref:`faq4_8`
 
 .. _faq1_35:
 
@@ -686,6 +692,30 @@ A list of files and corresponding functionality which degrade gracefully when re
 * :file:`./sql/` (SQL scripts to configure advanced functionality)
 * :file:`./js/vendor/openlayers/` (GIS visualization)
 
+.. _faq1_45:
+
+1.45 I get an error message about unknown authentication method caching_sha2_password when trying to log in
+-----------------------------------------------------------------------------------------------------------
+
+When logging in using MySQL version 8 or newer, you may encounter an error message like this:
+
+    mysqli_real_connect(): The server requested authentication method unknown to the client [caching_sha2_password]
+
+    mysqli_real_connect(): (HY000/2054): The server requested authentication method unknown to the client
+
+This error is because of a version compatibility problem between PHP and MySQL. The MySQL project introduced a new authentication
+method (our tests show this began with version 8.0.11) however PHP did not include the ability to use that authentication method.
+PHP reports that this was fixed in PHP version 7.4.
+
+Users experiencing this are encouraged to upgrade their PHP installation, however a workaround exists. Your MySQL user account
+can be set to use the older authentication with a command such as
+
+.. code-block:: mysql
+
+  ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'PASSWORD';
+
+.. seealso:: <https://github.com/phpmyadmin/phpmyadmin/issues/14220>, <https://stackoverflow.com/questions/49948350/phpmyadmin-on-mysql-8-0>, <https://bugs.php.net/bug.php?id=76243>
+
 .. _faqconfig:
 
 Configuration
@@ -823,7 +853,7 @@ Here are a few points to check:
 ---------------------------------
 
 To be able to see a progress bar during your uploads, your server must
-have the `APC <https://secure.php.net/manual/en/book.apc.php>`_ extension, the
+have the `APC <https://www.php.net/manual/en/book.apc.php>`_ extension, the
 `uploadprogress <https://pecl.php.net/package/uploadprogress>`_ one, or
 you must be running PHP 5.4.0 or higher. Moreover, the JSON extension
 has to be enabled in your PHP.
@@ -1052,7 +1082,7 @@ is no way for PHP to set the charset before authenticating.
 .. seealso::
 
     `phpMyAdmin issue 12232 <https://github.com/phpmyadmin/phpmyadmin/issues/12232>`_,
-    `MySQL documentation note <https://secure.php.net/manual/en/mysqli.real-connect.php#refsect1-mysqli.real-connect-notes>`_
+    `MySQL documentation note <https://www.php.net/manual/en/mysqli.real-connect.php#refsect1-mysqli.real-connect-notes>`_
 
 .. _faqmultiuser:
 
@@ -1174,6 +1204,8 @@ or one of the host names present in the configuration file.
 
 For example, to jump directly to a particular database, a URL can be constructed as
 ``https://example.com/phpmyadmin/?db=sakila``.
+
+.. seealso:: :ref:`faq1_34`
 
 .. versionchanged:: 4.9.0
 
@@ -1615,7 +1647,7 @@ It means "average".
   any) will be included in backup.
 * "Enclose table and column names with backquotes" ensures that column
   and table names formed with special characters are protected.
-* "Add into comments" includes column comments, relations, and MIME
+* "Add into comments" includes column comments, relations, and media (MIME)
   types set in the pmadb in the dump as :term:`SQL` comments
   (*/\* xxx \*/*).
 
@@ -1788,7 +1820,7 @@ in Browse mode or on the Structure page.
 -----------------------------------
 
 In all places where phpMyAdmin accepts format strings, you can use
-``@VARIABLE@`` expansion and `strftime <https://secure.php.net/strftime>`_
+``@VARIABLE@`` expansion and `strftime <https://www.php.net/strftime>`_
 format strings. The expanded variables depend on a context (for
 example, if you haven't chosen a table, you can not get the table
 name), but the following variables can be used:

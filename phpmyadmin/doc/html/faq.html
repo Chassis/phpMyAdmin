@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>FAQ - Frequently Asked Questions &#8212; phpMyAdmin 4.9.2 documentation</title>
+    <title>FAQ - Frequently Asked Questions &#8212; phpMyAdmin 5.0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.9.2',
+        VERSION:     '5.0.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="copyright" title="Copyright" href="copyright.html" />
-    <link rel="top" title="phpMyAdmin 4.9.2 documentation" href="index.html" />
+    <link rel="top" title="phpMyAdmin 5.0.1 documentation" href="index.html" />
     <link rel="next" title="Developers Information" href="developers.html" />
     <link rel="prev" title="Other sources of information" href="other.html" /> 
   </head>
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="other.html" title="Other sources of information"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.9.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.0.1 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -165,14 +165,14 @@ these problems should not occur. If possible, upgrade your phpMyAdmin
 to the latest version to take advantage of the new import features.</p>
 <p>The first things to check (or ask your host provider to check) are the values
 of <code class="docutils literal"><span class="pre">max_execution_time</span></code>, <code class="docutils literal"><span class="pre">upload_max_filesize</span></code>, <code class="docutils literal"><span class="pre">memory_limit</span></code> and
-<code class="docutils literal"><span class="pre">post_max_size</span></code> in the <code class="file docutils literal"><span class="pre">php.ini</span></code> configuration file. All of these three
+<code class="docutils literal"><span class="pre">post_max_size</span></code> in the <code class="file docutils literal"><span class="pre">php.ini</span></code> configuration file. All of these
 settings limit the maximum size of data that can be submitted and handled by
 PHP. Please note that <code class="docutils literal"><span class="pre">post_max_size</span></code> needs to be larger than
 <code class="docutils literal"><span class="pre">upload_max_filesize</span></code>. There exist several workarounds if your upload is too
 big or your hosting provider is unwilling to change the settings:</p>
 <ul>
 <li><p class="first">Look at the <span class="target" id="index-2"></span><a class="reference internal" href="config.html#cfg_UploadDir"><code class="xref config config-option docutils literal"><span class="pre">$cfg['UploadDir']</span></code></a> feature. This allows one to upload a file to the server
-via scp, ftp, or your favorite file transfer method. PhpMyAdmin is
+via scp, FTP, or your favorite file transfer method. PhpMyAdmin is
 then able to import the files from the temporary directory. More
 information is available in the <a class="reference internal" href="config.html#config"><span class="std std-ref">Configuration</span></a>  of this document.</p>
 </li>
@@ -204,7 +204,7 @@ output. In general, it should have at least the same minor version as
 your server - as mentioned in <a class="reference internal" href="#faq1-17"><span class="std std-ref">1.17 Which Database versions does phpMyAdmin support?</span></a>. This problem is
 generally caused by using MySQL version 4.1 or newer. MySQL changed
 the authentication hash and your PHP is trying to use the old method.
-The proper solution is to use the <a class="reference external" href="https://secure.php.net/mysqli">mysqli extension</a> with the proper client library to match
+The proper solution is to use the <a class="reference external" href="https://www.php.net/mysqli">mysqli extension</a> with the proper client library to match
 your MySQL installation. More
 information (and several workarounds) are located in the <a class="reference external" href="https://dev.mysql.com/doc/refman/5.7/en/common-errors.html">MySQL
 Documentation</a>.</p>
@@ -366,7 +366,8 @@ MMCache but upgrading MMCache to version 2.3.21 solves the problem.</p>
 releases.</p>
 <p>PHP 7 is supported since phpMyAdmin 4.6, PHP 7.1 is supported since 4.6.5,
 PHP 7.2 is supported since 4.7.4.</p>
-<p>phpMyAdmin also works fine with HHVM.</p>
+<p>HHVM is supported up to phpMyAdmin 4.8.</p>
+<p>Since release 5.0, phpMyAdmin supports only PHP 7.1 and newer.</p>
 </div>
 <div class="section" id="can-i-use-http-authentication-with-iis">
 <span id="faq1-32"></span><h3>1.32 Can I use HTTP authentication with IIS?<a class="headerlink" href="#can-i-use-http-authentication-with-iis" title="Permalink to this headline">¶</a></h3>
@@ -390,19 +391,20 @@ and click the <code class="docutils literal"><span class="pre">Set</span> <span 
 <div class="section" id="faq1-33">
 <span id="id6"></span><h3>1.33 (withdrawn).<a class="headerlink" href="#faq1-33" title="Permalink to this headline">¶</a></h3>
 </div>
-<div class="section" id="can-i-access-directly-to-database-or-table-pages">
-<span id="faq1-34"></span><h3>1.34 Can I access directly to database or table pages?<a class="headerlink" href="#can-i-access-directly-to-database-or-table-pages" title="Permalink to this headline">¶</a></h3>
-<p>Yes. Out of the box, you can use <a class="reference internal" href="glossary.html#term-url"><span class="xref std std-term">URL</span></a> like
+<div class="section" id="can-i-directly-access-a-database-or-table-pages">
+<span id="faq1-34"></span><h3>1.34 Can I directly access a database or table pages?<a class="headerlink" href="#can-i-directly-access-a-database-or-table-pages" title="Permalink to this headline">¶</a></h3>
+<p>Yes. Out of the box, you can use a <a class="reference internal" href="glossary.html#term-url"><span class="xref std std-term">URL</span></a> like
 <code class="docutils literal"><span class="pre">http://server/phpMyAdmin/index.php?server=X&amp;db=database&amp;table=table&amp;target=script</span></code>.
-For <code class="docutils literal"><span class="pre">server</span></code> you use the server number
-which refers to the order of the server paragraph in
-<code class="file docutils literal"><span class="pre">config.inc.php</span></code>. Table and script parts are optional. If you want
-<code class="docutils literal"><span class="pre">http://server/phpMyAdmin/database[/table][/script]</span></code> <a class="reference internal" href="glossary.html#term-url"><span class="xref std std-term">URL</span></a>, you need to do some configuration. Following
-lines apply only for <a class="reference external" href="https://httpd.apache.org">Apache</a> web server.
-First make sure, that you have enabled some features within global
+For <code class="docutils literal"><span class="pre">server</span></code> you can use the server number
+which refers to the numeric host index (from <code class="docutils literal"><span class="pre">$i</span></code>) in
+<code class="file docutils literal"><span class="pre">config.inc.php</span></code>. The table and script parts are optional.</p>
+<p>If you want a URL like
+<code class="docutils literal"><span class="pre">http://server/phpMyAdmin/database[/table][/script]</span></code>, you need to do some additional configuration. The following
+lines apply only for the <a class="reference external" href="https://httpd.apache.org">Apache</a> web server.
+First, make sure that you have enabled some features within the Apache global
 configuration. You need <code class="docutils literal"><span class="pre">Options</span> <span class="pre">SymLinksIfOwnerMatch</span></code> and <code class="docutils literal"><span class="pre">AllowOverride</span>
 <span class="pre">FileInfo</span></code> enabled for directory where phpMyAdmin is installed and you
-need mod_rewrite to be enabled. Then you just need to create
+need mod_rewrite to be enabled. Then you just need to create the
 following <a class="reference internal" href="glossary.html#term-htaccess"><span class="xref std std-term">.htaccess</span></a> file in root folder of phpMyAdmin installation (don&#8217;t
 forget to change directory name inside of it):</p>
 <div class="highlight-apache"><div class="highlight"><pre><span></span><span class="nb">RewriteEngine</span> <span class="k">On</span>
@@ -412,6 +414,10 @@ forget to change directory name inside of it):</p>
 <span class="nb">RewriteRule</span> ^([a-zA-Z0-9_]+)/([a-zA-Z0-9_]+)$ index.php?db=$1&amp;table=$2 [R]
 <span class="nb">RewriteRule</span> ^([a-zA-Z0-9_]+)$ index.php?db=$1 [R]
 </pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#faq4-8"><span class="std std-ref">4.8 Which parameters can I use in the URL that starts phpMyAdmin?</span></a></p>
 </div>
 </div>
 <div class="section" id="can-i-use-http-authentication-with-apache-cgi">
@@ -574,6 +580,26 @@ A list of files and corresponding functionality which degrade gracefully when re
 <li><code class="file docutils literal"><span class="pre">./js/vendor/openlayers/</span></code> (GIS visualization)</li>
 </ul>
 </div>
+<div class="section" id="i-get-an-error-message-about-unknown-authentication-method-caching-sha2-password-when-trying-to-log-in">
+<span id="faq1-45"></span><h3>1.45 I get an error message about unknown authentication method caching_sha2_password when trying to log in<a class="headerlink" href="#i-get-an-error-message-about-unknown-authentication-method-caching-sha2-password-when-trying-to-log-in" title="Permalink to this headline">¶</a></h3>
+<p>When logging in using MySQL version 8 or newer, you may encounter an error message like this:</p>
+<blockquote>
+<div><p>mysqli_real_connect(): The server requested authentication method unknown to the client [caching_sha2_password]</p>
+<p>mysqli_real_connect(): (HY000/2054): The server requested authentication method unknown to the client</p>
+</div></blockquote>
+<p>This error is because of a version compatibility problem between PHP and MySQL. The MySQL project introduced a new authentication
+method (our tests show this began with version 8.0.11) however PHP did not include the ability to use that authentication method.
+PHP reports that this was fixed in PHP version 7.4.</p>
+<p>Users experiencing this are encouraged to upgrade their PHP installation, however a workaround exists. Your MySQL user account
+can be set to use the older authentication with a command such as</p>
+<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">ALTER</span> <span class="n">USER</span> <span class="s1">&#39;root&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span> <span class="n">IDENTIFIED</span> <span class="k">WITH</span> <span class="n">mysql_native_password</span> <span class="k">BY</span> <span class="s1">&#39;PASSWORD&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">&lt;<a class="reference external" href="https://github.com/phpmyadmin/phpmyadmin/issues/14220">https://github.com/phpmyadmin/phpmyadmin/issues/14220</a>&gt;, &lt;<a class="reference external" href="https://stackoverflow.com/questions/49948350/phpmyadmin-on-mysql-8-0">https://stackoverflow.com/questions/49948350/phpmyadmin-on-mysql-8-0</a>&gt;, &lt;<a class="reference external" href="https://bugs.php.net/bug.php?id=76243">https://bugs.php.net/bug.php?id=76243</a>&gt;</p>
+</div>
+</div>
 </div>
 <div class="section" id="configuration">
 <span id="faqconfig"></span><h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
@@ -674,7 +700,7 @@ by <a class="reference external" href="https://bugs.php.net/bug.php?id=39842">bu
 <div class="section" id="seeing-an-upload-progress-bar">
 <span id="faq2-9"></span><h3>2.9 Seeing an upload progress bar<a class="headerlink" href="#seeing-an-upload-progress-bar" title="Permalink to this headline">¶</a></h3>
 <p>To be able to see a progress bar during your uploads, your server must
-have the <a class="reference external" href="https://secure.php.net/manual/en/book.apc.php">APC</a> extension, the
+have the <a class="reference external" href="https://www.php.net/manual/en/book.apc.php">APC</a> extension, the
 <a class="reference external" href="https://pecl.php.net/package/uploadprogress">uploadprogress</a> one, or
 you must be running PHP 5.4.0 or higher. Moreover, the JSON extension
 has to be enabled in your PHP.</p>
@@ -844,7 +870,7 @@ is no way for PHP to set the charset before authenticating.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference external" href="https://github.com/phpmyadmin/phpmyadmin/issues/12232">phpMyAdmin issue 12232</a>,
-<a class="reference external" href="https://secure.php.net/manual/en/mysqli.real-connect.php#refsect1-mysqli.real-connect-notes">MySQL documentation note</a></p>
+<a class="reference external" href="https://www.php.net/manual/en/mysqli.real-connect.php#refsect1-mysqli.real-connect-notes">MySQL documentation note</a></p>
 </div>
 </div>
 </div>
@@ -941,6 +967,10 @@ either the numeric host index (from <code class="docutils literal"><span class="
 or one of the host names present in the configuration file.</p>
 <p>For example, to jump directly to a particular database, a URL can be constructed as
 <code class="docutils literal"><span class="pre">https://example.com/phpmyadmin/?db=sakila</span></code>.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#faq1-34"><span class="std std-ref">1.34 Can I directly access a database or table pages?</span></a></p>
+</div>
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 4.9.0: </span>Support for using the <code class="docutils literal"><span class="pre">pma_username</span></code> and <code class="docutils literal"><span class="pre">pma_password</span></code> parameters was removed
 in phpMyAdmin 4.9.0 (see <a class="reference external" href="https://www.phpmyadmin.net/security/PMASA-2019-4/">PMASA-2019-4</a>).</p>
@@ -1275,7 +1305,7 @@ different structure.</li>
 any) will be included in backup.</li>
 <li>&#8220;Enclose table and column names with backquotes&#8221; ensures that column
 and table names formed with special characters are protected.</li>
-<li>&#8220;Add into comments&#8221; includes column comments, relations, and MIME
+<li>&#8220;Add into comments&#8221; includes column comments, relations, and media (MIME)
 types set in the pmadb in the dump as <a class="reference internal" href="glossary.html#term-sql"><span class="xref std std-term">SQL</span></a> comments
 (<em>/* xxx */</em>).</li>
 </ul>
@@ -1408,7 +1438,7 @@ in Browse mode or on the Structure page.</p>
 <div class="section" id="what-format-strings-can-i-use">
 <span id="faq6-27"></span><h3>6.27 What format strings can I use?<a class="headerlink" href="#what-format-strings-can-i-use" title="Permalink to this headline">¶</a></h3>
 <p>In all places where phpMyAdmin accepts format strings, you can use
-<code class="docutils literal"><span class="pre">&#64;VARIABLE&#64;</span></code> expansion and <a class="reference external" href="https://secure.php.net/strftime">strftime</a>
+<code class="docutils literal"><span class="pre">&#64;VARIABLE&#64;</span></code> expansion and <a class="reference external" href="https://www.php.net/strftime">strftime</a>
 format strings. The expanded variables depend on a context (for
 example, if you haven&#8217;t chosen a table, you can not get the table
 name), but the following variables can be used:</p>
@@ -1814,7 +1844,7 @@ spreadsheet program to properly parse and sanitize such data on input instead.</
 <li><a class="reference internal" href="#which-php-versions-does-phpmyadmin-support">1.31 Which PHP versions does phpMyAdmin support?</a></li>
 <li><a class="reference internal" href="#can-i-use-http-authentication-with-iis">1.32 Can I use HTTP authentication with IIS?</a></li>
 <li><a class="reference internal" href="#faq1-33">1.33 (withdrawn).</a></li>
-<li><a class="reference internal" href="#can-i-access-directly-to-database-or-table-pages">1.34 Can I access directly to database or table pages?</a></li>
+<li><a class="reference internal" href="#can-i-directly-access-a-database-or-table-pages">1.34 Can I directly access a database or table pages?</a></li>
 <li><a class="reference internal" href="#can-i-use-http-authentication-with-apache-cgi">1.35 Can I use HTTP authentication with Apache CGI?</a></li>
 <li><a class="reference internal" href="#i-get-an-error-500-internal-server-error">1.36 I get an error &#8220;500 Internal Server Error&#8221;.</a></li>
 <li><a class="reference internal" href="#i-run-phpmyadmin-on-cluster-of-different-machines-and-password-encryption-in-cookie-auth-doesn-t-work">1.37 I run phpMyAdmin on cluster of different machines and password encryption in cookie auth doesn&#8217;t work.</a></li>
@@ -1825,6 +1855,7 @@ spreadsheet program to properly parse and sanitize such data on input instead.</
 <li><a class="reference internal" href="#how-can-i-prevent-robots-from-accessing-phpmyadmin">1.42 How can I prevent robots from accessing phpMyAdmin?</a></li>
 <li><a class="reference internal" href="#why-can-t-i-display-the-structure-of-my-table-containing-hundreds-of-columns">1.43 Why can&#8217;t I display the structure of my table containing hundreds of columns?</a></li>
 <li><a class="reference internal" href="#how-can-i-reduce-the-installed-size-of-phpmyadmin-on-disk">1.44 How can I reduce the installed size of phpMyAdmin on disk?</a></li>
+<li><a class="reference internal" href="#i-get-an-error-message-about-unknown-authentication-method-caching-sha2-password-when-trying-to-log-in">1.45 I get an error message about unknown authentication method caching_sha2_password when trying to log in</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#configuration">Configuration</a><ul>
@@ -2003,7 +2034,7 @@ spreadsheet program to properly parse and sanitize such data on input instead.</
         <li class="right" >
           <a href="other.html" title="Other sources of information"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.9.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.0.1 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

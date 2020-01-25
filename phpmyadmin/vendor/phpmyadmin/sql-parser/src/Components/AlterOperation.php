@@ -1,8 +1,8 @@
 <?php
-
 /**
  * Parses an alter operation.
  */
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Components;
 
@@ -13,10 +13,6 @@ use PhpMyAdmin\SqlParser\TokensList;
 
 /**
  * Parses an alter operation.
- *
- * @category   Components
- *
- * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class AlterOperation extends Component
 {
@@ -25,67 +21,67 @@ class AlterOperation extends Component
      *
      * @var array
      */
-    public static $DB_OPTIONS = array(
-        'CHARACTER SET' => array(
+    public static $DB_OPTIONS = [
+        'CHARACTER SET' => [
             1,
-            'var'
-        ),
-        'CHARSET' => array(
+            'var',
+        ],
+        'CHARSET' => [
             1,
-            'var'
-        ),
-        'DEFAULT CHARACTER SET' => array(
+            'var',
+        ],
+        'DEFAULT CHARACTER SET' => [
             1,
-            'var'
-        ),
-        'DEFAULT CHARSET' => array(
+            'var',
+        ],
+        'DEFAULT CHARSET' => [
             1,
-            'var'
-        ),
-        'UPGRADE' => array(
+            'var',
+        ],
+        'UPGRADE' => [
             1,
-            'var'
-        ),
-        'COLLATE' => array(
+            'var',
+        ],
+        'COLLATE' => [
             2,
-            'var'
-        ),
-        'DEFAULT COLLATE' => array(
+            'var',
+        ],
+        'DEFAULT COLLATE' => [
             2,
-            'var'
-        )
-    );
+            'var',
+        ],
+    ];
 
     /**
      * All table options.
      *
      * @var array
      */
-    public static $TABLE_OPTIONS = array(
-        'ENGINE' => array(
+    public static $TABLE_OPTIONS = [
+        'ENGINE' => [
             1,
-            'var='
-        ),
-        'AUTO_INCREMENT' => array(
+            'var=',
+        ],
+        'AUTO_INCREMENT' => [
             1,
-            'var='
-        ),
-        'AVG_ROW_LENGTH' => array(
+            'var=',
+        ],
+        'AVG_ROW_LENGTH' => [
             1,
-            'var'
-        ),
-        'MAX_ROWS' => array(
+            'var',
+        ],
+        'MAX_ROWS' => [
             1,
-            'var'
-        ),
-        'ROW_FORMAT' => array(
+            'var',
+        ],
+        'ROW_FORMAT' => [
             1,
-            'var'
-        ),
-        'COMMENT' => array(
+            'var',
+        ],
+        'COMMENT' => [
             1,
-            'var'
-        ),
+            'var',
+        ],
         'ADD' => 1,
         'ALTER' => 1,
         'ANALYZE' => 1,
@@ -122,17 +118,17 @@ class AlterOperation extends Component
         'PRIMARY KEY' => 2,
         'SPATIAL' => 2,
         'TABLESPACE' => 2,
-        'INDEX' => 2
-    );
+        'INDEX' => 2,
+    ];
 
     /**
      * All view options.
      *
      * @var array
      */
-    public static $VIEW_OPTIONS = array(
+    public static $VIEW_OPTIONS = [
         'AS' => 1,
-    );
+    ];
 
     /**
      * Options of this operation.
@@ -153,11 +149,9 @@ class AlterOperation extends Component
      *
      * @var Token[]|string
      */
-    public $unknown = array();
+    public $unknown = [];
 
     /**
-     * Constructor.
-     *
      * @param OptionsArray $options options of alter operation
      * @param Expression   $field   altered field
      * @param array        $unknown unparsed tokens found at the end of operation
@@ -165,7 +159,7 @@ class AlterOperation extends Component
     public function __construct(
         $options = null,
         $field = null,
-        $unknown = array()
+        $unknown = []
     ) {
         $this->options = $options;
         $this->field = $field;
@@ -179,9 +173,9 @@ class AlterOperation extends Component
      *
      * @return AlterOperation
      */
-    public static function parse(Parser $parser, TokensList $list, array $options = array())
+    public static function parse(Parser $parser, TokensList $list, array $options = [])
     {
-        $ret = new self();
+        $ret = new static();
 
         /**
          * Counts brackets.
@@ -251,10 +245,10 @@ class AlterOperation extends Component
                 $ret->field = Expression::parse(
                     $parser,
                     $list,
-                    array(
+                    [
                         'breakOnAlias' => true,
-                        'parseField' => 'column'
-                    )
+                        'parseField' => 'column',
+                    ]
                 );
                 if ($ret->field === null) {
                     // No field was read. We go back one token so the next
@@ -315,10 +309,10 @@ class AlterOperation extends Component
      *
      * @return string
      */
-    public static function build($component, array $options = array())
+    public static function build($component, array $options = [])
     {
         $ret = $component->options . ' ';
-        if ((isset($component->field)) && ($component->field !== '')) {
+        if (isset($component->field) && ($component->field !== '')) {
             $ret .= $component->field . ' ';
         }
         $ret .= TokensList::build($component->unknown);
@@ -331,16 +325,22 @@ class AlterOperation extends Component
      * between column and table alteration
      *
      * @param string $tokenValue Value of current token
+     *
+     * @return bool
      */
     private static function checkIfColumnDefinitionKeyword($tokenValue)
     {
-        $common_options = array(
+        $common_options = [
             'AUTO_INCREMENT',
             'COMMENT',
             'DEFAULT',
             'CHARACTER SET',
-            'COLLATE'
-        );
+            'COLLATE',
+            'PRIMARY',
+            'UNIQUE',
+            'PRIMARY KEY',
+            'UNIQUE KEY',
+        ];
         // Since these options can be used for
         // both table as well as a specific column in the table
         return in_array($tokenValue, $common_options);
