@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Context for MySQL 5.0.
  *
@@ -7,6 +6,7 @@
  *
  * @see https://dev.mysql.com/doc/refman/5.0/en/keywords.html
  */
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Contexts;
 
@@ -15,10 +15,6 @@ use PhpMyAdmin\SqlParser\Token;
 
 /**
  * Context for MySQL 5.0.
- *
- * @category   Contexts
- *
- * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class ContextMySql50000 extends Context
 {
@@ -33,7 +29,7 @@ class ContextMySql50000 extends Context
      *
      * @var array
      */
-    public static $KEYWORDS = array(
+    public static $KEYWORDS = [
         'DO' => 1, 'IO' => 1, 'NO' => 1, 'XA' => 1,
         'ANY' => 1, 'BDB' => 1, 'CPU' => 1, 'END' => 1, 'IPC' => 1, 'NDB' => 1,
         'NEW' => 1, 'ONE' => 1, 'ROW' => 1,
@@ -281,6 +277,6 @@ class ContextMySql50000 extends Context
 
         'CHAR' => 43,
         'BINARY' => 43,
-        'INTERVAL' => 43
-    );
+        'INTERVAL' => 43,
+    ];
 }

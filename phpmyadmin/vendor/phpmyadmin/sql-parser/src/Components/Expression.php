@@ -1,9 +1,9 @@
 <?php
-
 /**
  * Parses a reference to an expression (column, table or database name, function
  * call, mathematical expression, etc.).
  */
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Components;
 
@@ -16,10 +16,6 @@ use PhpMyAdmin\SqlParser\TokensList;
 /**
  * Parses a reference to an expression (column, table or database name, function
  * call, mathematical expression, etc.).
- *
- * @category   Components
- *
- * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class Expression extends Component
 {
@@ -28,7 +24,7 @@ class Expression extends Component
      *
      * @var array
      */
-    private static $ALLOWED_KEYWORDS = array(
+    private static $ALLOWED_KEYWORDS = [
         'AS' => 1,
         'DUAL' => 1,
         'NULL' => 1,
@@ -39,8 +35,8 @@ class Expression extends Component
         'OR' => 1,
         'XOR' => 1,
         'NOT' => 1,
-        'MOD' => 1
-    );
+        'MOD' => 1,
+    ];
 
     /**
      * The name of this database.
@@ -92,8 +88,6 @@ class Expression extends Component
     public $subquery;
 
     /**
-     * Constructor.
-     *
      * Syntax:
      *     new Expression('expr')
      *     new Expression('expr', 'alias')
@@ -153,11 +147,11 @@ class Expression extends Component
      * @param TokensList $list    the list of tokens that are being parsed
      * @param array      $options parameters for parsing
      *
-     * @return Expression
+     * @return Expression|null
      */
-    public static function parse(Parser $parser, TokensList $list, array $options = array())
+    public static function parse(Parser $parser, TokensList $list, array $options = [])
     {
-        $ret = new self();
+        $ret = new static();
 
         /**
          * Whether current tokens make an expression or a table reference.
@@ -192,10 +186,10 @@ class Expression extends Component
          *
          * @var Token[]
          */
-        $prev = array(
+        $prev = [
             null,
-            null
-        );
+            null,
+        ];
 
         // When a field is parsed, no parentheses are expected.
         if (! empty($options['parseField'])) {
@@ -269,7 +263,7 @@ class Expression extends Component
                         continue;
                     }
                     $isExpr = true;
-                } elseif ($brackets === 0 && strlen($ret->expr) > 0 && ! $alias) {
+                } elseif ($brackets === 0 && strlen((string) $ret->expr) > 0 && ! $alias) {
                     /* End of expression */
                     break;
                 }
@@ -413,7 +407,7 @@ class Expression extends Component
         }
 
         // White-spaces might be added at the end.
-        $ret->expr = trim($ret->expr);
+        $ret->expr = trim((string) $ret->expr);
 
         if ($ret->expr === '') {
             return null;
@@ -430,16 +424,16 @@ class Expression extends Component
      *
      * @return string
      */
-    public static function build($component, array $options = array())
+    public static function build($component, array $options = [])
     {
         if (is_array($component)) {
             return implode(', ', $component);
         }
 
-        if ($component->expr !== '' && ! is_null($component->expr)) {
+        if ($component->expr !== '' && $component->expr !== null) {
             $ret = $component->expr;
         } else {
-            $fields = array();
+            $fields = [];
             if (isset($component->database) && ($component->database !== '')) {
                 $fields[] = $component->database;
             }

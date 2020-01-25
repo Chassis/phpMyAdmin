@@ -1,8 +1,8 @@
 <?php
-
 /**
  * Parses a reference to a LOCK expression.
  */
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Components;
 
@@ -13,10 +13,6 @@ use PhpMyAdmin\SqlParser\TokensList;
 
 /**
  * Parses a reference to a LOCK expression.
- *
- * @category   Components
- *
- * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class LockExpression extends Component
 {
@@ -39,11 +35,11 @@ class LockExpression extends Component
      * @param TokensList $list    the list of tokens that are being parsed
      * @param array      $options parameters for parsing
      *
-     * @return CaseExpression
+     * @return LockExpression
      */
-    public static function parse(Parser $parser, TokensList $list, array $options = array())
+    public static function parse(Parser $parser, TokensList $list, array $options = [])
     {
-        $ret = new self();
+        $ret = new static();
 
         /**
          * The state of the parser.
@@ -77,7 +73,7 @@ class LockExpression extends Component
             }
 
             if ($state === 0) {
-                $ret->table = Expression::parse($parser, $list, array('parseField' => 'table'));
+                $ret->table = Expression::parse($parser, $list, ['parseField' => 'table']);
                 $state = 1;
             } elseif ($state === 1) {
                 // parse lock type
@@ -103,7 +99,7 @@ class LockExpression extends Component
      *
      * @return string
      */
-    public static function build($component, array $options = array())
+    public static function build($component, array $options = [])
     {
         if (is_array($component)) {
             return implode(', ', $component);

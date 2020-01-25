@@ -1,8 +1,8 @@
 <?php
-
 /**
  * Parses a reference to a CASE expression.
  */
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Components;
 
@@ -14,10 +14,6 @@ use PhpMyAdmin\SqlParser\TokensList;
 
 /**
  * Parses a reference to a CASE expression.
- *
- * @category   Components
- *
- * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class CaseExpression extends Component
 {
@@ -33,21 +29,21 @@ class CaseExpression extends Component
      *
      * @var array
      */
-    public $conditions = array();
+    public $conditions = [];
 
     /**
      * The results matching with the WHEN clauses.
      *
      * @var array
      */
-    public $results = array();
+    public $results = [];
 
     /**
      * The values to be compared against.
      *
      * @var array
      */
-    public $compare_values = array();
+    public $compare_values = [];
 
     /**
      * The result in ELSE section of expr.
@@ -70,9 +66,6 @@ class CaseExpression extends Component
      */
     public $expr = '';
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
     }
@@ -84,9 +77,9 @@ class CaseExpression extends Component
      *
      * @return CaseExpression
      */
-    public static function parse(Parser $parser, TokensList $list, array $options = array())
+    public static function parse(Parser $parser, TokensList $list, array $options = [])
     {
-        $ret = new self();
+        $ret = new static();
 
         /**
          * State of parser.
@@ -279,7 +272,7 @@ class CaseExpression extends Component
      *
      * @return string
      */
-    public static function build($component, array $options = array())
+    public static function build($component, array $options = [])
     {
         $ret = 'CASE ';
         if (isset($component->value)) {

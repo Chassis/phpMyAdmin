@@ -52,7 +52,7 @@ Basic settings
 
     Sets here the complete :term:`URL` (with full path) to your phpMyAdmin
     installation's directory. E.g.
-    ``https://www.example.net/path_to_your_phpMyAdmin_directory/``.  Note also
+    ``https://www.example.net/path_to_your_phpMyAdmin_directory/``. Note also
     that the :term:`URL` on most of web servers are case sensitive (even on
     Windows). Don’t forget the trailing slash at the end.
 
@@ -212,12 +212,14 @@ Basic settings
 
 .. config:option:: $cfg['AllowThirdPartyFraming']
 
-    :type: boolean
+    :type: boolean|string
     :default: false
 
     Setting this to ``true`` allows phpMyAdmin to be included inside a frame,
     and is a potential security hole allowing cross-frame scripting attacks or
-    clickjacking.
+    clickjacking. Setting this to 'sameorigin' prevents phpMyAdmin to be 
+    included from another document in a frame, unless that document belongs 
+    to the same domain.
 
 Server connection settings
 --------------------------
@@ -709,7 +711,7 @@ Server connection settings
 
     More information on regular expressions can be found in the `PCRE
     pattern syntax
-    <https://secure.php.net/manual/en/reference.pcre.pattern.syntax.php>`_ portion
+    <https://www.php.net/manual/en/reference.pcre.pattern.syntax.php>`_ portion
     of the PHP reference manual.
 
 .. config:option:: $cfg['Servers'][$i]['verbose']
@@ -727,6 +729,12 @@ Server connection settings
 
     :type: string
     :default: ``'mysqli'``
+
+    .. deprecated:: 4.2.0
+
+        This setting was removed. The ``mysql`` extension will only be used when
+        the ``mysqli`` extension is not available. As of 5.0.0, only the
+        ``mysqli`` extension can be used.
 
     The PHP MySQL extension to use (``mysql`` or ``mysqli``).
 
@@ -1450,7 +1458,7 @@ Server connection settings
     An associative array of session cookie parameters of other authentication system.
     It is not needed if the other system doesn't use session_set_cookie_params().
     Keys should include 'lifetime', 'path', 'domain', 'secure' or 'httponly'.
-    Valid values are mentioned in `session_get_cookie_params <https://secure.php.net/manual/en/
+    Valid values are mentioned in `session_get_cookie_params <https://www.php.net/manual/en/
     function.session-get-cookie-params.php>`_, they should be set to same values as the
     other application uses. Takes effect only if
     :config:option:`$cfg['Servers'][$i]['SignonScript']` is not configured.
@@ -1580,14 +1588,14 @@ Generic settings
     :type: boolean
     :default: false
 
-    Whether `persistent connections <https://secure.php.net/manual/en/features
+    Whether `persistent connections <https://www.php.net/manual/en/features
     .persistent-connections.php>`_ should be used or not. Works with
     following extensions:
 
-    * mysql (`mysql\_pconnect <https://secure.php.net/manual/en/function.mysql-
+    * mysql (`mysql\_pconnect <https://www.php.net/manual/en/function.mysql-
       pconnect.php>`_),
     * mysqli (requires PHP 5.3.0 or newer, `more information
-      <https://secure.php.net/manual/en/mysqli.persistconns.php>`_).
+      <https://www.php.net/manual/en/mysqli.persistconns.php>`_).
 
 .. config:option:: $cfg['ForceSSL']
 
@@ -1624,7 +1632,7 @@ Generic settings
     :default: ``''``
 
     Path for storing session data (`session\_save\_path PHP parameter
-    <https://secure.php.net/session_save_path>`_).
+    <https://www.php.net/session_save_path>`_).
 
     .. warning::
 
@@ -1736,6 +1744,15 @@ Generic settings
     Define whether phpMyAdmin will continue executing a multi-query
     statement if one of the queries fails. Default is to abort execution.
 
+.. config:option:: $cfg['enable_drag_drop_import']
+
+    :type: boolean
+    :default: true
+
+    Whether or not the drag and drop import feature is enabled.
+    When enabled, a user can drag a file in to their browser and phpMyAdmin will
+    attempt to import the file.
+
 Cookie authentication options
 -----------------------------
 
@@ -1781,7 +1798,7 @@ Cookie authentication options
 
     Define how long a login cookie is valid. Please note that php
     configuration option `session.gc\_maxlifetime
-    <https://secure.php.net/manual/en/session.configuration.php#ini.session.gc-
+    <https://www.php.net/manual/en/session.configuration.php#ini.session.gc-
     maxlifetime>`_ might limit session validity and if the session is lost,
     the login cookie is also invalidated. So it is a good idea to set
     ``session.gc_maxlifetime`` at least to the same value of
@@ -3001,7 +3018,7 @@ the files.
     :default: ``''``
 
     The name of the directory where :term:`SQL` files have been uploaded by
-    other means than phpMyAdmin (for example, ftp). Those files are available
+    other means than phpMyAdmin (for example, FTP). Those files are available
     under a drop-down box when you click the database or table name, then the
     Import tab.
 
@@ -3254,6 +3271,11 @@ Theme manager settings
     :type: string
     :default: '82%'
 
+    .. deprecated:: 5.0.0
+
+        This setting was removed as the browser is more efficient,
+        thus no need of this option.
+
     Font size to use, is applied in CSS.
 
 Default queries
@@ -3483,7 +3505,6 @@ This example uses :file:`examples/signon.php` to demonstrate usage of :ref:`auth
     $cfg['Servers'][$i]['auth_type']     = 'signon';
     $cfg['Servers'][$i]['SignonSession'] = 'SignonSession';
     $cfg['Servers'][$i]['SignonURL']     = 'examples/signon.php';
-    ?>`
 
 Example for IP address limited autologin
 ++++++++++++++++++++++++++++++++++++++++
@@ -3539,7 +3560,6 @@ following example shows two of them:
     $cfg['ServerDefault'] = 0; // to choose the server on startup
 
     // further general options ...
-    ?>
 
 .. _example-google-ssl:
 

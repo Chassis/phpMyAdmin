@@ -1,8 +1,8 @@
 <?php
-
 /**
  * `LOCK` statement.
  */
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Statements;
 
@@ -14,10 +14,6 @@ use PhpMyAdmin\SqlParser\TokensList;
 
 /**
  * `LOCK` statement.
- *
- * @category   Statements
- *
- * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class LockStatement extends Statement
 {
@@ -26,7 +22,7 @@ class LockStatement extends Statement
      *
      * @var LockExpression[]
      */
-    public $locked = array();
+    public $locked = [];
 
     /**
      * Whether it's a LOCK statement
