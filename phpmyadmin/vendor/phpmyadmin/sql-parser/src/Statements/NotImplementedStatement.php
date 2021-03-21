@@ -2,6 +2,7 @@
 /**
  * Not implemented (yet) statements.
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Statements;
@@ -51,6 +52,7 @@ class NotImplementedStatement extends Statement
             if ($list->tokens[$list->idx]->type === Token::TYPE_DELIMITER) {
                 break;
             }
+
             $this->unknown[] = $list->tokens[$list->idx];
         }
     }

@@ -2,6 +2,7 @@
 /**
  * `REFERENCES` keyword parser.
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Components;
@@ -11,6 +12,8 @@ use PhpMyAdmin\SqlParser\Context;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Token;
 use PhpMyAdmin\SqlParser\TokensList;
+use function implode;
+use function trim;
 
 /**
  * `REFERENCES` keyword parser.

@@ -2,6 +2,7 @@
 /**
  * Parses an Index hint.
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Components;
@@ -10,6 +11,8 @@ use PhpMyAdmin\SqlParser\Component;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Token;
 use PhpMyAdmin\SqlParser\TokensList;
+use function implode;
+use function is_array;
 
 /**
  * Parses an Index hint.
@@ -50,8 +53,12 @@ class IndexHint extends Component
      * @param string $for        the clause for which this hint is (JOIN/ORDER BY/GROUP BY)
      * @param array  $indexes    List of indexes in this hint
      */
-    public function __construct(string $type = null, string $indexOrKey = null, string $for = null, array $indexes = [])
-    {
+    public function __construct(
+        ?string $type = null,
+        ?string $indexOrKey = null,
+        ?string $for = null,
+        array $indexes = []
+    ) {
         $this->type = $type;
         $this->indexOrKey = $indexOrKey;
         $this->for = $for;
@@ -69,7 +76,7 @@ class IndexHint extends Component
     {
         $ret = [];
         $expr = new static();
-        $expr->type = isset($options['type']) ? $options['type'] : null;
+        $expr->type = $options['type'] ?? null;
         /**
          * The state of the parser.
          *
@@ -90,6 +97,7 @@ class IndexHint extends Component
         if ($list->idx > 0) {
             --$list->idx;
         }
+
         for (; $list->idx < $list->count; ++$list->idx) {
             /**
              * Token parsed at this moment.
@@ -102,6 +110,7 @@ class IndexHint extends Component
             if ($token->type === Token::TYPE_DELIMITER) {
                 break;
             }
+
             // Skipping whitespaces and comments.
             if (($token->type === Token::TYPE_WHITESPACE) || ($token->type === Token::TYPE_COMMENT)) {
                 continue;
@@ -117,6 +126,7 @@ class IndexHint extends Component
                             break 2;
                         }
                     }
+
                     break;
                 case 1:
                     if ($token->type === Token::TYPE_KEYWORD) {
@@ -125,11 +135,13 @@ class IndexHint extends Component
                         } else {
                             $parser->error('Unexpected keyword.', $token);
                         }
+
                         $state = 2;
                     } else {
                         // we expect the token to be a keyword
                         $parser->error('Unexpected token.', $token);
                     }
+
                     break;
                 case 2:
                     if ($token->type === Token::TYPE_KEYWORD && $token->keyword === 'FOR') {
@@ -140,19 +152,25 @@ class IndexHint extends Component
                         $ret[] = $expr;
                         $expr = new static();
                     }
+
                     break;
                 case 3:
                     if ($token->type === Token::TYPE_KEYWORD) {
-                        if ($token->keyword === 'JOIN' || $token->keyword === 'GROUP BY' || $token->keyword === 'ORDER BY') {
+                        if ($token->keyword === 'JOIN'
+                            || $token->keyword === 'GROUP BY'
+                            || $token->keyword === 'ORDER BY'
+                        ) {
                             $expr->for = $token->keyword;
                         } else {
                             $parser->error('Unexpected keyword.', $token);
                         }
+
                         $state = 4;
                     } else {
                         // we expect the token to be a keyword
                         $parser->error('Unexpected token.', $token);
                     }
+
                     break;
                 case 4:
                     $expr->indexes = ExpressionArray::parse($parser, $list);
@@ -162,6 +180,7 @@ class IndexHint extends Component
                     break;
             }
         }
+
         --$list->idx;
 
         return $ret;
@@ -183,6 +202,7 @@ class IndexHint extends Component
         if ($component->for !== null) {
             $ret .= 'FOR ' . $component->for . ' ';
         }
+
         return $ret . ExpressionArray::build($component->indexes);
     }
 }

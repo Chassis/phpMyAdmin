@@ -17,6 +17,7 @@ use Symfony\Component\Config\Definition\EnumNode;
 use Symfony\Component\Config\Definition\NodeInterface;
 use Symfony\Component\Config\Definition\PrototypedArrayNode;
 use Symfony\Component\Config\Definition\ScalarNode;
+use Symfony\Component\Config\Definition\VariableNode;
 use Symfony\Component\Yaml\Inline;
 
 /**
@@ -39,7 +40,7 @@ class YamlReferenceDumper
 
         foreach (explode('.', $path) as $step) {
             if (!$node instanceof ArrayNode) {
-                throw new \UnexpectedValueException(sprintf('Unable to find node at path "%s.%s"', $rootNode->getName(), $path));
+                throw new \UnexpectedValueException(sprintf('Unable to find node at path "%s.%s".', $rootNode->getName(), $path));
             }
 
             /** @var NodeInterface[] $children */
@@ -53,7 +54,7 @@ class YamlReferenceDumper
                 }
             }
 
-            throw new \UnexpectedValueException(sprintf('Unable to find node at path "%s.%s"', $rootNode->getName(), $path));
+            throw new \UnexpectedValueException(sprintf('Unable to find node at path "%s.%s".', $rootNode->getName(), $path));
         }
 
         return $this->dumpNode($node);
@@ -95,6 +96,9 @@ class YamlReferenceDumper
         } elseif ($node instanceof EnumNode) {
             $comments[] = 'One of '.implode('; ', array_map('json_encode', $node->getValues()));
             $default = $node->hasDefaultValue() ? Inline::dump($node->getDefaultValue()) : '~';
+        } elseif (VariableNode::class === \get_class($node) && \is_array($example)) {
+            // If there is an array example, we are sure we dont need to print a default value
+            $default = '';
         } else {
             $default = '~';
 
@@ -125,7 +129,7 @@ class YamlReferenceDumper
 
         // example
         if ($example && !\is_array($example)) {
-            $comments[] = 'Example: '.$example;
+            $comments[] = 'Example: '.Inline::dump($example);
         }
 
         $default = '' != (string) $default ? ' '.$default : '';
@@ -161,7 +165,7 @@ class YamlReferenceDumper
 
             $this->writeLine('# '.$message.':', $depth * 4 + 4);
 
-            $this->writeArray($example, $depth + 1);
+            $this->writeArray(array_map([Inline::class, 'dump'], $example), $depth + 1);
         }
 
         if ($children) {

@@ -2,6 +2,7 @@
 /**
  * Transaction statement.
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Statements;
@@ -18,17 +19,13 @@ class TransactionStatement extends Statement
 {
     /**
      * START TRANSACTION and BEGIN.
-     *
-     * @var int
      */
-    const TYPE_BEGIN = 1;
+    public const TYPE_BEGIN = 1;
 
     /**
      * COMMIT and ROLLBACK.
-     *
-     * @var int
      */
-    const TYPE_END = 2;
+    public const TYPE_END = 2;
 
     /**
      * The type of this query.
@@ -102,6 +99,7 @@ class TransactionStatement extends Statement
                  */
                 $ret .= ';' . $statement->build();
             }
+
             $ret .= ';' . $this->end->build();
         }
 

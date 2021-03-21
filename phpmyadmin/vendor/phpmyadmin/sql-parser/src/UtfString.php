@@ -9,12 +9,16 @@
  * Because the lexer relies on the subscript operator this class had to be
  * implemented.
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser;
 
 use ArrayAccess;
 use Exception;
+use function mb_check_encoding;
+use function mb_strlen;
+use function ord;
 
 /**
  * Implements array-like access for UTF-8 strings.
@@ -118,6 +122,7 @@ class UtfString implements ArrayAccess
                 do {
                     $byte = ord($this->str[--$this->byteIdx]);
                 } while (($byte >= 128) && ($byte < 192));
+
                 --$this->charIdx;
             }
         }

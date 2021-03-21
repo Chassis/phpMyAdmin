@@ -2,6 +2,7 @@
 /**
  * Defines the core helper infrastructure of the library.
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser;
@@ -44,6 +45,7 @@ class Core
         if ($this->strict) {
             throw $error;
         }
+
         $this->errors[] = $error;
     }
 }

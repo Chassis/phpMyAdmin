@@ -2,6 +2,7 @@
 /**
  * Utilities that are used for formatting queries.
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Utils;
@@ -11,6 +12,18 @@ use PhpMyAdmin\SqlParser\Lexer;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Token;
 use PhpMyAdmin\SqlParser\TokensList;
+use function array_merge;
+use function array_pop;
+use function end;
+use function htmlspecialchars;
+use function in_array;
+use function mb_strlen;
+use function str_repeat;
+use function str_replace;
+use function strpos;
+use function strtoupper;
+use const ENT_NOQUOTES;
+use const PHP_SAPI;
 
 /**
  * Utilities that are used for formatting queries.
@@ -120,7 +133,7 @@ class Formatter
              *
              * @var string The type ('text', 'cli' or 'html')
              */
-            'type' => php_sapi_name() === 'cli' ? 'cli' : 'text',
+            'type' => PHP_SAPI === 'cli' ? 'cli' : 'text',
 
             /*
              * The line ending used.
@@ -236,7 +249,7 @@ class Formatter
         ];
     }
 
-    private static function mergeFormats(array $formats, array $newFormats)
+    private static function mergeFormats(array $formats, array $newFormats): array
     {
         $added = [];
         $integers = [
@@ -256,6 +269,7 @@ class Formatter
                     $newFormats[$j][$name] = 0;
                 }
             }
+
             foreach ($strings as $name) {
                 if (! isset($new[$name])) {
                     $newFormats[$j][$name] = '';
@@ -385,6 +399,7 @@ class Formatter
                 ) {
                     $lineEnded = true;
                 }
+
                 // Whitespaces are skipped because the formatter adds its own.
                 continue;
             }
@@ -420,8 +435,12 @@ class Formatter
                 }
 
                 // Checking if this clause ended.
-                if ($isClause = static::isClause($curr)) {
-                    if (($isClause === 2 || $this->options['clause_newline']) && empty(self::$SHORT_CLAUSES[$lastClause])) {
+                $isClause = static::isClause($curr);
+
+                if ($isClause) {
+                    if (($isClause === 2 || $this->options['clause_newline'])
+                        && empty(self::$SHORT_CLAUSES[$lastClause])
+                    ) {
                         $lineEnded = true;
                         if ($this->options['parts_newline'] && $indent > 0) {
                             --$indent;
@@ -431,7 +450,8 @@ class Formatter
 
                 // Inline JOINs
                 if (($prev->type === Token::TYPE_KEYWORD && isset(JoinKeyword::$JOINS[$prev->value]))
-                    || (in_array($curr->value, ['ON', 'USING'], true) && isset(JoinKeyword::$JOINS[$list->tokens[$list->idx - 2]->value]))
+                    || (in_array($curr->value, ['ON', 'USING'], true)
+                        && isset(JoinKeyword::$JOINS[$list->tokens[$list->idx - 2]->value]))
                     || isset($list->tokens[$list->idx - 4], JoinKeyword::$JOINS[$list->tokens[$list->idx - 4]->value])
                     || isset($list->tokens[$list->idx - 6], JoinKeyword::$JOINS[$list->tokens[$list->idx - 6]->value])
                 ) {
@@ -475,6 +495,7 @@ class Formatter
                         $lineEnded = true;
                         $shortGroup = false;
                     }
+
                     $blocksLineEndings[] = $lineEnded;
                 } elseif ($curr->type === Token::TYPE_OPERATOR && $curr->value === ')') {
                     $indent = array_pop($blocksIndentation);
@@ -499,7 +520,9 @@ class Formatter
                         || ! (
                             ($prev->type === Token::TYPE_OPERATOR && ($prev->value === '.' || $prev->value === '('))
                             // No space after . (
-                            || ($curr->type === Token::TYPE_OPERATOR && ($curr->value === '.' || $curr->value === ',' || $curr->value === '(' || $curr->value === ')'))
+                            || ($curr->type === Token::TYPE_OPERATOR
+                                && ($curr->value === '.' || $curr->value === ','
+                                    || $curr->value === '(' || $curr->value === ')'))
                             // No space before . , ( )
                             || $curr->type === Token::TYPE_DELIMITER && mb_strlen((string) $curr->value, 'UTF-8') < 2
                         )
@@ -520,7 +543,7 @@ class Formatter
         return $ret;
     }
 
-    public function escapeConsole($string)
+    public function escapeConsole(string $string): string
     {
         return str_replace(
             [

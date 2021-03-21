@@ -2,6 +2,7 @@
 /**
  * `ORDER BY` keyword parser.
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Components;
@@ -10,6 +11,8 @@ use PhpMyAdmin\SqlParser\Component;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Token;
 use PhpMyAdmin\SqlParser\TokensList;
+use function implode;
+use function is_array;
 
 /**
  * `ORDER BY` keyword parser.
@@ -99,6 +102,7 @@ class OrderKeyword extends Component
                     if (! empty($expr->expr)) {
                         $ret[] = $expr;
                     }
+
                     $expr = new static();
                     $state = 0;
                 } else {

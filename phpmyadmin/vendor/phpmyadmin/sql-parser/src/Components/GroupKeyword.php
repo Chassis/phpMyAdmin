@@ -2,6 +2,7 @@
 /**
  * `GROUP BY` keyword parser.
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Components;
@@ -10,12 +11,16 @@ use PhpMyAdmin\SqlParser\Component;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Token;
 use PhpMyAdmin\SqlParser\TokensList;
+use function implode;
+use function is_array;
+use function trim;
 
 /**
  * `GROUP BY` keyword parser.
  */
 class GroupKeyword extends Component
 {
+    /** @var mixed */
     public $type;
 
     /**
@@ -92,6 +97,7 @@ class GroupKeyword extends Component
                     if (! empty($expr->expr)) {
                         $ret[] = $expr;
                     }
+
                     $expr = new static();
                     $state = 0;
                 } else {

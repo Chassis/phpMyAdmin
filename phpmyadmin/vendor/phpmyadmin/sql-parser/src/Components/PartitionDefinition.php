@@ -4,6 +4,7 @@
  *
  * Used for parsing `CREATE TABLE` statement.
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Components;
@@ -12,6 +13,9 @@ use PhpMyAdmin\SqlParser\Component;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Token;
 use PhpMyAdmin\SqlParser\TokensList;
+use function implode;
+use function is_array;
+use function trim;
 
 /**
  * Parses the create definition of a partition.
@@ -171,8 +175,10 @@ class PartitionDefinition extends Component
                     if ($nextToken->type !== Token::TYPE_NONE) {
                         break;
                     }
+
                     $ret->name .= $nextToken->value;
                 }
+
                 $idx = $list->idx--;
                 // Get the first token after the white space.
                 $nextToken = $list->tokens[++$idx];
@@ -198,6 +204,7 @@ class PartitionDefinition extends Component
                         ]
                     );
                 }
+
                 $state = 5;
             } elseif ($state === 5) {
                 $ret->options = OptionsArray::parse($parser, $list, static::$OPTIONS);
@@ -207,12 +214,11 @@ class PartitionDefinition extends Component
                     $ret->subpartitions = ArrayObj::parse(
                         $parser,
                         $list,
-                        [
-                            'type' => 'PhpMyAdmin\\SqlParser\\Components\\PartitionDefinition',
-                        ]
+                        ['type' => 'PhpMyAdmin\\SqlParser\\Components\\PartitionDefinition']
                     );
                     ++$list->idx;
                 }
+
                 break;
             }
         }
@@ -243,7 +249,8 @@ class PartitionDefinition extends Component
         return trim(
             'PARTITION ' . $component->name
             . (empty($component->type) ? '' : ' VALUES ' . $component->type . ' ' . $component->expr . ' ')
-            . (! empty($component->options) && ! empty($component->type) ? '' : ' ') . $component->options . $subpartitions
+            . (! empty($component->options) && ! empty($component->type) ? '' : ' ')
+            . $component->options . $subpartitions
         );
     }
 }

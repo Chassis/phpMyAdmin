@@ -45,7 +45,7 @@ class YamlDumper extends Dumper
      */
     public function dump(array $options = [])
     {
-        if (!class_exists('Symfony\Component\Yaml\Dumper')) {
+        if (!class_exists(\Symfony\Component\Yaml\Dumper::class)) {
             throw new LogicException('Unable to dump the container as the Symfony Yaml Component is not installed.');
         }
 
@@ -132,7 +132,7 @@ class YamlDumper extends Dumper
         }
 
         if (null !== $decoratedService = $definition->getDecoratedService()) {
-            list($decorated, $renamedId, $priority) = $decoratedService;
+            [$decorated, $renamedId, $priority] = $decoratedService;
             $code .= sprintf("        decorates: %s\n", $decorated);
             if (null !== $renamedId) {
                 $code .= sprintf("        decoration_inner_name: %s\n", $renamedId);
@@ -163,8 +163,8 @@ class YamlDumper extends Dumper
     {
         $deprecated = $id->isDeprecated() ? sprintf("        deprecated: %s\n", $id->getDeprecationMessage('%alias_id%')) : '';
 
-        if ($id->isPrivate()) {
-            return sprintf("    %s: '@%s'\n%s", $alias, $id, $deprecated);
+        if (!$id->isDeprecated() && $id->isPrivate()) {
+            return sprintf("    %s: '@%s'\n", $alias, $id);
         }
 
         return sprintf("    %s:\n        alias: %s\n        public: %s\n%s", $alias, $id, $id->isPublic() ? 'true' : 'false', $deprecated);

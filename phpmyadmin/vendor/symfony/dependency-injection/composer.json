@@ -1,7 +1,7 @@
 {
     "name": "symfony/dependency-injection",
     "type": "library",
-    "description": "Symfony DependencyInjection Component",
+    "description": "Allows you to standardize and centralize the way objects are constructed in your application",
     "keywords": [],
     "homepage": "https://symfony.com",
     "license": "MIT",
@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "php": "^7.1.3",
+        "php": ">=7.1.3",
         "psr/container": "^1.0",
         "symfony/service-contracts": "^1.1.6|^2"
     },
@@ -48,10 +48,5 @@
             "/Tests/"
         ]
     },
-    "minimum-stability": "dev",
-    "extra": {
-        "branch-alias": {
-            "dev-master": "4.4-dev"
-        }
-    }
+    "minimum-stability": "dev"
 }

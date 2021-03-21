@@ -2,6 +2,7 @@
 /**
  * `VALUES` keyword parser.
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Components;
@@ -11,6 +12,8 @@ use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Token;
 use PhpMyAdmin\SqlParser\TokensList;
 use PhpMyAdmin\SqlParser\Translator;
+use function count;
+use function sprintf;
 
 /**
  * `VALUES` keyword parser.
@@ -88,6 +91,7 @@ class Array2d extends Component
                             $token
                         );
                     }
+
                     $ret[] = $arr;
                     $state = 1;
                 } else {

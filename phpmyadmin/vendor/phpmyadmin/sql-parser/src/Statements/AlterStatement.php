@@ -2,6 +2,7 @@
 /**
  * `ALTER` statement.
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Statements;
@@ -13,6 +14,7 @@ use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Statement;
 use PhpMyAdmin\SqlParser\Token;
 use PhpMyAdmin\SqlParser\TokensList;
+use function implode;
 
 /**
  * `ALTER` statement.

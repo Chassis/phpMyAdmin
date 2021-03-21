@@ -850,6 +850,7 @@
                 "session",
                 "global"
             ],
+            "type": "enumeration",
             "validValues": [
                 "NO",
                 "YES",
@@ -867,6 +868,7 @@
             "scope": [
                 "session"
             ],
+            "type": "enumeration",
             "ids": [
                 "4#connect_use_tempfile"
             ]
@@ -907,10 +909,17 @@
                 "4#connect_xtrace"
             ]
         },
+        "wsrep_applier_thread_count": {
+            "name": "wsrep_applier_thread_count",
+            "type": "integer",
+            "ids": [
+                "6#wsrep_applier_thread_count"
+            ]
+        },
         "wsrep_apply_oooe": {
             "name": "wsrep_apply_oooe",
             "ids": [
-                "6#wsrep_apply_oooe"
+                "5#wsrep_apply_oooe"
             ]
         },
         "wsrep_apply_oool": {
@@ -1028,6 +1037,7 @@
         },
         "wsrep_evs_repl_latency": {
             "name": "wsrep_evs_repl_latency",
+            "type": "integer",
             "ids": [
                 "5#wsrep_evs_repl_latency"
             ]
@@ -1292,6 +1302,13 @@
                 "5#wsrep_replicated_bytes"
             ]
         },
+        "wsrep_rollbacker_thread_count": {
+            "name": "wsrep_rollbacker_thread_count",
+            "type": "integer",
+            "ids": [
+                "5#wsrep_rollbacker_thread_count"
+            ]
+        },
         "wsrep_thread_count": {
             "name": "wsrep_thread_count",
             "type": "integer",
@@ -1427,6 +1444,7 @@
             "scope": [
                 "global"
             ],
+            "type": "enumeration",
             "ids": [
                 "6#wsrep_debug"
             ]
@@ -1483,6 +1501,7 @@
             "scope": [
                 "global"
             ],
+            "type": "enumeration",
             "validValues": [
                 "STATEMENT",
                 "ROW",
@@ -1523,9 +1542,24 @@
                 "6#wsrep_gtid_mode"
             ]
         },
+        "wsrep_gtid_seq_no": {
+            "dynamic": true,
+            "name": "wsrep_gtid_seq_no",
+            "range": {
+                "from": 0,
+                "to": 1.8446744073709552e+19
+            },
+            "scope": [
+                "session"
+            ],
+            "type": "integer",
+            "ids": [
+                "6#wsrep_gtid_seq_no"
+            ]
+        },
         "wsrep_ignore_apply_errors": {
             "cli": "--wsrep-ignore-apply-errors",
-            "default": "0",
+            "default": "7",
             "dynamic": true,
             "name": "wsrep_ignore_apply_errors",
             "range": {
@@ -1696,6 +1730,7 @@
                 "global",
                 "session"
             ],
+            "type": "enumeration",
             "validValues": [
                 "TOI",
                 "RSU"
@@ -1763,6 +1798,7 @@
             "scope": [
                 "global"
             ],
+            "type": "enumeration",
             "validValues": [
                 "NONE",
                 "ALL",
@@ -1870,6 +1906,7 @@
             "scope": [
                 "global"
             ],
+            "type": "enumeration",
             "validValues": [
                 "table",
                 "none"
@@ -1963,6 +2000,19 @@
                 "6#wsrep_start_position"
             ]
         },
+        "wsrep_strict_ddl": {
+            "cli": "--wsrep-strict-ddl[={0|1}",
+            "default": "OFF",
+            "dynamic": true,
+            "name": "wsrep_strict_ddl",
+            "scope": [
+                "global"
+            ],
+            "type": "boolean",
+            "ids": [
+                "6#wsrep_strict_ddl"
+            ]
+        },
         "wsrep_sync_wait": {
             "cli": "--wsrep-sync-wait=#",
             "default": "0",
@@ -2008,6 +2058,7 @@
                 "global",
                 "session"
             ],
+            "type": "enumeration",
             "validValues": [
                 "bytes",
                 "rows",
@@ -2015,6 +2066,18 @@
             ],
             "ids": [
                 "6#wsrep_trx_fragment_unit"
+            ]
+        },
+        "gtid_slave_pos": {
+            "default": "Null",
+            "dynamic": true,
+            "name": "gtid_slave_pos",
+            "scope": [
+                "global"
+            ],
+            "type": "string",
+            "ids": [
+                "8#gtid_slave_pos"
             ]
         },
         "gtid_binlog_pos": {
@@ -2026,7 +2089,7 @@
             ],
             "type": "string",
             "ids": [
-                "8#gtid_binlog_pos"
+                "7#gtid_binlog_pos"
             ]
         },
         "gtid_binlog_state": {
@@ -2051,6 +2114,19 @@
             "type": "string",
             "ids": [
                 "7#gtid_current_pos"
+            ]
+        },
+        "gtid_strict_mode": {
+            "cli": "--gtid-strict-mode[={0|1}]",
+            "default": "Off",
+            "dynamic": true,
+            "name": "gtid_strict_mode",
+            "scope": [
+                "global"
+            ],
+            "type": "boolean",
+            "ids": [
+                "7#gtid_strict_mode"
             ]
         },
         "gtid_domain_id": {
@@ -2082,6 +2158,7 @@
             ]
         },
         "server_id": {
+            "default": "1",
             "dynamic": true,
             "name": "server_id",
             "type": "integer",
@@ -2332,6 +2409,7 @@
             "scope": [
                 "global"
             ],
+            "type": "enumeration",
             "validValues": [
                 "SYSLOG",
                 "FILE"
@@ -2365,6 +2443,7 @@
             "scope": [
                 "global"
             ],
+            "type": "enumeration",
             "validValues": [
                 "LOG_USER",
                 "LOG_MAIL",
@@ -2418,6 +2497,7 @@
             "scope": [
                 "global"
             ],
+            "type": "enumeration",
             "validValues": [
                 "LOG_EMERG",
                 "LOG_ALERT",
@@ -2436,6 +2516,7 @@
             "cli": "--server-audit=val",
             "default": "ON",
             "name": "server_audit",
+            "type": "enumeration",
             "validValues": [
                 "OFF",
                 "ON",
@@ -2469,6 +2550,7 @@
                 "global",
                 "session"
             ],
+            "type": "enumeration",
             "ids": [
                 "14#mroonga_action_on_fulltext_query_error"
             ]
@@ -2482,6 +2564,7 @@
                 "global",
                 "session"
             ],
+            "type": "enumeration",
             "ids": [
                 "13#mroonga_boolean_mode_syntax_flags"
             ]
@@ -2677,6 +2760,7 @@
             "scope": [
                 "global"
             ],
+            "type": "enumeration",
             "ids": [
                 "13#mroonga_log_level"
             ]
@@ -3082,6 +3166,19 @@
                 "17#rocksdb_allow_mmap_writes"
             ]
         },
+        "rocksdb_allow_to_start_after_corruption": {
+            "cli": "--rocksdb-allow-to-start-after-corruption={0|1}",
+            "default": "OFF",
+            "dynamic": false,
+            "name": "rocksdb_allow_to_start_after_corruption",
+            "scope": [
+                "global"
+            ],
+            "type": "boolean",
+            "ids": [
+                "17#rocksdb_allow_to_start_after_corruption"
+            ]
+        },
         "rocksdb_background_sync": {
             "cli": "--rocksdb-background-sync={0|1}",
             "default": "OFF",
@@ -3118,7 +3215,8 @@
             "dynamic": true,
             "name": "rocksdb_blind_delete_primary_key",
             "scope": [
-                "global"
+                "global",
+                "session"
             ],
             "type": "boolean",
             "ids": [
@@ -3186,8 +3284,7 @@
                 "to": 2147483647
             },
             "scope": [
-                "global",
-                "session"
+                "global"
             ],
             "type": "integer",
             "ids": [
@@ -3206,6 +3303,20 @@
             "type": "boolean",
             "ids": [
                 "17#rocksdb_bulk_load"
+            ]
+        },
+        "rocksdb_bulk_load_allow_sk": {
+            "cli": "--rocksdb-bulk-load_allow_sk={0|1}",
+            "default": "OFF",
+            "dynamic": true,
+            "name": "rocksdb_bulk_load_allow_sk",
+            "scope": [
+                "global",
+                "session"
+            ],
+            "type": "boolean",
+            "ids": [
+                "17#rocksdb_bulk_load_allow_sk"
             ]
         },
         "rocksdb_bulk_load_allow_unsorted": {
@@ -3232,7 +3343,8 @@
                 "to": 1073741824
             },
             "scope": [
-                "global"
+                "global",
+                "session"
             ],
             "type": "integer",
             "ids": [
@@ -3242,7 +3354,7 @@
         "rocksdb_bytes_per_sync": {
             "cli": "--rocksdb-bytes-per-sync=#",
             "default": "0",
-            "dynamic": false,
+            "dynamic": true,
             "name": "rocksdb_bytes_per_sync",
             "range": {
                 "from": 0,
@@ -3256,8 +3368,37 @@
                 "17#rocksdb_bytes_per_sync"
             ]
         },
+        "rocksdb_cache_dump": {
+            "cli": "--rocksdb-cache-dump={0|1}",
+            "default": "ON",
+            "dynamic": true,
+            "name": "rocksdb_cache_dump",
+            "scope": [
+                "global"
+            ],
+            "type": "boolean",
+            "ids": [
+                "17#rocksdb_cache_dump"
+            ]
+        },
+        "rocksdb_cache_high_pri_pool_ratio": {
+            "cli": "--rocksdb-cache-high-pri-pool-ratio=#",
+            "default": "0.000000",
+            "dynamic": true,
+            "name": "rocksdb_cache_high_pri_pool_ratio",
+            "range": {
+                "from": 0,
+                "to": 1
+            },
+            "scope": [
+                "global"
+            ],
+            "ids": [
+                "17#rocksdb_cache_high_pri_pool_ratio"
+            ]
+        },
         "rocksdb_cache_index_and_filter_blocks": {
-            "cli": "--rocksdb-cache-index-and-filter_blocks={0|1}",
+            "cli": "--rocksdb-cache-index-and-filter-blocks={0|1}",
             "default": "ON",
             "dynamic": false,
             "name": "rocksdb_cache_index_and_filter_blocks",
@@ -3267,6 +3408,19 @@
             "type": "boolean",
             "ids": [
                 "17#rocksdb_cache_index_and_filter_blocks"
+            ]
+        },
+        "rocksdb_cache_index_and_filter_with_high_priority": {
+            "cli": "--rocksdb-cache-index-and-filter-with-high-priority={0|1}",
+            "default": "ON",
+            "dynamic": false,
+            "name": "rocksdb_cache_index_and_filter_with_high_priority",
+            "scope": [
+                "global"
+            ],
+            "type": "boolean",
+            "ids": [
+                "17#rocksdb_cache_index_and_filter_with_high_priority"
             ]
         },
         "rocksdb_checksums_pct": {
@@ -3306,11 +3460,26 @@
             "dynamic": true,
             "name": "rocksdb_commit_in_the_middle",
             "scope": [
-                "global"
+                "global",
+                "session"
             ],
             "type": "boolean",
             "ids": [
                 "17#rocksdb_commit_in_the_middle"
+            ]
+        },
+        "rocksdb_commit_time_batch_for_recovery": {
+            "cli": "--rocksdb-commit-time-batch-for-recovery={0|1}",
+            "default": "OFF",
+            "dynamic": true,
+            "name": "rocksdb_commit_time_batch_for_recovery",
+            "scope": [
+                "global",
+                "session"
+            ],
+            "type": "boolean",
+            "ids": [
+                "17#rocksdb_commit_time_batch_for_recovery"
             ]
         },
         "rocksdb_compact_cf": {
@@ -3461,7 +3630,7 @@
         },
         "rocksdb_datadir": {
             "cli": "--rocksdb-datadir[=value]",
-            "default": "./.rocksdb",
+            "default": "./#rocksdb",
             "dynamic": false,
             "name": "rocksdb_datadir",
             "scope": [
@@ -3521,14 +3690,30 @@
                 "17#rocksdb_deadlock_detect_depth"
             ]
         },
+        "rocksdb_debug_manual_compaction_delay": {
+            "cli": "--rocksdb-debug_manual_compaction_delay=#",
+            "default": "0",
+            "dynamic": true,
+            "name": "rocksdb_debug_manual_compaction_delay",
+            "range": {
+                "from": 0,
+                "to": 4294967295
+            },
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "17#rocksdb_debug_manual_compaction_delay"
+            ]
+        },
         "rocksdb_debug_optimizer_no_zero_cardinality": {
             "cli": "--rocksdb-debug-optimizer-no-zero-cardinality={0|1}",
             "default": "ON",
             "dynamic": true,
             "name": "rocksdb_debug_optimizer_no_zero_cardinality",
             "scope": [
-                "global",
-                "session"
+                "global"
             ],
             "type": "boolean",
             "ids": [
@@ -3541,8 +3726,7 @@
             "dynamic": true,
             "name": "rocksdb_debug_ttl_ignore_pk",
             "scope": [
-                "global",
-                "session"
+                "global"
             ],
             "type": "boolean",
             "ids": [
@@ -3559,8 +3743,7 @@
                 "to": 3600
             },
             "scope": [
-                "global",
-                "session"
+                "global"
             ],
             "type": "integer",
             "ids": [
@@ -3577,8 +3760,7 @@
                 "to": 3600
             },
             "scope": [
-                "global",
-                "session"
+                "global"
             ],
             "type": "integer",
             "ids": [
@@ -3595,8 +3777,7 @@
                 "to": 3600
             },
             "scope": [
-                "global",
-                "session"
+                "global"
             ],
             "type": "integer",
             "ids": [
@@ -3618,7 +3799,7 @@
         },
         "rocksdb_delayed_write_rate": {
             "cli": "--rocksdb-delayed-write-rate=#",
-            "default": "16777216",
+            "default": "0 (Previously 16777216)",
             "dynamic": true,
             "name": "rocksdb_delayed_write_rate",
             "range": {
@@ -3631,6 +3812,19 @@
             "type": "integer",
             "ids": [
                 "17#rocksdb_delayed_write_rate"
+            ]
+        },
+        "rocksdb_delete_cf": {
+            "cli": "--rocksdb-delete-cf=val",
+            "default": "(Empty string)",
+            "dynamic": false,
+            "name": "rocksdb_delete_cf",
+            "scope": [
+                "global"
+            ],
+            "type": "string",
+            "ids": [
+                "17#rocksdb_delete_cf"
             ]
         },
         "rocksdb_delete_obsolete_files_period_micros": {
@@ -3676,6 +3870,19 @@
                 "17#rocksdb_enable_bulk_load_api"
             ]
         },
+        "rocksdb_enable_insert_with_update_caching": {
+            "cli": "--rocksdb-enable-insert-with-update-caching={0|1}",
+            "default": "ON",
+            "dynamic": true,
+            "name": "rocksdb_enable_insert_with_update_caching",
+            "scope": [
+                "global"
+            ],
+            "type": "boolean",
+            "ids": [
+                "17#rocksdb_enable_insert_with_update_caching"
+            ]
+        },
         "rocksdb_enable_thread_tracking": {
             "cli": "--rocksdb-enable-thread-tracking={0|1}",
             "default": "OFF",
@@ -3718,7 +3925,7 @@
         "rocksdb_enable_write_thread_adaptive_yield": {
             "cli": "--rocksdb-enable-write-thread-adaptive-yield={0|1}",
             "default": "OFF",
-            "dynamic": true,
+            "dynamic": false,
             "name": "rocksdb_enable_write_thread_adaptive_yield",
             "scope": [
                 "global"
@@ -3741,6 +3948,19 @@
                 "17#rocksdb_error_if_exists"
             ]
         },
+        "rocksdb_error_on_suboptimal_collation": {
+            "cli": "--rocksdb-error-on-suboptimal-collation={0|1}",
+            "default": "ON",
+            "dynamic": false,
+            "name": "rocksdb_error_on_suboptimal_collation",
+            "scope": [
+                "global"
+            ],
+            "type": "boolean",
+            "ids": [
+                "17#rocksdb_error_on_suboptimal_collation"
+            ]
+        },
         "rocksdb_flush_log_at_trx_commit": {
             "cli": "--rocksdb-flush-log-at-trx-commit=#",
             "default": "1",
@@ -3751,8 +3971,7 @@
                 "to": 2
             },
             "scope": [
-                "global",
-                "session"
+                "global"
             ],
             "type": "integer",
             "ids": [
@@ -3809,8 +4028,7 @@
             "dynamic": true,
             "name": "rocksdb_force_flush_memtable_and_lzero_now",
             "scope": [
-                "global",
-                "session"
+                "global"
             ],
             "type": "boolean",
             "ids": [
@@ -3823,8 +4041,7 @@
             "dynamic": true,
             "name": "rocksdb_force_flush_memtable_now",
             "scope": [
-                "global",
-                "session"
+                "global"
             ],
             "type": "boolean",
             "ids": [
@@ -3833,7 +4050,7 @@
         },
         "rocksdb_force_index_records_in_range": {
             "cli": "--rocksdb-force-index-records-in-range=#",
-            "default": "1",
+            "default": "0",
             "dynamic": true,
             "name": "rocksdb_force_index_records_in_range",
             "range": {
@@ -3875,6 +4092,19 @@
                 "17#rocksdb_hash_index_allow_collision"
             ]
         },
+        "rocksdb_ignore_unknown_options": {
+            "cli": "--rocksdb-ignore-unknown-options={0|1}",
+            "default": "ON",
+            "dynamic": false,
+            "name": "rocksdb_ignore_unknown_options",
+            "scope": [
+                "global"
+            ],
+            "type": "boolean",
+            "ids": [
+                "17#rocksdb_ignore_unknown_options"
+            ]
+        },
         "rocksdb_index_type": {
             "cli": "--rocksdb-index-type=value",
             "default": "kBinarySearch",
@@ -3883,6 +4113,7 @@
             "scope": [
                 "global"
             ],
+            "type": "enumeration",
             "validValues": [
                 "kBinarySearch",
                 "kHashSearch"
@@ -3899,6 +4130,7 @@
             "scope": [
                 "global"
             ],
+            "type": "enumeration",
             "validValues": [
                 "error_level",
                 "debug_level",
@@ -4021,7 +4253,7 @@
         },
         "rocksdb_manifest_preallocation_size": {
             "cli": "--rocksdb-manifest-preallocation-size=#",
-            "default": "0",
+            "default": "4194304",
             "dynamic": false,
             "name": "rocksdb_manifest_preallocation_size",
             "range": {
@@ -4034,6 +4266,24 @@
             "type": "integer",
             "ids": [
                 "17#rocksdb_manifest_preallocation_size"
+            ]
+        },
+        "rocksdb_manual_compaction_threads": {
+            "cli": "--rocksdb-manual-compation-threads=#",
+            "default": "0",
+            "dynamic": true,
+            "name": "rocksdb_manual_compaction_threads",
+            "range": {
+                "from": 0,
+                "to": 128
+            },
+            "scope": [
+                "global",
+                "session"
+            ],
+            "type": "integer",
+            "ids": [
+                "17#rocksdb_manual_compaction_threads"
             ]
         },
         "rocksdb_manual_wal_flush": {
@@ -4150,7 +4400,7 @@
         },
         "rocksdb_max_manifest_file_size": {
             "cli": "--rocksdb-manifest-log-file-size=#",
-            "default": "18446744073709551615",
+            "default": "1073741824",
             "dynamic": false,
             "name": "rocksdb_max_manifest_file_size",
             "range": {
@@ -4165,13 +4415,30 @@
                 "17#rocksdb_max_manifest_file_size"
             ]
         },
+        "rocksdb_max_manual_compactions": {
+            "cli": "--rocksdb-manual_compactions=#",
+            "default": "10",
+            "dynamic": true,
+            "name": "rocksdb_max_manual_compactions",
+            "range": {
+                "from": 0,
+                "to": 4294967295
+            },
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "17#rocksdb_max_manual_compactions"
+            ]
+        },
         "rocksdb_max_open_files": {
             "cli": "--rocksdb-max-open-files=#",
-            "default": "-1",
+            "default": "-2",
             "dynamic": false,
             "name": "rocksdb_max_open_files",
             "range": {
-                "from": -1,
+                "from": -2,
                 "to": 2147483647
             },
             "scope": [
@@ -4360,7 +4627,7 @@
             "name": "rocksdb_perf_context_level",
             "range": {
                 "from": 0,
-                "to": 4
+                "to": 5
             },
             "scope": [
                 "global",
@@ -4394,8 +4661,7 @@
                 "to": 1.8446744073709552e+19
             },
             "scope": [
-                "global",
-                "session"
+                "global"
             ],
             "type": "integer",
             "ids": [
@@ -4477,6 +4743,19 @@
                 "17#rocksdb_records_in_range"
             ]
         },
+        "rocksdb_remove_mariabackup_checkpoint": {
+            "cli": "--rocksdb-remove-mariabackup-checkpoint={0|1}",
+            "default": "OFF",
+            "dynamic": true,
+            "name": "rocksdb_remove_mariabackup_checkpoint",
+            "scope": [
+                "global"
+            ],
+            "type": "boolean",
+            "ids": [
+                "17#rocksdb_remove_mariabackup_checkpoint"
+            ]
+        },
         "rocksdb_reset_stats": {
             "cli": "--rocksdb-reset-stats={0|1}",
             "default": "OFF",
@@ -4488,6 +4767,19 @@
             "type": "boolean",
             "ids": [
                 "17#rocksdb_reset_stats"
+            ]
+        },
+        "rocksdb_rollback_on_timeout": {
+            "cli": "--rocksdb-rollback-on-timeout={0|1}",
+            "default": "OFF",
+            "dynamic": true,
+            "name": "rocksdb_rollback_on_timeout",
+            "scope": [
+                "global"
+            ],
+            "type": "boolean",
+            "ids": [
+                "17#rocksdb_rollback_on_timeout"
             ]
         },
         "rocksdb_seconds_between_stat_computes": {
@@ -4613,6 +4905,40 @@
                 "17#rocksdb_stats_dump_period_sec"
             ]
         },
+        "rocksdb_stats_level": {
+            "cli": "--rocksdb-stats-level=#",
+            "default": "0",
+            "dynamic": true,
+            "name": "rocksdb_stats_level",
+            "range": {
+                "from": 0,
+                "to": 4
+            },
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "17#rocksdb_stats_level"
+            ]
+        },
+        "rocksdb_stats_recalc_rate": {
+            "cli": "--rocksdb-stats-recalc_rate=#",
+            "default": "0",
+            "dynamic": true,
+            "name": "rocksdb_stats_recalc_rate",
+            "range": {
+                "from": 0,
+                "to": 4294967295
+            },
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "17#rocksdb_stats_recalc_rate"
+            ]
+        },
         "rocksdb_store_row_debug_checksums": {
             "cli": "--rocksdb-store-row-debug-checksums={0|1}",
             "default": "OFF",
@@ -4673,7 +4999,7 @@
             "name": "rocksdb_table_cache_numshardbits",
             "range": {
                 "from": 0,
-                "to": 2147483647
+                "to": 19
             },
             "scope": [
                 "global"
@@ -4726,6 +5052,19 @@
             "type": "boolean",
             "ids": [
                 "17#rocksdb_trace_sst_api"
+            ]
+        },
+        "rocksdb_two_write_queues": {
+            "cli": "--rocksdb-two-write-queues={0|1}",
+            "default": "ON",
+            "dynamic": false,
+            "name": "rocksdb_two_write_queues",
+            "scope": [
+                "global"
+            ],
+            "type": "boolean",
+            "ids": [
+                "17#rocksdb_two_write_queues"
             ]
         },
         "rocksdb_unsafe_for_binlog": {
@@ -4866,7 +5205,7 @@
         "rocksdb_wal_bytes_per_sync": {
             "cli": "--rocksdb-wal-bytes-per-sync=#",
             "default": "0",
-            "dynamic": false,
+            "dynamic": true,
             "name": "rocksdb_wal_bytes_per_sync",
             "range": {
                 "from": 0,
@@ -4990,7 +5329,7 @@
             ]
         },
         "rocksdb_write_ignore_missing_column_families": {
-            "cli": "--rocksdb-write-ignore-missing-column-familiesl={0|1}",
+            "cli": "--rocksdb-write-ignore-missing-column-families={0|1}",
             "default": "OFF",
             "dynamic": true,
             "name": "rocksdb_write_ignore_missing_column_families",
@@ -5001,6 +5340,24 @@
             "type": "boolean",
             "ids": [
                 "17#rocksdb_write_ignore_missing_column_families"
+            ]
+        },
+        "rocksdb_write_policy": {
+            "cli": "--rocksdb-write-policy=val",
+            "default": "write_committed",
+            "dynamic": false,
+            "name": "rocksdb_write_policy",
+            "scope": [
+                "global"
+            ],
+            "type": "enumeration",
+            "validValues": [
+                "write_committed",
+                "write_prepared",
+                "write_unprepared"
+            ],
+            "ids": [
+                "17#rocksdb_write_policy"
             ]
         },
         "oqgraph_allow_create_integer_latch": {
@@ -5145,6 +5502,32 @@
                 "20#sysvar_performance_schema_events_statements_history_size"
             ]
         },
+        "performance_schema_events_transactions_history_long_size": {
+            "cli": "--performance-schema-events-transactions-history-long-size=#",
+            "dynamic": false,
+            "name": "performance_schema_events_transactions_history_long_size",
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "19#performance_schema_events_transactions_history_long_size",
+                "20#sysvar_performance_schema_events_transactions_history_long_size"
+            ]
+        },
+        "performance_schema_events_transactions_history_size": {
+            "cli": "--performance-schema-events-transactions-history-size=#",
+            "dynamic": false,
+            "name": "performance_schema_events_transactions_history_size",
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "19#performance_schema_events_transactions_history_size",
+                "20#sysvar_performance_schema_events_transactions_history_size"
+            ]
+        },
         "performance_schema_events_waits_history_long_size": {
             "cli": "--performance-schema-events-waits-history-long-size=#",
             "dynamic": false,
@@ -5190,7 +5573,6 @@
         },
         "performance_schema_max_cond_classes": {
             "cli": "--performance-schema-max-cond-classes=#",
-            "default": "80",
             "dynamic": false,
             "name": "performance_schema_max_cond_classes",
             "range": {
@@ -5239,6 +5621,7 @@
         },
         "performance_schema_max_file_classes": {
             "cli": "--performance-schema-max-file-classes=#",
+            "default": "80",
             "dynamic": false,
             "name": "performance_schema_max_file_classes",
             "range": {
@@ -5281,6 +5664,45 @@
                 "20#sysvar_performance_schema_max_file_instances"
             ]
         },
+        "performance_schema_max_index_stat": {
+            "cli": "--performance-schema-max-index-stat=#",
+            "dynamic": false,
+            "name": "performance_schema_max_index_stat",
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "19#performance_schema_max_index_stat",
+                "20#sysvar_performance_schema_max_index_stat"
+            ]
+        },
+        "performance_schema_max_memory_classes": {
+            "cli": "--performance-schema-max-memory-classes=#",
+            "dynamic": false,
+            "name": "performance_schema_max_memory_classes",
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "19#performance_schema_max_memory_classes",
+                "20#sysvar_performance_schema_max_memory_classes"
+            ]
+        },
+        "performance_schema_max_metadata_locks": {
+            "cli": "--performance-schema-max-metadata-locks=#",
+            "dynamic": false,
+            "name": "performance_schema_max_metadata_locks",
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "19#performance_schema_max_metadata_locks",
+                "20#sysvar_performance_schema_max_metadata_locks"
+            ]
+        },
         "performance_schema_max_mutex_classes": {
             "cli": "--performance-schema-max-mutex-classes=#",
             "dynamic": false,
@@ -5311,9 +5733,38 @@
                 "20#sysvar_performance_schema_max_mutex_instances"
             ]
         },
+        "performance_schema_max_prepared_statement_instances": {
+            "cli": "--performance-schema-max-prepared-statement-instances=#",
+            "default": "-1",
+            "dynamic": false,
+            "name": "performance_schema_max_prepared_statement_instances",
+            "range": {
+                "from": -1,
+                "to": 1048576
+            },
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "19#performance_schema_max_prepared_statement_instances"
+            ]
+        },
+        "performance_schema_max_program_instances": {
+            "cli": "--performance-schema-max-program-instances=#",
+            "dynamic": false,
+            "name": "performance_schema_max_program_instances",
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "19#performance_schema_max_program_instances",
+                "20#sysvar_performance_schema_max_program_instances"
+            ]
+        },
         "performance_schema_max_rwlock_classes": {
             "cli": "--performance-schema-max-rwlock-classes=#",
-            "default": "40",
             "dynamic": false,
             "name": "performance_schema_max_rwlock_classes",
             "range": {
@@ -5373,6 +5824,24 @@
                 "20#sysvar_performance_schema_max_socket_instances"
             ]
         },
+        "performance_schema_max_sql_text_length": {
+            "cli": "--performance-schema-max-sql-text-length=#",
+            "default": "1024",
+            "dynamic": false,
+            "name": "performance_schema_max_sql_text_length",
+            "range": {
+                "from": 0,
+                "to": 1048576
+            },
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "19#performance_schema_max_sql_text_length",
+                "20#sysvar_performance_schema_max_sql_text_length"
+            ]
+        },
         "performance_schema_max_stage_classes": {
             "cli": "--performance-schema-max-stage-classes=#",
             "dynamic": false,
@@ -5404,6 +5873,20 @@
                 "20#sysvar_performance_schema_max_statement_classes"
             ]
         },
+        "performance_schema_max_statement_stack": {
+            "cli": "--performance-schema-max-statement-stack=#",
+            "default": "10",
+            "dynamic": false,
+            "name": "performance_schema_max_statement_stack",
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "19#performance_schema_max_statement_stack",
+                "20#sysvar_performance_schema_max_statement_stack"
+            ]
+        },
         "performance_schema_max_table_handles": {
             "cli": "--performance-schema-max-table-handles=#",
             "dynamic": false,
@@ -5428,6 +5911,19 @@
             "ids": [
                 "19#performance_schema_max_table_instances",
                 "20#sysvar_performance_schema_max_table_instances"
+            ]
+        },
+        "performance_schema_max_table_lock_stat": {
+            "cli": "--performance-schema-max-table-lock-stat=#",
+            "dynamic": false,
+            "name": "performance_schema_max_table_lock_stat",
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "19#performance_schema_max_table_lock_stat",
+                "20#sysvar_performance_schema_max_table_lock_stat"
             ]
         },
         "performance_schema_max_thread_classes": {
@@ -5681,6 +6177,7 @@
         },
         "binlog_format": {
             "cli": "--binlog-format=format",
+            "default": "ROW",
             "dynamic": true,
             "name": "binlog_format",
             "scope": [
@@ -6417,8 +6914,7 @@
             "dynamic": true,
             "name": "slave_net_timeout",
             "range": {
-                "from": 1,
-                "to": "upwards"
+                "from": 1
             },
             "scope": [
                 "global"
@@ -6447,12 +6943,13 @@
             ]
         },
         "slave_parallel_mode": {
-            "default": "conservative",
-            "dynamic": false,
+            "default": "optimistic (>= MariaDB 10.5.1), conservative (<= MariaDB 10.5.0)",
+            "dynamic": true,
             "name": "slave_parallel_mode",
             "scope": [
                 "global"
             ],
+            "type": "enumeration",
             "validValues": [
                 "conservative",
                 "optimistic",
@@ -6506,10 +7003,12 @@
             "scope": [
                 "global"
             ],
+            "type": "enumeration",
             "validValues": [
                 "NO",
                 "YES",
-                "LOGGING"
+                "LOGGING",
+                "ENFORCE"
             ],
             "ids": [
                 "8#slave_run_triggers_for_rbr"
@@ -6632,8 +7131,12 @@
             ]
         },
         "sql_slave_skip_counter": {
+            "default": "0",
             "dynamic": true,
             "name": "sql_slave_skip_counter",
+            "range": {
+                "from": 0
+            },
             "scope": [
                 "global"
             ],
@@ -6645,6 +7148,7 @@
         },
         "sync_binlog": {
             "cli": "--sync-binlog=#",
+            "default": "1",
             "dynamic": true,
             "name": "sync_binlog",
             "range": {
@@ -6842,6 +7346,17 @@
             "type": "integer",
             "ids": [
                 "25#com_change_master"
+            ]
+        },
+        "Com_show_binlog_status": {
+            "name": "Com_show_binlog_status",
+            "scope": [
+                "global",
+                "session"
+            ],
+            "type": "integer",
+            "ids": [
+                "25#com_show_binlog_status"
             ]
         },
         "Com_show_master_status": {
@@ -7348,6 +7863,7 @@
             "cli": "--rpl-semi-sync-master=value",
             "default": "ON",
             "name": "rpl_semi_sync_master",
+            "type": "enumeration",
             "validValues": [
                 "OFF",
                 "ON",
@@ -7362,6 +7878,7 @@
             "cli": "--rpl-semi-sync-slave=value",
             "default": "ON",
             "name": "rpl_semi_sync_slave",
+            "type": "enumeration",
             "validValues": [
                 "OFF",
                 "ON",
@@ -9695,6 +10212,17 @@
                 "28#feature_gis"
             ]
         },
+        "Feature_insert_returning": {
+            "name": "Feature_insert_returning",
+            "scope": [
+                "global",
+                "session"
+            ],
+            "type": "integer",
+            "ids": [
+                "28#feature_insert_returning"
+            ]
+        },
         "Feature_invisible_columns": {
             "name": "Feature_invisible_columns",
             "scope": [
@@ -10338,259 +10866,6 @@
                 "28#opened_views"
             ]
         },
-        "Performance_schema_accounts_lost": {
-            "name": "Performance_schema_accounts_lost",
-            "scope": [
-                "global",
-                "session"
-            ],
-            "type": "integer",
-            "ids": [
-                "28#performance_schema_accounts_lost"
-            ]
-        },
-        "Performance_schema_cond_classes_lost": {
-            "name": "Performance_schema_cond_classes_lost",
-            "scope": [
-                "global",
-                "session"
-            ],
-            "type": "integer",
-            "ids": [
-                "28#performance_schema_cond_classes_lost"
-            ]
-        },
-        "Performance_schema_cond_instances_lost": {
-            "name": "Performance_schema_cond_instances_lost",
-            "scope": [
-                "global",
-                "session"
-            ],
-            "type": "integer",
-            "ids": [
-                "28#performance_schema_cond_instances_lost"
-            ]
-        },
-        "Performance_schema_digest_lost": {
-            "name": "Performance_schema_digest_lost",
-            "scope": [
-                "global",
-                "session"
-            ],
-            "type": "integer",
-            "ids": [
-                "28#performance_schema_digest_lost"
-            ]
-        },
-        "Performance_schema_file_classes_lost": {
-            "name": "Performance_schema_file_classes_lost",
-            "scope": [
-                "global",
-                "session"
-            ],
-            "type": "integer",
-            "ids": [
-                "28#performance_schema_file_classes_lost"
-            ]
-        },
-        "Performance_schema_file_handles_lost": {
-            "name": "Performance_schema_file_handles_lost",
-            "scope": [
-                "global",
-                "session"
-            ],
-            "type": "integer",
-            "ids": [
-                "28#performance_schema_file_handles_lost"
-            ]
-        },
-        "Performance_schema_file_instances_lost": {
-            "name": "Performance_schema_file_instances_lost",
-            "scope": [
-                "global",
-                "session"
-            ],
-            "type": "integer",
-            "ids": [
-                "28#performance_schema_file_instances_lost"
-            ]
-        },
-        "Performance_schema_hosts_lost": {
-            "name": "Performance_schema_hosts_lost",
-            "scope": [
-                "global",
-                "session"
-            ],
-            "type": "integer",
-            "ids": [
-                "28#performance_schema_hosts_lost"
-            ]
-        },
-        "Performance_schema_locker_lost": {
-            "name": "Performance_schema_locker_lost",
-            "scope": [
-                "global",
-                "session"
-            ],
-            "type": "integer",
-            "ids": [
-                "28#performance_schema_locker_lost"
-            ]
-        },
-        "Performance_schema_mutex_classes_lost": {
-            "name": "Performance_schema_mutex_classes_lost",
-            "scope": [
-                "global",
-                "session"
-            ],
-            "type": "integer",
-            "ids": [
-                "28#performance_schema_mutex_classes_lost"
-            ]
-        },
-        "Performance_schema_mutex_instances_lost": {
-            "name": "Performance_schema_mutex_instances_lost",
-            "scope": [
-                "global",
-                "session"
-            ],
-            "type": "integer",
-            "ids": [
-                "28#performance_schema_mutex_instances_lost"
-            ]
-        },
-        "Performance_schema_rwlock_classes_lost": {
-            "name": "Performance_schema_rwlock_classes_lost",
-            "scope": [
-                "global",
-                "session"
-            ],
-            "type": "integer",
-            "ids": [
-                "28#performance_schema_rwlock_classes_lost"
-            ]
-        },
-        "Performance_schema_rwlock_instances_lost": {
-            "name": "Performance_schema_rwlock_instances_lost",
-            "scope": [
-                "global",
-                "session"
-            ],
-            "type": "integer",
-            "ids": [
-                "28#performance_schema_rwlock_instances_lost"
-            ]
-        },
-        "Performance_schema_session_connect_attrs_lost": {
-            "name": "Performance_schema_session_connect_attrs_lost",
-            "scope": [
-                "global",
-                "session"
-            ],
-            "type": "integer",
-            "ids": [
-                "28#performance_schema_session_connect_attrs_lost"
-            ]
-        },
-        "Performance_schema_socket_classes_lost": {
-            "name": "Performance_schema_socket_classes_lost",
-            "scope": [
-                "global",
-                "session"
-            ],
-            "type": "integer",
-            "ids": [
-                "28#performance_schema_socket_classes_lost"
-            ]
-        },
-        "Performance_schema_socket_instances_lost": {
-            "name": "Performance_schema_socket_instances_lost",
-            "scope": [
-                "global",
-                "session"
-            ],
-            "type": "integer",
-            "ids": [
-                "28#performance_schema_socket_instances_lost"
-            ]
-        },
-        "Performance_schema_stage_classes_lost": {
-            "name": "Performance_schema_stage_classes_lost",
-            "scope": [
-                "global",
-                "session"
-            ],
-            "type": "integer",
-            "ids": [
-                "28#performance_schema_stage_classes_lost"
-            ]
-        },
-        "Performance_schema_statement_classes_lost": {
-            "name": "Performance_schema_statement_classes_lost",
-            "scope": [
-                "global",
-                "session"
-            ],
-            "type": "integer",
-            "ids": [
-                "28#performance_schema_statement_classes_lost"
-            ]
-        },
-        "Performance_schema_table_handles_lost": {
-            "name": "Performance_schema_table_handles_lost",
-            "scope": [
-                "global",
-                "session"
-            ],
-            "type": "integer",
-            "ids": [
-                "28#performance_schema_table_handles_lost"
-            ]
-        },
-        "Performance_schema_table_instances_lost": {
-            "name": "Performance_schema_table_instances_lost",
-            "scope": [
-                "global",
-                "session"
-            ],
-            "type": "integer",
-            "ids": [
-                "28#performance_schema_table_instances_lost"
-            ]
-        },
-        "Performance_schema_thread_classes_lost": {
-            "name": "Performance_schema_thread_classes_lost",
-            "scope": [
-                "global",
-                "session"
-            ],
-            "type": "integer",
-            "ids": [
-                "28#performance_schema_thread_classes_lost"
-            ]
-        },
-        "Performance_schema_thread_instances_lost": {
-            "name": "Performance_schema_thread_instances_lost",
-            "scope": [
-                "global",
-                "session"
-            ],
-            "type": "integer",
-            "ids": [
-                "28#performance_schema_thread_instances_lost"
-            ]
-        },
-        "Performance_schema_users_lost": {
-            "name": "Performance_schema_users_lost",
-            "scope": [
-                "global",
-                "session"
-            ],
-            "type": "integer",
-            "ids": [
-                "28#performance_schema_users_lost"
-            ]
-        },
         "Prepared_stmt_count": {
             "name": "Prepared_stmt_count",
             "scope": [
@@ -11062,6 +11337,7 @@
                 "global",
                 "session"
             ],
+            "type": "enumeration",
             "validValues": [
                 "DEFAULT",
                 "COPY",
@@ -11138,6 +11414,7 @@
         },
         "basedir": {
             "cli": "--basedir=path or -b path",
+            "default": "parent of mysqld installation directory",
             "dynamic": false,
             "name": "basedir",
             "scope": [
@@ -11198,6 +11475,7 @@
             ]
         },
         "character_set_client": {
+            "default": "utf8mb4",
             "dynamic": true,
             "name": "character_set_client",
             "scope": [
@@ -11211,6 +11489,7 @@
             ]
         },
         "character_set_connection": {
+            "default": "utf8mb4",
             "dynamic": true,
             "name": "character_set_connection",
             "scope": [
@@ -11224,6 +11503,7 @@
             ]
         },
         "character_set_database": {
+            "default": "utf8mb4",
             "dynamic": true,
             "name": "character_set_database",
             "scope": [
@@ -11252,6 +11532,7 @@
             ]
         },
         "character_set_results": {
+            "default": "utf8mb4",
             "dynamic": true,
             "name": "character_set_results",
             "scope": [
@@ -11266,6 +11547,7 @@
         },
         "character_set_server": {
             "cli": "--character-set-server=name",
+            "default": "utf8mb4",
             "dynamic": true,
             "name": "character_set_server",
             "scope": [
@@ -11332,6 +11614,7 @@
             ]
         },
         "collation_database": {
+            "default": "utf8mb4_0900_ai_ci",
             "dynamic": true,
             "name": "collation_database",
             "scope": [
@@ -11346,6 +11629,7 @@
         },
         "collation_server": {
             "cli": "--collation-server=name",
+            "default": "utf8mb4_0900_ai_ci",
             "dynamic": true,
             "name": "collation_server",
             "scope": [
@@ -11382,6 +11666,7 @@
             ]
         },
         "concurrent_insert": {
+            "cli": "--concurrent-insert[=value]",
             "default": "AUTO",
             "dynamic": true,
             "name": "concurrent_insert",
@@ -11518,7 +11803,23 @@
             ]
         },
         "default_regex_flags": {
+            "cli": "--default-regex-flags=value",
+            "default": "empty",
+            "dynamic": true,
             "name": "default_regex_flags",
+            "scope": [
+                "global",
+                "session"
+            ],
+            "type": "enumeration",
+            "validValues": [
+                "DOTALL",
+                "DUPNAMES",
+                "EXTENDED",
+                "EXTRA",
+                "MULTILINE",
+                "UNGREEDY"
+            ],
             "ids": [
                 "29#default_regex_flags"
             ]
@@ -11716,6 +12017,7 @@
             "scope": [
                 "global"
             ],
+            "type": "enumeration",
             "validValues": [
                 "none",
                 "aes_ecb",
@@ -11740,7 +12042,7 @@
         },
         "engine_condition_pushdown": {
             "cli": "--engine-condition-pushdown",
-            "default": "OFF (MariaDB 5.5), ON (<= MariaDB 5.3)",
+            "default": "OFF",
             "dynamic": true,
             "name": "engine_condition_pushdown",
             "scope": [
@@ -12253,6 +12555,24 @@
                 "29#ignore_db_dirs"
             ]
         },
+        "in_predicate_conversion_threshold": {
+            "cli": "--in-predicate-conversion-threshold=#",
+            "default": "1000",
+            "dynamic": false,
+            "name": "in_predicate_conversion_threshold",
+            "range": {
+                "from": 0,
+                "to": 4294967295
+            },
+            "scope": [
+                "global",
+                "session"
+            ],
+            "type": "integer",
+            "ids": [
+                "29#in_predicate_conversion_threshold"
+            ]
+        },
         "in_transaction": {
             "default": "0",
             "dynamic": false,
@@ -12394,6 +12714,7 @@
             "scope": [
                 "global"
             ],
+            "type": "boolean",
             "ids": [
                 "29#large_files_support",
                 "15#sysvar_large_files_support"
@@ -12718,8 +13039,8 @@
             ]
         },
         "log_warnings": {
-            "cli": "--log-warnings[=#]",
-            "default": "2",
+            "cli": "-W [level] or --log-warnings[=level]",
+            "default": "2 (>= MariaDB 10.2.4), 1 (<= MariaDB 10.2.3)",
             "dynamic": true,
             "name": "log_warnings",
             "range": {
@@ -12727,13 +13048,12 @@
                 "to": 4294967295
             },
             "scope": [
-                "global"
+                "global",
+                "session"
             ],
             "type": "integer",
             "ids": [
-                "29#log_warnings",
-                "16#option_mysqld_log-warnings",
-                "15#sysvar_log_warnings"
+                "29#log_warnings"
             ]
         },
         "long_query_time": {
@@ -13250,20 +13570,9 @@
         "multi_range_count": {
             "cli": "--multi-range-count=#",
             "default": "256",
-            "dynamic": true,
             "name": "multi_range_count",
-            "range": {
-                "from": 1,
-                "to": 4294967295
-            },
-            "scope": [
-                "global",
-                "session"
-            ],
-            "type": "integer",
             "ids": [
-                "29#multi_range_count",
-                "15#sysvar_multi_range_count"
+                "29#multi_range_count"
             ]
         },
         "mysql56_temporal_format": {
@@ -13388,7 +13697,6 @@
                 "global",
                 "session"
             ],
-            "type": "boolean",
             "ids": [
                 "29#old_alter_table",
                 "15#sysvar_old_alter_table"
@@ -13410,21 +13718,16 @@
             ]
         },
         "old_passwords": {
-            "cli": "--old-passwords=value",
-            "default": "0",
+            "default": "OFF",
             "dynamic": true,
             "name": "old_passwords",
             "scope": [
                 "global",
                 "session"
             ],
-            "validValues": [
-                "0",
-                "2"
-            ],
+            "type": "boolean",
             "ids": [
-                "29#old_passwords",
-                "15#sysvar_old_passwords"
+                "29#old_passwords"
             ]
         },
         "open_files_limit": {
@@ -13535,7 +13838,6 @@
                 "global",
                 "session"
             ],
-            "type": "string",
             "ids": [
                 "29#optimizer_trace",
                 "15#sysvar_optimizer_trace"
@@ -13543,6 +13845,7 @@
         },
         "optimizer_trace_max_mem_size": {
             "cli": "--optimizer-trace-max-mem-size=#",
+            "default": "1048576",
             "dynamic": true,
             "name": "optimizer_trace_max_mem_size",
             "scope": [
@@ -13590,6 +13893,7 @@
             "scope": [
                 "global"
             ],
+            "type": "enumeration",
             "validValues": [
                 "unknown",
                 "experimental",
@@ -13673,7 +13977,7 @@
         },
         "progress_report_time": {
             "cli": "--progress-report-time=#",
-            "default": "56 before MariaDB 5.5.39 and MariaDB 10.0.10, 5 as of MariaDB 5.5.40 and MariaDB 10.0.11",
+            "default": "5",
             "dynamic": true,
             "name": "progress_report_time",
             "range": {
@@ -13732,7 +14036,6 @@
             "scope": [
                 "session"
             ],
-            "type": "integer",
             "ids": [
                 "29#pseudo_slave_mode",
                 "15#sysvar_pseudo_slave_mode"
@@ -13770,7 +14073,7 @@
         },
         "query_cache_limit": {
             "cli": "--query-cache-limit=#",
-            "default": "1048576",
+            "default": "1048576 (1MB)",
             "dynamic": true,
             "name": "query_cache_limit",
             "range": {
@@ -13782,38 +14085,40 @@
             ],
             "type": "integer",
             "ids": [
-                "29#query_cache_limit",
-                "15#sysvar_query_cache_limit"
+                "29#query_cache_limit"
             ]
         },
         "query_cache_min_res_unit": {
             "cli": "--query-cache-min-res-unit=#",
-            "default": "4096",
+            "default": "4096 (4KB)",
             "dynamic": true,
             "name": "query_cache_min_res_unit",
-            "scope": [
-                "global"
-            ],
-            "type": "integer",
-            "ids": [
-                "29#query_cache_min_res_unit",
-                "15#sysvar_query_cache_min_res_unit"
-            ]
-        },
-        "query_cache_size": {
-            "cli": "--query-cache-size=#",
-            "dynamic": true,
-            "name": "query_cache_size",
             "range": {
-                "from": 0
+                "from": 0,
+                "to": 4294967295
             },
             "scope": [
                 "global"
             ],
             "type": "integer",
             "ids": [
-                "29#query_cache_size",
-                "15#sysvar_query_cache_size"
+                "29#query_cache_min_res_unit"
+            ]
+        },
+        "query_cache_size": {
+            "cli": "--query-cache-size=#",
+            "default": "1M (>= MariaDB 10.1.7), 0 (<= MariaDB 10.1.6) (although frequently given a default value in some setups)",
+            "dynamic": true,
+            "name": "query_cache_size",
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "validValues": [
+                "0"
+            ],
+            "ids": [
+                "29#query_cache_size"
             ]
         },
         "query_cache_strip_comments": {
@@ -13832,7 +14137,7 @@
         },
         "query_cache_type": {
             "cli": "--query-cache-type=#",
-            "default": "0",
+            "default": "OFF (>= MariaDB 10.1.7), ON (<= MariaDB 10.1.6)",
             "dynamic": true,
             "name": "query_cache_type",
             "scope": [
@@ -13849,12 +14154,11 @@
                 "DEMAND"
             ],
             "ids": [
-                "29#query_cache_type",
-                "15#sysvar_query_cache_type"
+                "29#query_cache_type"
             ]
         },
         "query_cache_wlock_invalidate": {
-            "cli": "--query-cache-wlock-invalidate[={OFF|ON}]",
+            "cli": "--query-cache-wlock-invalidate",
             "default": "OFF",
             "dynamic": true,
             "name": "query_cache_wlock_invalidate",
@@ -13864,8 +14168,7 @@
             ],
             "type": "boolean",
             "ids": [
-                "29#query_cache_wlock_invalidate",
-                "15#sysvar_query_cache_wlock_invalidate"
+                "29#query_cache_wlock_invalidate"
             ]
         },
         "query_prealloc_size": {
@@ -13924,10 +14227,6 @@
             "default": "131072",
             "dynamic": true,
             "name": "read_buffer_size",
-            "range": {
-                "from": 8200,
-                "to": 2147479552
-            },
             "scope": [
                 "global",
                 "session"
@@ -13967,6 +14266,19 @@
                 "15#sysvar_read_rnd_buffer_size"
             ]
         },
+        "require_secure_transport": {
+            "default": "OFF",
+            "dynamic": true,
+            "name": "require_secure_transport",
+            "scope": [
+                "global"
+            ],
+            "type": "boolean",
+            "ids": [
+                "29#require_secure_transport",
+                "15#sysvar_require_secure_transport"
+            ]
+        },
         "rowid_merge_buff_size": {
             "cli": "--rowid-merge-buff-size=#",
             "default": "8388608",
@@ -14004,20 +14316,16 @@
             ]
         },
         "secure_auth": {
-            "cli": "--secure-auth[={OFF|ON}]",
-            "default": "1",
+            "cli": "--secure-auth",
+            "default": "ON (>= MariaDB 10.1.7), OFF (<= MariaDB 10.1.6)",
             "dynamic": true,
             "name": "secure_auth",
             "scope": [
                 "global"
             ],
             "type": "boolean",
-            "validValues": [
-                "ON"
-            ],
             "ids": [
-                "29#secure_auth",
-                "15#sysvar_secure_auth"
+                "29#secure_auth"
             ]
         },
         "secure_file_priv": {
@@ -14047,6 +14355,7 @@
             "scope": [
                 "global"
             ],
+            "type": "enumeration",
             "ids": [
                 "29#secure_timestamp"
             ]
@@ -14323,6 +14632,20 @@
                 "15#sysvar_sql_buffer_result"
             ]
         },
+        "sql_if_exists": {
+            "cli": "--sql-if-exists[={0|1}]",
+            "default": "OFF",
+            "dynamic": true,
+            "name": "sql_if_exists",
+            "scope": [
+                "global",
+                "session"
+            ],
+            "type": "boolean",
+            "ids": [
+                "29#sql_if_exists"
+            ]
+        },
         "sql_log_off": {
             "default": "0",
             "dynamic": true,
@@ -14369,6 +14692,7 @@
         },
         "sql_mode": {
             "cli": "--sql-mode=name",
+            "default": "ONLY_FULL_GROUP_BY STRICT_TRANS_TABLES NO_ZERO_IN_DATE NO_ZERO_DATE ERROR_FOR_DIVISION_BY_ZERO NO_ENGINE_SUBSTITUTION",
             "dynamic": true,
             "name": "sql_mode",
             "scope": [
@@ -14376,6 +14700,7 @@
                 "session"
             ],
             "type": "set",
+            "validValues": [],
             "ids": [
                 "29#sql_mode",
                 "16#option_mysqld_sql-mode",
@@ -14718,6 +15043,7 @@
             ]
         },
         "time_zone": {
+            "default": "SYSTEM",
             "dynamic": true,
             "name": "time_zone",
             "scope": [
@@ -14744,8 +15070,13 @@
             ]
         },
         "timestamp": {
+            "default": "UNIX_TIMESTAMP()",
             "dynamic": true,
             "name": "timestamp",
+            "range": {
+                "from": 1,
+                "to": 2147483647
+            },
             "scope": [
                 "session"
             ],
@@ -14849,6 +15180,7 @@
             ]
         },
         "tx_isolation": {
+            "cli": "--transaction-isolation=name",
             "default": "REPEATABLE-READ",
             "dynamic": true,
             "name": "tx_isolation",
@@ -14864,12 +15196,12 @@
                 "SERIALIZABLE"
             ],
             "ids": [
-                "29#tx_isolation",
-                "15#sysvar_tx_isolation"
+                "29#tx_isolation"
             ]
         },
         "tx_read_only": {
-            "default": "0",
+            "cli": "--transaction-read-only=#",
+            "default": "OFF",
             "dynamic": true,
             "name": "tx_read_only",
             "scope": [
@@ -14878,8 +15210,7 @@
             ],
             "type": "boolean",
             "ids": [
-                "29#tx_read_only",
-                "15#sysvar_tx_read_only"
+                "29#tx_read_only"
             ]
         },
         "unique_checks": {
@@ -14919,6 +15250,7 @@
                 "global",
                 "session"
             ],
+            "type": "enumeration",
             "ids": [
                 "29#use_stat_tables"
             ]
@@ -15099,6 +15431,17 @@
                 "32#spider_direct_aggregate"
             ]
         },
+        "Spider_direct_delete": {
+            "name": "Spider_direct_delete",
+            "scope": [
+                "global",
+                "session"
+            ],
+            "type": "integer",
+            "ids": [
+                "31#spider_direct_delete"
+            ]
+        },
         "Spider_direct_order_limit": {
             "name": "Spider_direct_order_limit",
             "scope": [
@@ -15108,6 +15451,17 @@
             "type": "integer",
             "ids": [
                 "31#spider_direct_order_limit"
+            ]
+        },
+        "Spider_direct_update": {
+            "name": "Spider_direct_update",
+            "scope": [
+                "global",
+                "session"
+            ],
+            "type": "integer",
+            "ids": [
+                "31#spider_direct_update"
             ]
         },
         "Spider_mon_table_cache_version": {
@@ -15130,6 +15484,17 @@
             "type": "integer",
             "ids": [
                 "31#spider_mon_table_cache_version_req"
+            ]
+        },
+        "Spider_parallel_search": {
+            "name": "Spider_parallel_search",
+            "scope": [
+                "global",
+                "session"
+            ],
+            "type": "integer",
+            "ids": [
+                "31#spider_parallel_search"
             ]
         },
         "spider_auto_increment_mode": {
@@ -15256,6 +15621,22 @@
                 "32#spider_block_size"
             ]
         },
+        "spider_buffer_size": {
+            "dynamic": true,
+            "name": "spider_buffer_size",
+            "range": {
+                "from": -1,
+                "to": 2147483647
+            },
+            "scope": [
+                "global",
+                "session"
+            ],
+            "type": "integer",
+            "ids": [
+                "32#spider_buffer_size"
+            ]
+        },
         "spider_bulk_size": {
             "dynamic": true,
             "name": "spider_bulk_size",
@@ -15360,8 +15741,7 @@
                 "to": 1000
             },
             "scope": [
-                "global",
-                "session"
+                "global"
             ],
             "type": "integer",
             "ids": [
@@ -15372,6 +15752,10 @@
             "default": "1",
             "dynamic": true,
             "name": "spider_connect_error_interval",
+            "range": {
+                "from": 0,
+                "to": 4294967295
+            },
             "scope": [
                 "global"
             ],
@@ -15445,7 +15829,7 @@
             "name": "spider_crd_bg_mode",
             "range": {
                 "from": -1,
-                "to": 1
+                "to": 2
             },
             "scope": [
                 "global",
@@ -15761,11 +16145,15 @@
         "spider_internal_sql_log_off": {
             "dynamic": true,
             "name": "spider_internal_sql_log_off",
+            "range": {
+                "from": -1,
+                "to": 1
+            },
             "scope": [
                 "global",
                 "session"
             ],
-            "type": "boolean",
+            "type": "integer",
             "ids": [
                 "32#spider_internal_sql_log_off"
             ]
@@ -15822,23 +16210,31 @@
             ]
         },
         "spider_load_crd_at_startup": {
+            "default": "-1",
             "dynamic": true,
             "name": "spider_load_crd_at_startup",
+            "range": {
+                "from": -1,
+                "to": 1
+            },
             "scope": [
-                "global",
-                "session"
+                "global"
             ],
-            "type": "boolean",
+            "type": "integer",
             "ids": [
                 "32#spider_load_crd_at_startup"
             ]
         },
         "spider_load_sts_at_startup": {
+            "default": "-1",
             "dynamic": true,
             "name": "spider_load_sts_at_startup",
+            "range": {
+                "from": -1,
+                "to": 1
+            },
             "scope": [
-                "global",
-                "session"
+                "global"
             ],
             "type": "boolean",
             "ids": [
@@ -15846,6 +16242,7 @@
             ]
         },
         "spider_local_lock_table": {
+            "default": "0",
             "dynamic": true,
             "name": "spider_local_lock_table",
             "scope": [
@@ -15858,6 +16255,7 @@
             ]
         },
         "spider_lock_exchange": {
+            "default": "0",
             "dynamic": true,
             "name": "spider_lock_exchange",
             "scope": [
@@ -15870,24 +16268,32 @@
             ]
         },
         "spider_log_result_error_with_sql": {
+            "default": "0",
             "dynamic": true,
             "name": "spider_log_result_error_with_sql",
             "range": {
                 "from": 0,
-                "to": 3
+                "to": 4
             },
+            "scope": [
+                "global"
+            ],
             "type": "integer",
             "ids": [
                 "32#spider_log_result_error_with_sql"
             ]
         },
         "spider_log_result_errors": {
+            "default": "0",
             "dynamic": true,
             "name": "spider_log_result_errors",
             "range": {
                 "from": 0,
                 "to": 4
             },
+            "scope": [
+                "global"
+            ],
             "type": "integer",
             "ids": [
                 "32#spider_log_result_errors"
@@ -15913,8 +16319,7 @@
                 "to": 99999
             },
             "scope": [
-                "global",
-                "session"
+                "global"
             ],
             "type": "integer",
             "ids": [
@@ -15986,6 +16391,7 @@
             ]
         },
         "spider_ping_interval_at_trx_start": {
+            "default": "3600",
             "dynamic": true,
             "name": "spider_ping_interval_at_trx_start",
             "range": {
@@ -16015,6 +16421,22 @@
             "type": "integer",
             "ids": [
                 "32#spider_quick_mode"
+            ]
+        },
+        "spider_quick_page_byte": {
+            "dynamic": true,
+            "name": "spider_quick_page_byte",
+            "range": {
+                "from": -1,
+                "to": 9.223372036854776e+18
+            },
+            "scope": [
+                "global",
+                "session"
+            ],
+            "type": "integer",
+            "ids": [
+                "32#spider_quick_page_byte"
             ]
         },
         "spider_quick_page_size": {
@@ -16069,8 +16491,7 @@
                 "to": 1
             },
             "scope": [
-                "global",
-                "session"
+                "global"
             ],
             "type": "integer",
             "ids": [
@@ -16097,8 +16518,7 @@
                 "to": 1
             },
             "scope": [
-                "global",
-                "session"
+                "global"
             ],
             "type": "integer",
             "ids": [
@@ -16109,8 +16529,7 @@
             "dynamic": true,
             "name": "spider_remote_time_zone",
             "scope": [
-                "global",
-                "session"
+                "global"
             ],
             "type": "string",
             "ids": [
@@ -16125,12 +16544,28 @@
                 "to": 3
             },
             "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "32#spider_remote_trx_isolation"
+            ]
+        },
+        "spider_remote_wait_timeout": {
+            "default": "-1",
+            "dynamic": true,
+            "name": "spider_remote_wait_timeout",
+            "range": {
+                "from": -1,
+                "to": 2147483647
+            },
+            "scope": [
                 "global",
                 "session"
             ],
             "type": "integer",
             "ids": [
-                "32#spider_remote_trx_isolation"
+                "32#spider_remote_wait_timeout"
             ]
         },
         "spider_reset_sql_alloc": {
@@ -16326,11 +16761,28 @@
                 "to": 3
             },
             "scope": [
+                "global",
                 "session"
             ],
             "type": "integer",
             "ids": [
                 "32#spider_skip_parallel_search"
+            ]
+        },
+        "spider_slave_trx_isolation": {
+            "cli": "--spider-slave-trx-isolation=#",
+            "dynamic": true,
+            "name": "spider_slave_trx_isolation",
+            "range": {
+                "from": -1,
+                "to": 3
+            },
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "32#spider_slave_trx_isolation"
             ]
         },
         "spider_split_read": {
@@ -16381,12 +16833,29 @@
                 "32#spider_store_last_sts"
             ]
         },
+        "spider_strict_group_by": {
+            "default": "-1",
+            "dynamic": true,
+            "name": "spider_strict_group_by",
+            "range": {
+                "from": -1,
+                "to": 1
+            },
+            "scope": [
+                "global",
+                "session"
+            ],
+            "type": "integer",
+            "ids": [
+                "32#spider_strict_group_by"
+            ]
+        },
         "spider_sts_bg_mode": {
             "dynamic": true,
             "name": "spider_sts_bg_mode",
             "range": {
                 "from": -1,
-                "to": 1
+                "to": 2
             },
             "scope": [
                 "global",
@@ -16460,11 +16929,25 @@
             "dynamic": true,
             "name": "spider_sync_autocommit",
             "scope": [
-                "global"
+                "global",
+                "session"
             ],
             "type": "boolean",
             "ids": [
                 "32#spider_sync_autocommit"
+            ]
+        },
+        "spider_sync_sql_mode": {
+            "default": "ON",
+            "dynamic": true,
+            "name": "spider_sync_sql_mode",
+            "scope": [
+                "global",
+                "session"
+            ],
+            "type": "boolean",
+            "ids": [
+                "32#spider_sync_sql_mode"
             ]
         },
         "spider_sync_time_zone": {
@@ -16482,7 +16965,8 @@
             "dynamic": true,
             "name": "spider_sync_trx_isolation",
             "scope": [
-                "global"
+                "global",
+                "session"
             ],
             "type": "boolean",
             "ids": [
@@ -16540,6 +17024,7 @@
             ]
         },
         "spider_udf_ct_bulk_insert_interval": {
+            "default": "-1",
             "dynamic": true,
             "name": "spider_udf_ct_bulk_insert_interval",
             "range": {
@@ -16555,10 +17040,12 @@
             ]
         },
         "spider_udf_ct_bulk_insert_rows": {
+            "default": "-1",
             "dynamic": true,
             "name": "spider_udf_ct_bulk_insert_rows",
             "range": {
-                "from": -1
+                "from": -1,
+                "to": 9.223372036854776e+18
             },
             "scope": [
                 "global"
@@ -16569,13 +17056,16 @@
             ]
         },
         "spider_udf_ds_bulk_insert_rows": {
+            "default": "-1",
             "dynamic": true,
             "name": "spider_udf_ds_bulk_insert_rows",
             "range": {
-                "from": -1
+                "from": -1,
+                "to": 9.223372036854776e+18
             },
             "scope": [
-                "global"
+                "global",
+                "session"
             ],
             "type": "integer",
             "ids": [
@@ -16583,10 +17073,12 @@
             ]
         },
         "spider_udf_ds_table_loop_mode": {
+            "default": "-1",
             "dynamic": true,
             "name": "spider_udf_ds_table_loop_mode",
             "range": {
-                "from": -1
+                "from": -1,
+                "to": 2
             },
             "scope": [
                 "global",
@@ -16598,10 +17090,12 @@
             ]
         },
         "spider_udf_ds_use_real_table": {
+            "default": "-1",
             "dynamic": true,
             "name": "spider_udf_ds_use_real_table",
             "range": {
-                "from": -1
+                "from": -1,
+                "to": 1
             },
             "scope": [
                 "global",
@@ -16617,7 +17111,8 @@
             "dynamic": false,
             "name": "spider_udf_table_lock_mutex_count",
             "range": {
-                "from": 1
+                "from": 1,
+                "to": 4294967295
             },
             "scope": [
                 "global"
@@ -16632,7 +17127,8 @@
             "dynamic": false,
             "name": "spider_udf_table_mon_mutex_count",
             "range": {
-                "from": 1
+                "from": 1,
+                "to": 4294967295
             },
             "scope": [
                 "global"
@@ -16654,7 +17150,25 @@
                 "32#spider_use_all_conns_snapshot"
             ]
         },
+        "spider_use_cond_other_than_pk_for_update": {
+            "default": "1",
+            "dynamic": true,
+            "name": "spider_use_cond_other_than_pk_for_update",
+            "range": {
+                "from": 0,
+                "to": 1
+            },
+            "scope": [
+                "global",
+                "session"
+            ],
+            "type": "integer",
+            "ids": [
+                "32#spider_use_cond_other_than_pk_for_update"
+            ]
+        },
         "spider_use_consistent_snapshot": {
+            "default": "OFF",
             "dynamic": true,
             "name": "spider_use_consistent_snapshot",
             "scope": [
@@ -16667,6 +17181,7 @@
             ]
         },
         "spider_use_default_database": {
+            "default": "ON",
             "dynamic": true,
             "name": "spider_use_default_database",
             "scope": [
@@ -16679,6 +17194,7 @@
             ]
         },
         "spider_use_flash_logs": {
+            "default": "OFF",
             "dynamic": true,
             "name": "spider_use_flash_logs",
             "scope": [
@@ -16691,16 +17207,29 @@
             ]
         },
         "spider_use_handler": {
+            "default": "-1",
+            "dynamic": true,
             "name": "spider_use_handler",
+            "range": {
+                "from": -1,
+                "to": 3
+            },
+            "scope": [
+                "global",
+                "session"
+            ],
+            "type": "integer",
             "ids": [
                 "32#spider_use_handler"
             ]
         },
         "spider_use_pushdown_udf": {
+            "default": "-1",
             "dynamic": true,
             "name": "spider_use_pushdown_udf",
             "range": {
-                "from": -1
+                "from": -1,
+                "to": 1
             },
             "scope": [
                 "global",
@@ -16712,10 +17241,12 @@
             ]
         },
         "spider_use_snapshot_with_flush_tables": {
+            "default": "0",
             "dynamic": true,
             "name": "spider_use_snapshot_with_flush_tables",
             "range": {
-                "from": 0
+                "from": 0,
+                "to": 2
             },
             "scope": [
                 "global",
@@ -16727,10 +17258,12 @@
             ]
         },
         "spider_use_table_charset": {
+            "default": "-1",
             "dynamic": true,
             "name": "spider_use_table_charset",
             "range": {
-                "from": -1
+                "from": -1,
+                "to": 1
             },
             "scope": [
                 "global",
@@ -16750,6 +17283,23 @@
             "type": "string",
             "ids": [
                 "32#spider_version"
+            ]
+        },
+        "spider_wait_timeout": {
+            "default": "604800",
+            "dynamic": true,
+            "name": "spider_wait_timeout",
+            "range": {
+                "from": -1,
+                "to": 2147483647
+            },
+            "scope": [
+                "global",
+                "session"
+            ],
+            "type": "integer",
+            "ids": [
+                "32#spider_wait_timeout"
             ]
         },
         "spider_xa_register_mode": {
@@ -17056,6 +17606,7 @@
         },
         "ssl_ca": {
             "cli": "--ssl-ca=file_name",
+            "default": "NULL",
             "name": "ssl_ca",
             "scope": [
                 "global"
@@ -17067,6 +17618,7 @@
             ]
         },
         "ssl_capath": {
+            "default": "NULL",
             "name": "ssl_capath",
             "scope": [
                 "global"
@@ -17078,6 +17630,7 @@
             ]
         },
         "ssl_cert": {
+            "default": "NULL",
             "name": "ssl_cert",
             "scope": [
                 "global"
@@ -17090,6 +17643,7 @@
         },
         "ssl_cipher": {
             "cli": "--ssl-cipher=name",
+            "default": "NULL",
             "name": "ssl_cipher",
             "scope": [
                 "global"
@@ -17101,6 +17655,7 @@
             ]
         },
         "ssl_crl": {
+            "default": "NULL",
             "name": "ssl_crl",
             "scope": [
                 "global"
@@ -17112,6 +17667,7 @@
             ]
         },
         "ssl_crlpath": {
+            "default": "NULL",
             "name": "ssl_crlpath",
             "scope": [
                 "global"
@@ -17123,6 +17679,7 @@
             ]
         },
         "ssl_key": {
+            "default": "NULL",
             "name": "ssl_key",
             "scope": [
                 "global"
@@ -17137,7 +17694,6 @@
             "scope": [
                 "global"
             ],
-            "type": "string",
             "ids": [
                 "34#tls_version",
                 "15#sysvar_tls_version"
@@ -17302,6 +17858,7 @@
                 "global",
                 "connection"
             ],
+            "type": "enumeration",
             "validValues": [
                 "high",
                 "low",
@@ -18829,6 +19386,7 @@
                 "global",
                 "session"
             ],
+            "type": "enumeration",
             "validValues": [
                 "lr",
                 "rl",
@@ -19046,6 +19604,7 @@
                 "global",
                 "session"
             ],
+            "type": "enumeration",
             "validValues": [
                 "0",
                 "1",
@@ -19126,6 +19685,7 @@
                 "global",
                 "session"
             ],
+            "type": "enumeration",
             "validValues": [
                 "tokudb_default",
                 "tokudb_fast",
@@ -19259,6 +19819,7 @@
                 "global",
                 "session"
             ],
+            "type": "enumeration",
             "validValues": [
                 "ERROR",
                 "KEEP"
@@ -19583,6 +20144,16 @@
                 "39#innodb_buffer_pool_write_requests"
             ]
         },
+        "Innodb_buffered_aio_submitted": {
+            "name": "Innodb_buffered_aio_submitted",
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "39#innodb_buffered_aio_submitted"
+            ]
+        },
         "Innodb_checkpoint_age": {
             "name": "Innodb_checkpoint_age",
             "scope": [
@@ -19811,6 +20382,26 @@
             "type": "integer",
             "ids": [
                 "39#innodb_encryption_n_rowlog_blocks_encrypted"
+            ]
+        },
+        "Innodb_encryption_n_temp_blocks_decrypted": {
+            "name": "Innodb_encryption_n_temp_blocks_decrypted",
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "39#innodb_encryption_n_temp_blocks_decrypted"
+            ]
+        },
+        "Innodb_encryption_n_temp_blocks_encrypted": {
+            "name": "Innodb_encryption_n_temp_blocks_encrypted",
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "39#innodb_encryption_n_temp_blocks_encrypted"
             ]
         },
         "Innodb_encryption_num_key_requests": {
@@ -20906,7 +21497,8 @@
             ]
         },
         "ignore_builtin_innodb": {
-            "cli": "--ignore-builtin-innodb[={OFF|ON}]",
+            "cli": "--ignore-builtin-innodb",
+            "default": "OFF",
             "dynamic": false,
             "name": "ignore_builtin_innodb",
             "scope": [
@@ -20914,8 +21506,7 @@
             ],
             "type": "boolean",
             "ids": [
-                "40#ignore_builtin_innodb",
-                "42#sysvar_ignore_builtin_innodb"
+                "40#ignore_builtin_innodb"
             ]
         },
         "innodb_adaptive_checkpoint": {
@@ -20951,7 +21542,7 @@
             "type": "boolean",
             "ids": [
                 "40#innodb_adaptive_flushing",
-                "41#sysvar_innodb_adaptive_flushing"
+                "42#sysvar_innodb_adaptive_flushing"
             ]
         },
         "innodb_adaptive_flushing_lwm": {
@@ -21591,7 +22182,13 @@
                 "strict_innodb",
                 "strict_crc32",
                 "strict_none",
-                "strict_full_crc32"
+                "strict_full_crc32",
+                "innodb",
+                "crc32",
+                "none",
+                "strict_innodb",
+                "strict_crc32",
+                "strict_none"
             ],
             "ids": [
                 "40#innodb_checksum_algorithm",
@@ -21619,6 +22216,7 @@
             "scope": [
                 "global"
             ],
+            "type": "enumeration",
             "validValues": [
                 "high_checkpoint",
                 "legacy",
@@ -21669,6 +22267,7 @@
             "scope": [
                 "global"
             ],
+            "type": "enumeration",
             "validValues": [
                 "none",
                 "zlib",
@@ -21752,8 +22351,7 @@
             "dynamic": true,
             "name": "innodb_concurrency_tickets",
             "range": {
-                "from": 1,
-                "to": 4294967295
+                "from": 1
             },
             "scope": [
                 "global"
@@ -22047,6 +22645,7 @@
             "scope": [
                 "global"
             ],
+            "type": "enumeration",
             "validValues": [
                 "deprecated",
                 "backoff",
@@ -22285,7 +22884,7 @@
         },
         "innodb_file_format_check": {
             "cli": "--innodb-file-format-check=#",
-            "default": "ON (>= MariaDB 5.5)",
+            "default": "ON",
             "dynamic": false,
             "name": "innodb_file_format_check",
             "scope": [
@@ -22315,7 +22914,7 @@
         },
         "innodb_file_per_table": {
             "cli": "--innodb-path-per-table[={OFF|ON}]",
-            "default": "1",
+            "default": "ON",
             "dynamic": true,
             "name": "innodb_file_per_table",
             "scope": [
@@ -22511,6 +23110,7 @@
             "scope": [
                 "global"
             ],
+            "type": "enumeration",
             "validValues": [
                 "deprecated",
                 "exponential_backoff",
@@ -22615,6 +23215,10 @@
             "default": "2000",
             "dynamic": true,
             "name": "innodb_ft_num_word_optimize",
+            "range": {
+                "from": 1000,
+                "to": 10000
+            },
             "scope": [
                 "global"
             ],
@@ -22800,6 +23404,26 @@
                 "40#innodb_import_table_from_xtrabackup"
             ]
         },
+        "innodb_instant_alter_column_allowed": {
+            "cli": "--innodb-instant-alter-column-allowed=value",
+            "default": "<= MariaDB 10.3: add_last, >= MariaDB 10.4: add_drop_reorder",
+            "dynamic": true,
+            "name": "innodb_instant_alter_column_allowed",
+            "scope": [
+                "global"
+            ],
+            "type": "enumeration",
+            "validValues": [
+                "never",
+                "add_last",
+                "never",
+                "add_last",
+                "add_drop_reorder"
+            ],
+            "ids": [
+                "40#innodb_instant_alter_column_allowed"
+            ]
+        },
         "innodb_instrument_semaphores": {
             "cli": "--innodb-instrument-semaphores={0|1}",
             "default": "OFF",
@@ -22891,12 +23515,13 @@
         },
         "innodb_lock_schedule_algorithm": {
             "cli": "--innodb-lock-schedule-algorithm=#",
-            "default": "VATS (10.2), FCFS (10.1)",
+            "default": "FCFS (MariaDB 10.3.9, MariaDB 10.2.17), VATS (MariaDB 10.2.3), FCFS (MariaDB 10.1)",
             "dynamic": false,
             "name": "innodb_lock_schedule_algorithm",
             "scope": [
                 "global"
             ],
+            "type": "enumeration",
             "validValues": [
                 "FCFS",
                 "VATS"
@@ -23002,6 +23627,9 @@
             "cli": "--innodb-log-buffer-size=#",
             "default": "16777216",
             "name": "innodb_log_buffer_size",
+            "scope": [
+                "global"
+            ],
             "type": "integer",
             "ids": [
                 "40#innodb_log_buffer_size",
@@ -23016,6 +23644,7 @@
             "scope": [
                 "global"
             ],
+            "type": "enumeration",
             "validValues": [
                 "deprecated",
                 "innodb",
@@ -23063,7 +23692,6 @@
         },
         "innodb_log_file_size": {
             "cli": "--innodb-log-file-size=#",
-            "default": "50331648",
             "dynamic": false,
             "name": "innodb_log_file_size",
             "scope": [
@@ -23077,7 +23705,6 @@
         },
         "innodb_log_files_in_group": {
             "cli": "--innodb-log-files-in-group=#",
-            "default": "2",
             "dynamic": false,
             "name": "innodb_log_files_in_group",
             "scope": [
@@ -23104,7 +23731,7 @@
         },
         "innodb_log_optimize_ddl": {
             "cli": "--innodb-log-optimize-ddl={0|1}",
-            "default": "ON",
+            "default": "OFF (>= MariaDB 10.5.1, MariaDB 10.4.16, MariaDB 10.3.26, MariaDB 10.2.35), ON (<= MariaDB 10.5.0, MariaDB 10.4.15, MariaDB 10.3.25, MariaDB 10.2.34)",
             "dynamic": true,
             "name": "innodb_log_optimize_ddl",
             "scope": [
@@ -23185,6 +23812,7 @@
         },
         "innodb_max_dirty_pages_pct": {
             "cli": "--innodb-max-dirty-pages-pct=#",
+            "dynamic": true,
             "name": "innodb_max_dirty_pages_pct",
             "range": {
                 "from": 0
@@ -23238,7 +23866,8 @@
             "dynamic": true,
             "name": "innodb_max_purge_lag_delay",
             "range": {
-                "from": 0
+                "from": 0,
+                "to": 10000000
             },
             "scope": [
                 "global"
@@ -23663,6 +24292,17 @@
             "ids": [
                 "40#innodb_read_only",
                 "41#sysvar_innodb_read_only"
+            ]
+        },
+        "innodb_read_only_compressed": {
+            "cli": "--innodb-read-only-compressed, --skip-innodb-read-only-compressed",
+            "default": "ON",
+            "dynamic": false,
+            "name": "innodb_read_only_compressed",
+            "scope": [],
+            "type": "boolean",
+            "ids": [
+                "40#innodb_read_only_compressed"
             ]
         },
         "innodb_recovery_stats": {
@@ -24305,13 +24945,16 @@
             "default": "128",
             "dynamic": true,
             "name": "innodb_undo_logs",
+            "range": {
+                "from": 0,
+                "to": 128
+            },
             "scope": [
                 "global"
             ],
             "type": "integer",
             "ids": [
-                "40#innodb_undo_logs",
-                "41#sysvar_innodb_undo_logs"
+                "40#innodb_undo_logs"
             ]
         },
         "innodb_undo_tablespaces": {
@@ -24702,6 +25345,23 @@
                 "42#sysvar_audit_log_policy"
             ]
         },
+        "audit_log_prune_seconds": {
+            "cli": "--audit-log-prune-seconds=#",
+            "default": "0",
+            "dynamic": true,
+            "name": "audit_log_prune_seconds",
+            "range": {
+                "from": 0,
+                "to": 4294967295
+            },
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "42#sysvar_audit_log_prune_seconds"
+            ]
+        },
         "audit_log_read_buffer_size": {
             "cli": "--audit-log-read-buffer-size=#",
             "name": "audit_log_read_buffer_size",
@@ -24973,6 +25633,81 @@
                 "41#sysvar_innodb_directories"
             ]
         },
+        "innodb_doublewrite_batch_size": {
+            "cli": "--innodb-doublewrite-batch-size=#",
+            "default": "0",
+            "dynamic": false,
+            "name": "innodb_doublewrite_batch_size",
+            "range": {
+                "from": 0,
+                "to": 256
+            },
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "41#sysvar_innodb_doublewrite_batch_size"
+            ]
+        },
+        "innodb_doublewrite_dir": {
+            "cli": "--innodb-doublewrite-dir=dir_name",
+            "dynamic": false,
+            "name": "innodb_doublewrite_dir",
+            "scope": [
+                "global"
+            ],
+            "type": "directory name",
+            "ids": [
+                "41#sysvar_innodb_doublewrite_dir"
+            ]
+        },
+        "innodb_doublewrite_files": {
+            "cli": "--innodb-doublewrite-files=#",
+            "default": "innodb_buffer_pool_instances * 2",
+            "dynamic": false,
+            "name": "innodb_doublewrite_files",
+            "range": {
+                "from": 2,
+                "to": 256
+            },
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "41#sysvar_innodb_doublewrite_files"
+            ]
+        },
+        "innodb_doublewrite_pages": {
+            "cli": "--innodb-doublewrite-pages=#",
+            "default": "innodb_write_io_threads value",
+            "dynamic": false,
+            "name": "innodb_doublewrite_pages",
+            "range": {
+                "to": 512
+            },
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "41#sysvar_innodb_doublewrite_pages"
+            ]
+        },
+        "innodb_extend_and_initialize": {
+            "cli": "--innodb=extend-and-initialize[={OFF|ON}]",
+            "default": "ON",
+            "dynamic": true,
+            "name": "innodb_extend_and_initialize",
+            "scope": [
+                "global"
+            ],
+            "type": "boolean",
+            "ids": [
+                "41#sysvar_innodb_extend_and_initialize"
+            ]
+        },
         "innodb_fil_make_page_dirty_debug": {
             "cli": "--innodb-fil-make-page-dirty-debug=#",
             "default": "0",
@@ -25099,6 +25834,19 @@
                 "41#sysvar_innodb_log_wait_for_flush_spin_hwm"
             ]
         },
+        "innodb_log_writer_threads": {
+            "cli": "--innodb-log-writer-threads[={OFF|ON}]",
+            "default": "ON",
+            "dynamic": true,
+            "name": "innodb_log_writer_threads",
+            "scope": [
+                "global"
+            ],
+            "type": "boolean",
+            "ids": [
+                "41#sysvar_innodb_log_writer_threads"
+            ]
+        },
         "innodb_merge_threshold_set_all_debug": {
             "cli": "--innodb-merge-threshold-set-all-debug=#",
             "default": "50",
@@ -25170,19 +25918,6 @@
             "type": "boolean",
             "ids": [
                 "41#sysvar_innodb_redo_log_encrypt"
-            ]
-        },
-        "innodb_scan_directories": {
-            "cli": "--innodb-scan-directories=dir_name",
-            "default": "NULL",
-            "dynamic": false,
-            "name": "innodb_scan_directories",
-            "scope": [
-                "global"
-            ],
-            "type": "directory name",
-            "ids": [
-                "41#sysvar_innodb_scan_directories"
             ]
         },
         "innodb_saved_page_number_debug": {
@@ -25286,607 +26021,643 @@
                 "41#sysvar_innodb_undo_log_encrypt"
             ]
         },
-        "ndbcluster": {
-            "cli": "--ndbcluster",
-            "default": "FALSE (Version: NDB 7.5-7.6)",
+        "innodb_validate_tablespace_paths": {
+            "cli": "--innodb-validate-tablespace-paths[={OFF|ON}]",
+            "default": "ON",
             "dynamic": false,
+            "name": "innodb_validate_tablespace_paths",
+            "scope": [
+                "global"
+            ],
+            "type": "boolean",
+            "ids": [
+                "41#sysvar_innodb_validate_tablespace_paths"
+            ]
+        },
+        "ndbcluster": {
+            "cli": "--ndbcluster[=value]",
+            "default": "OFF",
             "name": "ndbcluster",
+            "type": "boolean",
             "ids": [
                 "44#option_mysqld_ndbcluster"
             ]
         },
-        "ndb-allow-copying-alter-table": {
-            "cli": "--ndb-allow-copying-alter-table=[ON|OFF]",
-            "default": "ON (Version: NDB 7.5-7.6)",
+        "ndb_allow_copying_alter_table": {
+            "cli": "--ndb-allow-copying-alter-table[={OFF|ON}]",
+            "default": "ON",
             "dynamic": true,
-            "name": "ndb-allow-copying-alter-table",
+            "name": "ndb_allow_copying_alter_table",
             "scope": [
                 "global",
                 "session"
             ],
+            "type": "boolean",
             "ids": [
                 "43#option_mysqld_ndb-allow-copying-alter-table"
             ]
         },
-        "ndb-batch-size": {
-            "cli": "--ndb-batch-size=#",
-            "default": "32768 / 0 - 31536000 (Version: NDB 7.5-7.6)",
+        "ndb_batch_size": {
+            "cli": "--ndb-batch-size",
+            "default": "32768",
             "dynamic": false,
-            "name": "ndb-batch-size",
+            "name": "ndb_batch_size",
+            "range": {
+                "from": 0,
+                "to": 31536000
+            },
             "scope": [
                 "global"
             ],
+            "type": "integer",
             "ids": [
                 "43#option_mysqld_ndb-batch-size"
             ]
         },
-        "ndb-cluster-connection-pool": {
-            "cli": "--ndb-cluster-connection-pool=#",
-            "default": "1 / 1 - 63 (Version: NDB 7.5-7.6)",
+        "ndb_cluster_connection_pool": {
+            "cli": "--ndb-cluster-connection-pool",
+            "default": "1",
             "dynamic": false,
-            "name": "ndb-cluster-connection-pool",
+            "name": "ndb_cluster_connection_pool",
+            "range": {
+                "from": 1,
+                "to": 63
+            },
             "scope": [
                 "global"
             ],
+            "type": "integer",
             "ids": [
                 "43#option_mysqld_ndb-cluster-connection-pool"
             ]
         },
-        "ndb-cluster-connection-pool-nodeids": {
-            "cli": "--ndb-cluster-connection-pool-nodeids=list",
-            "default": "/ (Version: NDB 7.5-7.6)",
-            "dynamic": false,
-            "name": "ndb-cluster-connection-pool-nodeids",
-            "scope": [
-                "global"
-            ],
+        "ndb_cluster_connection_pool_nodeids": {
+            "cli": "--ndb-cluster-connection-pool-nodeids",
+            "default": "",
+            "name": "ndb_cluster_connection_pool_nodeids",
+            "type": "set",
             "ids": [
                 "43#option_mysqld_ndb-cluster-connection-pool-nodeids"
             ]
         },
-        "ndb-blob-read-batch-bytes": {
-            "cli": "--ndb-blob-read-batch-bytes=bytes",
-            "default": "65536 / 0 - 4294967295 (Version: NDB 7.5-7.6)",
+        "ndb_blob_read_batch_bytes": {
+            "cli": "--ndb-blob-read-batch-bytes",
+            "default": "65536",
             "dynamic": true,
-            "name": "ndb-blob-read-batch-bytes",
+            "name": "ndb_blob_read_batch_bytes",
+            "range": {
+                "from": 0,
+                "to": 4294967295
+            },
             "scope": [
                 "global",
                 "session"
             ],
+            "type": "integer",
             "ids": [
                 "43#option_mysqld_ndb-blob-read-batch-bytes"
             ]
         },
-        "ndb-blob-write-batch-bytes": {
-            "cli": "--ndb-blob-write-batch-bytes=bytes",
-            "default": "65536 / 0 - 4294967295 (Version: NDB 7.5-7.6)",
+        "ndb_blob_write_batch_bytes": {
+            "cli": "--ndb-blob-write-batch-bytes",
+            "default": "65536",
             "dynamic": true,
-            "name": "ndb-blob-write-batch-bytes",
+            "name": "ndb_blob_write_batch_bytes",
+            "range": {
+                "from": 0,
+                "to": 4294967295
+            },
             "scope": [
                 "global",
                 "session"
             ],
+            "type": "integer",
             "ids": [
                 "43#option_mysqld_ndb-blob-write-batch-bytes"
             ]
         },
-        "ndb-connectstring": {
-            "cli": "--ndb-connectstring=connection_string",
-            "default": "(Version: NDB 7.5-7.6)",
-            "dynamic": false,
-            "name": "ndb-connectstring",
+        "ndb_connectstring": {
+            "cli": "--ndb-connectstring",
+            "name": "ndb_connectstring",
+            "type": "string",
             "ids": [
                 "43#option_mysqld_ndb-connectstring"
             ]
         },
-        "ndb-default-column-format": {
-            "cli": "--ndb-default-column-format=[FIXED|DYNAMIC]",
-            "default": "FIXED / FIXED, DYNAMIC (Version: 5.7.16-ndb-7.5.4)",
-            "dynamic": true,
-            "name": "ndb-default-column-format",
-            "scope": [
-                "global"
-            ],
-            "ids": [
-                "43#option_mysqld_ndb-default-column-format"
-            ]
-        },
-        "ndb-deferred-constraints": {
-            "cli": "--ndb-deferred-constraints=[0|1]",
-            "default": "0 / 0 - 1 (Version: NDB 7.5-7.6)",
-            "dynamic": true,
-            "name": "ndb-deferred-constraints",
-            "scope": [
-                "global",
-                "session"
-            ],
-            "ids": [
-                "43#option_mysqld_ndb-deferred-constraints"
-            ]
-        },
-        "ndb-distribution": {
-            "cli": "--ndb-distribution=[KEYHASH|LINHASH]",
-            "default": "KEYHASH / LINHASH, KEYHASH (Version: NDB 7.5-7.6)",
-            "dynamic": true,
-            "name": "ndb-distribution",
-            "scope": [
-                "global"
-            ],
-            "ids": [
-                "43#option_mysqld_ndb-distribution"
-            ]
-        },
-        "ndb-log-apply-status": {
-            "cli": "--ndb-log-apply-status",
-            "default": "OFF (Version: NDB 7.5-7.6)",
-            "dynamic": false,
-            "name": "ndb-log-apply-status",
-            "scope": [
-                "global"
-            ],
-            "ids": [
-                "43#option_mysqld_ndb-log-apply-status"
-            ]
-        },
-        "ndb-log-empty-epochs": {
-            "cli": "--ndb-log-empty-epochs=[ON|OFF]",
-            "default": "OFF (Version: NDB 7.5-7.6)",
-            "dynamic": true,
-            "name": "ndb-log-empty-epochs",
-            "scope": [
-                "global"
-            ],
-            "ids": [
-                "43#option_mysqld_ndb-log-empty-epochs"
-            ]
-        },
-        "ndb-log-empty-update": {
-            "cli": "--ndb-log-empty-update=[ON|OFF]",
-            "default": "OFF (Version: NDB 7.5-7.6)",
-            "dynamic": true,
-            "name": "ndb-log-empty-update",
-            "scope": [
-                "global"
-            ],
-            "ids": [
-                "43#option_mysqld_ndb-log-empty-update"
-            ]
-        },
-        "ndb-log-exclusive-reads": {
-            "cli": "--ndb-log-exclusive-reads=[0|1]",
-            "default": "0 (Version: NDB 7.5-7.6)",
-            "dynamic": true,
-            "name": "ndb-log-exclusive-reads",
-            "scope": [
-                "global",
-                "session"
-            ],
-            "ids": [
-                "43#option_mysqld_ndb-log-exclusive-reads"
-            ]
-        },
-        "ndb-log-orig": {
-            "cli": "--ndb-log-orig",
-            "default": "OFF (Version: NDB 7.5-7.6)",
-            "dynamic": false,
-            "name": "ndb-log-orig",
-            "scope": [
-                "global"
-            ],
-            "ids": [
-                "43#option_mysqld_ndb-log-orig"
-            ]
-        },
-        "ndb-log-transaction-id": {
-            "cli": "--ndb-log-transaction-id",
-            "default": "OFF (Version: NDB 7.5-7.6)",
-            "dynamic": false,
-            "name": "ndb-log-transaction-id",
-            "scope": [
-                "global"
-            ],
-            "ids": [
-                "43#option_mysqld_ndb-log-transaction-id"
-            ]
-        },
-        "ndb-log-update-minimal": {
-            "cli": "--ndb-log-update-minimal",
-            "default": "OFF (Version: 5.7.18-ndb-7.6.3)",
-            "dynamic": true,
-            "name": "ndb-log-update-minimal",
-            "scope": [
-                "global"
-            ],
-            "ids": [
-                "43#option_mysqld_ndb-log-update-minimal"
-            ]
-        },
-        "ndb-mgmd-host": {
-            "cli": "--ndb-mgmd-host=host[:port]",
-            "default": "localhost:1186 (Version: NDB 7.5-7.6)",
-            "dynamic": false,
-            "name": "ndb-mgmd-host",
-            "ids": [
-                "43#option_mysqld_ndb-mgmd-host"
-            ]
-        },
-        "ndb-nodeid": {
-            "cli": "--ndb-nodeid=#",
-            "default": "/ 1 - 255 (Version: 5.1.5)",
-            "dynamic": false,
-            "name": "ndb-nodeid",
-            "scope": [
-                "global"
-            ],
-            "ids": [
-                "43#option_mysqld_ndb-nodeid"
-            ]
-        },
-        "ndb-optimization-delay": {
-            "cli": "--ndb-optimization-delay=milliseconds",
-            "default": "10 / 0 - 100000 (Version: NDB 7.5-7.6)",
-            "dynamic": true,
-            "name": "ndb-optimization-delay",
-            "scope": [
-                "global"
-            ],
-            "ids": [
-                "43#option_mysqld_ndb-optimization-delay"
-            ]
-        },
-        "ndb-recv-thread-activation-threshold": {
-            "cli": "--ndb-recv-thread-activation-threshold=threshold",
-            "default": "8 / 0 (MIN_ACTIVATION_THRESHOLD) - 16 (MAX_ACTIVATION_THRESHOLD), (Version: 5.6.10-ndb-7.3.1)",
-            "dynamic": false,
-            "name": "ndb-recv-thread-activation-threshold",
-            "ids": [
-                "43#option_mysqld_ndb-recv-thread-activation-threshold"
-            ]
-        },
-        "ndb-recv-thread-cpu-mask": {
-            "cli": "--ndb-recv-thread-cpu-mask=bitmask",
-            "default": "[empty] (Version: NDB 7.5-7.6)",
-            "dynamic": false,
-            "name": "ndb-recv-thread-cpu-mask",
-            "ids": [
-                "43#option_mysqld_ndb-recv-thread-cpu-mask"
-            ]
-        },
-        "ndb-transid-mysql-connection-map": {
-            "cli": "ndb-transid-mysql-connection-map=state",
-            "default": "ON / ON, OFF, FORCE (Version: NDB 7.5-7.6)",
-            "dynamic": false,
-            "name": "ndb-transid-mysql-connection-map",
-            "ids": [
-                "43#option_mysqld_ndb-transid-mysql-connection-map"
-            ]
-        },
-        "ndb-wait-connected": {
-            "cli": "--ndb-wait-connected=seconds",
-            "default": "30 / 0 - 31536000 (Version: 5.1.56-ndb-7.1.16)",
-            "dynamic": false,
-            "name": "ndb-wait-connected",
-            "scope": [
-                "global"
-            ],
-            "ids": [
-                "43#option_mysqld_ndb-wait-connected"
-            ]
-        },
-        "ndb-wait-setup": {
-            "cli": "--ndb-wait-setup=seconds",
-            "default": "30 / 0 - 31536000 (Version: 5.1.56-ndb-7.1.16)",
-            "dynamic": false,
-            "name": "ndb-wait-setup",
-            "scope": [
-                "global"
-            ],
-            "ids": [
-                "43#option_mysqld_ndb-wait-setup"
-            ]
-        },
-        "skip-ndbcluster": {
-            "cli": "--skip-ndbcluster",
-            "dynamic": false,
-            "name": "skip-ndbcluster",
-            "ids": [
-                "43#option_mysqld_skip-ndbcluster"
-            ]
-        },
-        "ndb_autoincrement_prefetch_sz": {
-            "default": "1 / 1 - 256 (Version: NDB 7.5-7.6)",
-            "dynamic": true,
-            "name": "ndb_autoincrement_prefetch_sz",
-            "scope": [
-                "global",
-                "session"
-            ],
-            "ids": [
-                "43#sysvar_ndb_autoincrement_prefetch_sz"
-            ]
-        },
-        "ndb_cache_check_time": {
-            "default": "0 / - (Version: NDB 7.5-7.6)",
-            "dynamic": true,
-            "name": "ndb_cache_check_time",
-            "scope": [
-                "global"
-            ],
-            "ids": [
-                "43#sysvar_ndb_cache_check_time"
-            ]
-        },
-        "ndb_clear_apply_status": {
-            "default": "ON (Version: NDB 7.5-7.6)",
-            "dynamic": true,
-            "name": "ndb_clear_apply_status",
-            "scope": [
-                "global"
-            ],
-            "ids": [
-                "43#sysvar_ndb_clear_apply_status"
-            ]
-        },
-        "ndb_data_node_neighbour": {
-            "default": "0 / 0 - 255 (Version: 5.7.12-ndb-7.5.2)",
-            "dynamic": true,
-            "name": "ndb_data_node_neighbour",
-            "scope": [
-                "global"
-            ],
-            "ids": [
-                "43#sysvar_ndb_data_node_neighbour"
-            ]
-        },
         "ndb_default_column_format": {
-            "default": "FIXED / FIXED, DYNAMIC (Version: 5.7.16-ndb-7.5.4)",
+            "cli": "--ndb-default-column-format={FIXED|DYNAMIC}",
             "dynamic": true,
             "name": "ndb_default_column_format",
             "scope": [
                 "global"
             ],
+            "type": "enumeration",
+            "validValues": [
+                "FIXED",
+                "DYNAMIC"
+            ],
             "ids": [
+                "43#option_mysqld_ndb-default-column-format",
                 "43#sysvar_ndb_default_column_format"
             ]
         },
         "ndb_deferred_constraints": {
-            "default": "0 / 0 - 1 (Version: NDB 7.5-7.6)",
+            "cli": "--ndb-deferred-constraints=#",
+            "default": "0",
             "dynamic": true,
             "name": "ndb_deferred_constraints",
+            "range": {
+                "from": 0,
+                "to": 1
+            },
             "scope": [
                 "global",
                 "session"
             ],
+            "type": "integer",
             "ids": [
+                "43#option_mysqld_ndb-deferred-constraints",
                 "43#sysvar_ndb_deferred_constraints"
             ]
         },
         "ndb_distribution": {
-            "default": "KEYHASH / LINHASH, KEYHASH (Version: NDB 7.5-7.6)",
+            "cli": "--ndb-distribution={KEYHASH|LINHASH}",
+            "default": "KEYHASH",
             "dynamic": true,
             "name": "ndb_distribution",
             "scope": [
                 "global"
             ],
+            "type": "enumeration",
+            "validValues": [
+                "LINHASH",
+                "KEYHASH"
+            ],
             "ids": [
+                "43#option_mysqld_ndb-distribution",
                 "43#sysvar_ndb_distribution"
             ]
         },
-        "ndb_eventbuffer_free_percent": {
-            "default": "20 / 1 - 99 (Version: NDB 7.5-7.6)",
-            "dynamic": true,
-            "name": "ndb_eventbuffer_free_percent",
-            "scope": [
-                "global"
-            ],
-            "ids": [
-                "43#sysvar_ndb_eventbuffer_free_percent"
-            ]
-        },
-        "ndb_eventbuffer_max_alloc": {
-            "default": "0 / 0 - 4294967295 (Version: NDB 7.5-7.6)",
-            "dynamic": true,
-            "name": "ndb_eventbuffer_max_alloc",
-            "scope": [
-                "global"
-            ],
-            "ids": [
-                "43#sysvar_ndb_eventbuffer_max_alloc"
-            ]
-        },
-        "ndb_extra_logging": {
-            "default": "1 / - (Version: 5.1.19-ndb-6.3.0)",
-            "dynamic": true,
-            "name": "ndb_extra_logging",
-            "scope": [
-                "global"
-            ],
-            "ids": [
-                "43#sysvar_ndb_extra_logging"
-            ]
-        },
-        "ndb_force_send": {
-            "default": "TRUE (Version: NDB 7.5-7.6)",
-            "dynamic": true,
-            "name": "ndb_force_send",
-            "scope": [
-                "global",
-                "session"
-            ],
-            "ids": [
-                "43#sysvar_ndb_force_send"
-            ]
-        },
-        "ndb_fully_replicated": {
-            "default": "OFF (Version: 5.7.12-ndb-7-5-2)",
-            "dynamic": true,
-            "name": "ndb_fully_replicated",
-            "scope": [
-                "global",
-                "session"
-            ],
-            "ids": [
-                "43#sysvar_ndb_fully_replicated"
-            ]
-        },
-        "ndb_index_stat_enable": {
-            "default": "ON (Version: 5.5.15-ndb-7.2.1)",
-            "dynamic": true,
-            "name": "ndb_index_stat_enable",
-            "scope": [
-                "global",
-                "session"
-            ],
-            "ids": [
-                "43#sysvar_ndb_index_stat_enable"
-            ]
-        },
-        "ndb_index_stat_option": {
-            "default": "loop_checkon=1000ms,loop_idle=1000ms,loop_busy=100ms,, update_batch=1,read_batch=4,idle_batch=32,check_batch=32,, check_delay=1m,delete_batch=8,clean_delay=0,error_batch=4,, error_delay=1m,evict_batch=8,evict_delay=1m,cache_limit=32M,, cache_lowpct=90 (Version: 5.1.56-ndb-7.1.17)",
-            "dynamic": true,
-            "name": "ndb_index_stat_option",
-            "scope": [
-                "global",
-                "session"
-            ],
-            "ids": [
-                "43#sysvar_ndb_index_stat_option"
-            ]
-        },
-        "ndb_join_pushdown": {
-            "default": "TRUE (Version: 5.1.51-ndb-7.2.0)",
-            "dynamic": true,
-            "name": "ndb_join_pushdown",
-            "scope": [
-                "global",
-                "session"
-            ],
-            "ids": [
-                "43#sysvar_ndb_join_pushdown"
-            ]
-        },
         "ndb_log_apply_status": {
-            "default": "OFF (Version: NDB 7.5-7.6)",
+            "cli": "--ndb-log-apply-status[={OFF|ON}]",
+            "default": "OFF",
             "dynamic": false,
             "name": "ndb_log_apply_status",
             "scope": [
                 "global"
             ],
+            "type": "boolean",
             "ids": [
+                "43#option_mysqld_ndb-log-apply-status",
                 "43#sysvar_ndb_log_apply_status"
             ]
         },
-        "ndb_log_bin": {
-            "default": "ON (Version: NDB 7.5-7.6)",
-            "dynamic": true,
-            "name": "ndb_log_bin",
-            "scope": [
-                "global",
-                "session"
-            ],
-            "ids": [
-                "43#sysvar_ndb_log_bin"
-            ]
-        },
-        "ndb_log_binlog_index": {
-            "default": "ON (Version: NDB 7.5-7.6)",
-            "dynamic": true,
-            "name": "ndb_log_binlog_index",
-            "scope": [
-                "global"
-            ],
-            "ids": [
-                "43#sysvar_ndb_log_binlog_index"
-            ]
-        },
         "ndb_log_empty_epochs": {
-            "default": "OFF (Version: NDB 7.5-7.6)",
+            "cli": "--ndb-log-empty-epochs[={OFF|ON}]",
+            "default": "OFF",
             "dynamic": true,
             "name": "ndb_log_empty_epochs",
             "scope": [
                 "global"
             ],
+            "type": "boolean",
             "ids": [
+                "43#option_mysqld_ndb-log-empty-epochs",
                 "43#sysvar_ndb_log_empty_epochs"
             ]
         },
         "ndb_log_empty_update": {
-            "default": "OFF (Version: NDB 7.5-7.6)",
+            "cli": "--ndb-log-empty-update[={OFF|ON}]",
+            "default": "OFF",
             "dynamic": true,
             "name": "ndb_log_empty_update",
             "scope": [
                 "global"
             ],
+            "type": "boolean",
             "ids": [
+                "43#option_mysqld_ndb-log-empty-update",
                 "43#sysvar_ndb_log_empty_update"
             ]
         },
         "ndb_log_exclusive_reads": {
-            "default": "0 (Version: NDB 7.5-7.6)",
+            "cli": "--ndb-log-exclusive-reads[={OFF|ON}]",
+            "default": "0",
             "dynamic": true,
             "name": "ndb_log_exclusive_reads",
             "scope": [
                 "global",
                 "session"
             ],
+            "type": "boolean",
             "ids": [
+                "43#option_mysqld_ndb-log-exclusive-reads",
                 "43#sysvar_ndb_log_exclusive_reads"
             ]
         },
+        "ndb_log_fail_terminate": {
+            "cli": "--ndb-log-fail-terminate",
+            "default": "FALSE",
+            "dynamic": false,
+            "name": "ndb_log_fail_terminate",
+            "scope": [
+                "global"
+            ],
+            "type": "boolean",
+            "ids": [
+                "43#option_mysqld_ndb-log-fail-terminate"
+            ]
+        },
         "ndb_log_orig": {
-            "default": "OFF (Version: NDB 7.5-7.6)",
+            "cli": "--ndb-log-orig[={OFF|ON}]",
+            "default": "OFF",
             "dynamic": false,
             "name": "ndb_log_orig",
             "scope": [
                 "global"
             ],
+            "type": "boolean",
             "ids": [
+                "43#option_mysqld_ndb-log-orig",
                 "43#sysvar_ndb_log_orig"
             ]
         },
         "ndb_log_transaction_id": {
-            "default": "OFF (Version: NDB 7.5-7.6)",
+            "default": "OFF",
             "dynamic": false,
             "name": "ndb_log_transaction_id",
             "scope": [
                 "global"
             ],
+            "type": "boolean",
             "ids": [
+                "43#option_mysqld_ndb-log-transaction-id",
                 "43#sysvar_ndb_log_transaction_id"
             ]
         },
-        "ndb_optimized_node_selection": {
-            "default": "3 / 0 - 3 (Version: 5.1.22-ndb-6.3.4)",
-            "dynamic": false,
-            "name": "ndb_optimized_node_selection",
+        "ndb_log_update_minimal": {
+            "cli": "--ndb-log-update-minimal[={OFF|ON}]",
+            "default": "OFF",
+            "dynamic": true,
+            "name": "ndb_log_update_minimal",
             "scope": [
                 "global"
             ],
+            "type": "boolean",
+            "ids": [
+                "43#option_mysqld_ndb-log-update-minimal"
+            ]
+        },
+        "ndb_mgmd_host": {
+            "cli": "--ndb-mgmd-host=host_name[:port_num]",
+            "default": "localhost:1186",
+            "name": "ndb_mgmd_host",
+            "type": "string",
+            "ids": [
+                "43#option_mysqld_ndb-mgmd-host"
+            ]
+        },
+        "ndb_nodeid": {
+            "cli": "--ndb-nodeid=#",
+            "dynamic": false,
+            "name": "ndb_nodeid",
+            "range": {
+                "from": 1,
+                "to": 63
+            },
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "43#option_mysqld_ndb-nodeid"
+            ]
+        },
+        "ndb_optimization_delay": {
+            "cli": "--ndb-optimization-delay=#",
+            "default": "10",
+            "dynamic": true,
+            "name": "ndb_optimization_delay",
+            "range": {
+                "from": 0,
+                "to": 100000
+            },
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "43#option_mysqld_ndb-optimization-delay"
+            ]
+        },
+        "ndb_transid_mysql_connection_map": {
+            "cli": "--ndb-transid-mysql-connection-map[=state]",
+            "default": "ON",
+            "name": "ndb_transid_mysql_connection_map",
+            "type": "enumeration",
+            "validValues": [
+                "ON",
+                "OFF",
+                "FORCE"
+            ],
+            "ids": [
+                "43#option_mysqld_ndb-transid-mysql-connection-map"
+            ]
+        },
+        "ndb_wait_connected": {
+            "cli": "--ndb-wait-connected=#",
+            "default": "30",
+            "dynamic": false,
+            "name": "ndb_wait_connected",
+            "range": {
+                "from": 0,
+                "to": 31536000
+            },
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "43#option_mysqld_ndb-wait-connected"
+            ]
+        },
+        "ndb_wait_setup": {
+            "cli": "--ndb-wait-setup=#",
+            "default": "15",
+            "dynamic": false,
+            "name": "ndb_wait_setup",
+            "range": {
+                "from": 0,
+                "to": 31536000
+            },
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "43#option_mysqld_ndb-wait-setup"
+            ]
+        },
+        "skip_ndbcluster": {
+            "cli": "--skip-ndbcluster",
+            "name": "skip_ndbcluster",
+            "ids": [
+                "43#option_mysqld_skip-ndbcluster"
+            ]
+        },
+        "ndb_autoincrement_prefetch_sz": {
+            "cli": "--ndb-autoincrement-prefetch-sz=#",
+            "default": "1",
+            "dynamic": true,
+            "name": "ndb_autoincrement_prefetch_sz",
+            "range": {
+                "from": 1,
+                "to": 65536
+            },
+            "scope": [
+                "global",
+                "session"
+            ],
+            "type": "integer",
+            "ids": [
+                "43#sysvar_ndb_autoincrement_prefetch_sz"
+            ]
+        },
+        "ndb_cache_check_time": {
+            "cli": "--ndb-cache-check-time=#",
+            "default": "0",
+            "dynamic": true,
+            "name": "ndb_cache_check_time",
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "43#sysvar_ndb_cache_check_time"
+            ]
+        },
+        "ndb_clear_apply_status": {
+            "cli": "--ndb-clear-apply-status[={OFF|ON}]",
+            "default": "ON",
+            "dynamic": true,
+            "name": "ndb_clear_apply_status",
+            "scope": [
+                "global"
+            ],
+            "type": "boolean",
+            "ids": [
+                "43#sysvar_ndb_clear_apply_status"
+            ]
+        },
+        "ndb_data_node_neighbour": {
+            "cli": "--ndb-data-node-neighbour=#",
+            "default": "0",
+            "dynamic": true,
+            "name": "ndb_data_node_neighbour",
+            "range": {
+                "from": 0,
+                "to": 255
+            },
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "43#sysvar_ndb_data_node_neighbour"
+            ]
+        },
+        "ndb_eventbuffer_free_percent": {
+            "cli": "--ndb-eventbuffer-free-percent=#",
+            "default": "20",
+            "dynamic": true,
+            "name": "ndb_eventbuffer_free_percent",
+            "range": {
+                "from": 1,
+                "to": 99
+            },
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "43#sysvar_ndb_eventbuffer_free_percent"
+            ]
+        },
+        "ndb_eventbuffer_max_alloc": {
+            "cli": "--ndb-eventbuffer-max-alloc=#",
+            "default": "0",
+            "dynamic": true,
+            "name": "ndb_eventbuffer_max_alloc",
+            "range": {
+                "from": 0,
+                "to": 4294967295
+            },
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "43#sysvar_ndb_eventbuffer_max_alloc"
+            ]
+        },
+        "ndb_extra_logging": {
+            "default": "1",
+            "dynamic": true,
+            "name": "ndb_extra_logging",
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "43#sysvar_ndb_extra_logging"
+            ]
+        },
+        "ndb_force_send": {
+            "cli": "--ndb-force-send[={OFF|ON}]",
+            "default": "ON",
+            "dynamic": true,
+            "name": "ndb_force_send",
+            "scope": [
+                "global",
+                "session"
+            ],
+            "type": "boolean",
+            "ids": [
+                "43#sysvar_ndb_force_send"
+            ]
+        },
+        "ndb_fully_replicated": {
+            "cli": "--ndb-fully-replicated[={OFF|ON}]",
+            "default": "OFF",
+            "dynamic": true,
+            "name": "ndb_fully_replicated",
+            "scope": [
+                "global",
+                "session"
+            ],
+            "type": "boolean",
+            "ids": [
+                "43#sysvar_ndb_fully_replicated"
+            ]
+        },
+        "ndb_index_stat_enable": {
+            "cli": "--ndb-index-stat-enable[={OFF|ON}]",
+            "default": "ON",
+            "dynamic": true,
+            "name": "ndb_index_stat_enable",
+            "scope": [
+                "global",
+                "session"
+            ],
+            "type": "boolean",
+            "ids": [
+                "43#sysvar_ndb_index_stat_enable"
+            ]
+        },
+        "ndb_index_stat_option": {
+            "cli": "--ndb-index-stat-option=value",
+            "default": "loop_checkon=1000ms,loop_idle=1000ms,loop_busy=100ms,         update_batch=1,read_batch=4,idle_batch=32,check_batch=32,         check_delay=1m,delete_batch=8,clean_delay=0,error_batch=4,         error_delay=1m,evict_batch=8,evict_delay=1m,cache_limit=32M,         cache_lowpct=90",
+            "dynamic": true,
+            "name": "ndb_index_stat_option",
+            "scope": [
+                "global",
+                "session"
+            ],
+            "type": "string",
+            "ids": [
+                "43#sysvar_ndb_index_stat_option"
+            ]
+        },
+        "ndb_join_pushdown": {
+            "default": "ON",
+            "dynamic": true,
+            "name": "ndb_join_pushdown",
+            "scope": [
+                "global",
+                "session"
+            ],
+            "type": "boolean",
+            "ids": [
+                "43#sysvar_ndb_join_pushdown"
+            ]
+        },
+        "ndb_log_bin": {
+            "cli": "--ndb-log-bin[={OFF|ON}]",
+            "default": "ON",
+            "dynamic": true,
+            "name": "ndb_log_bin",
+            "scope": [
+                "global",
+                "session"
+            ],
+            "type": "boolean",
+            "ids": [
+                "43#sysvar_ndb_log_bin"
+            ]
+        },
+        "ndb_log_binlog_index": {
+            "cli": "--ndb-log-binlog-index[={OFF|ON}]",
+            "default": "ON",
+            "dynamic": true,
+            "name": "ndb_log_binlog_index",
+            "scope": [
+                "global"
+            ],
+            "type": "boolean",
+            "ids": [
+                "43#sysvar_ndb_log_binlog_index"
+            ]
+        },
+        "ndb_optimized_node_selection": {
+            "cli": "--ndb-optimized-node-selection=#",
+            "default": "3",
+            "dynamic": false,
+            "name": "ndb_optimized_node_selection",
+            "range": {
+                "from": 0,
+                "to": 3
+            },
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
             "ids": [
                 "43#sysvar_ndb_optimized_node_selection"
             ]
         },
         "ndb_read_backup": {
-            "default": "OFF (Version: 5.7.12-ndb-7.5.2)",
+            "cli": "--ndb-read-backup[={OFF|ON}]",
+            "default": "OFF",
             "dynamic": true,
             "name": "ndb_read_backup",
             "scope": [
                 "global"
             ],
+            "type": "boolean",
             "ids": [
                 "43#sysvar_ndb_read_backup"
             ]
         },
         "ndb_recv_thread_activation_threshold": {
-            "default": "8 / 0 (MIN_ACTIVATION_THRESHOLD) - 16 (MAX_ACTIVATION_THRESHOLD), (Version: 5.6.10-ndb-7.3.1)",
-            "dynamic": false,
+            "cli": "--ndb-recv-thread-activation-threshold=#",
+            "default": "8",
+            "dynamic": true,
             "name": "ndb_recv_thread_activation_threshold",
+            "range": {
+                "from": 0,
+                "to": 16
+            },
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
             "ids": [
                 "43#sysvar_ndb_recv_thread_activation_threshold"
             ]
         },
         "ndb_recv_thread_cpu_mask": {
-            "default": "[empty] (Version: NDB 7.5-7.6)",
+            "cli": "--ndb-recv-thread-cpu-mask=mask",
+            "default": "[empty]",
             "dynamic": true,
             "name": "ndb_recv_thread_cpu_mask",
             "scope": [
@@ -25897,34 +26668,49 @@
             ]
         },
         "ndb_report_thresh_binlog_epoch_slip": {
-            "default": "10 / 0 - 256 (Version: 5.7.16-ndb-7.5.4)",
+            "cli": "--ndb-report-thresh-binlog-epoch-slip=#",
             "dynamic": true,
             "name": "ndb_report_thresh_binlog_epoch_slip",
+            "range": {
+                "from": 0,
+                "to": 256
+            },
             "scope": [
                 "global"
             ],
+            "type": "integer",
             "ids": [
                 "43#sysvar_ndb_report_thresh_binlog_epoch_slip"
             ]
         },
         "ndb_report_thresh_binlog_mem_usage": {
-            "default": "1 / 0 - 1 (Version: NDB 7.6.8)",
+            "cli": "--ndb-report-thresh-binlog-mem-usage=#",
+            "default": "10",
             "dynamic": true,
             "name": "ndb_report_thresh_binlog_mem_usage",
+            "range": {
+                "from": 0,
+                "to": 10
+            },
             "scope": [
                 "global"
             ],
-            "type": "boolean",
+            "type": "integer",
             "ids": [
                 "43#sysvar_ndb_report_thresh_binlog_mem_usage"
             ]
         },
         "ndb_row_checksum": {
-            "default": "1 / 0 - 1 (Version: NDB 7.6.8)",
+            "default": "1",
             "dynamic": true,
             "name": "ndb_row_checksum",
+            "range": {
+                "from": 0,
+                "to": 1
+            },
             "scope": [
-                "global"
+                "global",
+                "session"
             ],
             "type": "integer",
             "ids": [
@@ -25932,45 +26718,57 @@
             ]
         },
         "ndb_show_foreign_key_mock_tables": {
-            "default": "OFF (Version: NDB 7.5-7.6)",
+            "cli": "--ndb-show-foreign-key-mock-tables[={OFF|ON}]",
+            "default": "OFF",
             "dynamic": true,
             "name": "ndb_show_foreign_key_mock_tables",
             "scope": [
                 "global"
             ],
+            "type": "boolean",
             "ids": [
                 "43#sysvar_ndb_show_foreign_key_mock_tables"
             ]
         },
         "ndb_slave_conflict_role": {
-            "default": "NONE / NONE, PRIMARY, SECONDARY, PASS (Version: NDB 7.5-7.6)",
+            "cli": "--ndb-slave-conflict-role=value",
+            "default": "NONE",
             "dynamic": true,
             "name": "ndb_slave_conflict_role",
             "scope": [
                 "global"
+            ],
+            "type": "enumeration",
+            "validValues": [
+                "NONE",
+                "PRIMARY",
+                "SECONDARY",
+                "PASS"
             ],
             "ids": [
                 "43#sysvar_ndb_slave_conflict_role"
             ]
         },
         "ndb_table_no_logging": {
-            "default": "FALSE (Version: NDB 7.5-7.6)",
+            "default": "OFF",
             "dynamic": true,
             "name": "ndb_table_no_logging",
             "scope": [
                 "session"
             ],
+            "type": "boolean",
             "ids": [
                 "43#sysvar_ndb_table_no_logging"
             ]
         },
         "ndb_table_temporary": {
-            "default": "FALSE (Version: NDB 7.5-7.6)",
+            "default": "OFF",
             "dynamic": true,
             "name": "ndb_table_temporary",
             "scope": [
                 "session"
             ],
+            "type": "boolean",
             "ids": [
                 "43#sysvar_ndb_table_temporary"
             ]
@@ -25987,161 +26785,188 @@
             ]
         },
         "ndb_use_exact_count": {
-            "default": "OFF (Version: 5.1.47-ndb-7.1.8)",
+            "default": "OFF",
             "dynamic": true,
             "name": "ndb_use_exact_count",
             "scope": [
                 "global",
                 "session"
             ],
+            "type": "boolean",
             "ids": [
                 "43#sysvar_ndb_use_exact_count"
             ]
         },
         "ndb_use_transactions": {
-            "default": "ON (Version: NDB 7.5-7.6)",
+            "cli": "--ndb-use-transactions[={OFF|ON}]",
+            "default": "ON",
             "dynamic": true,
             "name": "ndb_use_transactions",
             "scope": [
                 "global",
                 "session"
             ],
+            "type": "boolean",
             "ids": [
                 "43#sysvar_ndb_use_transactions"
             ]
         },
         "ndb_version": {
-            "default": "(Version: NDB 7.5-7.6)",
+            "default": "",
             "dynamic": false,
             "name": "ndb_version",
             "scope": [
                 "global"
             ],
+            "type": "string",
             "ids": [
                 "43#sysvar_ndb_version"
             ]
         },
         "ndb_version_string": {
-            "default": "(Version: NDB 7.5-7.6)",
+            "default": "",
             "dynamic": false,
             "name": "ndb_version_string",
             "scope": [
                 "global"
             ],
+            "type": "string",
             "ids": [
                 "43#sysvar_ndb_version_string"
             ]
         },
         "server_id_bits": {
-            "default": "32 / 7 - 32 (Version: NDB 7.5-7.6)",
+            "cli": "--server-id-bits=#",
+            "default": "32",
             "dynamic": false,
             "name": "server_id_bits",
+            "range": {
+                "from": 7,
+                "to": 32
+            },
             "scope": [
                 "global"
             ],
+            "type": "integer",
             "ids": [
                 "43#sysvar_server_id_bits"
             ]
         },
         "slave_allow_batching": {
-            "default": "off (Version: NDB 7.5-7.6)",
+            "cli": "--slave-allow-batching[={OFF|ON}]",
+            "default": "OFF",
             "dynamic": true,
             "name": "slave_allow_batching",
             "scope": [
                 "global"
             ],
+            "type": "boolean",
             "ids": [
                 "43#sysvar_slave_allow_batching"
             ]
         },
         "transaction_allow_batching": {
-            "default": "FALSE (Version: NDB 7.5-7.6)",
+            "default": "OFF",
             "dynamic": true,
             "name": "transaction_allow_batching",
             "scope": [
                 "session"
             ],
+            "type": "boolean",
             "ids": [
                 "43#sysvar_transaction_allow_batching"
             ]
         },
         "ndbinfo_database": {
-            "default": "ndbinfo (Version: NDB 7.5-7.6)",
+            "default": "ndbinfo",
             "dynamic": false,
             "name": "ndbinfo_database",
             "scope": [
                 "global"
             ],
+            "type": "string",
             "ids": [
                 "43#sysvar_ndbinfo_database"
             ]
         },
         "ndbinfo_max_bytes": {
-            "default": "0 / - (Version: NDB 7.5-7.6)",
+            "cli": "--ndbinfo-max-bytes=#",
+            "default": "0",
             "dynamic": true,
             "name": "ndbinfo_max_bytes",
             "scope": [
                 "global",
                 "session"
             ],
+            "type": "integer",
             "ids": [
                 "43#sysvar_ndbinfo_max_bytes"
             ]
         },
         "ndbinfo_max_rows": {
-            "default": "10 / - (Version: NDB 7.5-7.6)",
+            "cli": "--ndbinfo-max-rows=#",
+            "default": "10",
             "dynamic": true,
             "name": "ndbinfo_max_rows",
             "scope": [
                 "global",
                 "session"
             ],
+            "type": "integer",
             "ids": [
                 "43#sysvar_ndbinfo_max_rows"
             ]
         },
         "ndbinfo_offline": {
-            "default": "OFF (Version: NDB 7.5-7.6)",
+            "default": "OFF",
             "dynamic": true,
             "name": "ndbinfo_offline",
             "scope": [
                 "global"
             ],
+            "type": "boolean",
             "ids": [
                 "43#sysvar_ndbinfo_offline"
             ]
         },
         "ndbinfo_show_hidden": {
-            "default": "OFF (Version: NDB 7.5-7.6)",
+            "cli": "--ndbinfo-show-hidden[={OFF|ON}]",
+            "default": "OFF",
             "dynamic": true,
             "name": "ndbinfo_show_hidden",
             "scope": [
                 "global",
                 "session"
             ],
+            "type": "boolean",
+            "validValues": [
+                "ON",
+                "OFF"
+            ],
             "ids": [
                 "43#sysvar_ndbinfo_show_hidden"
             ]
         },
         "ndbinfo_table_prefix": {
-            "default": "ndb$ (Version: NDB 7.5-7.6)",
-            "dynamic": true,
+            "default": "ndb$",
+            "dynamic": false,
             "name": "ndbinfo_table_prefix",
             "scope": [
-                "global",
-                "session"
+                "global"
             ],
+            "type": "string",
             "ids": [
                 "43#sysvar_ndbinfo_table_prefix"
             ]
         },
         "ndbinfo_version": {
-            "default": "(Version: NDB 7.5-7.6)",
+            "default": "",
             "dynamic": false,
             "name": "ndbinfo_version",
             "scope": [
                 "global"
             ],
+            "type": "string",
             "ids": [
                 "43#sysvar_ndbinfo_version"
             ]
@@ -26163,32 +26988,6 @@
                 "20#sysvar_performance_schema_error_size"
             ]
         },
-        "performance_schema_events_transactions_history_long_size": {
-            "cli": "--performance-schema-events-transactions-history-long-size=#",
-            "default": "(-1 signifies autosizing; do not use -1)",
-            "dynamic": false,
-            "name": "performance_schema_events_transactions_history_long_size",
-            "scope": [
-                "global"
-            ],
-            "type": "integer",
-            "ids": [
-                "20#sysvar_performance_schema_events_transactions_history_long_size"
-            ]
-        },
-        "performance_schema_events_transactions_history_size": {
-            "cli": "--performance-schema-events-transactions-history-size=#",
-            "default": "(-1 signifies autosizing; do not use -1)",
-            "dynamic": false,
-            "name": "performance_schema_events_transactions_history_size",
-            "scope": [
-                "global"
-            ],
-            "type": "integer",
-            "ids": [
-                "20#sysvar_performance_schema_events_transactions_history_size"
-            ]
-        },
         "performance_schema_max_digest_sample_age": {
             "cli": "--performance-schema-max-digest-sample-age=#",
             "default": "60",
@@ -26206,44 +27005,6 @@
                 "20#sysvar_performance_schema_max_digest_sample_age"
             ]
         },
-        "performance_schema_max_index_stat": {
-            "cli": "--performance-schema-max-index-stat=#",
-            "default": "(-1 signifies autosizing; do not use -1)",
-            "dynamic": false,
-            "name": "performance_schema_max_index_stat",
-            "scope": [
-                "global"
-            ],
-            "type": "integer",
-            "ids": [
-                "20#sysvar_performance_schema_max_index_stat"
-            ]
-        },
-        "performance_schema_max_memory_classes": {
-            "cli": "--performance-schema-max-memory-classes=#",
-            "dynamic": false,
-            "name": "performance_schema_max_memory_classes",
-            "scope": [
-                "global"
-            ],
-            "type": "integer",
-            "ids": [
-                "20#sysvar_performance_schema_max_memory_classes"
-            ]
-        },
-        "performance_schema_max_metadata_locks": {
-            "cli": "--performance-schema-max-metadata-locks=#",
-            "default": "(-1 signifies autoscaling; do not use -1)",
-            "dynamic": false,
-            "name": "performance_schema_max_metadata_locks",
-            "scope": [
-                "global"
-            ],
-            "type": "integer",
-            "ids": [
-                "20#sysvar_performance_schema_max_metadata_locks"
-            ]
-        },
         "performance_schema_max_prepared_statements_instances": {
             "cli": "--performance-schema-max-prepared-statements-instances=#",
             "default": "(-1 signifies autoscaling; do not use -1)",
@@ -26257,60 +27018,17 @@
                 "20#sysvar_performance_schema_max_prepared_statements_instances"
             ]
         },
-        "performance_schema_max_program_instances": {
-            "cli": "--performance-schema-max-program-instances=#",
-            "default": "(-1 signifies autoscaling; do not use -1)",
-            "dynamic": false,
-            "name": "performance_schema_max_program_instances",
+        "performance_schema_show_processlist": {
+            "cli": "--performance-schema-show-processlist[={OFF|ON}]",
+            "default": "OFF",
+            "dynamic": true,
+            "name": "performance_schema_show_processlist",
             "scope": [
                 "global"
             ],
-            "type": "integer",
+            "type": "boolean",
             "ids": [
-                "20#sysvar_performance_schema_max_program_instances"
-            ]
-        },
-        "performance_schema_max_sql_text_length": {
-            "cli": "--performance-schema-max-sql-text-length=#",
-            "default": "1024",
-            "dynamic": false,
-            "name": "performance_schema_max_sql_text_length",
-            "range": {
-                "from": 0,
-                "to": 1048576
-            },
-            "scope": [
-                "global"
-            ],
-            "type": "integer",
-            "ids": [
-                "20#sysvar_performance_schema_max_sql_text_length"
-            ]
-        },
-        "performance_schema_max_statement_stack": {
-            "cli": "--performance-schema-max-statement-stack=#",
-            "default": "10",
-            "dynamic": false,
-            "name": "performance_schema_max_statement_stack",
-            "scope": [
-                "global"
-            ],
-            "type": "integer",
-            "ids": [
-                "20#sysvar_performance_schema_max_statement_stack"
-            ]
-        },
-        "performance_schema_max_table_lock_stat": {
-            "cli": "--performance-schema-max-table-lock-stat=#",
-            "default": "(-1 signifies autosizing; do not use -1)",
-            "dynamic": false,
-            "name": "performance_schema_max_table_lock_stat",
-            "scope": [
-                "global"
-            ],
-            "type": "integer",
-            "ids": [
-                "20#sysvar_performance_schema_max_table_lock_stat"
+                "20#sysvar_performance_schema_show_processlist"
             ]
         },
         "authentication_ldap_sasl_auth_method_name": {
@@ -26454,6 +27172,19 @@
                 "44#sysvar_authentication_ldap_sasl_max_pool_size"
             ]
         },
+        "authentication_ldap_sasl_referral": {
+            "cli": "--authentication-ldap-sasl-referral[={OFF|ON}]",
+            "default": "OFF",
+            "dynamic": true,
+            "name": "authentication_ldap_sasl_referral",
+            "scope": [
+                "global"
+            ],
+            "type": "boolean",
+            "ids": [
+                "44#sysvar_authentication_ldap_sasl_referral"
+            ]
+        },
         "authentication_ldap_sasl_server_host": {
             "cli": "--authentication-ldap-sasl-server-host=host_name",
             "dynamic": true,
@@ -26518,6 +27249,10 @@
                 "global"
             ],
             "type": "string",
+            "validValues": [
+                "SIMPLE",
+                "AD-FOREST"
+            ],
             "ids": [
                 "44#sysvar_authentication_ldap_simple_auth_method_name"
             ]
@@ -26650,6 +27385,19 @@
                 "44#sysvar_authentication_ldap_simple_max_pool_size"
             ]
         },
+        "authentication_ldap_simple_referral": {
+            "cli": "--authentication-ldap-simple-referral[={OFF|ON}]",
+            "default": "OFF",
+            "dynamic": true,
+            "name": "authentication_ldap_simple_referral",
+            "scope": [
+                "global"
+            ],
+            "type": "boolean",
+            "ids": [
+                "44#sysvar_authentication_ldap_simple_referral"
+            ]
+        },
         "authentication_ldap_simple_server_host": {
             "cli": "--authentication-ldap-simple-server-host=host_name",
             "dynamic": true,
@@ -26772,6 +27520,7 @@
         },
         "binlog_error_action": {
             "cli": "--binlog-error-action[=value]",
+            "default": "ABORT_SERVER",
             "dynamic": true,
             "name": "binlog_error_action",
             "scope": [
@@ -26789,6 +27538,7 @@
         },
         "binlog_expire_logs_seconds": {
             "cli": "--binlog-expire-logs-seconds=#",
+            "default": "2592000",
             "dynamic": true,
             "name": "binlog_expire_logs_seconds",
             "range": {
@@ -26916,6 +27666,36 @@
                 "23#sysvar_binlog_rows_query_log_events"
             ]
         },
+        "binlog_transaction_compression": {
+            "cli": "--binlog-transaction-compression[={OFF|ON}]",
+            "default": "OFF",
+            "dynamic": true,
+            "name": "binlog_transaction_compression",
+            "scope": [
+                "global"
+            ],
+            "type": "boolean",
+            "ids": [
+                "22#sysvar_binlog_transaction_compression"
+            ]
+        },
+        "binlog_transaction_compression_level_zstd": {
+            "cli": "--binlog-transaction-compression-level-zstd=#",
+            "default": "3",
+            "dynamic": true,
+            "name": "binlog_transaction_compression_level_zstd",
+            "range": {
+                "from": 1,
+                "to": 22
+            },
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "22#sysvar_binlog_transaction_compression_level_zstd"
+            ]
+        },
         "binlog_transaction_dependency_tracking": {
             "cli": "--binlog-transaction-dependency-tracking=value",
             "default": "COMMIT_ORDER",
@@ -26967,20 +27747,6 @@
                 "23#sysvar_log_bin_use_v1_row_events"
             ]
         },
-        "log_builtin_as_identified_by_password": {
-            "cli": "--log-builtin-as-identified-by-password[={OFF|ON}]",
-            "default": "OFF",
-            "dynamic": true,
-            "name": "log_builtin_as_identified_by_password",
-            "scope": [
-                "global"
-            ],
-            "type": "boolean",
-            "ids": [
-                "22#sysvar_log_builtin_as_identified_by_password",
-                "23#sysvar_log_builtin_as_identified_by_password"
-            ]
-        },
         "log_statements_unsafe_for_binlog": {
             "cli": "--log-statements-unsafe-for-binlog[={OFF|ON}]",
             "default": "ON",
@@ -27008,7 +27774,7 @@
         },
         "transaction_write_set_extraction": {
             "cli": "--transaction-write-set-extraction[=value]",
-            "default": "OFF",
+            "default": "0",
             "dynamic": true,
             "name": "transaction_write_set_extraction",
             "scope": [
@@ -27021,35 +27787,17 @@
                 "23#sysvar_transaction_write_set_extraction"
             ]
         },
-        "binlogging_impossible_mode": {
-            "cli": "--binlogging-impossible-mode[=value]",
-            "default": "IGNORE_ERROR",
-            "dynamic": true,
-            "name": "binlogging_impossible_mode",
-            "scope": [
-                "global",
-                "session"
-            ],
-            "type": "enumeration",
-            "validValues": [
-                "IGNORE_ERROR",
-                "ABORT_SERVER"
-            ],
-            "ids": [
-                "23#sysvar_binlogging_impossible_mode"
-            ]
-        },
-        "log_backward_compatible_user_definitions": {
-            "cli": "--log-backward-compatible-user-definitions[={OFF|ON}]",
+        "log_builtin_as_identified_by_password": {
+            "cli": "--log-builtin-as-identified-by-password[={OFF|ON}]",
             "default": "OFF",
             "dynamic": true,
-            "name": "log_backward_compatible_user_definitions",
+            "name": "log_builtin_as_identified_by_password",
             "scope": [
                 "global"
             ],
             "type": "boolean",
             "ids": [
-                "23#sysvar_log_backward_compatible_user_definitions"
+                "23#sysvar_log_builtin_as_identified_by_password"
             ]
         },
         "binlog_gtid_simple_recovery": {
@@ -27097,7 +27845,6 @@
         },
         "gtid_executed_compression_period": {
             "cli": "--gtid-executed-compression-period=#",
-            "default": "1000",
             "dynamic": true,
             "name": "gtid_executed_compression_period",
             "range": {
@@ -27171,54 +27918,6 @@
                 "45#sysvar_gtid_purged"
             ]
         },
-        "show_slave_auth_info": {
-            "cli": "--show-slave-auth-info[={OFF|ON}]",
-            "default": "OFF",
-            "name": "show_slave_auth_info",
-            "type": "boolean",
-            "ids": [
-                "21#option_mysqld_show-slave-auth-info"
-            ]
-        },
-        "immediate_server_version": {
-            "dynamic": true,
-            "name": "immediate_server_version",
-            "scope": [
-                "session"
-            ],
-            "type": "integer",
-            "ids": [
-                "21#sysvar_immediate_server_version"
-            ]
-        },
-        "original_server_version": {
-            "dynamic": true,
-            "name": "original_server_version",
-            "scope": [
-                "session"
-            ],
-            "type": "integer",
-            "ids": [
-                "21#sysvar_original_server_version"
-            ]
-        },
-        "rpl_semi_sync_master_wait_for_slave_count": {
-            "cli": "--rpl-semi-sync-master-wait-for-slave-count=#",
-            "default": "1",
-            "dynamic": true,
-            "name": "rpl_semi_sync_master_wait_for_slave_count",
-            "range": {
-                "from": 1,
-                "to": 65535
-            },
-            "scope": [
-                "global"
-            ],
-            "type": "integer",
-            "ids": [
-                "21#sysvar_rpl_semi_sync_master_wait_for_slave_count"
-            ]
-        },
         "master_info_file": {
             "cli": "--master-info-file=file_name",
             "default": "master.info",
@@ -27281,6 +27980,7 @@
         },
         "master_info_repository": {
             "cli": "--master-info-repository={FILE|TABLE}",
+            "default": "TABLE",
             "dynamic": true,
             "name": "master_info_repository",
             "scope": [
@@ -27297,6 +27997,7 @@
         },
         "relay_log_info_repository": {
             "cli": "--relay-log-info-repository=value",
+            "default": "TABLE",
             "dynamic": true,
             "name": "relay_log_info_repository",
             "scope": [
@@ -27368,8 +28069,7 @@
             "dynamic": true,
             "name": "slave_checkpoint_period",
             "range": {
-                "from": 1,
-                "to": 4
+                "from": 1
             },
             "scope": [
                 "global"
@@ -27427,6 +28127,7 @@
         },
         "slave_rows_search_algorithms": {
             "cli": "--slave-rows-search-algorithms=value",
+            "default": "INDEX_SCAN,HASH_SCAN",
             "dynamic": true,
             "name": "slave_rows_search_algorithms",
             "scope": [
@@ -27441,6 +28142,54 @@
             ],
             "ids": [
                 "24#sysvar_slave_rows_search_algorithms"
+            ]
+        },
+        "show_slave_auth_info": {
+            "cli": "--show-slave-auth-info[={OFF|ON}]",
+            "default": "OFF",
+            "name": "show_slave_auth_info",
+            "type": "boolean",
+            "ids": [
+                "21#option_mysqld_show-slave-auth-info"
+            ]
+        },
+        "immediate_server_version": {
+            "dynamic": true,
+            "name": "immediate_server_version",
+            "scope": [
+                "session"
+            ],
+            "type": "integer",
+            "ids": [
+                "21#sysvar_immediate_server_version"
+            ]
+        },
+        "original_server_version": {
+            "dynamic": true,
+            "name": "original_server_version",
+            "scope": [
+                "session"
+            ],
+            "type": "integer",
+            "ids": [
+                "21#sysvar_original_server_version"
+            ]
+        },
+        "rpl_semi_sync_master_wait_for_slave_count": {
+            "cli": "--rpl-semi-sync-master-wait-for-slave-count=#",
+            "default": "1",
+            "dynamic": true,
+            "name": "rpl_semi_sync_master_wait_for_slave_count",
+            "range": {
+                "from": 1,
+                "to": 65535
+            },
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "21#sysvar_rpl_semi_sync_master_wait_for_slave_count"
             ]
         },
         "server_uuid": {
@@ -27459,6 +28208,15 @@
             "name": "help",
             "ids": [
                 "16#option_mysqld_help"
+            ]
+        },
+        "admin_ssl": {
+            "cli": "--admin-ssl[={OFF|ON}]",
+            "default": "ON",
+            "name": "admin_ssl",
+            "type": "boolean",
+            "ids": [
+                "16#option_mysqld_admin-ssl"
             ]
         },
         "allow_suspicious_udfs": {
@@ -27524,13 +28282,6 @@
             "type": "string",
             "ids": [
                 "16#option_mysqld_default-time-zone"
-            ]
-        },
-        "des_key_file": {
-            "cli": "--des-key-file=file_name",
-            "name": "des_key_file",
-            "ids": [
-                "16#option_mysqld_des-key-file"
             ]
         },
         "early_plugin_load": {
@@ -27780,6 +28531,15 @@
                 "16#option_mysqld_slow-start-timeout"
             ]
         },
+        "ssl": {
+            "cli": "--ssl[={OFF|ON}]",
+            "default": "ON",
+            "name": "ssl",
+            "type": "boolean",
+            "ids": [
+                "16#option_mysqld_ssl"
+            ]
+        },
         "standalone": {
             "cli": "--standalone",
             "name": "standalone",
@@ -27798,6 +28558,7 @@
         },
         "symbolic_links": {
             "cli": "--symbolic-links[={OFF|ON}]",
+            "default": "OFF",
             "name": "symbolic_links",
             "type": "boolean",
             "ids": [
@@ -27815,23 +28576,16 @@
         },
         "tc_heuristic_recover": {
             "cli": "--tc-heuristic-recover=name",
-            "default": "COMMIT",
+            "default": "OFF",
             "name": "tc_heuristic_recover",
             "type": "enumeration",
             "validValues": [
+                "OFF",
                 "COMMIT",
                 "ROLLBACK"
             ],
             "ids": [
                 "16#option_mysqld_tc-heuristic-recover"
-            ]
-        },
-        "temp_pool": {
-            "cli": "--temp-pool[={OFF|ON}]",
-            "name": "temp_pool",
-            "type": "boolean",
-            "ids": [
-                "16#option_mysqld_temp-pool"
             ]
         },
         "transaction_isolation": {
@@ -27944,6 +28698,123 @@
                 "15#sysvar_admin_port"
             ]
         },
+        "admin_ssl_ca": {
+            "cli": "--admin-ssl-ca=file_name",
+            "default": "NULL",
+            "dynamic": true,
+            "name": "admin_ssl_ca",
+            "scope": [
+                "global"
+            ],
+            "type": "file name",
+            "ids": [
+                "15#sysvar_admin_ssl_ca"
+            ]
+        },
+        "admin_ssl_capath": {
+            "cli": "--admin-ssl-capath=dir_name",
+            "default": "NULL",
+            "dynamic": true,
+            "name": "admin_ssl_capath",
+            "scope": [
+                "global"
+            ],
+            "type": "directory name",
+            "ids": [
+                "15#sysvar_admin_ssl_capath"
+            ]
+        },
+        "admin_ssl_cert": {
+            "cli": "--admin-ssl-cert=file_name",
+            "default": "NULL",
+            "dynamic": true,
+            "name": "admin_ssl_cert",
+            "scope": [
+                "global"
+            ],
+            "type": "file name",
+            "ids": [
+                "15#sysvar_admin_ssl_cert"
+            ]
+        },
+        "admin_ssl_cipher": {
+            "cli": "--admin-ssl-cipher=name",
+            "default": "NULL",
+            "dynamic": true,
+            "name": "admin_ssl_cipher",
+            "scope": [
+                "global"
+            ],
+            "type": "string",
+            "ids": [
+                "15#sysvar_admin_ssl_cipher"
+            ]
+        },
+        "admin_ssl_crl": {
+            "cli": "--admin-ssl-crl=file_name",
+            "default": "NULL",
+            "dynamic": true,
+            "name": "admin_ssl_crl",
+            "scope": [
+                "global"
+            ],
+            "type": "file name",
+            "ids": [
+                "15#sysvar_admin_ssl_crl"
+            ]
+        },
+        "admin_ssl_crlpath": {
+            "cli": "--admin-ssl-crlpath=dir_name",
+            "default": "NULL",
+            "dynamic": true,
+            "name": "admin_ssl_crlpath",
+            "scope": [
+                "global"
+            ],
+            "type": "directory name",
+            "ids": [
+                "15#sysvar_admin_ssl_crlpath"
+            ]
+        },
+        "admin_ssl_key": {
+            "cli": "--admin-ssl-key=file_name",
+            "default": "NULL",
+            "dynamic": true,
+            "name": "admin_ssl_key",
+            "scope": [
+                "global"
+            ],
+            "type": "file name",
+            "ids": [
+                "15#sysvar_admin_ssl_key"
+            ]
+        },
+        "admin_tls_ciphersuites": {
+            "cli": "--admin-tls-ciphersuites=ciphersuite_list",
+            "default": "NULL",
+            "dynamic": true,
+            "name": "admin_tls_ciphersuites",
+            "scope": [
+                "global"
+            ],
+            "type": "string",
+            "ids": [
+                "15#sysvar_admin_tls_ciphersuites"
+            ]
+        },
+        "admin_tls_version": {
+            "cli": "--admin-tls-version=protocol_list",
+            "default": "TLSv1,TLSv1.1,TLSv1.2,TLSv1.3 (OpenSSL 1.1.1 and higher)TLSv1,TLSv1.1,TLSv1.2 (otherwise)",
+            "dynamic": true,
+            "name": "admin_tls_version",
+            "scope": [
+                "global"
+            ],
+            "type": "string",
+            "ids": [
+                "15#sysvar_admin_tls_version"
+            ]
+        },
         "authentication_windows_log_level": {
             "cli": "--authentication-windows-log-level=#",
             "default": "2",
@@ -28012,6 +28883,23 @@
             "type": "string",
             "ids": [
                 "15#sysvar_block_encryption_mode"
+            ]
+        },
+        "caching_sha2_password_digest_rounds": {
+            "cli": "--caching-sha2-password-digest-rounds=#",
+            "default": "5000",
+            "dynamic": false,
+            "name": "caching_sha2_password_digest_rounds",
+            "range": {
+                "from": 5000,
+                "to": 4095000
+            },
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "15#sysvar_caching_sha2_password_digest_rounds"
             ]
         },
         "caching_sha2_password_auto_generate_rsa_keys": {
@@ -28099,12 +28987,18 @@
         },
         "default_authentication_plugin": {
             "cli": "--default-authentication-plugin=plugin_name",
+            "default": "caching_sha2_password",
             "dynamic": false,
             "name": "default_authentication_plugin",
             "scope": [
                 "global"
             ],
             "type": "enumeration",
+            "validValues": [
+                "mysql_native_password",
+                "sha256_password",
+                "caching_sha2_password"
+            ],
             "ids": [
                 "15#sysvar_default_authentication_plugin"
             ]
@@ -28278,19 +29172,6 @@
                 "15#sysvar_internal_tmp_mem_storage_engine"
             ]
         },
-        "log_error_filter_rules": {
-            "cli": "--log-error-filter-rules=value",
-            "default": "set by server",
-            "dynamic": true,
-            "name": "log_error_filter_rules",
-            "scope": [
-                "global"
-            ],
-            "type": "string",
-            "ids": [
-                "15#sysvar_log_error_filter_rules"
-            ]
-        },
         "log_error_services": {
             "cli": "--log-error-services=value",
             "default": "log_filter_internal; log_sink_internal",
@@ -28319,6 +29200,7 @@
         },
         "log_error_verbosity": {
             "cli": "--log-error-verbosity=#",
+            "default": "2",
             "dynamic": true,
             "name": "log_error_verbosity",
             "range": {
@@ -28348,6 +29230,7 @@
         },
         "log_syslog": {
             "cli": "--log-syslog[={OFF|ON}]",
+            "default": "ON (when error logging to system log is enabled)",
             "dynamic": true,
             "name": "log_syslog",
             "scope": [
@@ -28802,17 +29685,16 @@
                 "15#sysvar_regexp_time_limit"
             ]
         },
-        "require_secure_transport": {
-            "cli": "--require-secure-transport[={OFF|ON}]",
+        "require_row_format": {
             "default": "OFF",
             "dynamic": true,
-            "name": "require_secure_transport",
+            "name": "require_row_format",
             "scope": [
-                "global"
+                "session"
             ],
             "type": "boolean",
             "ids": [
-                "15#sysvar_require_secure_transport"
+                "15#sysvar_require_row_format"
             ]
         },
         "resultset_metadata": {
@@ -28861,6 +29743,60 @@
             "type": "integer",
             "ids": [
                 "15#sysvar_schema_definition_cache"
+            ]
+        },
+        "select_into_buffer_size": {
+            "cli": "--select-into-buffer-size=#",
+            "default": "131072",
+            "dynamic": true,
+            "name": "select_into_buffer_size",
+            "range": {
+                "from": 8192,
+                "to": 2147479552
+            },
+            "scope": [
+                "global",
+                "session"
+            ],
+            "type": "integer",
+            "ids": [
+                "15#sysvar_select_into_buffer_size"
+            ]
+        },
+        "select_into_disk_sync": {
+            "cli": "--select-into-disk-sync={ON|OFF}",
+            "default": "OFF",
+            "dynamic": true,
+            "name": "select_into_disk_sync",
+            "scope": [
+                "global",
+                "session"
+            ],
+            "type": "boolean",
+            "validValues": [
+                "OFF",
+                "ON"
+            ],
+            "ids": [
+                "15#sysvar_select_into_disk_sync"
+            ]
+        },
+        "select_into_disk_sync_delay": {
+            "cli": "--select-into-disk-sync-delay=#",
+            "default": "0",
+            "dynamic": true,
+            "name": "select_into_disk_sync_delay",
+            "range": {
+                "from": 0,
+                "to": 31536000
+            },
+            "scope": [
+                "global",
+                "session"
+            ],
+            "type": "integer",
+            "ids": [
+                "15#sysvar_select_into_disk_sync_delay"
             ]
         },
         "session_track_gtids": {
@@ -28932,19 +29868,6 @@
             "type": "file name",
             "ids": [
                 "15#sysvar_sha256_password_public_key_path"
-            ]
-        },
-        "show_compatibility_56": {
-            "cli": "--show-compatibility-56[={OFF|ON}]",
-            "default": "OFF",
-            "dynamic": true,
-            "name": "show_compatibility_56",
-            "scope": [
-                "global"
-            ],
-            "type": "boolean",
-            "ids": [
-                "15#sysvar_show_compatibility_56"
             ]
         },
         "show_create_table_skip_secondary_engine": {
@@ -29119,6 +30042,23 @@
                 "15#sysvar_tablespace_definition_cache"
             ]
         },
+        "temptable_max_mmap": {
+            "cli": "--temptable-max-mmap=#",
+            "default": "1073741824",
+            "dynamic": true,
+            "name": "temptable_max_mmap",
+            "range": {
+                "from": 0,
+                "to": 2
+            },
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "15#sysvar_temptable_max_mmap"
+            ]
+        },
         "temptable_max_ram": {
             "cli": "--temptable-max-ram=#",
             "default": "1073741824",
@@ -29220,7 +30160,7 @@
         },
         "tls_ciphersuites": {
             "cli": "--tls-ciphersuites=ciphersuite_list",
-            "default": "empty string",
+            "default": "NULL",
             "dynamic": true,
             "name": "tls_ciphersuites",
             "scope": [
@@ -29342,6 +30282,24 @@
                 "47#sysvar_mysqlx_bind_address"
             ]
         },
+        "mysqlx_compression_algorithms": {
+            "cli": "--mysqlx-compression-algorithms=value",
+            "default": "deflate_stream,lz4_message,zstd_stream",
+            "dynamic": true,
+            "name": "mysqlx_compression_algorithms",
+            "scope": [
+                "global"
+            ],
+            "type": "set",
+            "validValues": [
+                "deflate_stream",
+                "lz4_message",
+                "zstd_stream"
+            ],
+            "ids": [
+                "47#sysvar_mysqlx_compression_algorithms"
+            ]
+        },
         "mysqlx_connect_timeout": {
             "cli": "--mysqlx-connect-timeout=#",
             "default": "30",
@@ -29357,6 +30315,40 @@
             "type": "integer",
             "ids": [
                 "47#sysvar_mysqlx_connect_timeout"
+            ]
+        },
+        "mysqlx_deflate_default_compression_level": {
+            "cli": "--mysqlx_deflate_default_compression_level=#",
+            "default": "3",
+            "dynamic": true,
+            "name": "mysqlx_deflate_default_compression_level",
+            "range": {
+                "from": 1,
+                "to": 9
+            },
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "47#sysvar_mysqlx_deflate_default_compression_level"
+            ]
+        },
+        "mysqlx_deflate_max_client_compression_level": {
+            "cli": "--mysqlx_deflate_max_client_compression_level=#",
+            "default": "5",
+            "dynamic": true,
+            "name": "mysqlx_deflate_max_client_compression_level",
+            "range": {
+                "from": 1,
+                "to": 9
+            },
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "47#sysvar_mysqlx_deflate_max_client_compression_level"
             ]
         },
         "mysqlx_document_id_unique_prefix": {
@@ -29421,6 +30413,40 @@
             "type": "integer",
             "ids": [
                 "47#sysvar_mysqlx_interactive_timeout"
+            ]
+        },
+        "mysqlx_lz4_default_compression_level": {
+            "cli": "--mysqlx_lz4_default_compression_level=#",
+            "default": "2",
+            "dynamic": true,
+            "name": "mysqlx_lz4_default_compression_level",
+            "range": {
+                "from": 0,
+                "to": 16
+            },
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "47#sysvar_mysqlx_lz4_default_compression_level"
+            ]
+        },
+        "mysqlx_lz4_max_client_compression_level": {
+            "cli": "--mysqlx_lz4_max_client_compression_level=#",
+            "default": "8",
+            "dynamic": true,
+            "name": "mysqlx_lz4_max_client_compression_level",
+            "range": {
+                "from": 0,
+                "to": 16
+            },
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "47#sysvar_mysqlx_lz4_max_client_compression_level"
             ]
         },
         "mysqlx_max_allowed_packet": {
@@ -29540,6 +30566,7 @@
         },
         "mysqlx_ssl_ca": {
             "cli": "--mysqlx-ssl-ca=file_name",
+            "default": "NULL",
             "dynamic": false,
             "name": "mysqlx_ssl_ca",
             "scope": [
@@ -29552,6 +30579,7 @@
         },
         "mysqlx_ssl_capath": {
             "cli": "--mysqlx-ssl-capath=dir_name",
+            "default": "NULL",
             "dynamic": false,
             "name": "mysqlx_ssl_capath",
             "scope": [
@@ -29563,7 +30591,8 @@
             ]
         },
         "mysqlx_ssl_cert": {
-            "cli": "--mysqlx-ssl-cert=name",
+            "cli": "--mysqlx-ssl-cert=file_name",
+            "default": "NULL",
             "dynamic": false,
             "name": "mysqlx_ssl_cert",
             "scope": [
@@ -29576,6 +30605,7 @@
         },
         "mysqlx_ssl_cipher": {
             "cli": "--mysqlx-ssl-cipher=name",
+            "default": "NULL",
             "dynamic": false,
             "name": "mysqlx_ssl_cipher",
             "scope": [
@@ -29588,6 +30618,7 @@
         },
         "mysqlx_ssl_crl": {
             "cli": "--mysqlx-ssl-crl=file_name",
+            "default": "NULL",
             "dynamic": false,
             "name": "mysqlx_ssl_crl",
             "scope": [
@@ -29600,6 +30631,7 @@
         },
         "mysqlx_ssl_crlpath": {
             "cli": "--mysqlx-ssl-crlpath=dir_name",
+            "default": "NULL",
             "dynamic": false,
             "name": "mysqlx_ssl_crlpath",
             "scope": [
@@ -29612,6 +30644,7 @@
         },
         "mysqlx_ssl_key": {
             "cli": "--mysqlx-ssl-key=file_name",
+            "default": "NULL",
             "dynamic": false,
             "name": "mysqlx_ssl_key",
             "scope": [
@@ -29655,6 +30688,40 @@
             "ids": [
                 "47#sysvar_mysqlx_write_timeout"
             ]
+        },
+        "mysqlx_zstd_default_compression_level": {
+            "cli": "--mysqlx_zstd_default_compression_level=#",
+            "default": "3",
+            "dynamic": true,
+            "name": "mysqlx_zstd_default_compression_level",
+            "range": {
+                "from": -131072,
+                "to": 22
+            },
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "47#sysvar_mysqlx_zstd_default_compression_level"
+            ]
+        },
+        "mysqlx_zstd_max_client_compression_level": {
+            "cli": "--mysqlx_zstd_max_client_compression_level=#",
+            "default": "11",
+            "dynamic": true,
+            "name": "mysqlx_zstd_max_client_compression_level",
+            "range": {
+                "from": -131072,
+                "to": 22
+            },
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "47#sysvar_mysqlx_zstd_max_client_compression_level"
+            ]
         }
     },
     "version": 1,
@@ -29680,10 +30747,10 @@
         "https://mariadb.com/kb/en/library/documentation/oqgraph-system-and-status-variables/",
         "https://mariadb.com/kb/en/library/documentation/performance-schema-system-variables/",
         "https://dev.mysql.com/doc/refman/8.0/en/performance-schema-system-variables.html",
-        "https://dev.mysql.com/doc/refman/8.0/en/replication-options-master.html",
+        "https://dev.mysql.com/doc/refman/8.0/en/replication-options-source.html",
         "https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html",
         "https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html",
-        "https://dev.mysql.com/doc/refman/8.0/en/replication-options-slave.html",
+        "https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html",
         "https://mariadb.com/kb/en/library/documentation/replication-and-binary-log-status-variables/",
         "https://mariadb.com/kb/en/library/documentation/semisynchronous-replication-plugin-status-variables/",
         "https://mariadb.com/kb/en/library/documentation/semisynchronous-replication/",

@@ -2,6 +2,7 @@
 /**
  * `SET` keyword parser.
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Components;
@@ -10,6 +11,9 @@ use PhpMyAdmin\SqlParser\Component;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Token;
 use PhpMyAdmin\SqlParser\TokensList;
+use function implode;
+use function is_array;
+use function trim;
 
 /**
  * `SET` keyword parser.
@@ -34,7 +38,7 @@ class SetOperation extends Component
      * @param string $column Field's name..
      * @param string $value  new value
      */
-    public function __construct($column = null, $value = null)
+    public function __construct($column = '', $value = '')
     {
         $this->column = $column;
         $this->value = $value;
@@ -112,14 +116,13 @@ class SetOperation extends Component
                 $tmp = Expression::parse(
                     $parser,
                     $list,
-                    [
-                        'breakOnAlias' => true,
-                    ]
+                    ['breakOnAlias' => true]
                 );
                 if ($tmp === null) {
                     $parser->error('Missing expression.', $token);
                     break;
                 }
+
                 $expr->column = trim($expr->column);
                 $expr->value = $tmp->expr;
                 $ret[] = $expr;
@@ -128,6 +131,7 @@ class SetOperation extends Component
                 $commaLastSeenAt = null;
             }
         }
+
         --$list->idx;
 
         // We saw a comma, but didn't see a column-value pair after it

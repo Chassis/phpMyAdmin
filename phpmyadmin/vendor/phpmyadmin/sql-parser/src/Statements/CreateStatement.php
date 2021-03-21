@@ -2,6 +2,7 @@
 /**
  * `CREATE` statement.
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Statements;
@@ -17,6 +18,8 @@ use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Statement;
 use PhpMyAdmin\SqlParser\Token;
 use PhpMyAdmin\SqlParser\TokensList;
+use function is_array;
+use function trim;
 
 /**
  * `CREATE` statement.
@@ -278,10 +281,11 @@ class CreateStatement extends Statement
 
     /**
      * If `CREATE TABLE ... SELECT`.
+     * If `CREATE VIEW AS ` ... SELECT`.
      *
-     * Used by `CREATE TABLE`
+     * Used by `CREATE TABLE`, `CREATE VIEW`
      *
-     * @var SelectStatement
+     * @var SelectStatement|null
      */
     public $select;
 
@@ -357,9 +361,8 @@ class CreateStatement extends Statement
     public $parameters;
 
     /**
-     * The body of this function or procedure. For views, it is the select
-     * statement that gets the.
-     *
+     * The body of this function or procedure.
+     * For views, it is the select statement that creates the view.
      * Used by `CREATE FUNCTION`, `CREATE PROCEDURE` and `CREATE VIEW`.
      *
      * @var Token[]|string
@@ -379,6 +382,7 @@ class CreateStatement extends Statement
                 $fields = ArrayObj::build($this->fields);
             }
         }
+
         if ($this->options->has('DATABASE') || $this->options->has('SCHEMA')) {
             return 'CREATE '
                 . OptionsArray::build($this->options) . ' '
@@ -401,15 +405,19 @@ class CreateStatement extends Statement
                 if (! empty($this->partitionBy)) {
                     $partition .= "\nPARTITION BY " . $this->partitionBy;
                 }
+
                 if (! empty($this->partitionsNum)) {
                     $partition .= "\nPARTITIONS " . $this->partitionsNum;
                 }
+
                 if (! empty($this->subpartitionBy)) {
                     $partition .= "\nSUBPARTITION BY " . $this->subpartitionBy;
                 }
+
                 if (! empty($this->subpartitionsNum)) {
                     $partition .= "\nSUBPARTITIONS " . $this->subpartitionsNum;
                 }
+
                 if (! empty($this->partitions)) {
                     $partition .= "\n" . PartitionDefinition::build($this->partitions);
                 }
@@ -425,7 +433,7 @@ class CreateStatement extends Statement
             return 'CREATE '
                 . OptionsArray::build($this->options) . ' '
                 . Expression::build($this->name) . ' '
-                . $fields . ' AS ' . TokensList::build($this->body) . ' '
+                . $fields . ' AS ' . ($this->select ? $this->select->build() : TokensList::build($this->body)) . ' '
                 . OptionsArray::build($this->entityOptions);
         } elseif ($this->options->has('TRIGGER')) {
             return 'CREATE '
@@ -544,6 +552,7 @@ class CreateStatement extends Statement
                         $list->tokens[$list->idx]
                     );
                 }
+
                 ++$list->idx;
 
                 $this->entityOptions = OptionsArray::parse(
@@ -615,7 +624,7 @@ class CreateStatement extends Statement
                                 // This is used instead of `++$brackets` because,
                                 // initially, `$brackets` is `false` cannot be
                                 // incremented.
-                                $brackets = $brackets + 1;
+                                $brackets += 1;
                             } elseif ($token->value === ')') {
                                 --$brackets;
                             }
@@ -637,11 +646,10 @@ class CreateStatement extends Statement
                             $this->partitions = ArrayObj::parse(
                                 $parser,
                                 $list,
-                                [
-                                    'type' => 'PhpMyAdmin\\SqlParser\\Components\\PartitionDefinition',
-                                ]
+                                ['type' => 'PhpMyAdmin\\SqlParser\\Components\\PartitionDefinition']
                             );
                         }
+
                         break;
                     }
                 }
@@ -666,6 +674,7 @@ class CreateStatement extends Statement
                     );
                 }
             }
+
             ++$list->idx;
 
             $this->entityOptions = OptionsArray::parse(
@@ -680,6 +689,7 @@ class CreateStatement extends Statement
                 $this->body[] = $token;
             }
         } elseif ($this->options->has('VIEW')) {
+            /** @var Token $token */
             $token = $list->getNext(); // Skipping whitespaces and comments.
 
             // Parsing columns list.
@@ -690,13 +700,26 @@ class CreateStatement extends Statement
                 $list->getNext();
             }
 
-            // Parsing the `AS` keyword.
-            for (; $list->idx < $list->count; ++$list->idx) {
-                $token = $list->tokens[$list->idx];
-                if ($token->type === Token::TYPE_DELIMITER) {
-                    break;
+            // Parsing the SELECT expression with and without the `AS` keyword
+            if ($token->type === Token::TYPE_KEYWORD
+                && $token->keyword === 'SELECT'
+            ) {
+                $this->select = new SelectStatement($parser, $list);
+            } elseif ($token->type === Token::TYPE_KEYWORD
+                && $token->keyword === 'AS'
+                && $list->tokens[$nextidx]->type === Token::TYPE_KEYWORD
+                && $list->tokens[$nextidx]->value === 'SELECT'
+            ) {
+                $list->idx = $nextidx;
+                $this->select = new SelectStatement($parser, $list);
+            } else {
+                for (; $list->idx < $list->count; ++$list->idx) {
+                    $token = $list->tokens[$list->idx];
+                    if ($token->type === Token::TYPE_DELIMITER) {
+                        break;
+                    }
+                    $this->body[] = $token;
                 }
-                $this->body[] = $token;
             }
         } elseif ($this->options->has('TRIGGER')) {
             // Parsing the time and the event.
@@ -734,6 +757,7 @@ class CreateStatement extends Statement
                 if ($token->type === Token::TYPE_DELIMITER) {
                     break;
                 }
+
                 $this->body[] = $token;
             }
         }
