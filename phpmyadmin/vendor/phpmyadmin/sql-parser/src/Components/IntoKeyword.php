@@ -2,6 +2,7 @@
 /**
  * `INTO` keyword parser.
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Components;
@@ -10,6 +11,8 @@ use PhpMyAdmin\SqlParser\Component;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Token;
 use PhpMyAdmin\SqlParser\TokensList;
+use function implode;
+use function trim;
 
 /**
  * `INTO` keyword parser.
@@ -205,12 +208,14 @@ class IntoKeyword extends Component
                 } else {
                     $ret->values = ExpressionArray::parse($parser, $list);
                 }
+
                 $state = 1;
             } elseif ($state === 1) {
                 if (($token->type === Token::TYPE_OPERATOR) && ($token->value === '(')) {
                     $ret->columns = ArrayObj::parse($parser, $list)->values;
                     ++$list->idx;
                 }
+
                 break;
             } elseif ($state === 2) {
                 $ret->dest = $token->value;
@@ -234,6 +239,13 @@ class IntoKeyword extends Component
         return $ret;
     }
 
+    /**
+     * @param Parser     $parser  The parser
+     * @param TokensList $list    A token list
+     * @param string     $keyword They keyword
+     *
+     * @return void
+     */
     public function parseFileOptions(Parser $parser, TokensList $list, $keyword = 'FIELDS')
     {
         ++$list->idx;

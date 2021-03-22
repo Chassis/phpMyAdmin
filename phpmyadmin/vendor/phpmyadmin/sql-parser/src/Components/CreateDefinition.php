@@ -4,6 +4,7 @@
  *
  * Used for parsing `CREATE TABLE` statement.
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Components;
@@ -13,6 +14,9 @@ use PhpMyAdmin\SqlParser\Context;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Token;
 use PhpMyAdmin\SqlParser\TokensList;
+use function implode;
+use function is_array;
+use function trim;
 
 /**
  * Parses the create definition of a column or a key.
@@ -81,6 +85,8 @@ class CreateDefinition extends Component
             'expr',
             ['parenthesesDelimited' => true],
         ],
+
+        'INVISIBLE' => 13,
         // Common entries.
         //
         // NOTE: Some of the common options are not in the same order which
@@ -279,11 +285,13 @@ class CreateDefinition extends Component
                 } else {
                     --$list->idx;
                 }
+
                 $state = 5;
             } elseif ($state === 5) {
                 if (! empty($expr->type) || ! empty($expr->key)) {
                     $ret[] = $expr;
                 }
+
                 $expr = new static();
                 if ($token->value === ',') {
                     $state = 1;

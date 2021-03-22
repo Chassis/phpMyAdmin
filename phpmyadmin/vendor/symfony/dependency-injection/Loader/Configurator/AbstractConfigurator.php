@@ -20,7 +20,7 @@ use Symfony\Component\ExpressionLanguage\Expression;
 
 abstract class AbstractConfigurator
 {
-    const FACTORY = 'unknown';
+    public const FACTORY = 'unknown';
 
     /** @internal */
     protected $definition;
@@ -31,7 +31,17 @@ abstract class AbstractConfigurator
             return $this->{'set'.$method}(...$args);
         }
 
-        throw new \BadMethodCallException(sprintf('Call to undefined method %s::%s()', \get_class($this), $method));
+        throw new \BadMethodCallException(sprintf('Call to undefined method "%s::%s()".', static::class, $method));
+    }
+
+    public function __sleep()
+    {
+        throw new \BadMethodCallException('Cannot serialize '.__CLASS__);
+    }
+
+    public function __wakeup()
+    {
+        throw new \BadMethodCallException('Cannot unserialize '.__CLASS__);
     }
 
     /**

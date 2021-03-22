@@ -2,6 +2,7 @@
 /**
  * `WHERE` keyword parser.
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Components;
@@ -10,6 +11,10 @@ use PhpMyAdmin\SqlParser\Component;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Token;
 use PhpMyAdmin\SqlParser\TokensList;
+use function implode;
+use function in_array;
+use function is_array;
+use function trim;
 
 /**
  * `WHERE` keyword parser.
@@ -170,6 +175,7 @@ class Condition extends Component
                 if ($token->value === 'BETWEEN') {
                     $betweenBefore = true;
                 }
+
                 if (($brackets === 0) && empty(static::$ALLOWED_KEYWORDS[$token->value])) {
                     break;
                 }
@@ -182,6 +188,7 @@ class Condition extends Component
                     if ($brackets === 0) {
                         break;
                     }
+
                     --$brackets;
                 }
             }

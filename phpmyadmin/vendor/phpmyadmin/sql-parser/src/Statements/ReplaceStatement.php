@@ -2,6 +2,7 @@
 /**
  * `REPLACE` statement.
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Statements;
@@ -14,6 +15,9 @@ use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Statement;
 use PhpMyAdmin\SqlParser\Token;
 use PhpMyAdmin\SqlParser\TokensList;
+use function count;
+use function strlen;
+use function trim;
 
 /**
  * `REPLACE` statement.
@@ -152,6 +156,7 @@ class ReplaceStatement extends Statement
                     $parser->error('Unexpected keyword.', $token);
                     break;
                 }
+
                 ++$list->idx;
                 $this->into = IntoKeyword::parse(
                     $parser,
@@ -181,6 +186,7 @@ class ReplaceStatement extends Statement
                         );
                         break;
                     }
+
                     $state = 2;
                 } else {
                     $parser->error(

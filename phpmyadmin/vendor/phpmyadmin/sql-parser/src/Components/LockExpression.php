@@ -2,6 +2,7 @@
 /**
  * Parses a reference to a LOCK expression.
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Components;
@@ -10,6 +11,8 @@ use PhpMyAdmin\SqlParser\Component;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Token;
 use PhpMyAdmin\SqlParser\TokensList;
+use function implode;
+use function is_array;
 
 /**
  * Parses a reference to a LOCK expression.
@@ -80,6 +83,7 @@ class LockExpression extends Component
                 $ret->type = self::parseLockType($parser, $list);
                 $state = 2;
             }
+
             $prevToken = $token;
         }
 
@@ -108,6 +112,9 @@ class LockExpression extends Component
         return $component->table . ' ' . $component->type;
     }
 
+    /**
+     * @return string
+     */
     private static function parseLockType(Parser $parser, TokensList $list)
     {
         $lockType = '';
@@ -168,6 +175,7 @@ class LockExpression extends Component
                     $parser->error('Unexpected keyword.', $token);
                     break;
                 }
+
                 $lockType .= $token->keyword;
             } elseif ($state === 1) {
                 if ($token->keyword === 'LOCAL') {

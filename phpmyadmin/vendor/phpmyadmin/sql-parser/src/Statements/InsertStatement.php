@@ -2,6 +2,7 @@
 /**
  * `INSERT` statement.
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Statements;
@@ -15,6 +16,9 @@ use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Statement;
 use PhpMyAdmin\SqlParser\Token;
 use PhpMyAdmin\SqlParser\TokensList;
+use function count;
+use function strlen;
+use function trim;
 
 /**
  * `INSERT` statement.
@@ -216,6 +220,7 @@ class InsertStatement extends Statement
                         );
                         break;
                     }
+
                     $state = 2;
                     $miniState = 1;
                 } else {

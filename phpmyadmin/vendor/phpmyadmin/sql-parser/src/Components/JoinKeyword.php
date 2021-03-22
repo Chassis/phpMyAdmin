@@ -2,6 +2,7 @@
 /**
  * `JOIN` keyword parser.
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Components;
@@ -10,6 +11,8 @@ use PhpMyAdmin\SqlParser\Component;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Token;
 use PhpMyAdmin\SqlParser\TokensList;
+use function array_search;
+use function implode;
 
 /**
  * `JOIN` keyword parser.
@@ -175,6 +178,7 @@ class JoinKeyword extends Component
                                 /* Next clause is starting */
                                 break 2;
                             }
+
                             break;
                     }
                 }

@@ -1,22 +1,30 @@
 <?php
-/* vim: set expandtab sw=4 ts=4 sts=4: */
 /**
  * Abstract class for the external transformations plugins
- *
- * @package    PhpMyAdmin-Transformations
- * @subpackage External
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Plugins\Transformations\Abs;
 
 use PhpMyAdmin\Plugins\TransformationsPlugin;
 use stdClass;
+use const E_USER_DEPRECATED;
+use function count;
+use function fclose;
+use function feof;
+use function fgets;
+use function fwrite;
+use function htmlspecialchars;
+use function is_resource;
+use function proc_close;
+use function proc_open;
+use function sprintf;
+use function strlen;
+use function trigger_error;
 
 /**
  * Provides common methods for all of the external transformations plugins.
- *
- * @package PhpMyAdmin
  */
 abstract class ExternalTransformationsPlugin extends TransformationsPlugin
 {
@@ -32,10 +40,10 @@ abstract class ExternalTransformationsPlugin extends TransformationsPlugin
             . ' data via standard input. Returns the standard output of the'
             . ' application. The default is Tidy, to pretty-print HTML code.'
             . ' For security reasons, you have to manually edit the file'
-            . ' libraries/classes/Plugins/Transformations/Output/Text_Plain_External'
-            . '.php and list the tools you want to make available.'
+            . ' libraries/classes/Plugins/Transformations/Abs/ExternalTransformationsPlugin.php'
+            . ' and list the tools you want to make available.'
             . ' The first option is then the number of the program you want to'
-            . ' use and the second option is the parameters for the program.'
+            . ' use. The second option should be blank for historical reasons.'
             . ' The third option, if set to 1, will convert the output using'
             . ' htmlspecialchars() (Default 1). The fourth option, if set to 1,'
             . ' will prevent wrapping and ensure that the output appears all on'
@@ -80,7 +88,6 @@ abstract class ExternalTransformationsPlugin extends TransformationsPlugin
 
         $allowed_programs = [];
 
-        //
         // WARNING:
         //
         // It's up to administrator to allow anything here. Note that users may
@@ -111,16 +118,27 @@ abstract class ExternalTransformationsPlugin extends TransformationsPlugin
             $program = $allowed_programs[0];
         }
 
+        if (isset($options[1]) && strlen((string) $options[1]) > 0) {
+            trigger_error(sprintf(
+                __(
+                    'You are using the external transformation command line'
+                    . ' options field, which has been deprecated for security reasons.'
+                    . ' Add all command line options directly to the definition in %s.'
+                ),
+                '[code]libraries/classes/Plugins/Transformations/Abs/ExternalTransformationsPlugin.php[/code]'
+            ), E_USER_DEPRECATED);
+        }
+
         // needs PHP >= 4.3.0
         $newstring = '';
         $descriptorspec = [
             0 => [
-                "pipe",
-                "r",
+                'pipe',
+                'r',
             ],
             1 => [
-                "pipe",
-                "w",
+                'pipe',
+                'w',
             ],
         ];
         $process = proc_open($program . ' ' . $options[1], $descriptorspec, $pipes);
@@ -145,7 +163,6 @@ abstract class ExternalTransformationsPlugin extends TransformationsPlugin
         return $retstring;
     }
 
-
     /* ~~~~~~~~~~~~~~~~~~~~ Getters and Setters ~~~~~~~~~~~~~~~~~~~~ */
 
     /**
@@ -155,6 +172,6 @@ abstract class ExternalTransformationsPlugin extends TransformationsPlugin
      */
     public static function getName()
     {
-        return "External";
+        return 'External';
     }
 }

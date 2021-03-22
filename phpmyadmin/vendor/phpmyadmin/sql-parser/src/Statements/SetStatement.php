@@ -2,6 +2,7 @@
 /**
  * `SET` statement.
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Statements;
@@ -9,6 +10,7 @@ namespace PhpMyAdmin\SqlParser\Statements;
 use PhpMyAdmin\SqlParser\Components\OptionsArray;
 use PhpMyAdmin\SqlParser\Components\SetOperation;
 use PhpMyAdmin\SqlParser\Statement;
+use function trim;
 
 /**
  * `SET` statement.
@@ -34,7 +36,7 @@ class SetStatement extends Statement
     ];
 
     /**
-     * Possible exceptions in SET statment.
+     * Possible exceptions in SET statement.
      *
      * @var array
      */
@@ -65,6 +67,7 @@ class SetStatement extends Statement
         '@@PERSIST_ONLY' => 3,
     ];
 
+    /** @var array */
     public static $END_OPTIONS = [
         'COLLATE' => [
             1,

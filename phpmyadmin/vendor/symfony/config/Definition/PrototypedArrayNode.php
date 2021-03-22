@@ -185,7 +185,7 @@ class PrototypedArrayNode extends ArrayNode
     protected function finalizeValue($value)
     {
         if (false === $value) {
-            throw new UnsetKeyException(sprintf('Unsetting key for path "%s", value: %s', $this->getPath(), json_encode($value)));
+            throw new UnsetKeyException(sprintf('Unsetting key for path "%s", value: "%s".', $this->getPath(), json_encode($value)));
         }
 
         foreach ($value as $k => $v) {
@@ -236,6 +236,10 @@ class PrototypedArrayNode extends ArrayNode
                     throw $ex;
                 } elseif (isset($v[$this->keyAttribute])) {
                     $k = $v[$this->keyAttribute];
+
+                    if (\is_float($k)) {
+                        $k = var_export($k, true);
+                    }
 
                     // remove the key attribute when required
                     if ($this->removeKeyAttribute) {
@@ -367,7 +371,7 @@ class PrototypedArrayNode extends ArrayNode
      */
     private function getPrototypeForChild(string $key)
     {
-        $prototype = isset($this->valuePrototypes[$key]) ? $this->valuePrototypes[$key] : $this->prototype;
+        $prototype = $this->valuePrototypes[$key] ?? $this->prototype;
         $prototype->setName($key);
 
         return $prototype;

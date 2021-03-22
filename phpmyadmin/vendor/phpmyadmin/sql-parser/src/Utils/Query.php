@@ -2,6 +2,7 @@
 /**
  * Statement utilities.
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Utils;
@@ -32,6 +33,12 @@ use PhpMyAdmin\SqlParser\Statements\TruncateStatement;
 use PhpMyAdmin\SqlParser\Statements\UpdateStatement;
 use PhpMyAdmin\SqlParser\Token;
 use PhpMyAdmin\SqlParser\TokensList;
+use function array_flip;
+use function array_keys;
+use function count;
+use function in_array;
+use function is_string;
+use function trim;
 
 /**
  * Statement utilities.
@@ -41,7 +48,7 @@ class Query
     /**
      * Functions that set the flag `is_func`.
      *
-     * @var array
+     * @var string[]
      */
     public static $FUNCTIONS = [
         'SUM',
@@ -54,6 +61,7 @@ class Query
         'BIT_AND',
     ];
 
+    /** @var array<string,false> */
     public static $ALLFLAGS = [
         /*
          * select ... DISTINCT ...
@@ -256,6 +264,7 @@ class Query
                     $flags['is_func'] = true;
                 }
             }
+
             if (! empty($expr->subquery)) {
                 $flags['is_subquery'] = true;
             }
@@ -373,6 +382,7 @@ class Query
             if (! empty($statement->limit)) {
                 $flags['limit'] = true;
             }
+
             if (! empty($statement->order)) {
                 $flags['order'] = true;
             }
@@ -422,7 +432,7 @@ class Query
                 ) {
                     $tableAliases[$expr->alias] = [
                         $expr->table,
-                        isset($expr->database) ? $expr->database : null,
+                        $expr->database ?? null,
                     ];
                 }
             }
@@ -441,6 +451,7 @@ class Query
                                 $expr->database : null,
                         ];
                     }
+
                     if (! in_array($arr, $ret['select_tables'])) {
                         $ret['select_tables'][] = $arr;
                     }
@@ -501,6 +512,7 @@ class Query
                 // No tables are dropped.
                 return [];
             }
+
             $expressions = $statement->fields;
         } elseif ($statement instanceof RenameStatement) {
             foreach ($statement->renames as $rename) {
@@ -587,7 +599,7 @@ class Query
          *
          * @var int
          */
-        $clauseIdx = isset($clauses[$clauseType]) ? $clauses[$clauseType] : -1;
+        $clauseIdx = $clauses[$clauseType] ?? -1;
 
         $firstClauseIdx = $clauseIdx;
         $lastClauseIdx = $clauseIdx;
@@ -739,9 +751,7 @@ class Query
         }
 
         // Adding everything after the last replacement.
-        $ret .= static::getClause($statement, $list, $ops[$count - 1][0], 1);
-
-        return $ret;
+        return $ret . static::getClause($statement, $list, $ops[$count - 1][0], 1);
     }
 
     /**
