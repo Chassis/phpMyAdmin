@@ -3,7 +3,8 @@ class phpmyadmin (
 	$config,
 	$path = '/vagrant/extensions/phpmyadmin',
 	$database_user     = $config[database][user],
-	$database_password = $config[database][password]
+	$database_password = $config[database][password],
+	$paths = $config[paths][base]
 ) {
 	if ( ! empty( $config[disabled_extensions] ) and 'chassis/phpmyadmin' in $config[disabled_extensions] ) {
 		$file = absent
@@ -18,9 +19,18 @@ class phpmyadmin (
 		content => template('phpmyadmin/config.inc.php.erb'),
 	}
 
-	file { '/vagrant/phpmyadmin':
-		ensure => $link,
-		target => '/vagrant/extensions/phpmyadmin/phpmyadmin',
-		notify => Service['nginx'],
+	# We need to make sure we handle custom paths otherwise WordPress will do a 404 for /phpmyadmin.
+	if ( '.' == $paths ) {
+			file { '/vagrant/phpmyadmin':
+				ensure => $link,
+				target => '/vagrant/extensions/phpmyadmin/phpmyadmin',
+				notify => Service['nginx'],
+			}
+	} else {
+			file { '/chassis/phpmyadmin':
+				ensure => $link,
+				target => '/vagrant/extensions/phpmyadmin/phpmyadmin',
+				notify => Service['nginx'],
+			}
 	}
 }
