@@ -4,10 +4,11 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitc96a91b7ad101761b6a118cb376d8d22
+class ComposerStaticInit5b64bc5128aa3aa10a1fab44c22216e7
 {
     public static $files = array (
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
+        '23c18046f52bef3eea034657bafda50f' => __DIR__ . '/..' . '/symfony/polyfill-php81/bootstrap.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '253c157292f75eb38082b5acb06f3f01' => __DIR__ . '/..' . '/nikic/fast-route/src/functions.php',
         'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
@@ -28,6 +29,7 @@ class ComposerStaticInitc96a91b7ad101761b6a118cb376d8d22
         ),
         'S' => 
         array (
+            'Symfony\\Polyfill\\Php81\\' => 23,
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
             'Symfony\\Contracts\\Service\\' => 26,
@@ -85,6 +87,10 @@ class ComposerStaticInitc96a91b7ad101761b6a118cb376d8d22
         'Twig\\' => 
         array (
             0 => __DIR__ . '/..' . '/twig/twig/src',
+        ),
+        'Symfony\\Polyfill\\Php81\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-php81',
         ),
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
@@ -921,6 +927,7 @@ class ComposerStaticInitc96a91b7ad101761b6a118cb376d8d22
         'ReCaptcha\\RequestMethod\\SocketPost' => __DIR__ . '/..' . '/google/recaptcha/src/ReCaptcha/RequestMethod/SocketPost.php',
         'ReCaptcha\\RequestParameters' => __DIR__ . '/..' . '/google/recaptcha/src/ReCaptcha/RequestParameters.php',
         'ReCaptcha\\Response' => __DIR__ . '/..' . '/google/recaptcha/src/ReCaptcha/Response.php',
+        'ReturnTypeWillChange' => __DIR__ . '/..' . '/symfony/polyfill-php81/Resources/stubs/ReturnTypeWillChange.php',
         'Samyoul\\U2F\\U2FServer\\Registration' => __DIR__ . '/..' . '/samyoul/u2f-php-server/src/Registration.php',
         'Samyoul\\U2F\\U2FServer\\RegistrationRequest' => __DIR__ . '/..' . '/samyoul/u2f-php-server/src/RegistrationRequest.php',
         'Samyoul\\U2F\\U2FServer\\SignRequest' => __DIR__ . '/..' . '/samyoul/u2f-php-server/src/SignRequest.php',
@@ -994,6 +1001,7 @@ class ComposerStaticInitc96a91b7ad101761b6a118cb376d8d22
         'Symfony\\Component\\Cache\\Traits\\PhpArrayTrait' => __DIR__ . '/..' . '/symfony/cache/Traits/PhpArrayTrait.php',
         'Symfony\\Component\\Cache\\Traits\\PhpFilesTrait' => __DIR__ . '/..' . '/symfony/cache/Traits/PhpFilesTrait.php',
         'Symfony\\Component\\Cache\\Traits\\ProxyTrait' => __DIR__ . '/..' . '/symfony/cache/Traits/ProxyTrait.php',
+        'Symfony\\Component\\Cache\\Traits\\RedisClusterNodeProxy' => __DIR__ . '/..' . '/symfony/cache/Traits/RedisClusterNodeProxy.php',
         'Symfony\\Component\\Cache\\Traits\\RedisClusterProxy' => __DIR__ . '/..' . '/symfony/cache/Traits/RedisClusterProxy.php',
         'Symfony\\Component\\Cache\\Traits\\RedisProxy' => __DIR__ . '/..' . '/symfony/cache/Traits/RedisProxy.php',
         'Symfony\\Component\\Cache\\Traits\\RedisTrait' => __DIR__ . '/..' . '/symfony/cache/Traits/RedisTrait.php',
@@ -1279,6 +1287,7 @@ class ComposerStaticInitc96a91b7ad101761b6a118cb376d8d22
         'Symfony\\Contracts\\Service\\Test\\ServiceLocatorTest' => __DIR__ . '/..' . '/symfony/service-contracts/Test/ServiceLocatorTest.php',
         'Symfony\\Polyfill\\Ctype\\Ctype' => __DIR__ . '/..' . '/symfony/polyfill-ctype/Ctype.php',
         'Symfony\\Polyfill\\Mbstring\\Mbstring' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/Mbstring.php',
+        'Symfony\\Polyfill\\Php81\\Php81' => __DIR__ . '/..' . '/symfony/polyfill-php81/Php81.php',
         'TCPDF' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf.php',
         'TCPDF2DBarcode' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf_barcodes_2d.php',
         'TCPDFBarcode' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf_barcodes_1d.php',
@@ -1679,10 +1688,10 @@ class ComposerStaticInitc96a91b7ad101761b6a118cb376d8d22
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitc96a91b7ad101761b6a118cb376d8d22::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitc96a91b7ad101761b6a118cb376d8d22::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitc96a91b7ad101761b6a118cb376d8d22::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitc96a91b7ad101761b6a118cb376d8d22::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit5b64bc5128aa3aa10a1fab44c22216e7::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit5b64bc5128aa3aa10a1fab44c22216e7::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit5b64bc5128aa3aa10a1fab44c22216e7::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit5b64bc5128aa3aa10a1fab44c22216e7::$classMap;
 
         }, null, ClassLoader::class);
     }
