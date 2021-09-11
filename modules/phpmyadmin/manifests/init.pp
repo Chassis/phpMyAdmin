@@ -20,7 +20,7 @@ class phpmyadmin (
 	}
 
 	# We need to make sure we handle custom paths otherwise WordPress will do a 404 for /phpmyadmin.
-	if ( '.' == $paths ) {
+	if ( '/vagrant' == $paths ) {
 			file { '/vagrant/phpmyadmin':
 				ensure => $link,
 				target => '/vagrant/extensions/phpmyadmin/phpmyadmin',
