@@ -1330,6 +1330,9 @@ Functions.insertQuery = function (queryType) {
           }
 
           $('#querymessage').html('');
+        },
+        error: function error() {
+          $('#querymessage').html('');
         }
       });
     }
@@ -2274,7 +2277,8 @@ Functions.documentationAdd = function ($elm, params) {
   var url = Functions.sprintf(decodeURIComponent(mysqlDocTemplate), params[0]);
 
   if (params.length > 1) {
-    url += '#' + params[1];
+    // The # needs to be escaped to be part of the destination URL
+    url += encodeURIComponent('#') + params[1];
   }
 
   var content = $elm.text();
@@ -4196,6 +4200,7 @@ AJAX.registerOnload('functions.js', function () {
 
 Functions.mainMenuResizerCallback = function () {
   // 5 px margin for jumping menu in Chrome
+  // eslint-disable-next-line compat/compat
   return $(document.body).width() - 5;
 }; // This must be fired only once after the initial page load
 
@@ -4494,7 +4499,8 @@ Functions.initSlider = function () {
     $wrapper.toggle($this.is(':visible'));
     $('<a>', {
       href: '#' + this.id,
-      'class': 'ajax'
+      'class': 'ajax',
+      id: 'slide-handle'
     }).text($this.attr('title')).prepend($('<span>')).insertBefore($this).on('click', function () {
       var $wrapper = $this.closest('.slide-wrapper');
       var visible = $this.is(':visible');

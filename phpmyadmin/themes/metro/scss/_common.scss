@@ -874,6 +874,11 @@ td.disabled {
   color: red;
 }
 
+li.last.database {
+  // Avoid having the last item of the tree hidden behind the scroll bar
+  margin-bottom: 15px !important;
+}
+
 /* specific elements */
 
 ul.tabs {
@@ -2404,8 +2409,8 @@ form.append_fields_form .tblFooters {
 
   height: $height;
   width: $width;
-  margin-#{$left}: $height / -2;
-  margin-top: $width / -2;
+  margin-#{$left}: $height * -0.5;
+  margin-top: $width * -0.5;
   position: absolute;
   background: url("../img/col_pointer.png");
 }
@@ -2517,6 +2522,7 @@ form.append_fields_form .tblFooters {
   input {
     &[type="submit"] {
       background: $navi-background;
+      color: $navi-color;
       border: none;
       filter: none;
       margin: 5px;
@@ -3560,4 +3566,8 @@ body {
   .sticky {
     top: 0;
   }
+}
+
+.resize-vertical {
+  resize: vertical;
 }

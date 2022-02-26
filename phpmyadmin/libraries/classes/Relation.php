@@ -729,7 +729,7 @@ class Relation
     public function canAccessStorageTable(string $tableDbName): bool
     {
         $result = $this->queryAsControlUser(
-            'SELECT NULL FROM ' . $tableDbName . ' LIMIT 0',
+            'SELECT NULL FROM ' . Util::backquote($tableDbName) . ' LIMIT 0',
             false,
             DatabaseInterface::QUERY_STORE
         );
@@ -1316,7 +1316,6 @@ class Relation
                 } else {
                     $selected = ($key == '0x' . $data);
                 }
-                $key .= $selected;
             }
 
             if (mb_check_encoding($value, 'utf-8')
@@ -1763,7 +1762,7 @@ class Relation
                     'table_name'
                 );
             } else {
-                // if the table is moved out of the database we can no loger keep the
+                // if the table is moved out of the database we can no longer keep the
                 // record for table coordinate
                 $remove_query = 'DELETE FROM '
                     . Util::backquote($GLOBALS['cfgRelation']['db']) . '.'
@@ -1965,6 +1964,10 @@ class Relation
             return $foreigners[$column];
         }
 
+        if (! isset($foreigners['foreign_keys_data'])) {
+            return false;
+        }
+
         $foreigner = [];
         foreach ($foreigners['foreign_keys_data'] as $one_key) {
             $column_index = array_search($column, $one_key['index_list']);
@@ -1987,9 +1990,9 @@ class Relation
     /**
      * Returns default PMA table names and their create queries.
      *
-     * @return array table name, create query
+     * @return array<string,string> table name, create query
      */
-    public function getDefaultPmaTableNames()
+    public function getDefaultPmaTableNames(array $tableNameReplacements): array
     {
         $pma_tables = [];
         $create_tables_file = (string) file_get_contents(
@@ -2008,33 +2011,49 @@ class Relation
                 continue;
             }
 
-            $pma_tables[$table[1]] = $query . ';';
+            $tableName = (string) $table[1];
+
+            // Replace the table name with another one
+            if (isset($tableNameReplacements[$tableName])) {
+                $query = str_replace($tableName, $tableNameReplacements[$tableName], $query);
+            }
+
+            $pma_tables[$tableName] = $query . ';';
         }
 
         return $pma_tables;
     }
 
     /**
-     * Create a table named phpmyadmin to be used as configuration storage
-     *
-     * @return bool
+     * Create a database to be used as configuration storage
      */
-    public function createPmaDatabase()
+    public function createPmaDatabase(string $configurationStorageDbName): bool
     {
-        $this->dbi->tryQuery('CREATE DATABASE IF NOT EXISTS `phpmyadmin`');
+        $this->dbi->tryQuery(
+            'CREATE DATABASE IF NOT EXISTS ' . Util::backquote($configurationStorageDbName),
+            DatabaseInterface::CONNECT_CONTROL
+        );
 
-        $error = $this->dbi->getError();
+        $error = $this->dbi->getError(DatabaseInterface::CONNECT_CONTROL);
         if (! $error) {
+            // Re-build the cache to show the list of tables created or not
+            // This is the case when the DB could be created but no tables just after
+            // So just purge the cache and show the new configuration storage state
+            $_SESSION['relation'][$GLOBALS['server']] = $this->checkRelationsParam();
+
             return true;
         }
 
         $GLOBALS['message'] = $error;
 
         if ($GLOBALS['errno'] === 1044) {
-            $GLOBALS['message'] = __(
-                'You do not have necessary privileges to create a database named'
-                . ' \'phpmyadmin\'. You may go to \'Operations\' tab of any'
-                . ' database to set up the phpMyAdmin configuration storage there.'
+            $GLOBALS['message'] = sprintf(
+                __(
+                    'You do not have necessary privileges to create a database named'
+                    . ' \'%s\'. You may go to \'Operations\' tab of any'
+                    . ' database to set up the phpMyAdmin configuration storage there.'
+                ),
+                $configurationStorageDbName
             );
         }
 
@@ -2075,18 +2094,42 @@ class Relation
 
         $existingTables = $this->dbi->getTables($db, DatabaseInterface::CONNECT_CONTROL);
 
+        /** @var array<string,string> $tableNameReplacements */
+        $tableNameReplacements = [];
+
+        // Build a map of replacements between default table names and name built by the user
+        foreach ($tablesToFeatures as $table => $feature) {
+            // Empty, we can not do anything about it
+            if (empty($GLOBALS['cfg']['Server'][$feature])) {
+                continue;
+            }
+            // Default table name, nothing to do
+            if ($GLOBALS['cfg']['Server'][$feature] === $table) {
+                continue;
+            }
+            // Set the replacement to transform the default table name into a custom name
+            $tableNameReplacements[$table] = $GLOBALS['cfg']['Server'][$feature];
+        }
+
         $createQueries = null;
         $foundOne = false;
         foreach ($tablesToFeatures as $table => $feature) {
-            if (! in_array($table, $existingTables)) {
+            // Check if the table already exists
+            // use the possible replaced name first and fallback on the table name
+            // if no replacement exists
+            if (! in_array($tableNameReplacements[$table] ?? $table, $existingTables)) {
                 if ($create) {
                     if ($createQueries == null) { // first create
-                        $createQueries = $this->getDefaultPmaTableNames();
-                        $this->dbi->selectDb($db);
-                    }
-                    $this->dbi->tryQuery($createQueries[$table]);
+                        $createQueries = $this->getDefaultPmaTableNames($tableNameReplacements);
+                        if (! $this->dbi->selectDb($db, DatabaseInterface::CONNECT_CONTROL)) {
+                            $GLOBALS['message'] = $this->dbi->getError(DatabaseInterface::CONNECT_CONTROL);
 
-                    $error = $this->dbi->getError();
+                            return;
+                        }
+                    }
+                    $this->dbi->tryQuery($createQueries[$table], DatabaseInterface::CONNECT_CONTROL);
+
+                    $error = $this->dbi->getError(DatabaseInterface::CONNECT_CONTROL);
                     if ($error) {
                         $GLOBALS['message'] = $error;
 
@@ -2094,11 +2137,17 @@ class Relation
                     }
 
                     $foundOne = true;
-                    $GLOBALS['cfg']['Server'][$feature] = $table;
+                    if (empty($GLOBALS['cfg']['Server'][$feature])) {
+                        // Do not override a user defined value, only fill if empty
+                        $GLOBALS['cfg']['Server'][$feature] = $table;
+                    }
                 }
             } else {
                 $foundOne = true;
-                $GLOBALS['cfg']['Server'][$feature] = $table;
+                if (empty($GLOBALS['cfg']['Server'][$feature])) {
+                    // Do not override a user defined value, only fill if empty
+                    $GLOBALS['cfg']['Server'][$feature] = $table;
+                }
             }
         }
 
@@ -2154,7 +2203,7 @@ class Relation
                 $params['create_pmadb'] = 1;
                 $message = Message::notice(
                     __(
-                        '%sCreate%s a database named \'phpmyadmin\' and setup '
+                        '%sCreate%s a database named \'%s\' and setup '
                         . 'the phpMyAdmin configuration storage there.'
                     )
                 );
@@ -2174,9 +2223,16 @@ class Relation
             );
         }
         $message->addParamHtml(
-            '<a href="' . Url::getFromRoute('/check-relations') . '" data-post="' . Url::getCommon($params, '') . '">'
+            '<a href="' . Url::getFromRoute('/check-relations')
+            . '" data-post="' . Url::getCommon($params, '', false) . '">'
         );
         $message->addParamHtml('</a>');
+
+        if ($allTables && $createDb) {
+            $message->addParam(
+                $this->getConfigurationStorageDbName()
+            );
+        }
 
         return $retval . $message->getDisplay();
     }
@@ -2269,5 +2325,15 @@ class Relation
         }
 
         return $tables;
+    }
+
+    public function getConfigurationStorageDbName(): string
+    {
+        global $cfg;
+
+        $cfgStorageDbName = $cfg['Server']['pmadb'] ?? '';
+
+        // Use "phpmyadmin" as a default database name to check to keep the behavior consistent
+        return empty($cfgStorageDbName) ? 'phpmyadmin' : $cfgStorageDbName;
     }
 }

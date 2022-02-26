@@ -144,6 +144,8 @@ Core::cleanupPathInfo();
 /** @var bool $isConfigLoading Indication for the error handler */
 $isConfigLoading = false;
 
+register_shutdown_function([Config::class, 'fatalErrorHandler']);
+
 /**
  * Force reading of config file, because we removed sensitive values
  * in the previous iteration.
@@ -152,14 +154,14 @@ $isConfigLoading = false;
  */
 $PMA_Config = $containerBuilder->get('config');
 
-register_shutdown_function([Config::class, 'fatalErrorHandler']);
-
 /**
  * include session handling after the globals, to prevent overwriting
  */
 if (! defined('PMA_NO_SESSION')) {
     Session::setUp($PMA_Config, $error_handler);
 }
+
+Core::populateRequestWithEncryptedQueryParams();
 
 /**
  * init some variables LABEL_variables_init
@@ -262,6 +264,14 @@ if (! defined('PMA_MINIMUM_COMMON')) {
         $auth_plugin = Plugins::getAuthPlugin();
         $auth_plugin->authenticate();
 
+        /* Enable LOAD DATA LOCAL INFILE for LDI plugin */
+        if ($route === '/import' && ($_POST['format'] ?? '') === 'ldi') {
+            // Switch this before the DB connection is done
+            // phpcs:disable PSR1.Files.SideEffects
+            define('PMA_ENABLE_LDI', 1);
+            // phpcs:enable
+        }
+
         Core::connectToDatabaseServer($dbi, $auth_plugin);
 
         $auth_plugin->rememberCredentials();
@@ -301,7 +311,7 @@ if (! defined('PMA_MINIMUM_COMMON')) {
      * There is no point in even attempting to process
      * an ajax request if there is a token mismatch
      */
-    if ($response->isAjax() && $_SERVER['REQUEST_METHOD'] === 'POST' && $token_mismatch) {
+    if ($response->isAjax() && ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST' && $token_mismatch) {
         $response->setRequestStatus(false);
         $response->addJSON(
             'message',

@@ -1,5 +1,7 @@
 "use strict";
 
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 /* global firstDayOfCalendar */
 // templates/javascript/variables.twig
 
@@ -112,7 +114,8 @@ var makeGrid = function makeGrid(t, enableResize, enableReorder, enableVisib, en
         obj: obj,
         objLeft: $(obj).position().left,
         objWidth: $(g.t).find('th.draggable:visible').eq(n).find('span').outerWidth()
-      };
+      }; // eslint-disable-next-line compat/compat
+
       $(document.body).css('cursor', 'col-resize').noSelect();
 
       if (g.isCellEditActive) {
@@ -149,7 +152,8 @@ var makeGrid = function makeGrid(t, enableResize, enableReorder, enableVisib, en
         obj: obj,
         objTop: objPos.top,
         objLeft: objPos.left
-      };
+      }; // eslint-disable-next-line compat/compat
+
       $(document.body).css('cursor', 'move').noSelect();
 
       if (g.isCellEditActive) {
@@ -243,7 +247,8 @@ var makeGrid = function makeGrid(t, enableResize, enableReorder, enableVisib, en
         }, 'fast').fadeOut();
         $(g.cPointer).css('visibility', 'hidden');
         g.colReorder = false;
-      }
+      } // eslint-disable-next-line compat/compat
+
 
       $(document.body).css('cursor', 'inherit').noSelect(false);
     },
@@ -969,6 +974,12 @@ var makeGrid = function makeGrid(t, enableResize, enableReorder, enableVisib, en
           };
           g.lastXHR = $.post('index.php?route=/sql/get-enum-values', postParams, function (data) {
             g.lastXHR = null;
+
+            if (_typeof(data) === 'object' && data.success === false) {
+              Functions.ajaxShowMessage(data.error, undefined, 'error');
+              return;
+            }
+
             $editArea.removeClass('edit_area_loading');
             $editArea.append(data.dropdown);
             $editArea.append('<div class="cell_edit_hint">' + g.cellEditHint + '</div>');
@@ -1006,6 +1017,12 @@ var makeGrid = function makeGrid(t, enableResize, enableReorder, enableVisib, en
 
           g.lastXHR = $.post('index.php?route=/sql/get-set-values', postParams, function (data) {
             g.lastXHR = null;
+
+            if (_typeof(data) === 'object' && data.success === false) {
+              Functions.ajaxShowMessage(data.error, undefined, 'error');
+              return;
+            }
+
             $editArea.removeClass('edit_area_loading');
             $editArea.append(data.select);
             $td.data('original_data', $(data.select).val().join());
@@ -1726,7 +1743,7 @@ var makeGrid = function makeGrid(t, enableResize, enableReorder, enableVisib, en
 
 
       if ($firstRowCols.length > 1) {
-        var $colVisibTh = $(g.t).find('th:not(.draggable)');
+        var $colVisibTh = $(g.t).find('th:not(.draggable)').slice(0, 1);
         Functions.tooltip($colVisibTh, 'th', Messages.strColVisibHint); // create column visibility drop-down arrow(s)
 
         $colVisibTh.each(function () {

@@ -1,20 +1,18 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Bookmarks &#8212; phpMyAdmin 5.1.1 documentation</title>
-    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bookmarks &#8212; phpMyAdmin 5.1.3 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -34,8 +32,9 @@
         <li class="right" >
           <a href="transformations.html" title="Transformations"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.1.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="user.html" accesskey="U">User Guide</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.1.3 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="user.html" accesskey="U">User Guide</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Bookmarks</a></li> 
       </ul>
     </div>  
 
@@ -47,8 +46,8 @@
   <div class="section" id="bookmarks">
 <span id="id1"></span><h1>Bookmarks<a class="headerlink" href="#bookmarks" title="Permalink to this headline">¶</a></h1>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">You need to have configured the <a class="reference internal" href="setup.html#linked-tables"><span class="std std-ref">phpMyAdmin configuration storage</span></a> for using bookmarks
+<p class="admonition-title">Note</p>
+<p>You need to have configured the <a class="reference internal" href="setup.html#linked-tables"><span class="std std-ref">phpMyAdmin configuration storage</span></a> for using bookmarks
 feature.</p>
 </div>
 <div class="section" id="storing-bookmarks">
@@ -82,12 +81,12 @@ chars. So you can use:</p>
 </div>
 <p>in your query, where VARIABLE1 is the string you entered in the Variable 1 input box.</p>
 <p>A more complex example, say you have stored this query:</p>
-<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">Name</span><span class="p">,</span> <span class="n">Address</span> <span class="k">FROM</span> <span class="n">addresses</span> <span class="k">WHERE</span> <span class="mi">1</span> <span class="cm">/* AND Name LIKE &#39;%[VARIABLE1]%&#39; */</span>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="k">Name</span><span class="p">,</span> <span class="n">Address</span> <span class="k">FROM</span> <span class="n">addresses</span> <span class="k">WHERE</span> <span class="mi">1</span> <span class="cm">/* AND Name LIKE &#39;%[VARIABLE1]%&#39; */</span>
 </pre></div>
 </div>
 <p>If you wish to enter “phpMyAdmin” as the variable for the stored query, the full
 query will be:</p>
-<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">Name</span><span class="p">,</span> <span class="n">Address</span> <span class="k">FROM</span> <span class="n">addresses</span> <span class="k">WHERE</span> <span class="mi">1</span> <span class="k">AND</span> <span class="n">Name</span> <span class="k">LIKE</span> <span class="s1">&#39;%phpMyAdmin%&#39;</span>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="k">Name</span><span class="p">,</span> <span class="n">Address</span> <span class="k">FROM</span> <span class="n">addresses</span> <span class="k">WHERE</span> <span class="mi">1</span> <span class="k">AND</span> <span class="k">Name</span> <span class="k">LIKE</span> <span class="s1">&#39;%phpMyAdmin%&#39;</span>
 </pre></div>
 </div>
 <p><strong>NOTE THE ABSENCE OF SPACES</strong> inside the <code class="docutils literal notranslate"><span class="pre">/**/</span></code> construct. Any spaces
@@ -100,14 +99,15 @@ to unexpected results especially when using the variable expansion inside of a
 <p>When a bookmark has the same name as the table, it will be used as the query when browsing
 this table.</p>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="faq.html#faqbookmark"><span class="std std-ref">6.18 Bookmarks: Where can I store bookmarks? Why can’t I see any bookmarks below the query box? What are these variables for?</span></a>,
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="faq.html#faqbookmark"><span class="std std-ref">6.18 Bookmarks: Where can I store bookmarks? Why can’t I see any bookmarks below the query box? What are these variables for?</span></a>,
 <a class="reference internal" href="faq.html#faq6-22"><span class="std std-ref">6.22 Bookmarks: Can I execute a default bookmark automatically when entering Browse mode for a table?</span></a></p>
 </div>
 </div>
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -137,17 +137,15 @@ this table.</p>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -164,13 +162,14 @@ this table.</p>
         <li class="right" >
           <a href="transformations.html" title="Transformations"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.1.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="user.html" >User Guide</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.1.3 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="user.html" >User Guide</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Bookmarks</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; <a href="copyright.html">Copyright</a> 2012 - 2021, The phpMyAdmin devel team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
     </div>
   </body>
 </html>

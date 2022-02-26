@@ -1,20 +1,18 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Transformations &#8212; phpMyAdmin 5.1.1 documentation</title>
-    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transformations &#8212; phpMyAdmin 5.1.3 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -34,8 +32,9 @@
         <li class="right" >
           <a href="two_factor.html" title="Two-factor authentication"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.1.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="user.html" accesskey="U">User Guide</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.1.3 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="user.html" accesskey="U">User Guide</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Transformations</a></li> 
       </ul>
     </div>  
 
@@ -47,8 +46,8 @@
   <div class="section" id="transformations">
 <span id="id1"></span><h1>Transformations<a class="headerlink" href="#transformations" title="Permalink to this headline">¶</a></h1>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">You need to have configured the <a class="reference internal" href="setup.html#linked-tables"><span class="std std-ref">phpMyAdmin configuration storage</span></a> to use the transformations
+<p class="admonition-title">Note</p>
+<p>You need to have configured the <a class="reference internal" href="setup.html#linked-tables"><span class="std std-ref">phpMyAdmin configuration storage</span></a> to use the transformations
 feature.</p>
 </div>
 <div class="section" id="introduction">
@@ -84,13 +83,13 @@ official phpMyAdmin homepage.</p>
 <p>Go to the table structure page (reached by clicking on
 the ‘Structure’ link for a table). There click on “Change” (or the change
 icon) and there you will see the five transformation–related fields at the end of the line.
-They are called ‘<a class="reference internal" href="glossary.html#term-media-type"><span class="xref std std-term">Media type</span></a>’, ‘Browser transformation’ and
+They are called ‘<a class="reference internal" href="glossary.html#term-Media-type"><span class="xref std std-term">Media type</span></a>’, ‘Browser transformation’ and
 ‘Transformation options’.</p>
 <ul class="simple">
-<li>The field ‘<a class="reference internal" href="glossary.html#term-media-type"><span class="xref std std-term">Media type</span></a>’ is a drop-down field. Select the <a class="reference internal" href="glossary.html#term-media-type"><span class="xref std std-term">Media type</span></a> that
+<li><p>The field ‘<a class="reference internal" href="glossary.html#term-Media-type"><span class="xref std std-term">Media type</span></a>’ is a drop-down field. Select the <a class="reference internal" href="glossary.html#term-Media-type"><span class="xref std std-term">Media type</span></a> that
 corresponds to the column’s contents. Please note that many transformations
-are inactive until a <a class="reference internal" href="glossary.html#term-media-type"><span class="xref std std-term">Media type</span></a> is selected.</li>
-<li>The field ‘Browser display transformation’ is a drop-down field. You can
+are inactive until a <a class="reference internal" href="glossary.html#term-Media-type"><span class="xref std std-term">Media type</span></a> is selected.</p></li>
+<li><p>The field ‘Browser display transformation’ is a drop-down field. You can
 choose from a hopefully growing amount of pre-defined transformations.
 See below for information on how to build your own transformation.
 There are global transformations and mimetype-bound transformations.
@@ -102,8 +101,8 @@ which will most likely take the subtype into regard, and those who
 only operate on a specific subtype (like ‘image/jpeg’). You can use
 transformations on mimetypes for which the function was not defined
 for. There is no security check for you selected the right
-transformation, so take care of what the output will be like.</li>
-<li>The field ‘Browser display transformation options’ is a free-type textfield. You have
+transformation, so take care of what the output will be like.</p></li>
+<li><p>The field ‘Browser display transformation options’ is a free-type textfield. You have
 to enter transform-function specific options here. Usually the
 transforms can operate with default options, but it is generally a
 good idea to look up the overview to see which options are necessary.
@@ -117,18 +116,18 @@ defined options of the specific mime-transform, as the last value of
 the set. Use the format “’; charset=XXX’”. If you use a transform, for
 which you can specify 2 options and you want to append a character
 set, enter “‘first parameter’,’second parameter’,’charset=us-ascii’”.
-You can, however use the defaults for the parameters: “’‘,’‘,’charset
+You can, however use the defaults for the parameters: “’’,’’,’charset
 =us-ascii’”. The default options can be configured using
-<span class="target" id="index-0"></span><a class="reference internal" href="config.html#cfg_DefaultTransformations"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['DefaultTransformations']</span></code></a>.</li>
-<li>‘Input transformation’ is another drop-down menu that corresponds exactly
+<span class="target" id="index-0"></span><a class="reference internal" href="config.html#cfg_DefaultTransformations"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['DefaultTransformations']</span></code></a>.</p></li>
+<li><p>‘Input transformation’ is another drop-down menu that corresponds exactly
 with the instructions above for “Browser display transformation” except
 these these affect the data before insertion in to the database. These are
 most commonly used to either provide a specialized editor (for example, using
 the phpMyAdmin SQL editor interface) or selector (such as for uploading an image).
 It’s also possible to manipulate the data such as converting an IPv4 address to binary
-or parsing it through a regular expression.</li>
-<li>Finally, ‘Input transformation options’ is the equivalent of the “Browser display
-transformation options” section above and is where optional and required parameters are entered.</li>
+or parsing it through a regular expression.</p></li>
+<li><p>Finally, ‘Input transformation options’ is the equivalent of the “Browser display
+transformation options” section above and is where optional and required parameters are entered.</p></li>
 </ul>
 </div>
 <div class="section" id="file-structure">
@@ -150,9 +149,9 @@ basic functions which can be included by any other transform function.</p>
 name <code class="docutils literal notranslate"><span class="pre">[Transformation</span> <span class="pre">Name]TransformationsPlugin</span></code>. All of the
 methods that have to be implemented by a transformations plug-in are:</p>
 <ol class="arabic simple">
-<li>getMIMEType() and getMIMESubtype() in the main class;</li>
-<li>getName(), getInfo() and applyTransformation() in the abstract class
-it extends.</li>
+<li><p>getMIMEType() and getMIMESubtype() in the main class;</p></li>
+<li><p>getName(), getInfo() and applyTransformation() in the abstract class
+it extends.</p></li>
 </ol>
 <p>The getMIMEType(), getMIMESubtype() and getName() methods return the
 name of the MIME type, MIME Subtype and transformation accordingly.
@@ -168,22 +167,23 @@ class), by using
 <code class="file docutils literal notranslate"><span class="pre">scripts/transformations_generator_main_class.sh</span></code>.</p>
 <p>The applyTransformation() method always gets passed three variables:</p>
 <ol class="arabic simple">
-<li><strong>$buffer</strong> - Contains the text inside of the column. This is the
-text, you want to transform.</li>
-<li><strong>$options</strong> - Contains any user-passed options to a transform
-function as an array.</li>
-<li><strong>$meta</strong> - Contains an object with information about your column. The
+<li><p><strong>$buffer</strong> - Contains the text inside of the column. This is the
+text, you want to transform.</p></li>
+<li><p><strong>$options</strong> - Contains any user-passed options to a transform
+function as an array.</p></li>
+<li><p><strong>$meta</strong> - Contains an object with information about your column. The
 data is drawn from the output of the <a class="reference external" href="https://www.php.net/mysql_fetch_field">mysql_fetch_field()</a> function. This means, all
 object properties described on the <a class="reference external" href="https://www.php.net/mysql_fetch_field">manual page</a> are available in this
 variable and can be used to transform a column accordingly to
 unsigned/zerofill/not_null/… properties. The $meta-&gt;mimetype
-variable contains the original <a class="reference internal" href="glossary.html#term-media-type"><span class="xref std std-term">Media type</span></a> of the column (i.e.
-‘text/plain’, ‘image/jpeg’ etc.)</li>
+variable contains the original <a class="reference internal" href="glossary.html#term-Media-type"><span class="xref std std-term">Media type</span></a> of the column (i.e.
+‘text/plain’, ‘image/jpeg’ etc.)</p></li>
 </ol>
 </div>
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -213,17 +213,15 @@ variable contains the original <a class="reference internal" href="glossary.html
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -240,13 +238,14 @@ variable contains the original <a class="reference internal" href="glossary.html
         <li class="right" >
           <a href="two_factor.html" title="Two-factor authentication"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.1.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="user.html" >User Guide</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.1.3 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="user.html" >User Guide</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Transformations</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; <a href="copyright.html">Copyright</a> 2012 - 2021, The phpMyAdmin devel team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
     </div>
   </body>
 </html>

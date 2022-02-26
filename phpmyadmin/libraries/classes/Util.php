@@ -793,12 +793,12 @@ class Util
 
         $date = (string) preg_replace(
             '@%[aA]@',
-            $day_of_week[(int) strftime('%w', (int) $timestamp)],
+            $day_of_week[(int) @strftime('%w', (int) $timestamp)],
             $format
         );
         $date = (string) preg_replace(
             '@%[bB]@',
-            $month[(int) strftime('%m', (int) $timestamp) - 1],
+            $month[(int) @strftime('%m', (int) $timestamp) - 1],
             $date
         );
 
@@ -813,7 +813,7 @@ class Util
 
         // Can return false on windows for Japanese language
         // See https://github.com/phpmyadmin/phpmyadmin/issues/15830
-        $ret = strftime($date, (int) $timestamp);
+        $ret = @strftime($date, (int) $timestamp);
         // Some OSes such as Win8.1 Traditional Chinese version did not produce UTF-8
         // output here. See https://github.com/phpmyadmin/phpmyadmin/issues/10598
         if ($ret === false
@@ -1345,7 +1345,7 @@ class Util
      *
      * @return string per user directory
      */
-    public static function userDir($dir): string
+    public static function userDir(string $dir): string
     {
         // add trailing slash
         if (mb_substr($dir, -1) !== '/') {
@@ -1662,7 +1662,7 @@ class Util
             $spatialSrid = 'ST_SRID';
         }
 
-        if ($mysqlVersionInt >= 80010 && ! $dbi->isMariaDb()) {
+        if ($mysqlVersionInt >= 80001 && ! $dbi->isMariaDb()) {
             $axisOrder = ', \'axis-order=long-lat\'';
         }
 
@@ -1674,7 +1674,7 @@ class Util
         $wktresult  = $dbi->tryQuery(
             $wktsql
         );
-        $wktarr     = $dbi->fetchRow($wktresult, 0);
+        $wktarr     = $dbi->fetchRow($wktresult);
         $wktval     = $wktarr[0] ?? null;
 
         if ($includeSRID) {
@@ -1933,7 +1933,7 @@ class Util
         }
 
         /* Do the replacement */
-        return strtr((string) strftime($string), $replace);
+        return strtr((string) @strftime($string), $replace);
     }
 
     /**
@@ -3017,8 +3017,8 @@ class Util
             // Get random byte and strip highest bit
             // to get ASCII only range
             $byte = ord((string) $random_func(1)) & 0x7f;
-            // We want only ASCII chars
-            if ($byte <= 32) {
+            // We want only ASCII chars and no DEL character (127)
+            if ($byte <= 32 || $byte === 127) {
                 continue;
             }
 
@@ -3171,9 +3171,9 @@ class Util
             $urlParams['tbl_group'] = $_REQUEST['tbl_group'];
         }
 
-        $url = Url::getFromRoute('/database/structure', $urlParams);
+        $url = Url::getFromRoute('/database/structure');
 
-        return Generator::linkOrButton($url, $title . $orderImg, $orderLinkParams);
+        return Generator::linkOrButton($url, $urlParams, $title . $orderImg, $orderLinkParams);
     }
 
     /**

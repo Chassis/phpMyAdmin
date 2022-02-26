@@ -329,13 +329,13 @@ class InsertEdit
 
         if (! $is_show) {
             return ' : <a href="' . Url::getFromRoute('/table/change') . '" data-post="'
-                . Url::getCommon($this_url_params, '') . '">'
+                . Url::getCommon($this_url_params, '', false) . '">'
                 . $this->showTypeOrFunctionLabel($which)
                 . '</a>';
         }
 
         return '<th><a href="' . Url::getFromRoute('/table/change') . '" data-post="'
-            . Url::getCommon($this_url_params, '')
+            . Url::getCommon($this_url_params, '', false)
             . '" title="' . __('Hide') . '">'
             . $this->showTypeOrFunctionLabel($which)
             . '</a></th>';
@@ -858,7 +858,7 @@ class InsertEdit
         }
 
         if (in_array($column['pma_type'], $gis_data_types)) {
-            $html_output .= $this->getHtmlForGisDataTypes();
+            $html_output .= $this->getHtmlForGisDataTypes((int) $rownumber);
         }
 
         return $html_output;
@@ -920,7 +920,8 @@ class InsertEdit
                     'rownumber' => $rownumber,
                     'data'      => $data,
                 ],
-                ''
+                '',
+                false
             ) . '">'
             . Generator::getIcon('b_browse', __('Browse foreign values')) . '</a>';
 
@@ -1030,7 +1031,7 @@ class InsertEdit
              *       why character columns have the "char" class instead
              */
             $the_class = 'char charField';
-            $textAreaRows = max($GLOBALS['cfg']['CharTextareaRows'], 7);
+            $textAreaRows = $GLOBALS['cfg']['CharTextareaRows'];
             $textareaCols = $GLOBALS['cfg']['CharTextareaCols'];
             $extracted_columnspec = Util::extractColumnSpec(
                 $column['Type']
@@ -1569,7 +1570,7 @@ class InsertEdit
     private function getSelectOptionForUpload($vkey, array $column)
     {
         $files = $this->fileListing->getFileSelectOptions(
-            Util::userDir($GLOBALS['cfg']['UploadDir'])
+            Util::userDir((string) ($GLOBALS['cfg']['UploadDir'] ?? ''))
         );
 
         if ($files === false) {
@@ -1781,13 +1782,14 @@ class InsertEdit
      *
      * @return string an html snippet
      */
-    private function getHtmlForGisDataTypes()
+    private function getHtmlForGisDataTypes(int $rowId): string
     {
         $edit_str = Generator::getIcon('b_edit', __('Edit/Insert'));
 
-        return '<span class="open_gis_editor">'
+        return '<span class="open_gis_editor" data-row-id="' . $rowId . '">'
             . Generator::linkOrButton(
                 '#',
+                null,
                 $edit_str,
                 [],
                 '_blank'
@@ -2602,7 +2604,7 @@ class InsertEdit
         $type
     ) {
         $include_file = 'libraries/classes/Plugins/Transformations/' . $file;
-        if (is_file($include_file)) {
+        if (is_file(ROOT_PATH . $include_file)) {
             // $cfg['SaveCellsAtOnce'] = true; JS code sends an array
             $whereClause = is_array($_POST['where_clause']) ? $_POST['where_clause'][0] : $_POST['where_clause'];
             $_url_params = [
@@ -2686,9 +2688,9 @@ class InsertEdit
             return "'" . $uuid . "'";
         }
 
-        if ((in_array($multi_edit_funcs[$key], $gis_from_text_functions)
-            && substr($current_value, 0, 3) == "'''")
-            || in_array($multi_edit_funcs[$key], $gis_from_wkb_functions)
+        if (
+            in_array($multi_edit_funcs[$key], $gis_from_text_functions) ||
+            in_array($multi_edit_funcs[$key], $gis_from_wkb_functions)
         ) {
             // Remove enclosing apostrophes
             $current_value = mb_substr($current_value, 1, -1);
@@ -3099,7 +3101,7 @@ class InsertEdit
          */
         $url_params = [
             'db' => $db,
-            'sql_query' => $_POST['sql_query'],
+            'sql_query' => $_POST['sql_query'] ?? '',
         ];
 
         if (strpos($goto, 'tbl_') === 0 || strpos($goto, 'index.php?route=/table') === 0) {
@@ -3297,7 +3299,8 @@ class InsertEdit
         // in the name attribute (see bug #1746964 )
         $column_name_appendix = $vkey . '[' . $column['Field_md5'] . ']';
 
-        if ($column['Type'] === 'datetime' && ! isset($column['Default']) && $insert_mode) {
+        if ($column['Type'] === 'datetime' && $column['Null'] !== 'YES'
+            && ! isset($column['Default']) && $insert_mode) {
             $column['Default'] = date('Y-m-d H:i:s', time());
         }
 
@@ -3425,7 +3428,7 @@ class InsertEdit
         if (! empty($column_mime['input_transformation'])) {
             $file = $column_mime['input_transformation'];
             $include_file = 'libraries/classes/Plugins/Transformations/' . $file;
-            if (is_file($include_file)) {
+            if (is_file(ROOT_PATH . $include_file)) {
                 $class_name = $this->transformations->getClassName($include_file);
                 if (class_exists($class_name)) {
                     $transformation_plugin = new $class_name();
