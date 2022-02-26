@@ -74,8 +74,9 @@ use function is_bool;
 use function mysqli_init;
 use function stripos;
 use function trigger_error;
-use const PHP_VERSION_ID;
 use function mysqli_get_client_info;
+use function sprintf;
+use const E_USER_ERROR;
 
 /**
  * Interface to the MySQL Improved extension (MySQLi)
@@ -164,15 +165,27 @@ class DbiMysqli implements DbiExtension
             $host = $server['host'];
         }
 
-        $return_value = $mysqli->real_connect(
-            $host,
-            $user,
-            $password,
-            '',
-            $server['port'],
-            (string) $server['socket'],
-            $client_flags
-        );
+        if ($server['hide_connection_errors']) {
+            $return_value = @$mysqli->real_connect(
+                $host,
+                $user,
+                $password,
+                '',
+                $server['port'],
+                (string) $server['socket'],
+                $client_flags
+            );
+        } else {
+            $return_value = $mysqli->real_connect(
+                $host,
+                $user,
+                $password,
+                '',
+                $server['port'],
+                (string) $server['socket'],
+                $client_flags
+            );
+        }
 
         if ($return_value === false || $return_value === null) {
             /*
@@ -197,6 +210,20 @@ class DbiMysqli implements DbiExtension
                 $server['ssl'] = true;
 
                 return self::connect($user, $password, $server);
+            }
+
+            if ($error_number === 1045 && $server['hide_connection_errors']) {
+                trigger_error(
+                    sprintf(
+                        __(
+                            'Error 1045: Access denied for user. Additional error information'
+                            . ' may be available, but is being hidden by the %s configuration directive.'
+                        ),
+                        '[code][doc@cfg_Servers_hide_connection_errors]'
+                        . '$cfg[\'Servers\'][$i][\'hide_connection_errors\'][/doc][/code]'
+                    ),
+                    E_USER_ERROR
+                );
             }
 
             return false;
@@ -393,17 +420,10 @@ class DbiMysqli implements DbiExtension
     /**
      * returns a string that represents the client library version
      *
-     * @param mysqli $mysqli mysql link
-     *
      * @return string MySQL client library version
      */
-    public function getClientInfo($mysqli)
+    public function getClientInfo()
     {
-        // See: https://github.com/phpmyadmin/phpmyadmin/issues/16911
-        if (PHP_VERSION_ID < 80100) {
-            return $mysqli->get_client_info();
-        }
-
         return mysqli_get_client_info();
     }
 

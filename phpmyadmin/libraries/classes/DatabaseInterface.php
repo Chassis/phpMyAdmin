@@ -288,6 +288,10 @@ class DatabaseInterface implements DbalInterface
      */
     public function getTables(string $database, $link = self::CONNECT_USER): array
     {
+        if ($database === '') {
+            return [];
+        }
+
         $tables = $this->fetchResult(
             'SHOW TABLES FROM ' . Util::backquote($database) . ';',
             null,
@@ -1168,22 +1172,23 @@ class DatabaseInterface implements DbalInterface
      */
     public function initRelationParamsCache()
     {
-        if (strlen($GLOBALS['db'])) {
-            $cfgRelation = $this->relation->getRelationsParam();
-            if (empty($cfgRelation['db'])) {
-                $this->relation->fixPmaTables($GLOBALS['db'], false);
-            }
-        }
-        $cfgRelation = $this->relation->getRelationsParam();
-        if (! empty($cfgRelation['db']) || ! isset($GLOBALS['dblist'])) {
+        $storageDbName = $GLOBALS['cfg']['Server']['pmadb'] ?? '';
+        // Use "phpmyadmin" as a default database name to check to keep the behavior consistent
+        $storageDbName = is_string($storageDbName) && $storageDbName !== '' ? $storageDbName : 'phpmyadmin';
+
+        // This will make users not having explicitly listed databases
+        // have config values filled by the default phpMyAdmin storage table name values
+        $this->relation->fixPmaTables($storageDbName, false);
+
+        // This global will be changed if fixPmaTables did find one valid table
+        $storageDbName = $GLOBALS['cfg']['Server']['pmadb'] ?? '';
+
+        // Empty means that until now no pmadb was found eligible
+        if (! empty($storageDbName)) {
             return;
         }
 
-        if (! $GLOBALS['dblist']->databases->exists('phpmyadmin')) {
-            return;
-        }
-
-        $this->relation->fixPmaTables('phpmyadmin', false);
+        $this->relation->fixPmaTables($GLOBALS['db'], false);
     }
 
     /**
@@ -2137,17 +2142,11 @@ class DatabaseInterface implements DbalInterface
     /**
      * returns a string that represents the client library version
      *
-     * @param int $link link type
-     *
      * @return string MySQL client library version
      */
-    public function getClientInfo($link = self::CONNECT_USER): string
+    public function getClientInfo(): string
     {
-        if (! isset($this->links[$link])) {
-            return '';
-        }
-
-        return $this->extension->getClientInfo($this->links[$link]);
+        return $this->extension->getClientInfo();
     }
 
     /**

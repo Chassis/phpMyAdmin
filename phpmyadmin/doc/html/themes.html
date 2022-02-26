@@ -1,20 +1,18 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Custom Themes &#8212; phpMyAdmin 5.1.1 documentation</title>
-    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom Themes &#8212; phpMyAdmin 5.1.3 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -34,8 +32,9 @@
         <li class="right" >
           <a href="import_export.html" title="Import and export"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.1.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="user.html" accesskey="U">User Guide</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.1.3 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="user.html" accesskey="U">User Guide</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Custom Themes</a></li> 
       </ul>
     </div>  
 
@@ -63,19 +62,19 @@ stored in a cookie.</p>
 <h2>Creating custom theme<a class="headerlink" href="#creating-custom-theme" title="Permalink to this headline">¶</a></h2>
 <p>To create a theme:</p>
 <ul class="simple">
-<li>make a new subdirectory (for example “your_theme_name”) under <code class="file docutils literal notranslate"><span class="pre">./themes/</span></code>.</li>
-<li>copy the files and directories from <code class="docutils literal notranslate"><span class="pre">pmahomme</span></code> to “your_theme_name”</li>
-<li>edit the css-files in “your_theme_name/css”</li>
-<li>put your new images in “your_theme_name/img”</li>
-<li>edit <code class="file docutils literal notranslate"><span class="pre">_variables.scss</span></code> in “your_theme_name/scss”</li>
-<li>edit <code class="file docutils literal notranslate"><span class="pre">theme.json</span></code> in “your_theme_name” to contain theme metadata (see below)</li>
-<li>make a new screenshot of your theme and save it under
-“your_theme_name/screen.png”</li>
+<li><p>make a new subdirectory (for example “your_theme_name”) under <code class="file docutils literal notranslate"><span class="pre">./themes/</span></code>.</p></li>
+<li><p>copy the files and directories from <code class="docutils literal notranslate"><span class="pre">pmahomme</span></code> to “your_theme_name”</p></li>
+<li><p>edit the css-files in “your_theme_name/css”</p></li>
+<li><p>put your new images in “your_theme_name/img”</p></li>
+<li><p>edit <code class="file docutils literal notranslate"><span class="pre">_variables.scss</span></code> in “your_theme_name/scss”</p></li>
+<li><p>edit <code class="file docutils literal notranslate"><span class="pre">theme.json</span></code> in “your_theme_name” to contain theme metadata (see below)</p></li>
+<li><p>make a new screenshot of your theme and save it under
+“your_theme_name/screen.png”</p></li>
 </ul>
 <div class="section" id="theme-metadata">
 <h3>Theme metadata<a class="headerlink" href="#theme-metadata" title="Permalink to this headline">¶</a></h3>
 <div class="versionchanged">
-<p><span class="versionmodified">Changed in version 4.8.0: </span>Before 4.8.0 the theme metadata was passed in the <code class="file docutils literal notranslate"><span class="pre">info.inc.php</span></code> file.
+<p><span class="versionmodified changed">Changed in version 4.8.0: </span>Before 4.8.0 the theme metadata was passed in the <code class="file docutils literal notranslate"><span class="pre">info.inc.php</span></code> file.
 It has been replaced by <code class="file docutils literal notranslate"><span class="pre">theme.json</span></code> to allow easier parsing (without
 need to handle PHP code) and to support additional features.</p>
 </div>
@@ -83,42 +82,42 @@ need to handle PHP code) and to support additional features.</p>
 metadata. Currently it consists of:</p>
 <dl class="describe">
 <dt>
-<code class="descname">name</code></dt>
+<code class="sig-name descname">name</code></dt>
 <dd><p>Display name of the theme.</p>
 <p><strong>This field is required.</strong></p>
 </dd></dl>
 
 <dl class="describe">
 <dt>
-<code class="descname">version</code></dt>
+<code class="sig-name descname">version</code></dt>
 <dd><p>Theme version, can be quite arbitrary and does not have to match phpMyAdmin version.</p>
 <p><strong>This field is required.</strong></p>
 </dd></dl>
 
 <dl class="describe">
 <dt>
-<code class="descname">description</code></dt>
+<code class="sig-name descname">description</code></dt>
 <dd><p>Theme description. this will be shown on the website.</p>
 <p><strong>This field is required.</strong></p>
 </dd></dl>
 
 <dl class="describe">
 <dt>
-<code class="descname">author</code></dt>
+<code class="sig-name descname">author</code></dt>
 <dd><p>Theme author name.</p>
 <p><strong>This field is required.</strong></p>
 </dd></dl>
 
 <dl class="describe">
 <dt>
-<code class="descname">url</code></dt>
+<code class="sig-name descname">url</code></dt>
 <dd><p>Link to theme author website. It’s good idea to have way for getting
 support there.</p>
 </dd></dl>
 
 <dl class="describe">
 <dt>
-<code class="descname">supports</code></dt>
+<code class="sig-name descname">supports</code></dt>
 <dd><p>Array of supported phpMyAdmin major versions.</p>
 <p><strong>This field is required.</strong></p>
 </dd></dl>
@@ -145,6 +144,7 @@ default icons and buttons (from the system-theme <code class="docutils literal n
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -177,17 +177,15 @@ default icons and buttons (from the system-theme <code class="docutils literal n
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -204,13 +202,14 @@ default icons and buttons (from the system-theme <code class="docutils literal n
         <li class="right" >
           <a href="import_export.html" title="Import and export"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.1.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="user.html" >User Guide</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.1.3 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="user.html" >User Guide</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Custom Themes</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; <a href="copyright.html">Copyright</a> 2012 - 2021, The phpMyAdmin devel team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
     </div>
   </body>
 </html>

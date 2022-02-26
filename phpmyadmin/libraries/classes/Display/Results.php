@@ -1014,7 +1014,11 @@ class Results
 
         // required to generate sort links that will remember whether the
         // "Show all" button has been clicked
-        $sql_md5 = md5($this->properties['sql_query']);
+        $sql_md5 = md5(
+            $this->properties['server']
+            . $this->properties['db']
+            . $this->properties['sql_query']
+        );
         $session_max_rows = $is_limited_display
             ? 0
             : $_SESSION['tmpval']['query'][$sql_md5]['max_rows'];
@@ -1555,9 +1559,8 @@ class Results
 
         $tmp_image = '<img class="fulltext" src="' . $tmp_image_file . '" alt="'
                      . $tmp_txt . '" title="' . $tmp_txt . '">';
-        $tmp_url = Url::getFromRoute('/sql', $url_params_full_text);
 
-        return Generator::linkOrButton($tmp_url, $tmp_image);
+        return Generator::linkOrButton(Url::getFromRoute('/sql'), $url_params_full_text, $tmp_image);
     }
 
     /**
@@ -1673,16 +1676,14 @@ class Results
             'session_max_rows'   => $session_max_rows,
             'is_browse_distinct' => $this->properties['is_browse_distinct'],
         ];
-        $single_order_url = Url::getFromRoute('/sql', $_single_url_params);
-        $multi_order_url = Url::getFromRoute('/sql', $_multi_url_params);
 
         // Displays the sorting URL
         // enable sort order swapping for image
         $order_link = $this->getSortOrderLink(
             $order_img,
             $fields_meta,
-            $single_order_url,
-            $multi_order_url
+            $_single_url_params,
+            $_multi_url_params
         );
 
         $order_link .= $this->getSortOrderHiddenInputs(
@@ -1992,10 +1993,10 @@ class Results
      *
      * @see getTableHeaders()
      *
-     * @param string   $order_img       the sort order image
-     * @param stdClass $fields_meta     set of field properties
-     * @param string   $order_url       the url for sort
-     * @param string   $multi_order_url the url for sort
+     * @param string   $order_img              the sort order image
+     * @param stdClass $fields_meta            set of field properties
+     * @param array    $order_url_params       the url params for sort
+     * @param array    $multi_order_url_params the url params for sort
      *
      * @return string the sort order link
      *
@@ -2004,17 +2005,21 @@ class Results
     private function getSortOrderLink(
         $order_img,
         $fields_meta,
-        $order_url,
-        $multi_order_url
+        $order_url_params,
+        $multi_order_url_params
     ) {
         $order_link_params = ['class' => 'sortlink'];
 
-        $order_link_content = htmlspecialchars($fields_meta->name);
+        $order_link_content = htmlspecialchars($fields_meta->name ?? '');
         $inner_link_content = $order_link_content . $order_img
-            . '<input type="hidden" value="' . $multi_order_url . '">';
+            . '<input type="hidden" value="'
+            . Url::getFromRoute('/sql')
+            . Url::getCommon($multi_order_url_params, '?', false)
+            . '">';
 
         return Generator::linkOrButton(
-            $order_url,
+            Url::getFromRoute('/sql'),
+            $order_url_params,
             $inner_link_content,
             $order_link_params
         );
@@ -2082,7 +2087,7 @@ class Results
             return;
         }
 
-        $th_class[] = 'right';
+        $th_class[] = 'text-right';
     }
 
     /**
@@ -2485,8 +2490,8 @@ class Results
         $whereClauseMap = $this->properties['whereClauseMap'];
         while ($row = $dbi->fetchRow($dt_result)) {
             // add repeating headers
-            if (($row_no != 0) && ($_SESSION['tmpval']['repeat_cells'] != 0)
-                && ! $row_no % $_SESSION['tmpval']['repeat_cells']
+            if (($row_no !== 0) && ($_SESSION['tmpval']['repeat_cells'] > 0)
+                && ($row_no % $_SESSION['tmpval']['repeat_cells']) === 0
             ) {
                 $table_body_html .= $this->getRepeatingHeaders(
                     $display_params
@@ -2515,6 +2520,8 @@ class Results
             $copy_url = null;
             $copy_str = null;
             $edit_url = null;
+            $editCopyUrlParams = [];
+            $delUrlParams = null;
 
             // 1.2 Defines the URLs for the modify/delete link(s)
 
@@ -2555,6 +2562,7 @@ class Results
                         $copy_url,
                         $edit_str,
                         $copy_str,
+                        $editCopyUrlParams,
                     ]
                             = $this->getModifiedLinks(
                                 $where_clause,
@@ -2564,7 +2572,7 @@ class Results
                 }
 
                 // 1.2.2 Delete/Kill link(s)
-                [$del_url, $del_str, $js_conf]
+                [$del_url, $del_str, $js_conf, $delUrlParams]
                     = $this->getDeleteAndKillLinks(
                         $where_clause,
                         $clause_is_unique,
@@ -2580,9 +2588,18 @@ class Results
                     $table_body_html .= $this->template->render('display/results/checkbox_and_links', [
                         'position' => self::POSITION_LEFT,
                         'has_checkbox' => ! empty($del_url) && $displayParts['del_lnk'] !== self::KILL_PROCESS,
-                        'edit' => ['url' => $edit_url, 'string' => $edit_str, 'clause_is_unique' => $clause_is_unique],
-                        'copy' => ['url' => $copy_url, 'string' => $copy_str],
-                        'delete' => ['url' => $del_url, 'string' => $del_str],
+                        'edit' => [
+                            'url' => $edit_url,
+                            'params' => $editCopyUrlParams + ['default_action' => 'update'],
+                            'string' => $edit_str,
+                            'clause_is_unique' => $clause_is_unique,
+                        ],
+                        'copy' => [
+                            'url' => $copy_url,
+                            'params' => $editCopyUrlParams + ['default_action' => 'insert'],
+                            'string' => $copy_str,
+                        ],
+                        'delete' => ['url' => $del_url, 'params' => $delUrlParams, 'string' => $del_str],
                         'row_number' => $row_no,
                         'where_clause' => $where_clause,
                         'condition' => json_encode($condition_array),
@@ -2593,9 +2610,18 @@ class Results
                     $table_body_html .= $this->template->render('display/results/checkbox_and_links', [
                         'position' => self::POSITION_NONE,
                         'has_checkbox' => ! empty($del_url) && $displayParts['del_lnk'] !== self::KILL_PROCESS,
-                        'edit' => ['url' => $edit_url, 'string' => $edit_str, 'clause_is_unique' => $clause_is_unique],
-                        'copy' => ['url' => $copy_url, 'string' => $copy_str],
-                        'delete' => ['url' => $del_url, 'string' => $del_str],
+                        'edit' => [
+                            'url' => $edit_url,
+                            'params' => $editCopyUrlParams + ['default_action' => 'update'],
+                            'string' => $edit_str,
+                            'clause_is_unique' => $clause_is_unique,
+                        ],
+                        'copy' => [
+                            'url' => $copy_url,
+                            'params' => $editCopyUrlParams + ['default_action' => 'insert'],
+                            'string' => $copy_str,
+                        ],
+                        'delete' => ['url' => $del_url, 'params' => $delUrlParams, 'string' => $del_str],
                         'row_number' => $row_no,
                         'where_clause' => $where_clause,
                         'condition' => json_encode($condition_array),
@@ -2633,11 +2659,16 @@ class Results
                         'has_checkbox' => ! empty($del_url) && $displayParts['del_lnk'] !== self::KILL_PROCESS,
                         'edit' => [
                             'url' => $edit_url,
+                            'params' => $editCopyUrlParams + ['default_action' => 'update'],
                             'string' => $edit_str,
                             'clause_is_unique' => $clause_is_unique ?? true,
                         ],
-                        'copy' => ['url' => $copy_url, 'string' => $copy_str],
-                        'delete' => ['url' => $del_url, 'string' => $del_str],
+                        'copy' => [
+                            'url' => $copy_url,
+                            'params' => $editCopyUrlParams + ['default_action' => 'insert'],
+                            'string' => $copy_str,
+                        ],
+                        'delete' => ['url' => $del_url, 'params' => $delUrlParams, 'string' => $del_str],
                         'row_number' => $row_no,
                         'where_clause' => $where_clause ?? '',
                         'condition' => json_encode($condition_array ?? []),
@@ -2830,7 +2861,7 @@ class Results
                     $file = $mime_map[$orgFullColName]['transformation'];
                     $include_file = 'libraries/classes/Plugins/Transformations/' . $file;
 
-                    if (@file_exists($include_file)) {
+                    if (@file_exists(ROOT_PATH . $include_file)) {
                         $class_name = $this->transformations->getClassName($include_file);
                         if (class_exists($class_name)) {
                             // todo add $plugin_manager
@@ -2863,7 +2894,7 @@ class Results
                 && (trim($row[$i]) != '')
                 && ! $_SESSION['tmpval']['hide_transformation']
             ) {
-                include_once $this->transformationInfo[$dbLower][$tblLower][$nameLower][0];
+                include_once ROOT_PATH . $this->transformationInfo[$dbLower][$tblLower][$nameLower][0];
                 $transformation_plugin = new $this->transformationInfo[$dbLower][$tblLower][$nameLower][1](null);
 
                 $transform_options = $this->transformations->getOptions(
@@ -2950,7 +2981,9 @@ class Results
             // even for a string type
             // for decimal numeric is returning 1
             // have to improve logic
-            if (($meta->numeric == 1 && $meta->type !== 'string') || $meta->type === 'real') {
+            // Nullable text fields and text fields have the blob flag (issue 16896)
+            $isNumericAndNotBlob = $meta->numeric == 1 && $meta->blob == 0;
+            if (($isNumericAndNotBlob && $meta->type !== 'string') || $meta->type === 'real') {
                 // n u m e r i c
 
                 $display_params['data'][$row_no][$i]
@@ -2975,7 +3008,7 @@ class Results
 
                 $display_params['data'][$row_no][$i]
                     = $this->getDataCellForGeometryColumns(
-                        $row[$i],
+                        $row[$i] === null ? null : (string) $row[$i],
                         $class,
                         $meta,
                         $map,
@@ -2991,7 +3024,7 @@ class Results
 
                 $display_params['data'][$row_no][$i]
                     = $this->getDataCellForNonNumericColumns(
-                        $row[$i],
+                        $row[$i] === null ? null : (string) $row[$i],
                         $class,
                         $meta,
                         $map,
@@ -3225,8 +3258,12 @@ class Results
      * @param bool   $clause_is_unique the unique condition of clause
      * @param string $url_sql_query    the analyzed sql query
      *
-     * @return array<int,string>       5 element array - $edit_url, $copy_url,
-     *                                                   $edit_str, $copy_str
+     * @phpstan-return array{string, string, string, string,
+     *  array{
+     *    db: string, table: string, where_clause: string,
+     *    clause_is_unique: bool, sql_query: string, goto: string
+     *  }
+     * }
      *
      * @access private
      */
@@ -3244,15 +3281,9 @@ class Results
             'goto'             => Url::getFromRoute('/sql'),
         ];
 
-        $edit_url = Url::getFromRoute(
-            '/table/change',
-            $_url_params + ['default_action' => 'update']
-        );
+        $edit_url = Url::getFromRoute('/table/change');
 
-        $copy_url = Url::getFromRoute(
-            '/table/change',
-            $_url_params + ['default_action' => 'insert']
-        );
+        $copy_url = Url::getFromRoute('/table/change');
 
         $edit_str = $this->getActionLinkContent(
             'b_edit',
@@ -3268,6 +3299,7 @@ class Results
             $copy_url,
             $edit_str,
             $copy_str,
+            $_url_params,
         ];
     }
 
@@ -3321,10 +3353,10 @@ class Results
                 'message_to_show' => __('The row has been deleted.'),
                 'goto'      => $lnk_goto,
             ];
-            $del_url  = Url::getFromRoute('/sql', $_url_params);
+            $del_url  = Url::getFromRoute('/sql');
 
-            $js_conf  = 'DELETE FROM ' . Sanitize::jsFormat($this->properties['table'])
-                . ' WHERE ' . Sanitize::jsFormat($where_clause, false)
+            $js_conf  = 'DELETE FROM ' . $this->properties['table']
+                . ' WHERE ' . $where_clause
                 . ($clause_is_unique ? '' : ' LIMIT 1');
 
             $del_str = $this->getActionLinkContent('b_drop', __('Delete'));
@@ -3346,20 +3378,21 @@ class Results
                 'goto'      => $lnk_goto,
             ];
 
-            $del_url = Url::getFromRoute('/sql', $_url_params);
+            $del_url = Url::getFromRoute('/sql');
             $js_conf = $kill;
             $del_str = Generator::getIcon(
                 'b_drop',
                 __('Kill')
             );
         } else {
-            $del_url = $del_str = $js_conf = null;
+            $del_url = $del_str = $js_conf = $_url_params = null;
         }
 
         return [
             $del_url,
             $del_str,
             $js_conf,
+            $_url_params,
         ];
     }
 
@@ -3496,7 +3529,7 @@ class Results
     ) {
         if (! isset($column) || $column === null) {
             $cell = $this->buildNullDisplay(
-                'right ' . $class,
+                'text-right ' . $class,
                 $condition_field,
                 $meta,
                 ''
@@ -3506,7 +3539,7 @@ class Results
             $where_comparison = ' = ' . $column;
 
             $cell = $this->getRowData(
-                'right ' . $class,
+                'text-right ' . $class,
                 $condition_field,
                 $analyzed_sql_results,
                 $meta,
@@ -3523,7 +3556,7 @@ class Results
             );
         } else {
             $cell = $this->buildEmptyDisplay(
-                'right ' . $class,
+                'text-right ' . $class,
                 $condition_field,
                 $meta,
                 ''
@@ -3872,7 +3905,11 @@ class Results
      */
     public function setConfigParamsForDisplayTable()
     {
-        $sql_md5 = md5($this->properties['sql_query']);
+        $sql_md5 = md5(
+            $this->properties['server']
+            . $this->properties['db']
+            . $this->properties['sql_query']
+        );
         $query = [];
         if (isset($_SESSION['tmpval']['query'][$sql_md5])) {
             $query = $_SESSION['tmpval']['query'][$sql_md5];
@@ -4359,6 +4396,7 @@ class Results
 
         if (stripos($meta->type, self::BLOB_FIELD) !== false
             || ($meta->type === self::GEOMETRY_FIELD)
+            || ($meta->type === 'string' && $meta->charsetnr === 63)// Is a binary string
         ) {
             $column_for_first_row = $this->handleNonPrintableContents(
                 $meta->type,
@@ -4391,6 +4429,7 @@ class Results
         $meta = $fields_meta[$sorted_column_index];
         if (stripos($meta->type, self::BLOB_FIELD) !== false
             || ($meta->type === self::GEOMETRY_FIELD)
+            || ($meta->type === 'string' && $meta->charsetnr === 63)// Is a binary string
         ) {
             $column_for_last_row = $this->handleNonPrintableContents(
                 $meta->type,
@@ -4886,7 +4925,7 @@ class Results
         );
 
         if ($dispresult && $dbi->numRows($dispresult) > 0) {
-            [$dispval] = $dbi->fetchRow($dispresult, 0);
+            [$dispval] = $dbi->fetchRow($dispresult);
         } else {
             $dispval = __('Link not found!');
         }
@@ -5055,7 +5094,8 @@ class Results
                     $tag_params['class'] = 'ajax';
                 }
                 $result .= Generator::linkOrButton(
-                    Url::getFromRoute('/sql', $_url_params),
+                    Url::getFromRoute('/sql'),
+                    $_url_params,
                     $displayedData,
                     $tag_params
                 );

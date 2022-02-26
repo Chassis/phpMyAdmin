@@ -4,12 +4,15 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit5b64bc5128aa3aa10a1fab44c22216e7
+class ComposerStaticInit8abdbdc9c177836e7eeea3d791ca9380
 {
     public static $files = array (
+        'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '23c18046f52bef3eea034657bafda50f' => __DIR__ . '/..' . '/symfony/polyfill-php81/bootstrap.php',
+        '0d59ee240a4cd96ddbb4ff164fccea4d' => __DIR__ . '/..' . '/symfony/polyfill-php73/bootstrap.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
         '253c157292f75eb38082b5acb06f3f01' => __DIR__ . '/..' . '/nikic/fast-route/src/functions.php',
         'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
     );
@@ -30,6 +33,9 @@ class ComposerStaticInit5b64bc5128aa3aa10a1fab44c22216e7
         'S' => 
         array (
             'Symfony\\Polyfill\\Php81\\' => 23,
+            'Symfony\\Polyfill\\Php80\\' => 23,
+            'Symfony\\Polyfill\\Php73\\' => 23,
+            'Symfony\\Polyfill\\Php72\\' => 23,
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
             'Symfony\\Contracts\\Service\\' => 26,
@@ -40,7 +46,6 @@ class ComposerStaticInit5b64bc5128aa3aa10a1fab44c22216e7
             'Symfony\\Component\\DependencyInjection\\' => 38,
             'Symfony\\Component\\Config\\' => 25,
             'Symfony\\Component\\Cache\\' => 24,
-            'Samyoul\\U2F\\U2FServer\\' => 22,
         ),
         'R' => 
         array (
@@ -69,6 +74,10 @@ class ComposerStaticInit5b64bc5128aa3aa10a1fab44c22216e7
         array (
             'DASPRiD\\Enum\\' => 13,
         ),
+        'C' => 
+        array (
+            'CodeLts\\U2F\\U2FServer\\' => 22,
+        ),
         'B' => 
         array (
             'BaconQrCode\\' => 12,
@@ -91,6 +100,18 @@ class ComposerStaticInit5b64bc5128aa3aa10a1fab44c22216e7
         'Symfony\\Polyfill\\Php81\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php81',
+        ),
+        'Symfony\\Polyfill\\Php80\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
+        ),
+        'Symfony\\Polyfill\\Php73\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-php73',
+        ),
+        'Symfony\\Polyfill\\Php72\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-php72',
         ),
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
@@ -131,10 +152,6 @@ class ComposerStaticInit5b64bc5128aa3aa10a1fab44c22216e7
         'Symfony\\Component\\Cache\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/cache',
-        ),
-        'Samyoul\\U2F\\U2FServer\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/samyoul/u2f-php-server/src',
         ),
         'ReCaptcha\\' => 
         array (
@@ -196,6 +213,10 @@ class ComposerStaticInit5b64bc5128aa3aa10a1fab44c22216e7
         array (
             0 => __DIR__ . '/..' . '/dasprid/enum/src',
         ),
+        'CodeLts\\U2F\\U2FServer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/code-lts/u2f-php-server/src',
+        ),
         'BaconQrCode\\' => 
         array (
             0 => __DIR__ . '/..' . '/bacon/bacon-qr-code/src',
@@ -213,6 +234,7 @@ class ComposerStaticInit5b64bc5128aa3aa10a1fab44c22216e7
     );
 
     public static $classMap = array (
+        'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'BaconQrCode\\Common\\BitArray' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/Common/BitArray.php',
         'BaconQrCode\\Common\\BitMatrix' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/Common/BitMatrix.php',
         'BaconQrCode\\Common\\BitUtils' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/Common/BitUtils.php',
@@ -273,6 +295,11 @@ class ComposerStaticInit5b64bc5128aa3aa10a1fab44c22216e7
         'BaconQrCode\\Renderer\\RendererStyle\\GradientType' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/Renderer/RendererStyle/GradientType.php',
         'BaconQrCode\\Renderer\\RendererStyle\\RendererStyle' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/Renderer/RendererStyle/RendererStyle.php',
         'BaconQrCode\\Writer' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/Writer.php',
+        'CodeLts\\U2F\\U2FServer\\Registration' => __DIR__ . '/..' . '/code-lts/u2f-php-server/src/Registration.php',
+        'CodeLts\\U2F\\U2FServer\\RegistrationRequest' => __DIR__ . '/..' . '/code-lts/u2f-php-server/src/RegistrationRequest.php',
+        'CodeLts\\U2F\\U2FServer\\SignRequest' => __DIR__ . '/..' . '/code-lts/u2f-php-server/src/SignRequest.php',
+        'CodeLts\\U2F\\U2FServer\\U2FException' => __DIR__ . '/..' . '/code-lts/u2f-php-server/src/U2FException.php',
+        'CodeLts\\U2F\\U2FServer\\U2FServer' => __DIR__ . '/..' . '/code-lts/u2f-php-server/src/U2FServer.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'DASPRiD\\Enum\\AbstractEnum' => __DIR__ . '/..' . '/dasprid/enum/src/AbstractEnum.php',
         'DASPRiD\\Enum\\EnumMap' => __DIR__ . '/..' . '/dasprid/enum/src/EnumMap.php',
@@ -302,6 +329,7 @@ class ComposerStaticInit5b64bc5128aa3aa10a1fab44c22216e7
         'FastRoute\\RouteCollector' => __DIR__ . '/..' . '/nikic/fast-route/src/RouteCollector.php',
         'FastRoute\\RouteParser' => __DIR__ . '/..' . '/nikic/fast-route/src/RouteParser.php',
         'FastRoute\\RouteParser\\Std' => __DIR__ . '/..' . '/nikic/fast-route/src/RouteParser/Std.php',
+        'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
         'PDF417' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/barcodes/pdf417.php',
         'ParagonIE\\ConstantTime\\Base32' => __DIR__ . '/..' . '/paragonie/constant_time_encoding/src/Base32.php',
         'ParagonIE\\ConstantTime\\Base32Hex' => __DIR__ . '/..' . '/paragonie/constant_time_encoding/src/Base32Hex.php',
@@ -470,6 +498,7 @@ class ComposerStaticInit5b64bc5128aa3aa10a1fab44c22216e7
         'PhpMyAdmin\\Controllers\\ViewOperationsController' => __DIR__ . '/../..' . '/libraries/classes/Controllers/ViewOperationsController.php',
         'PhpMyAdmin\\Core' => __DIR__ . '/../..' . '/libraries/classes/Core.php',
         'PhpMyAdmin\\CreateAddField' => __DIR__ . '/../..' . '/libraries/classes/CreateAddField.php',
+        'PhpMyAdmin\\Crypto\\Crypto' => __DIR__ . '/../..' . '/libraries/classes/Crypto/Crypto.php',
         'PhpMyAdmin\\DatabaseInterface' => __DIR__ . '/../..' . '/libraries/classes/DatabaseInterface.php',
         'PhpMyAdmin\\Database\\CentralColumns' => __DIR__ . '/../..' . '/libraries/classes/Database/CentralColumns.php',
         'PhpMyAdmin\\Database\\DatabaseList' => __DIR__ . '/../..' . '/libraries/classes/Database/DatabaseList.php',
@@ -778,11 +807,15 @@ class ComposerStaticInit5b64bc5128aa3aa10a1fab44c22216e7
         'PhpMyAdmin\\SqlParser\\Components\\RenameOperation' => __DIR__ . '/..' . '/phpmyadmin/sql-parser/src/Components/RenameOperation.php',
         'PhpMyAdmin\\SqlParser\\Components\\SetOperation' => __DIR__ . '/..' . '/phpmyadmin/sql-parser/src/Components/SetOperation.php',
         'PhpMyAdmin\\SqlParser\\Components\\UnionKeyword' => __DIR__ . '/..' . '/phpmyadmin/sql-parser/src/Components/UnionKeyword.php',
+        'PhpMyAdmin\\SqlParser\\Components\\WithKeyword' => __DIR__ . '/..' . '/phpmyadmin/sql-parser/src/Components/WithKeyword.php',
         'PhpMyAdmin\\SqlParser\\Context' => __DIR__ . '/..' . '/phpmyadmin/sql-parser/src/Context.php',
         'PhpMyAdmin\\SqlParser\\Contexts\\ContextMariaDb100000' => __DIR__ . '/..' . '/phpmyadmin/sql-parser/src/Contexts/ContextMariaDb100000.php',
         'PhpMyAdmin\\SqlParser\\Contexts\\ContextMariaDb100100' => __DIR__ . '/..' . '/phpmyadmin/sql-parser/src/Contexts/ContextMariaDb100100.php',
         'PhpMyAdmin\\SqlParser\\Contexts\\ContextMariaDb100200' => __DIR__ . '/..' . '/phpmyadmin/sql-parser/src/Contexts/ContextMariaDb100200.php',
         'PhpMyAdmin\\SqlParser\\Contexts\\ContextMariaDb100300' => __DIR__ . '/..' . '/phpmyadmin/sql-parser/src/Contexts/ContextMariaDb100300.php',
+        'PhpMyAdmin\\SqlParser\\Contexts\\ContextMariaDb100400' => __DIR__ . '/..' . '/phpmyadmin/sql-parser/src/Contexts/ContextMariaDb100400.php',
+        'PhpMyAdmin\\SqlParser\\Contexts\\ContextMariaDb100500' => __DIR__ . '/..' . '/phpmyadmin/sql-parser/src/Contexts/ContextMariaDb100500.php',
+        'PhpMyAdmin\\SqlParser\\Contexts\\ContextMariaDb100600' => __DIR__ . '/..' . '/phpmyadmin/sql-parser/src/Contexts/ContextMariaDb100600.php',
         'PhpMyAdmin\\SqlParser\\Contexts\\ContextMySql50000' => __DIR__ . '/..' . '/phpmyadmin/sql-parser/src/Contexts/ContextMySql50000.php',
         'PhpMyAdmin\\SqlParser\\Contexts\\ContextMySql50100' => __DIR__ . '/..' . '/phpmyadmin/sql-parser/src/Contexts/ContextMySql50100.php',
         'PhpMyAdmin\\SqlParser\\Contexts\\ContextMySql50500' => __DIR__ . '/..' . '/phpmyadmin/sql-parser/src/Contexts/ContextMySql50500.php',
@@ -823,6 +856,7 @@ class ComposerStaticInit5b64bc5128aa3aa10a1fab44c22216e7
         'PhpMyAdmin\\SqlParser\\Statements\\TransactionStatement' => __DIR__ . '/..' . '/phpmyadmin/sql-parser/src/Statements/TransactionStatement.php',
         'PhpMyAdmin\\SqlParser\\Statements\\TruncateStatement' => __DIR__ . '/..' . '/phpmyadmin/sql-parser/src/Statements/TruncateStatement.php',
         'PhpMyAdmin\\SqlParser\\Statements\\UpdateStatement' => __DIR__ . '/..' . '/phpmyadmin/sql-parser/src/Statements/UpdateStatement.php',
+        'PhpMyAdmin\\SqlParser\\Statements\\WithStatement' => __DIR__ . '/..' . '/phpmyadmin/sql-parser/src/Statements/WithStatement.php',
         'PhpMyAdmin\\SqlParser\\Token' => __DIR__ . '/..' . '/phpmyadmin/sql-parser/src/Token.php',
         'PhpMyAdmin\\SqlParser\\TokensList' => __DIR__ . '/..' . '/phpmyadmin/sql-parser/src/TokensList.php',
         'PhpMyAdmin\\SqlParser\\Tools\\ContextGenerator' => __DIR__ . '/..' . '/phpmyadmin/sql-parser/src/Tools/ContextGenerator.php',
@@ -928,11 +962,7 @@ class ComposerStaticInit5b64bc5128aa3aa10a1fab44c22216e7
         'ReCaptcha\\RequestParameters' => __DIR__ . '/..' . '/google/recaptcha/src/ReCaptcha/RequestParameters.php',
         'ReCaptcha\\Response' => __DIR__ . '/..' . '/google/recaptcha/src/ReCaptcha/Response.php',
         'ReturnTypeWillChange' => __DIR__ . '/..' . '/symfony/polyfill-php81/Resources/stubs/ReturnTypeWillChange.php',
-        'Samyoul\\U2F\\U2FServer\\Registration' => __DIR__ . '/..' . '/samyoul/u2f-php-server/src/Registration.php',
-        'Samyoul\\U2F\\U2FServer\\RegistrationRequest' => __DIR__ . '/..' . '/samyoul/u2f-php-server/src/RegistrationRequest.php',
-        'Samyoul\\U2F\\U2FServer\\SignRequest' => __DIR__ . '/..' . '/samyoul/u2f-php-server/src/SignRequest.php',
-        'Samyoul\\U2F\\U2FServer\\U2FException' => __DIR__ . '/..' . '/samyoul/u2f-php-server/src/U2FException.php',
-        'Samyoul\\U2F\\U2FServer\\U2FServer' => __DIR__ . '/..' . '/samyoul/u2f-php-server/src/U2FServer.php',
+        'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'Symfony\\Component\\Cache\\Adapter\\AbstractAdapter' => __DIR__ . '/..' . '/symfony/cache/Adapter/AbstractAdapter.php',
         'Symfony\\Component\\Cache\\Adapter\\AbstractTagAwareAdapter' => __DIR__ . '/..' . '/symfony/cache/Adapter/AbstractTagAwareAdapter.php',
         'Symfony\\Component\\Cache\\Adapter\\AdapterInterface' => __DIR__ . '/..' . '/symfony/cache/Adapter/AdapterInterface.php',
@@ -1287,6 +1317,9 @@ class ComposerStaticInit5b64bc5128aa3aa10a1fab44c22216e7
         'Symfony\\Contracts\\Service\\Test\\ServiceLocatorTest' => __DIR__ . '/..' . '/symfony/service-contracts/Test/ServiceLocatorTest.php',
         'Symfony\\Polyfill\\Ctype\\Ctype' => __DIR__ . '/..' . '/symfony/polyfill-ctype/Ctype.php',
         'Symfony\\Polyfill\\Mbstring\\Mbstring' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/Mbstring.php',
+        'Symfony\\Polyfill\\Php72\\Php72' => __DIR__ . '/..' . '/symfony/polyfill-php72/Php72.php',
+        'Symfony\\Polyfill\\Php73\\Php73' => __DIR__ . '/..' . '/symfony/polyfill-php73/Php73.php',
+        'Symfony\\Polyfill\\Php80\\Php80' => __DIR__ . '/..' . '/symfony/polyfill-php80/Php80.php',
         'Symfony\\Polyfill\\Php81\\Php81' => __DIR__ . '/..' . '/symfony/polyfill-php81/Php81.php',
         'TCPDF' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf.php',
         'TCPDF2DBarcode' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf_barcodes_2d.php',
@@ -1344,6 +1377,7 @@ class ComposerStaticInit5b64bc5128aa3aa10a1fab44c22216e7
         'Twig\\Node\\BlockNode' => __DIR__ . '/..' . '/twig/twig/src/Node/BlockNode.php',
         'Twig\\Node\\BlockReferenceNode' => __DIR__ . '/..' . '/twig/twig/src/Node/BlockReferenceNode.php',
         'Twig\\Node\\BodyNode' => __DIR__ . '/..' . '/twig/twig/src/Node/BodyNode.php',
+        'Twig\\Node\\CheckSecurityCallNode' => __DIR__ . '/..' . '/twig/twig/src/Node/CheckSecurityCallNode.php',
         'Twig\\Node\\CheckSecurityNode' => __DIR__ . '/..' . '/twig/twig/src/Node/CheckSecurityNode.php',
         'Twig\\Node\\CheckToStringNode' => __DIR__ . '/..' . '/twig/twig/src/Node/CheckToStringNode.php',
         'Twig\\Node\\DeprecatedNode' => __DIR__ . '/..' . '/twig/twig/src/Node/DeprecatedNode.php',
@@ -1654,6 +1688,8 @@ class ComposerStaticInit5b64bc5128aa3aa10a1fab44c22216e7
         'Twig_TokenStream' => __DIR__ . '/..' . '/twig/twig/lib/Twig/TokenStream.php',
         'Twig_Util_DeprecationCollector' => __DIR__ . '/..' . '/twig/twig/lib/Twig/Util/DeprecationCollector.php',
         'Twig_Util_TemplateDirIterator' => __DIR__ . '/..' . '/twig/twig/lib/Twig/Util/TemplateDirIterator.php',
+        'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
+        'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
         'Williamdes\\MariaDBMySQLKBS\\KBDocumentation' => __DIR__ . '/..' . '/williamdes/mariadb-mysql-kbs/src/KBDocumentation.php',
         'Williamdes\\MariaDBMySQLKBS\\KBEntry' => __DIR__ . '/..' . '/williamdes/mariadb-mysql-kbs/src/KBEntry.php',
         'Williamdes\\MariaDBMySQLKBS\\KBException' => __DIR__ . '/..' . '/williamdes/mariadb-mysql-kbs/src/KBException.php',
@@ -1688,10 +1724,10 @@ class ComposerStaticInit5b64bc5128aa3aa10a1fab44c22216e7
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit5b64bc5128aa3aa10a1fab44c22216e7::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit5b64bc5128aa3aa10a1fab44c22216e7::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit5b64bc5128aa3aa10a1fab44c22216e7::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit5b64bc5128aa3aa10a1fab44c22216e7::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit8abdbdc9c177836e7eeea3d791ca9380::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit8abdbdc9c177836e7eeea3d791ca9380::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit8abdbdc9c177836e7eeea3d791ca9380::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit8abdbdc9c177836e7eeea3d791ca9380::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -1264,6 +1264,9 @@ Functions.insertQuery = function (queryType) {
                         codeMirrorEditor.setValue(data.sql);
                     }
                     $('#querymessage').html('');
+                },
+                error: function () {
+                    $('#querymessage').html('');
                 }
             });
         }
@@ -2065,7 +2068,8 @@ Functions.documentationAdd = function ($elm, params) {
         params[0]
     );
     if (params.length > 1) {
-        url += '#' + params[1];
+        // The # needs to be escaped to be part of the destination URL
+        url += encodeURIComponent('#') + params[1];
     }
     var content = $elm.text();
     $elm.text('');
@@ -3994,6 +3998,7 @@ AJAX.registerOnload('functions.js', function () {
 
 Functions.mainMenuResizerCallback = function () {
     // 5 px margin for jumping menu in Chrome
+    // eslint-disable-next-line compat/compat
     return $(document.body).width() - 5;
 };
 
@@ -4268,7 +4273,7 @@ Functions.initSlider = function () {
         }
         var $wrapper = $('<div>', { 'class': 'slide-wrapper' });
         $wrapper.toggle($this.is(':visible'));
-        $('<a>', { href: '#' + this.id, 'class': 'ajax' })
+        $('<a>', { href: '#' + this.id, 'class': 'ajax', id: 'slide-handle' })
             .text($this.attr('title'))
             .prepend($('<span>'))
             .insertBefore($this)
