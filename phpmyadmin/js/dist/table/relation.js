@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * for table relation
  */
@@ -16,6 +14,10 @@ TableRelation.showHideClauses = function ($thisDropdown) {
 };
 /**
  * Sets dropdown options to values
+ * @param $dropdown
+ * @param values
+ * @param selectedValue
+ * @return {void}
  */
 
 
@@ -33,6 +35,7 @@ TableRelation.setDropdownValues = function ($dropdown, values, selectedValue) {
  * Retrieves and populates dropdowns to the left based on the selected value
  *
  * @param $dropdown the dropdown whose value got changed
+ * @return {void}
  */
 
 
@@ -93,7 +96,7 @@ TableRelation.getDropdownValues = function ($dropdown) {
     url: 'index.php?route=/table/relation',
     data: params,
     dataType: 'json',
-    success: function success(data) {
+    success: function (data) {
       Functions.ajaxRemoveMessage($msgbox);
 
       if (typeof data !== 'undefined' && data.success) {

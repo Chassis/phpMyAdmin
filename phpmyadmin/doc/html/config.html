@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Configuration &#8212; phpMyAdmin 5.1.3 documentation</title>
+    <title>Configuration &#8212; phpMyAdmin 5.2.0 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     
@@ -32,7 +32,7 @@
         <li class="right" >
           <a href="setup.html" title="Installation"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.1.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.2.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Configuration</a></li> 
       </ul>
     </div>  
@@ -301,7 +301,7 @@ contain <code class="docutils literal notranslate"><span class="pre">'SendErrorR
 </dd>
 </dl>
 <p>Setting this to <code class="docutils literal notranslate"><span class="pre">true</span></code> allows the user to execute queries by pressing Enter
-instead of Ctrl+Enter. A new line can be inserted by pressing Shift + Enter.</p>
+instead of Ctrl+Enter. A new line can be inserted by pressing Shift+Enter.</p>
 <p>The behaviour of the console can be temporarily changed using console’s
 settings interface.</p>
 </dd></dl>
@@ -865,6 +865,30 @@ explicitly specified in your configuration, a string combined of
 <span class="target" id="index-74"></span><a class="reference internal" href="#cfg_Servers_host"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Servers'][$i]['host']</span></code></a> will be used.</p>
 </dd></dl>
 
+<span class="target" id="servers-auth-swekey-config"></span><dl class="config option">
+<dt id="cfg_Servers_auth_swekey_config">
+<code class="sig-name descname">$cfg['Servers'][$i]['auth_swekey_config']</code><a class="headerlink" href="#cfg_Servers_auth_swekey_config" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+<dt class="field-even">Default value</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">''</span></code></p>
+</dd>
+</dl>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 3.0.0.0: </span>This setting was named <cite>$cfg[‘Servers’][$i][‘auth_feebee_config’]</cite> and was renamed before the <cite>3.0.0.0</cite> release.</p>
+</div>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 4.6.4: </span>This setting was removed because their servers are no longer working and it was not working correctly.</p>
+</div>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 4.0.10.17: </span>This setting was removed in a maintenance release because their servers are no longer working and it was not working correctly.</p>
+</div>
+<p>The name of the file containing swekey ids and login names for hardware
+authentication. Leave empty to deactivate this feature.</p>
+</dd></dl>
+
 <span class="target" id="servers-user"></span><dl class="config option">
 <dt id="cfg_Servers_user">
 <code class="sig-name descname">$cfg['Servers'][$i]['user']</code><a class="headerlink" href="#cfg_Servers_user" title="Permalink to this definition">¶</a></dt>
@@ -940,7 +964,7 @@ database list. But <strong>it does not replace the privileges rules of the
 MySQL database server</strong>. If set, it just means only these databases
 will be displayed but <strong>not that all other databases can’t be used.</strong></p>
 <p>An example of using more that one database:</p>
-<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Servers&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;only_db&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;db1&#39;</span><span class="p">,</span> <span class="s1">&#39;db2&#39;</span><span class="p">);</span>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Servers&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;only_db&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;db1&#39;</span><span class="p">,</span> <span class="s1">&#39;db2&#39;</span><span class="p">];</span>
 </pre></div>
 </div>
 <div class="versionchanged">
@@ -1897,19 +1921,19 @@ system, the following work:</p>
 </ul>
 <p>Examples:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$cfg[&#39;Servers&#39;][$i][&#39;AllowDeny&#39;][&#39;order&#39;] = &#39;allow,deny&#39;;
-$cfg[&#39;Servers&#39;][$i][&#39;AllowDeny&#39;][&#39;rules&#39;] = array(&#39;allow bob from all&#39;);
+$cfg[&#39;Servers&#39;][$i][&#39;AllowDeny&#39;][&#39;rules&#39;] = [&#39;allow bob from all&#39;];
 // Allow only &#39;bob&#39; to connect from any host
 
 $cfg[&#39;Servers&#39;][$i][&#39;AllowDeny&#39;][&#39;order&#39;] = &#39;allow,deny&#39;;
-$cfg[&#39;Servers&#39;][$i][&#39;AllowDeny&#39;][&#39;rules&#39;] = array(&#39;allow mary from 192.168.100.[50-100]&#39;);
+$cfg[&#39;Servers&#39;][$i][&#39;AllowDeny&#39;][&#39;rules&#39;] = [&#39;allow mary from 192.168.100.[50-100]&#39;];
 // Allow only &#39;mary&#39; to connect from host 192.168.100.50 through 192.168.100.100
 
 $cfg[&#39;Servers&#39;][$i][&#39;AllowDeny&#39;][&#39;order&#39;] = &#39;allow,deny&#39;;
-$cfg[&#39;Servers&#39;][$i][&#39;AllowDeny&#39;][&#39;rules&#39;] = array(&#39;allow % from 192.168.[5-6].10&#39;);
+$cfg[&#39;Servers&#39;][$i][&#39;AllowDeny&#39;][&#39;rules&#39;] = [&#39;allow % from 192.168.[5-6].10&#39;];
 // Allow any user to connect from host 192.168.5.10 or 192.168.6.10
 
 $cfg[&#39;Servers&#39;][$i][&#39;AllowDeny&#39;][&#39;order&#39;] = &#39;allow,deny&#39;;
-$cfg[&#39;Servers&#39;][$i][&#39;AllowDeny&#39;][&#39;rules&#39;] = array(&#39;allow root from 192.168.5.50&#39;,&#39;allow % from 192.168.6.10&#39;);
+$cfg[&#39;Servers&#39;][$i][&#39;AllowDeny&#39;][&#39;rules&#39;] = [&#39;allow root from 192.168.5.50&#39;,&#39;allow % from 192.168.6.10&#39;];
 // Allow any user to connect from 192.168.6.10, and additionally allow root to connect from 192.168.5.50
 </pre></div>
 </div>
@@ -4019,6 +4043,23 @@ done assuming UTF-8.</p>
 </dd></dl>
 
 <dl class="config option">
+<dt id="cfg_Export_remove_definer_from_definitions">
+<code class="sig-name descname">$cfg['Export']['remove_definer_from_definitions']</code><a class="headerlink" href="#cfg_Export_remove_definer_from_definitions" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>boolean</p>
+</dd>
+<dt class="field-even">Default value</dt>
+<dd class="field-even"><p>false</p>
+</dd>
+</dl>
+<p>Remove DEFINER clause from the event, view and routine definitions.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 5.2.0.</span></p>
+</div>
+</dd></dl>
+
+<dl class="config option">
 <dt id="cfg_Import">
 <code class="sig-name descname">$cfg['Import']</code><a class="headerlink" href="#cfg_Import" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
@@ -4348,7 +4389,7 @@ want to use rules for IP addresses behind proxy.</p>
 <p>The following example specifies that phpMyAdmin should trust a
 HTTP_X_FORWARDED_FOR (<code class="docutils literal notranslate"><span class="pre">X-Forwarded-For</span></code>) header coming from the proxy
 1.2.3.4:</p>
-<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;TrustedProxies&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;1.2.3.4&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;HTTP_X_FORWARDED_FOR&#39;</span><span class="p">);</span>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;TrustedProxies&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;1.2.3.4&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;HTTP_X_FORWARDED_FOR&#39;</span><span class="p">];</span>
 </pre></div>
 </div>
 <p>The <span class="target" id="index-153"></span><a class="reference internal" href="#cfg_Servers_AllowDeny_rules"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Servers'][$i]['AllowDeny']['rules']</span></code></a> directive uses the
@@ -5533,7 +5574,7 @@ for first timestamp column in table.</p>
 <dd class="field-even"><p>false</p>
 </dd>
 </dl>
-<p>Execute queries on Enter and insert new line with Shift + Enter</p>
+<p>Execute queries on Enter and insert new line with Shift+Enter</p>
 </dd></dl>
 
 <dl class="config option">
@@ -5610,7 +5651,7 @@ The <code class="docutils literal notranslate"><span class="pre">development</sp
 <dd class="field-odd"><p>array</p>
 </dd>
 <dt class="field-even">Default value</dt>
-<dd class="field-even"><p>array(…)</p>
+<dd class="field-even"><p>[]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -6108,7 +6149,7 @@ download the CA server certificate and tell phpMyAdmin to use it:</p>
         <li class="right" >
           <a href="setup.html" title="Installation"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.1.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.2.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Configuration</a></li> 
       </ul>
     </div>

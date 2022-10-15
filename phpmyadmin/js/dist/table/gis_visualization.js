@@ -1,13 +1,7 @@
-"use strict";
-
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 /**
  * @fileoverview    functions used for visualizing GIS data
  *
  * @requires    jquery
- * @requires    vendor/jquery/jquery.svg.js
- * @requires    vendor/jquery/jquery.mousewheel.js
  */
 
 /* global drawOpenLayers PASSIVE_EVENT_LISTENERS */
@@ -138,7 +132,7 @@ function drawOpenLayerMap() {
   $('#placeholder').hide();
   $('#openlayersmap').show(); // Function doesn't work properly if #openlayersmap is hidden
 
-  if (_typeof(map) !== 'object') {
+  if (typeof map !== 'object') {
     // Draws openStreetMap with openLayers
     map = drawOpenLayers();
   }
@@ -151,6 +145,10 @@ function getRelativeCoords(e) {
     y: e.pageY - position.top
   };
 }
+/**
+ * @param {WheelEvent} event
+ */
+
 
 function onGisMouseWheel(event) {
   if (event.deltaY === 0) {
@@ -172,7 +170,7 @@ function onGisMouseWheel(event) {
  *
  * Actions Ajaxified here:
  *
- * Zooming in and zooming out on mousewheel movement.
+ * Zooming in and zooming out on mouse wheel movement.
  * Panning the visualization on dragging.
  * Zooming in on double clicking.
  * Zooming out on clicking the zoom out button.
@@ -237,7 +235,7 @@ AJAX.registerOnload('table/gis_visualization.js', function () {
   var dragX = 0;
   var dragY = 0;
   $('svg').draggable({
-    helper: function helper() {
+    helper: function () {
       return $('<div>'); // Give a fake element to be used for dragging display
     }
   });

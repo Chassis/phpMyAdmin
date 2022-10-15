@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * Initializes the data required to run Designer, then fires it up.
  */
@@ -18,12 +16,16 @@
 
 /* global designerConfig */
 // templates/database/designer/main.twig
+
+/* eslint-disable no-unused-vars */
 var jTabs;
 var hTabs;
 var contr;
 var displayField;
 var server;
 var selectedPage;
+/* eslint-enable no-unused-vars */
+
 var db;
 var designerTablesEnabled;
 AJAX.registerTeardown('designer/init.js', function () {
@@ -36,16 +38,12 @@ AJAX.registerOnload('designer/init.js', function () {
     $('#ab').accordion('refresh');
     return false;
   });
-  /* eslint-disable no-unused-vars */
-
   jTabs = designerConfig.scriptTables.j_tabs;
   hTabs = designerConfig.scriptTables.h_tabs;
   contr = designerConfig.scriptContr;
   displayField = designerConfig.scriptDisplayField;
   server = designerConfig.server;
   selectedPage = designerConfig.displayPage;
-  /* eslint-enable no-unused-vars */
-
   db = designerConfig.db;
   designerTablesEnabled = designerConfig.tablesEnabled;
   DesignerMove.main();

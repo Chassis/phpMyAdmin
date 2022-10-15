@@ -1,5 +1,3 @@
-"use strict";
-
 // TODO: tablesorter shouldn't sort already sorted columns
 // eslint-disable-next-line no-unused-vars
 function initTableSorter(tabid) {
@@ -30,10 +28,10 @@ function initTableSorter(tabid) {
 $(function () {
   $.tablesorter.addParser({
     id: 'fancyNumber',
-    is: function is(s) {
+    is: function (s) {
       return /^[0-9]?[0-9,\\.]*\s?(k|M|G|T|%)?$/.test(s);
     },
-    format: function format(s) {
+    format: function (s) {
       var num = jQuery.tablesorter.formatFloat(s.replace(Messages.strThousandsSeparator, '').replace(Messages.strDecimalSeparator, '.'));
       var factor = 1;
 
@@ -66,10 +64,10 @@ $(function () {
   });
   $.tablesorter.addParser({
     id: 'withinSpanNumber',
-    is: function is(s) {
+    is: function (s) {
       return /<span class="original"/.test(s);
     },
-    format: function format(s, table, html) {
+    format: function (s, table, html) {
       var res = html.innerHTML.match(/<span(\s*style="display:none;"\s*)?\s*class="original">(.*)?<\/span>/);
       return res && res.length >= 3 ? res[2] : 0;
     },

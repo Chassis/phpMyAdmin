@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * Handles the resizing of a menu according to the available screen width
  *
@@ -39,7 +37,7 @@
       'class': 'nav-link dropdown-toggle',
       'id': 'navbarDropdown',
       'role': 'button',
-      'data-toggle': 'dropdown',
+      'data-bs-toggle': 'dropdown',
       'aria-haspopup': 'true',
       'aria-expanded': 'false'
     }).text(Messages.strMore);
@@ -52,7 +50,7 @@
     var $submenu = $('<li></li>', {
       'class': 'nav-item dropdown d-none'
     }).append(link).append($('<ul></ul>', {
-      'class': 'dropdown-menu dropdown-menu-right',
+      'class': 'dropdown-menu dropdown-menu-end',
       'aria-labelledby': 'navbarDropdown'
     }));
     $container.append($submenu);
@@ -162,7 +160,7 @@
 
 
   var methods = {
-    init: function init(widthCalculator) {
+    init: function (widthCalculator) {
       return this.each(function () {
         var $this = $(this);
 
@@ -171,7 +169,7 @@
         }
       });
     },
-    resize: function resize() {
+    resize: function () {
       return this.each(function () {
         var self = $(this).data('menuResizer');
 
@@ -180,7 +178,7 @@
         }
       });
     },
-    destroy: function destroy() {
+    destroy: function () {
       return this.each(function () {
         var self = $(this).data('menuResizer');
 
@@ -190,7 +188,13 @@
       });
     }
   };
-  /** Extend jQuery */
+  /**
+   * Extend jQuery
+   *
+   * @param {string} method
+   *
+   * @return {any}
+   */
 
   $.fn.menuResizer = function (method) {
     if (methods[method]) {

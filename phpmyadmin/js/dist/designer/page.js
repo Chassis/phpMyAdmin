@@ -1,5 +1,3 @@
-"use strict";
-
 /* global DesignerOfflineDB */
 // js/designer/database.js
 // eslint-disable-next-line no-unused-vars
@@ -30,7 +28,7 @@ DesignerPage.saveToNewPage = function (db, pageName, tablePositions, callback) {
     if (page) {
       var tblCords = [];
 
-      var saveCallback = function saveCallback(id) {
+      var saveCallback = function (id) {
         tblCords.push(id);
 
         if (tablePositions.length === tblCords.length) {

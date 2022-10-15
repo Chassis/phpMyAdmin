@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * @fileoverview    function used in server privilege pages
  * @name            Database Operations
@@ -147,7 +145,7 @@ AJAX.registerOnload('database/operations.js', function () {
     event.preventDefault();
     var $link = $(this);
     /**
-     * @var question    String containing the question to be asked for confirmation
+     * @var {String} question String containing the question to be asked for confirmation
      */
 
     var question = Messages.strDropDatabaseStrongWarning + ' ';
