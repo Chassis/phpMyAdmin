@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * Server Status Processes
  *
@@ -22,9 +20,9 @@ var processList = {
   /**
    * Handles killing of a process
    *
-   * @return void
+   * @return {void}
    */
-  init: function init() {
+  init: function () {
     processList.setRefreshLabel();
 
     if (processList.refreshUrl === null) {
@@ -41,11 +39,11 @@ var processList = {
   /**
    * Handles killing of a process
    *
-   * @param object the event object
+   * @param {object} event the event object
    *
-   * @return void
+   * @return {void}
    */
-  killProcessHandler: function killProcessHandler(event) {
+  killProcessHandler: function (event) {
     event.preventDefault();
     var argSep = CommonParams.get('arg_separator');
     var params = $(this).getPostData();
@@ -78,10 +76,9 @@ var processList = {
 
   /**
    * Handles Auto Refreshing
-   *
-   * @return void
+   * @return {void}
    */
-  refresh: function refresh() {
+  refresh: function () {
     // abort any previous pending requests
     // this is necessary, it may go into
     // multiple loops causing unnecessary
@@ -108,9 +105,9 @@ var processList = {
   /**
    * Stop current request and clears timeout
    *
-   * @return void
+   * @return {void}
    */
-  abortRefresh: function abortRefresh() {
+  abortRefresh: function () {
     if (processList.refreshRequest !== null) {
       processList.refreshRequest.abort();
       processList.refreshRequest = null;
@@ -123,9 +120,9 @@ var processList = {
    * Set label of refresh button
    * change between play & pause
    *
-   * @return void
+   * @return {void}
    */
-  setRefreshLabel: function setRefreshLabel() {
+  setRefreshLabel: function () {
     var img = 'play';
     var label = Messages.strStartRefresh;
 
@@ -143,9 +140,9 @@ var processList = {
    * for autorefresh request,
    * includes showExecuting if the filter is checked
    *
-   * @return urlParams - url parameters with autoRefresh request
+   * @return {object} urlParams - url parameters with autoRefresh request
    */
-  getUrlParams: function getUrlParams() {
+  getUrlParams: function () {
     var urlParams = {
       'server': CommonParams.get('server'),
       'ajax_request': true,

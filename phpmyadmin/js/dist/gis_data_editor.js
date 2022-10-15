@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * @fileoverview    functions used in GIS data editor
  *
@@ -12,6 +10,7 @@
 
 /* global themeImagePath */
 // templates/javascript/variables.twig
+// eslint-disable-next-line no-unused-vars
 var gisEditorLoaded = false;
 /**
  * Closes the GIS data editor and perform necessary clean up work.
@@ -47,9 +46,9 @@ function prepareJSVersion() {
 /**
  * Returns the HTML for a data point.
  *
- * @param pointNumber point number
- * @param prefix      prefix of the name
- * @returns the HTML for a data point
+ * @param {number} pointNumber point number
+ * @param {string} prefix      prefix of the name
+ * @return {string} the HTML for a data point
  */
 
 
@@ -85,18 +84,12 @@ function initGISEditorVisualization() {
 
 function loadJSAndGISEditor(value, field, type, inputName) {
   var head = document.getElementsByTagName('head')[0];
-  var script; // Loads a set of small JS file needed for the GIS editor
-
-  var smallScripts = ['js/vendor/jquery/jquery.svg.js', 'js/vendor/jquery/jquery.mousewheel.js', 'js/dist/table/gis_visualization.js'];
-
-  for (var i = 0; i < smallScripts.length; i++) {
-    script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = smallScripts[i];
-    head.appendChild(script);
-  } // OpenLayers.js is BIG and takes time. So asynchronous loading would not work.
+  var script;
+  script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src = 'js/dist/table/gis_visualization.js';
+  head.appendChild(script); // OpenLayers.js is BIG and takes time. So asynchronous loading would not work.
   // Load the JS and do a callback to load the content for the GIS Editor.
-
 
   script = document.createElement('script');
   script.type = 'text/javascript';
@@ -116,8 +109,7 @@ function loadJSAndGISEditor(value, field, type, inputName) {
   };
 
   script.src = 'js/vendor/openlayers/OpenLayers.js';
-  head.appendChild(script); // eslint-disable-next-line no-unused-vars
-
+  head.appendChild(script);
   gisEditorLoaded = true;
 }
 /**

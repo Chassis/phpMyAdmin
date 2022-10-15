@@ -1,11 +1,9 @@
-"use strict";
-
 // global var that holds: 0- if ctrl key is not pressed 1- if ctrl key is pressed
 var ctrlKeyHistory = 0;
 /**
   * Allows moving around inputs/select by Ctrl+arrows
   *
-  * @param object   event data
+  * @param {object} event data
   */
 
 function onKeyDownArrowsHandler(event) {

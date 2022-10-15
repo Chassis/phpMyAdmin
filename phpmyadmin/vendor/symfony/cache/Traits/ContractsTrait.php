@@ -42,7 +42,7 @@ trait ContractsTrait
     public function setCallbackWrapper(?callable $callbackWrapper): callable
     {
         if (!isset($this->callbackWrapper)) {
-            $this->callbackWrapper = [LockRegistry::class, 'compute'];
+            $this->callbackWrapper = \Closure::fromCallable([LockRegistry::class, 'compute']);;
 
             if (\in_array(\PHP_SAPI, ['cli', 'phpdbg'], true)) {
                 $this->setCallbackWrapper(null);
@@ -65,7 +65,7 @@ trait ContractsTrait
 
         static $setMetadata;
 
-        $setMetadata = $setMetadata ?? \Closure::bind(
+        $setMetadata ?? $setMetadata = \Closure::bind(
             static function (CacheItem $item, float $startTime, ?array &$metadata) {
                 if ($item->expiry > $endTime = microtime(true)) {
                     $item->newMetadata[CacheItem::METADATA_EXPIRY] = $metadata[CacheItem::METADATA_EXPIRY] = $item->expiry;

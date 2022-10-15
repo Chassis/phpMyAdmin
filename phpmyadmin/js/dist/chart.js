@@ -1,7 +1,3 @@
-"use strict";
-
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 /**
  * Chart type enumerations
  */
@@ -29,10 +25,10 @@ var ColumnType = {
  * Abstract chart factory which defines the contract for chart factories
  */
 
-var ChartFactory = function ChartFactory() {};
+var ChartFactory = function () {};
 
 ChartFactory.prototype = {
-  createChart: function createChart() {
+  createChart: function () {
     throw new Error('createChart must be implemented by a subclass');
   }
 };
@@ -43,21 +39,21 @@ ChartFactory.prototype = {
  *            id of the div element the chart is drawn in
  */
 
-var Chart = function Chart(elementId) {
+var Chart = function (elementId) {
   this.elementId = elementId;
 };
 
 Chart.prototype = {
-  draw: function draw() {
+  draw: function () {
     throw new Error('draw must be implemented by a subclass');
   },
-  redraw: function redraw() {
+  redraw: function () {
     throw new Error('redraw must be implemented by a subclass');
   },
-  destroy: function destroy() {
+  destroy: function () {
     throw new Error('destroy must be implemented by a subclass');
   },
-  toImageString: function toImageString() {
+  toImageString: function () {
     throw new Error('toImageString must be implemented by a subclass');
   }
 };
@@ -74,7 +70,7 @@ Chart.prototype = {
  *            id of the div element the chart is drawn in
  */
 
-var BaseChart = function BaseChart(elementId) {
+var BaseChart = function (elementId) {
   Chart.call(this, elementId);
 };
 
@@ -104,7 +100,7 @@ BaseChart.prototype.validateColumns = function (dataTable) {
  */
 
 
-var PieChart = function PieChart(elementId) {
+var PieChart = function (elementId) {
   BaseChart.call(this, elementId);
 };
 
@@ -128,7 +124,7 @@ PieChart.prototype.validateColumns = function (dataTable) {
  */
 
 
-var TimelineChart = function TimelineChart(elementId) {
+var TimelineChart = function (elementId) {
   BaseChart.call(this, elementId);
 };
 
@@ -156,7 +152,7 @@ TimelineChart.prototype.validateColumns = function (dataTable) {
  */
 
 
-var ScatterChart = function ScatterChart(elementId) {
+var ScatterChart = function (elementId) {
   BaseChart.call(this, elementId);
 };
 
@@ -182,7 +178,7 @@ ScatterChart.prototype.validateColumns = function (dataTable) {
 // eslint-disable-next-line no-unused-vars
 
 
-var DataTable = function DataTable() {
+var DataTable = function () {
   var columns = [];
   var data = null;
 
@@ -206,7 +202,7 @@ var DataTable = function DataTable() {
     return data;
   };
 
-  var fillMissingValues = function fillMissingValues() {
+  var fillMissingValues = function () {
     if (columns.length === 0) {
       throw new Error('Set columns first');
     }
@@ -238,7 +234,7 @@ var DataTable = function DataTable() {
  */
 
 
-var JQPlotChart = function JQPlotChart(elementId) {
+var JQPlotChart = function (elementId) {
   Chart.call(this, elementId);
   this.plot = null;
   this.validator = null;
@@ -286,7 +282,7 @@ JQPlotChart.prototype.prepareData = function () {
  */
 
 
-var JQPlotLineChart = function JQPlotLineChart(elementId) {
+var JQPlotLineChart = function (elementId) {
   JQPlotChart.call(this, elementId);
   this.validator = BaseChart.prototype;
 };
@@ -367,7 +363,7 @@ JQPlotLineChart.prototype.prepareData = function (dataTable) {
  */
 
 
-var JQPlotSplineChart = function JQPlotSplineChart(elementId) {
+var JQPlotSplineChart = function (elementId) {
   JQPlotLineChart.call(this, elementId);
 };
 
@@ -395,7 +391,7 @@ JQPlotSplineChart.prototype.populateOptions = function (dataTable, options) {
  */
 
 
-var JQPlotScatterChart = function JQPlotScatterChart(elementId) {
+var JQPlotScatterChart = function (elementId) {
   JQPlotChart.call(this, elementId);
   this.validator = ScatterChart.prototype;
 };
@@ -475,7 +471,7 @@ JQPlotScatterChart.prototype.prepareData = function (dataTable) {
  */
 
 
-var JQPlotTimelineChart = function JQPlotTimelineChart(elementId) {
+var JQPlotTimelineChart = function (elementId) {
   JQPlotLineChart.call(this, elementId);
   this.validator = TimelineChart.prototype;
 };
@@ -525,7 +521,7 @@ JQPlotTimelineChart.prototype.prepareData = function (dataTable) {
       } // See https://github.com/phpmyadmin/phpmyadmin/issues/14395 for the block
 
 
-      if (d !== null && _typeof(d) === 'object') {
+      if (d !== null && typeof d === 'object') {
         retRow.push([d.getTime(), row[j]]);
       } else if (typeof d === 'string') {
         d = new Date(d);
@@ -544,7 +540,7 @@ JQPlotTimelineChart.prototype.prepareData = function (dataTable) {
  */
 
 
-var JQPlotAreaChart = function JQPlotAreaChart(elementId) {
+var JQPlotAreaChart = function (elementId) {
   JQPlotLineChart.call(this, elementId);
 };
 
@@ -574,7 +570,7 @@ JQPlotAreaChart.prototype.populateOptions = function (dataTable, options) {
  */
 
 
-var JQPlotColumnChart = function JQPlotColumnChart(elementId) {
+var JQPlotColumnChart = function (elementId) {
   JQPlotLineChart.call(this, elementId);
 };
 
@@ -604,7 +600,7 @@ JQPlotColumnChart.prototype.populateOptions = function (dataTable, options) {
  */
 
 
-var JQPlotBarChart = function JQPlotBarChart(elementId) {
+var JQPlotBarChart = function (elementId) {
   JQPlotLineChart.call(this, elementId);
 };
 
@@ -672,7 +668,7 @@ JQPlotBarChart.prototype.populateOptions = function (dataTable, options) {
  */
 
 
-var JQPlotPieChart = function JQPlotPieChart(elementId) {
+var JQPlotPieChart = function (elementId) {
   JQPlotChart.call(this, elementId);
   this.validator = PieChart.prototype;
 };
@@ -723,7 +719,7 @@ JQPlotPieChart.prototype.prepareData = function (dataTable) {
  */
 
 
-var JQPlotChartFactory = function JQPlotChartFactory() {};
+var JQPlotChartFactory = function () {};
 
 JQPlotChartFactory.prototype = new ChartFactory();
 

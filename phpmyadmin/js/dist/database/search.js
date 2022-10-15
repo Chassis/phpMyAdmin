@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * JavaScript functions used on Database Search page
  *
@@ -29,6 +27,8 @@ AJAX.registerTeardown('database/search.js', function () {
   $('#togglesearchresultlink').off('click');
   $('#togglequerybox').off('click');
   $('#togglesearchformlink').off('click');
+  $('#select_all').off('click');
+  $('#unselect_all').off('click');
   $(document).off('submit', '#db_search_form.ajax');
 });
 AJAX.registerOnload('database/search.js', function () {
@@ -215,6 +215,12 @@ AJAX.registerOnload('database/search.js', function () {
 
   $(document).on('submit', '#db_search_form.ajax', function (event) {
     event.preventDefault();
+
+    if ($('#criteriaTables :selected').length === 0) {
+      Functions.ajaxShowMessage(Messages.strNoTableSelected);
+      return;
+    }
+
     var $msgbox = Functions.ajaxShowMessage(Messages.strSearching, false); // jQuery object to reuse
 
     var $form = $(this);
@@ -242,5 +248,13 @@ AJAX.registerOnload('database/search.js', function () {
 
       Functions.ajaxRemoveMessage($msgbox);
     });
+  });
+  $('#select_all').on('click', function () {
+    Functions.setSelectOptions('db_search', 'criteriaTables[]', true);
+    return false;
+  });
+  $('#unselect_all').on('click', function () {
+    Functions.setSelectOptions('db_search', 'criteriaTables[]', false);
+    return false;
   });
 }); // end $()

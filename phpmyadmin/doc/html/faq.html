@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FAQ - Frequently Asked Questions &#8212; phpMyAdmin 5.1.3 documentation</title>
+    <title>FAQ - Frequently Asked Questions &#8212; phpMyAdmin 5.2.0 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     
@@ -32,7 +32,7 @@
         <li class="right" >
           <a href="other.html" title="Other sources of information"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.1.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.2.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">FAQ - Frequently Asked Questions</a></li> 
       </ul>
     </div>  
@@ -354,7 +354,8 @@ releases.</p>
 <p>PHP 7 is supported since phpMyAdmin 4.6, PHP 7.1 is supported since 4.6.5,
 PHP 7.2 is supported since 4.7.4.</p>
 <p>HHVM is supported up to phpMyAdmin 4.8.</p>
-<p>Since release 5.0, phpMyAdmin supports only PHP 7.1 and newer.</p>
+<p>Since release 5.0, phpMyAdmin supports only PHP 7.1 and newer.
+Since release 5.2, phpMyAdmin supports only PHP 7.2 and newer.</p>
 </div>
 <div class="section" id="can-i-use-http-authentication-with-iis">
 <span id="faq1-32"></span><h3>1.32 Can I use HTTP authentication with IIS?<a class="headerlink" href="#can-i-use-http-authentication-with-iis" title="Permalink to this headline">¶</a></h3>
@@ -927,13 +928,13 @@ just add those updated lines into the
 network <a class="reference internal" href="glossary.html#term-IP"><span class="xref std std-term">IP</span></a> blocks.</p>
 <div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">//block root from logging in except from the private networks</span>
 <span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Servers&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;AllowDeny&#39;</span><span class="p">][</span><span class="s1">&#39;order&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;deny,allow&#39;</span><span class="p">;</span>
-<span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Servers&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;AllowDeny&#39;</span><span class="p">][</span><span class="s1">&#39;rules&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+<span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Servers&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;AllowDeny&#39;</span><span class="p">][</span><span class="s1">&#39;rules&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s1">&#39;deny root from all&#39;</span><span class="p">,</span>
     <span class="s1">&#39;allow root from localhost&#39;</span><span class="p">,</span>
     <span class="s1">&#39;allow root from 10.0.0.0/8&#39;</span><span class="p">,</span>
     <span class="s1">&#39;allow root from 192.168.0.0/16&#39;</span><span class="p">,</span>
     <span class="s1">&#39;allow root from 172.16.0.0/12&#39;</span><span class="p">,</span>
-<span class="p">);</span>
+<span class="p">];</span>
 </pre></div>
 </div>
 </div>
@@ -1487,7 +1488,7 @@ you want to be displayed in the plot by specifing it in the ‘Max rows
 to plot’ field. Once you have decided over your criteria, click ‘Go’
 to display the plot.</p>
 <p>After the plot is generated, you can use the
-mousewheel to zoom in and out of the plot. In addition, panning
+mouse wheel to zoom in and out of the plot. In addition, panning
 feature is enabled to navigate through the plot. You can zoom-in to a
 certain level of detail and use panning to locate your area of
 interest. Clicking on a point opens a dialogue box, displaying field
@@ -1987,7 +1988,7 @@ spreadsheet program to properly parse and sanitize such data on input instead.</
         <li class="right" >
           <a href="other.html" title="Other sources of information"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.1.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.2.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">FAQ - Frequently Asked Questions</a></li> 
       </ul>
     </div>

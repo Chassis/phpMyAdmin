@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * @fileoverview    function used for page-related settings
  * @name            Page-related settings
@@ -26,10 +24,10 @@ function showSettings(selector) {
     width: 700,
     minHeight: 250,
     modal: true,
-    open: function open() {
+    open: function () {
       $(this).dialog('option', 'maxHeight', $(window).height() - $(this).offset().top);
     },
-    close: function close() {
+    close: function () {
       $(selector + ' .page_settings').replaceWith($clone);
     },
     buttons: buttons

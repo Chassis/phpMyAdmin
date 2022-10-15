@@ -31,11 +31,9 @@ class Exporter
      * @param int               &$objectsCount
      * @param bool              &$valuesAreStatic
      *
-     * @return array
-     *
      * @throws NotInstantiableTypeException When a value cannot be serialized
      */
-    public static function prepare($values, $objectsPool, &$refsPool, &$objectsCount, &$valuesAreStatic)
+    public static function prepare($values, $objectsPool, &$refsPool, &$objectsCount, &$valuesAreStatic): array
     {
         $refs = $values;
         foreach ($values as $k => $value) {
@@ -62,7 +60,7 @@ class Exporter
                     $value = self::prepare($value, $objectsPool, $refsPool, $objectsCount, $valueIsStatic);
                 }
                 goto handle_value;
-            } elseif (!\is_object($value) && !$value instanceof \__PHP_Incomplete_Class || $value instanceof \UnitEnum) {
+            } elseif (!\is_object($value) || $value instanceof \UnitEnum) {
                 goto handle_value;
             }
 
@@ -108,7 +106,15 @@ class Exporter
                 }
                 $properties = ['SplObjectStorage' => ["\0" => $properties]];
                 $arrayValue = (array) $value;
-            } elseif ($value instanceof \Serializable || $value instanceof \__PHP_Incomplete_Class) {
+            } elseif ($value instanceof \Serializable
+                || $value instanceof \__PHP_Incomplete_Class
+                || $value instanceof \DatePeriod
+                || (\PHP_VERSION_ID >= 80200 && (
+                    $value instanceof \DateTimeInterface
+                    || $value instanceof \DateTimeZone
+                    || $value instanceof \DateInterval
+                ))
+            ) {
                 ++$objectsCount;
                 $objectsPool[$value] = [$id = \count($objectsPool), serialize($value), [], 0];
                 $value = new Reference($id);
@@ -132,7 +138,7 @@ class Exporter
                 $i = 0;
                 $n = (string) $name;
                 if ('' === $n || "\0" !== $n[0]) {
-                    $c = 'stdClass';
+                    $c = \PHP_VERSION_ID >= 80100 && $reflector->hasProperty($n) && ($p = $reflector->getProperty($n))->isReadOnly() ? $p->class : 'stdClass';
                 } elseif ('*' === $n[1]) {
                     $n = substr($n, 3);
                     $c = $reflector->getProperty($n)->class;
@@ -184,15 +190,16 @@ class Exporter
         return $values;
     }
 
-    public static function export($value, $indent = '')
+    public static function export($value, string $indent = '')
     {
         switch (true) {
-            case \is_int($value) || \is_float($value) || $value instanceof \UnitEnum: return var_export($value, true);
+            case \is_int($value) || \is_float($value): return var_export($value, true);
             case [] === $value: return '[]';
             case false === $value: return 'false';
             case true === $value: return 'true';
             case null === $value: return 'null';
             case '' === $value: return "''";
+            case $value instanceof \UnitEnum: return ltrim(var_export($value, true), '\\');
         }
 
         if ($value instanceof Reference) {
@@ -270,7 +277,7 @@ class Exporter
             return self::exportHydrator($value, $indent, $subIndent);
         }
 
-        throw new \UnexpectedValueException(sprintf('Cannot export value of type "%s".', \is_object($value) ? \get_class($value) : \gettype($value)));
+        throw new \UnexpectedValueException(sprintf('Cannot export value of type "%s".', get_debug_type($value)));
     }
 
     private static function exportRegistry(Registry $value, string $indent, string $subIndent): string

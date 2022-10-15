@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * Functions used in configuration forms and on user preferences pages
  */
@@ -10,12 +8,15 @@ var configScriptLoaded;
 /**
  * checks whether browser supports web storage
  *
- * @param type the type of storage i.e. localStorage or sessionStorage
+ * @param {'localStorage' | 'sessionStorage'} type the type of storage i.e. localStorage or sessionStorage
+ * @param {boolean} warn Wether to show a warning on error
  *
- * @returns bool
+ * @return {boolean}
  */
 
-function isStorageSupported(type, warn) {
+function isStorageSupported(type) {
+  let warn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
   try {
     window[type].setItem('PMATest', 'test'); // Check whether key-value pair was set successfully
 
@@ -41,7 +42,7 @@ function isStorageSupported(type, warn) {
 AJAX.registerTeardown('config.js', function () {
   $('.optbox input[id], .optbox select[id], .optbox textarea[id]').off('change').off('keyup');
   $('.optbox input[type=button][name=submit_reset]').off('click');
-  $('div.tabs_contents').off();
+  $('div.tab-content').off();
   $('#import_local_storage, #export_local_storage').off('click');
   $('form.prefs-form').off('change').off('submit');
   $(document).off('click', 'div.click-hide-message');
@@ -58,6 +59,8 @@ var defaultValues = {};
  * Returns field type
  *
  * @param {Element} field
+ *
+ * @return {string}
  */
 
 function getFieldType(field) {
@@ -79,6 +82,8 @@ function getFieldType(field) {
  *
  * @param {Element} field
  * @param {boolean} display
+ *
+ * @return {void}
  */
 
 
@@ -89,7 +94,9 @@ function setRestoreDefaultBtn(field, display) {
 /**
  * Marks field depending on its value (system default or custom)
  *
- * @param {Element} field
+ * @param {Element | JQuery<Element>} field
+ *
+ * @return {void}
  */
 
 
@@ -112,8 +119,8 @@ function markField(field) {
  * o Array of values - if field_type is 'select'
  *
  * @param {Element} field
- * @param {String}  fieldType  see {@link #getFieldType}
- * @param {String|Boolean}  value
+ * @param {string}  fieldType see {@link #getFieldType}
+ * @param {string | boolean}  value
  */
 
 
@@ -153,8 +160,9 @@ function setFieldValue(field, fieldType, value) {
  * o Array of values - if type is 'select'
  *
  * @param {Element} field
- * @param {String}  fieldType returned by {@link #getFieldType}
- * @type Boolean|String|String[]
+ * @param {string}  fieldType returned by {@link #getFieldType}
+ *
+ * @return {boolean | string | string[] | null}
  */
 
 
@@ -188,6 +196,8 @@ function getFieldValue(field, fieldType) {
 }
 /**
  * Returns values for all fields in fieldsets
+ *
+ * @return {object}
  */
 // eslint-disable-next-line no-unused-vars
 
@@ -218,8 +228,9 @@ function getAllValues() {
  * Checks whether field has its default value
  *
  * @param {Element} field
- * @param {String}  type
- * @return boolean
+ * @param {string}  type
+ *
+ * @return {boolean}
  */
 
 
@@ -255,6 +266,8 @@ function checkFieldDefault(field, type) {
 /**
  * Returns element's id prefix
  * @param {Element} element
+ *
+ * @return {string}
  */
 // eslint-disable-next-line no-unused-vars
 
@@ -279,8 +292,10 @@ var validators = {
    * Validates positive number
    *
    * @param {boolean} isKeyUp
+   *
+   * @return {boolean}
    */
-  validatePositiveNumber: function validatePositiveNumber(isKeyUp) {
+  validatePositiveNumber: function (isKeyUp) {
     if (isKeyUp && this.value === '') {
       return true;
     }
@@ -293,8 +308,10 @@ var validators = {
    * Validates non-negative number
    *
    * @param {boolean} isKeyUp
+   *
+   * @return {boolean}
    */
-  validateNonNegativeNumber: function validateNonNegativeNumber(isKeyUp) {
+  validateNonNegativeNumber: function (isKeyUp) {
     if (isKeyUp && this.value === '') {
       return true;
     }
@@ -305,8 +322,10 @@ var validators = {
 
   /**
    * Validates port number
+   *
+   * @return {true|string}
    */
-  validatePortNumber: function validatePortNumber() {
+  validatePortNumber: function () {
     if (this.value === '') {
       return true;
     }
@@ -320,8 +339,10 @@ var validators = {
    *
    * @param {boolean} isKeyUp
    * @param {string}  regexp
+   *
+   * @return {true|string}
    */
-  validateByRegex: function validateByRegex(isKeyUp, regexp) {
+  validateByRegex: function (isKeyUp, regexp) {
     if (isKeyUp && this.value === '') {
       return true;
     } // convert PCRE regexp
@@ -336,9 +357,11 @@ var validators = {
    * Validates upper bound for numeric inputs
    *
    * @param {boolean} isKeyUp
-   * @param {int} maxValue
+   * @param {number} maxValue
+   *
+   * @return {true|string}
    */
-  validateUpperBound: function validateUpperBound(isKeyUp, maxValue) {
+  validateUpperBound: function (isKeyUp, maxValue) {
     var val = parseInt(this.value, 10);
 
     if (isNaN(val)) {
@@ -355,8 +378,8 @@ var validators = {
 /**
  * Registers validator for given field
  *
- * @param {String}  id       field id
- * @param {String}  type     validator (key in validators object)
+ * @param {string}  id       field id
+ * @param {string}  type     validator (key in validators object)
  * @param {boolean} onKeyUp  whether fire on key up
  * @param {Array}   params   validation function parameters
  */
@@ -379,9 +402,9 @@ function registerFieldValidator(id, type, onKeyUp, params) {
  * Returns validation functions associated with form field
  *
  * @param {String}  fieldId     form field id
- * @param {boolean} onKeyUpOnly  see registerFieldValidator
- * @type Array
- * @return array of [function, parameters to be passed to function]
+ * @param {boolean} onKeyUpOnly see registerFieldValidator
+ *
+ * @return {any[]} of [function, parameters to be passed to function]
  */
 
 
@@ -415,12 +438,12 @@ function getFieldValidators(fieldId, onKeyUpOnly) {
  * WARNING: created DOM elements must be identical with the ones made by
  * PhpMyAdmin\Config\FormDisplayTemplate::displayInput()!
  *
- * @param {Object} errorList list of errors in the form {field id: error array}
+ * @param {object} errorList list of errors in the form {field id: error array}
  */
 
 
 function displayErrors(errorList) {
-  var tempIsEmpty = function tempIsEmpty(item) {
+  var tempIsEmpty = function (item) {
     return item !== '';
   };
 
@@ -495,7 +518,7 @@ function setDisplayError() {
  *
  * @param {Element} fieldset
  * @param {boolean} isKeyUp
- * @param {Object}  errors
+ * @param {object}  errors
  */
 
 
@@ -523,7 +546,7 @@ function validateFieldset(fieldset, isKeyUp, errors) {
  *
  * @param {Element} field
  * @param {boolean} isKeyUp
- * @param {Object}  errors
+ * @param {object}  errors
  */
 
 
@@ -640,51 +663,6 @@ AJAX.registerOnload('config.js', function () {
 }); //
 // END: Form validation and field operations
 // ------------------------------------------------------------------
-// ------------------------------------------------------------------
-// Tabbed forms
-//
-
-/**
- * Sets active tab
- *
- * @param {String} tabId
- */
-
-function setTab(tabId) {
-  $('ul.tabs').each(function () {
-    var $this = $(this);
-
-    if (!$this.find('li a[href="#' + tabId + '"]').length) {
-      return;
-    }
-
-    $this.find('li').removeClass('active').find('a[href="#' + tabId + '"]').parent().addClass('active');
-    $this.parent().find('div.tabs_contents fieldset').hide().filter('#' + tabId).show();
-    var hashValue = 'tab_' + tabId;
-    location.hash = hashValue;
-    $this.parent().find('input[name=tab_hash]').val(hashValue);
-  });
-}
-
-function setupConfigTabs() {
-  var forms = $('form.config-form');
-  forms.each(function () {
-    var $this = $(this);
-    var $tabs = $this.find('ul.tabs');
-
-    if (!$tabs.length) {
-      return;
-    } // add tabs events and activate one tab (the first one or indicated by location hash)
-
-
-    $tabs.find('li').removeClass('active');
-    $tabs.find('a').on('click', function (e) {
-      e.preventDefault();
-      setTab($(this).attr('href').substr(1));
-    }).first().parent().addClass('active');
-    $this.find('div.tabs_contents fieldset').hide().first().show();
-  });
-}
 
 function adjustPrefsNotification() {
   var $prefsAutoLoad = $('#prefs_autoload');
@@ -697,26 +675,8 @@ function adjustPrefsNotification() {
 }
 
 AJAX.registerOnload('config.js', function () {
-  setupConfigTabs();
-  adjustPrefsNotification(); // tab links handling
-  // (works with history in FF, further browser support here would be an overkill)
-
-  window.onhashchange = function () {
-    if (location.hash.match(/^#tab_[a-zA-Z0-9_]+$/)) {
-      // session ID is sometimes appended here
-      var hash = location.hash.substr(5).split('&')[0];
-
-      if ($('#' + hash).length) {
-        setTab(hash);
-      }
-    }
-  };
-
-  window.onhashchange();
-}); //
-// END: Tabbed forms
-// ------------------------------------------------------------------
-// ------------------------------------------------------------------
+  adjustPrefsNotification();
+}); // ------------------------------------------------------------------
 // Form reset buttons
 //
 
@@ -740,7 +700,9 @@ AJAX.registerOnload('config.js', function () {
 /**
  * Restores field's default value
  *
- * @param {String} fieldId
+ * @param {string} fieldId
+ *
+ * @return {void}
  */
 
 function restoreField(fieldId) {
@@ -754,7 +716,7 @@ function restoreField(fieldId) {
 }
 
 function setupRestoreField() {
-  $('div.tabs_contents').on('mouseenter', '.restore-default, .set-value', function () {
+  $('div.tab-content').on('mouseenter', '.restore-default, .set-value', function () {
     $(this).css('opacity', 1);
   }).on('mouseleave', '.restore-default, .set-value', function () {
     $(this).css('opacity', 0.25);
@@ -867,7 +829,7 @@ function savePrefsToLocalStorage(form) {
       'server': CommonParams.get('server'),
       'submit_get_json': true
     },
-    success: function success(data) {
+    success: function (data) {
       if (typeof data !== 'undefined' && data.success === true) {
         window.localStorage.config = data.prefs;
         window.localStorage.configMtime = data.mtime;
@@ -883,7 +845,7 @@ function savePrefsToLocalStorage(form) {
         Functions.ajaxShowMessage(data.error);
       }
     },
-    complete: function complete() {
+    complete: function () {
       submit.prop('disabled', false);
     }
   });
@@ -947,7 +909,7 @@ var PASSIVE_EVENT_LISTENERS = function () {
 
   try {
     var options = Object.defineProperty({}, 'passive', {
-      get: function get() {
+      get: function () {
         return passive = true;
       }
     });
